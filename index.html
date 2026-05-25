@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#003DA5">
+  <meta name="description" content="Hub CRM RE/MAX Master Arequipa · Portada del sistema de gestión de leads. 21 documentos operativos del proceso de recepción, calificación y cierre.">
+  <title>Hub CRM · RE/MAX Master Arequipa</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --master-blue: #003DA5;
+      --remax-red: #FF1200;
+      --remax-blue: #0043FF;
+      --cream: #F7F5EE;
+      --white: #FFFFFF;
+      --black: #010101;
+      --charcoal: #232323;
+
+      --bridge-blue: #0C2749;
+      --dark-blue: #000E35;
+      --bridge-red: #AA1120;
+      --sky-blue: #A3D4F2;
+
+      --estado-alta: #2A9D8F;
+      --estado-media: #E9B949;
+      --estado-baja: #E76F51;
+      --estado-descarte: #7A2E2E;
+
+      --gris-borde: #E0E0E0;
+      --gris-texto-suave: #6C757D;
+      --fondo-app: var(--cream);
+      --fondo-tarjeta: var(--white);
+      --texto-principal: var(--charcoal);
+      --texto-titulo: var(--bridge-blue);
+      --acento-primario: var(--master-blue);
+      --acento-secundario: var(--remax-red);
+
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 1100px;
+      --radio: 10px;
+      --sombra-tarjeta: 0 1px 3px rgba(12, 39, 73, 0.08), 0 1px 2px rgba(12, 39, 73, 0.04);
+      --sombra-tarjeta-hover: 0 6px 18px rgba(12, 39, 73, 0.14), 0 2px 6px rgba(12, 39, 73, 0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background: linear-gradient(135deg, var(--bridge-blue) 0%, var(--master-blue) 100%);
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 4px solid var(--remax-red);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .site-brand .brand-master { color: var(--sky-blue); }
+
+    .site-header .meta-version {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--sky-blue);
+      opacity: 0.85;
+    }
+
+    /* Hero */
+    .hero {
+      background-color: var(--fondo-tarjeta);
+      border-bottom: 1px solid var(--gris-borde);
+      padding: 3rem 1.5rem 2.5rem;
+    }
+
+    .hero-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      margin: 0 0 0.4em;
+      font-family: var(--font-base);
+      font-weight: 700;
+      font-size: 2.4rem;
+      line-height: 1.15;
+      color: var(--acento-primario);
+    }
+
+    .hero .lead {
+      margin: 0 0 0.4em;
+      font-size: 1.1rem;
+      color: var(--texto-titulo);
+      max-width: 60ch;
+    }
+
+    .hero .lead-meta {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--gris-texto-suave);
+      max-width: 60ch;
+    }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* Sección */
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--gris-borde);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--texto-titulo);
+      letter-spacing: -0.005em;
+    }
+
+    .section-head .section-count {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gris-texto-suave);
+    }
+
+    .section-intro {
+      margin: 0 0 1.25rem;
+      max-width: 65ch;
+      color: var(--charcoal);
+    }
+
+    /* Grids */
+    .card-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .card-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .card-grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    /* Card */
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 1.1rem 1.15rem 1.15rem;
+      background-color: var(--fondo-tarjeta);
+      border: 1px solid var(--gris-borde);
+      border-left: 4px solid var(--master-blue);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra-tarjeta);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, border-left-color 0.12s ease;
+    }
+
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: var(--sombra-tarjeta-hover);
+      border-left-color: var(--remax-red);
+      outline: none;
+    }
+
+    .card:focus-visible {
+      outline: 2px solid var(--master-blue);
+      outline-offset: 2px;
+    }
+
+    .card-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gris-texto-suave);
+    }
+
+    .card-title {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 600;
+      font-size: 1.02rem;
+      color: var(--texto-titulo);
+      line-height: 1.3;
+    }
+
+    .card-meta {
+      margin: 0.25rem 0 0;
+      font-size: 0.88rem;
+      color: var(--charcoal);
+      line-height: 1.45;
+    }
+
+    .card-link {
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--acento-primario);
+    }
+
+    .card-link::after {
+      content: " →";
+    }
+
+    .card.is-draft {
+      border-left-color: var(--estado-media);
+      background: linear-gradient(180deg, rgba(233, 185, 73, 0.06) 0%, var(--fondo-tarjeta) 80%);
+    }
+
+    .card.is-draft:hover,
+    .card.is-draft:focus-visible {
+      border-left-color: var(--bridge-red);
+    }
+
+    .badge-draft {
+      display: inline-block;
+      padding: 0.12em 0.55em;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bridge-red);
+      background-color: rgba(170, 17, 32, 0.08);
+      border: 1px solid var(--bridge-red);
+      border-radius: 4px;
+      margin-left: 0.4rem;
+      vertical-align: 1px;
+    }
+
+    /* Cards principales (empezar aquí) — más grandes */
+    .card.is-primary {
+      border-left-width: 6px;
+      padding: 1.35rem 1.4rem 1.4rem;
+      background: linear-gradient(180deg, rgba(0, 61, 165, 0.05) 0%, var(--fondo-tarjeta) 70%);
+    }
+
+    .card.is-primary .card-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+    }
+
+    .card.is-primary .card-meta {
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 2rem 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--sky-blue);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .card-grid.cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .card-grid.cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 2rem 1rem 1.75rem; }
+      .hero h1 { font-size: 1.85rem; }
+      .hero .lead { font-size: 1rem; }
+      main { padding: 1.5rem 1rem 3rem; }
+      .card-grid.cols-2,
+      .card-grid.cols-3,
+      .card-grid.cols-4 {
+        grid-template-columns: 1fr;
+      }
+      .section-head h2 { font-size: 1.2rem; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header,
+      .site-footer { background: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-footer a { color: var(--black); }
+      .card { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <span class="site-brand">RE/MAX <span class="brand-master">Master</span> · Arequipa</span>
+      <span class="meta-version">Hub CRM · v1.0 · 2026-05-19</span>
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <h1 id="hero-title">Hub CRM · Sistema de gestión de leads</h1>
+      <p class="lead">Documentación operativa del proceso de recepción, calificación y cierre de leads de RE/MAX Master Arequipa.</p>
+      <p class="lead-meta">22 documentos · agrupados por uso: empezar aquí, cheatsheets por perfil, flujos detallados de recepción y anexos de referencia.</p>
+    </div>
+  </section>
+
+  <main>
+
+    <section class="section" aria-labelledby="sec-empezar">
+      <div class="section-head">
+        <h2 id="sec-empezar">Empezar aquí</h2>
+        <span class="section-count">2 documentos</span>
+      </div>
+      <p class="section-intro">Los dos documentos que dan contexto general antes de bajar al detalle por perfil.</p>
+
+      <div class="card-grid cols-2">
+        <a class="card is-primary" href="./guia/guia-coordinador-crm.html">
+          <span class="card-eyebrow">Guía operativa</span>
+          <h3 class="card-title">Guía del coordinador del CRM</h3>
+          <p class="card-meta">Manual del rol que recibe los leads, aplica el filtro CURIOSO, asigna al closer y registra en CRM.</p>
+          <span class="card-link">Abrir guía</span>
+        </a>
+
+        <a class="card is-primary" href="./embudo-pagina-1.html">
+          <span class="card-eyebrow">Proceso operativo</span>
+          <h3 class="card-title">Embudo de leads · Página 1</h3>
+          <p class="card-meta">Los 13 pasos del proceso de conversión, desde recepción hasta cierre, con SLAs y máquina de estados.</p>
+          <span class="card-link">Abrir embudo</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sec-cheatsheets">
+      <div class="section-head">
+        <h2 id="sec-cheatsheets">Cheatsheets por perfil</h2>
+        <span class="section-count">8 perfiles</span>
+      </div>
+      <p class="section-intro">Checklist de bolsillo para calificar al lead en la primera conversación. Uno por cada uno de los 8 perfiles del Router.</p>
+
+      <div class="card-grid cols-4">
+        <a class="card" href="./cheatsheets/cheatsheet-comprador.html">
+          <span class="card-eyebrow">Adquirente</span>
+          <h3 class="card-title">Comprador</h3>
+          <p class="card-meta">Lead que busca comprar una propiedad.</p>
+        </a>
+
+        <a class="card" href="./cheatsheets/cheatsheet-vendedor.html">
+          <span class="card-eyebrow">Propietario</span>
+          <h3 class="card-title">Vendedor</h3>
+          <p class="card-meta">Lead que quiere vender su propiedad.</p>
+        </a>
+
+        <a class="card" href="./cheatsheets/cheatsheet-arrendador.html">
+          <span class="card-eyebrow">Propietario</span>
+          <h3 class="card-title">Arrendador</h3>
+          <p class="card-meta">Lead que quiere dar en alquiler su propiedad.</p>
+        </a>
+
+        <a class="card" href="./cheatsheets/cheatsheet-arrendatario.html">
+          <span class="card-eyebrow">Adquirente</span>
+          <h3 class="card-title">Arrendatario</h3>
+          <p class="card-meta">Lead que busca alquilar una propiedad.</p>
+        </a>
+
+        <a class="card" href="./cheatsheets/cheatsheet-anticresista-acreedor.html">
+          <span class="card-eyebrow">Adquirente</span>
+          <h3 class="card-title">Anticresista acreedor</h3>
+          <p class="card-meta">Lead que quiere colocar dinero en anticresis.</p>
+        </a>
+
+        <a class="card" href="./cheatsheets/cheatsheet-anticresista-deudor.html">
+          <span class="card-eyebrow">Propietario</span>
+          <h3 class="card-title">Anticresista deudor</h3>
+          <p class="card-meta">Lead que busca dinero dando su propiedad en anticresis.</p>
+        </a>
+
+        <a class="card" href="./cheatsheets/cheatsheet-constructora.html">
+          <span class="card-eyebrow">Propietario</span>
+          <h3 class="card-title">Constructora</h3>
+          <p class="card-meta">Constructora con proyecto inmobiliario para colocar.</p>
+        </a>
+
+        <a class="card" href="./cheatsheets/cheatsheet-closer-postulante.html">
+          <span class="card-eyebrow">Equipo</span>
+          <h3 class="card-title">Closer postulante</h3>
+          <p class="card-meta">Candidato a unirse al equipo como asesor.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sec-flujos">
+      <div class="section-head">
+        <h2 id="sec-flujos">Flujos de recepción detallados</h2>
+        <span class="section-count">6 producción · 2 borrador</span>
+      </div>
+      <p class="section-intro">Diagramas paso a paso (Mermaid) del flujo de calificación de cada perfil. Los marcados <span class="badge-draft">Borrador</span> aún no están validados.</p>
+
+      <div class="card-grid cols-2">
+        <a class="card" href="./flujos/recepcion-comprador.html">
+          <span class="card-eyebrow">Flujo · Adquirente</span>
+          <h3 class="card-title">Recepción comprador</h3>
+          <p class="card-meta">Flujo completo: identidad → tipo → zona → presupuesto → timing → financiamiento → decisor → cierre → DNI → visita.</p>
+        </a>
+
+        <a class="card" href="./flujos/recepcion-vendedor.html">
+          <span class="card-eyebrow">Flujo · Propietario</span>
+          <h3 class="card-title">Recepción vendedor</h3>
+          <p class="card-meta">Captación con matriz Plazo × Gap de precio y disparo de marketing premium / estándar / mínimo.</p>
+        </a>
+
+        <a class="card" href="./flujos/recepcion-arrendador.html">
+          <span class="card-eyebrow">Flujo · Propietario</span>
+          <h3 class="card-title">Recepción arrendador</h3>
+          <p class="card-meta">Captación de propiedad para alquiler con matriz Plazo × Gap y boost a SUPER POTENCIAL.</p>
+        </a>
+
+        <a class="card" href="./flujos/recepcion-arrendatario.html">
+          <span class="card-eyebrow">Flujo · Adquirente</span>
+          <h3 class="card-title">Recepción arrendatario</h3>
+          <p class="card-meta">Calificación con gates de riesgo crediticio anidados y validación de garantías.</p>
+        </a>
+
+        <a class="card" href="./flujos/recepcion-anticresista-acreedor.html">
+          <span class="card-eyebrow">Flujo · Adquirente</span>
+          <h3 class="card-title">Recepción anticresista acreedor</h3>
+          <p class="card-meta">Camino a firma de escritura con script educativo obligatorio para colocadores de capital.</p>
+        </a>
+
+        <a class="card" href="./flujos/recepcion-anticresista-deudor.html">
+          <span class="card-eyebrow">Flujo · Propietario</span>
+          <h3 class="card-title">Recepción anticresista deudor</h3>
+          <p class="card-meta">Captación con matriz Urgencia × Gap monto y disparo de promoción prioritaria / regular / mínima.</p>
+        </a>
+
+        <a class="card is-draft" href="./flujos/flujo-constructora-draft.html">
+          <span class="card-eyebrow">Flujo · Propietario</span>
+          <h3 class="card-title">Flujo constructora <span class="badge-draft">Borrador</span></h3>
+          <p class="card-meta">Generado por IA siguiendo el patrón de los 6 flujos producción. Pendiente de validar con Eduardo antes de operar.</p>
+        </a>
+
+        <a class="card is-draft" href="./flujos/flujo-closer-postulante-draft.html">
+          <span class="card-eyebrow">Flujo · Equipo</span>
+          <h3 class="card-title">Flujo closer postulante <span class="badge-draft">Borrador</span></h3>
+          <p class="card-meta">Generado por IA siguiendo el patrón existente y los nodos n6c y n23 del Super Proceso. Pendiente de validar.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sec-anexos">
+      <div class="section-head">
+        <h2 id="sec-anexos">Anexos de referencia</h2>
+        <span class="section-count">4 documentos</span>
+      </div>
+      <p class="section-intro">Cuatro documentos cerrados que dictan reglas duras del sistema: etiquetas, estados, asignación y los campos del CRM.</p>
+
+      <div class="card-grid cols-3">
+        <a class="card" href="./anexos/anexo-tabla-etiquetas.html">
+          <span class="card-eyebrow">Anexo · Entregable 2</span>
+          <h3 class="card-title">Tabla de etiquetas</h3>
+          <p class="card-meta">Mapeo de las 50+ etiquetas por perfil a las 4 prioridades comunes (Alta · Media · Baja · Descarte).</p>
+        </a>
+
+        <a class="card" href="./anexos/anexo-estados-lead.html">
+          <span class="card-eyebrow">Anexo · Entregable 4 · v2</span>
+          <h3 class="card-title">Estados del lead</h3>
+          <p class="card-meta">Los 11 estados, transiciones válidas, SLAs por estado y reportes derivados. Incluye SVG de la máquina de estados.</p>
+        </a>
+
+        <a class="card" href="./anexos/anexo-reglas-asignacion.html">
+          <span class="card-eyebrow">Anexo · Entregable 3</span>
+          <h3 class="card-title">Reglas de asignación</h3>
+          <p class="card-meta">Quién recibe qué lead, en cuánto tiempo y por qué regla. Default + 3 overrides + casos límite.</p>
+        </a>
+
+        <a class="card" href="./anexos/anexo-campos-crm.html">
+          <span class="card-eyebrow">Anexo · Entregable 5 · v3</span>
+          <h3 class="card-title">Campos del CRM</h3>
+          <p class="card-meta">El contrato de ~40 campos del CRM: listas cerradas, gates por perfil, mapeo al Excel actual y conexión con el Proyecto 2.</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa · Hub CRM</span>
+      <span class="meta">v1.1 · 2026-05-25 · 22 documentos</span>
+      <a href="mailto:administracion@remaxmaster.com">administracion@remaxmaster.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>

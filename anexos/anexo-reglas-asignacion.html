@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#003DA5">
+  <meta name="description" content="Reglas para asignar leads a closers: regla default, 3 overrides, casos límite, SLA y canal de handoff coordinador → closer.">
+  <title>Anexo · Reglas de Asignación de Leads · RE/MAX Master</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Primarios de marca */
+      --master-blue: #003DA5;
+      --remax-red: #FF1200;
+      --remax-blue: #0043FF;
+      --cream: #F7F5EE;
+      --white: #FFFFFF;
+      --black: #010101;
+      --charcoal: #232323;
+
+      /* Secundarios */
+      --bridge-blue: #0C2749;
+      --dark-blue: #000E35;
+      --bridge-red: #AA1120;
+      --sky-blue: #A3D4F2;
+
+      /* Estados del embudo (sistema, no marca) */
+      --estado-alta: #2A9D8F;
+      --estado-media: #E9B949;
+      --estado-baja: #E76F51;
+      --estado-descarte: #7A2E2E;
+
+      /* Neutros UI */
+      --gris-borde: #E0E0E0;
+      --gris-texto-suave: #6C757D;
+      --fondo-app: var(--cream);
+      --fondo-tarjeta: var(--white);
+      --texto-principal: var(--charcoal);
+      --texto-titulo: var(--bridge-blue);
+      --acento-primario: var(--master-blue);
+      --acento-secundario: var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(12, 39, 73, 0.08), 0 1px 2px rgba(12, 39, 73, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 4px solid var(--master-blue);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .site-brand .brand-master { color: var(--sky-blue); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .site-nav a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--acento-primario);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--bridge-blue); }
+
+    strong { font-weight: 700; color: var(--bridge-blue); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(163, 212, 242, 0.08); }
+
+    /* Blockquote */
+    blockquote {
+      margin: 1.25em 0;
+      padding: 0.75em 1.1em;
+      border-left: 4px solid var(--acento-primario);
+      background-color: var(--fondo-tarjeta);
+      color: var(--charcoal);
+      font-style: italic;
+      border-radius: 0 var(--radio) var(--radio) 0;
+    }
+
+    blockquote p:last-child { margin-bottom: 0; }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(12, 39, 73, 0.06);
+      color: var(--bridge-blue);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1em 1.1em;
+      border-radius: var(--radio);
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--master-blue);
+      color: var(--bridge-blue);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* Badges de prioridad */
+    .badge-alta,
+    .badge-media,
+    .badge-baja,
+    .badge-descarte {
+      display: inline-block;
+      padding: 0.18em 0.65em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .badge-alta {
+      background-color: var(--estado-alta);
+      color: var(--white);
+    }
+
+    .badge-media {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .badge-baja {
+      background-color: var(--estado-baja);
+      color: var(--white);
+    }
+
+    .badge-descarte {
+      background-color: var(--estado-descarte);
+      color: var(--white);
+    }
+
+    /* Banner de draft */
+    .draft-banner {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+      padding: 0.75em 1.1em;
+      border-radius: var(--radio);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px dashed var(--bridge-red);
+    }
+
+    .draft-banner::before {
+      content: "BORRADOR · ";
+      font-weight: 700;
+      color: var(--bridge-red);
+      letter-spacing: 0.04em;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--sky-blue);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">RE/MAX <span class="brand-master">Master</span> · Arequipa</a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Anexo — Reglas de Asignación de Leads</h1>
+    <h3>Entregable 3 del Proyecto 1</h3>
+
+    <blockquote>
+      <p>Define <strong>quién recibe qué lead, en cuánto tiempo y por qué regla</strong>. Resuelve los casos límite que la Página 1 no puede contener.</p>
+    </blockquote>
+
+    <h2>Propósito</h2>
+
+    <p>Hoy el campo <code>ASESOR</code> del CRM Excel mezcla nombres reales con "OFICINA", "DESCONOCIDO" y estados. Este anexo cierra ese hueco con:</p>
+
+    <ol>
+      <li><strong>Una regla default</strong> (la que aplica el 80% de los casos).</li>
+      <li><strong>3 overrides</strong> (en orden de prioridad) para los casos donde el default no sirve.</li>
+      <li><strong>Reglas para casos límite</strong> (closer en vacaciones, saturado, lead que vuelve, etc.).</li>
+      <li><strong>Lista cerrada de closers activos</strong> — Eduardo la llena.</li>
+    </ol>
+
+    <h2>Regla DEFAULT · Round-robin ponderado por disponibilidad</h2>
+
+    <p><strong>Aplicación</strong>: el 80% de los leads.</p>
+
+    <p><strong>Cómo funciona</strong>:</p>
+    <ol>
+      <li>El coordinador mira la lista de closers <strong>activos del día</strong> (excluye vacaciones, licencias, día libre).</li>
+      <li>De esa lista, <strong>excluye los saturados</strong> (&gt; 15 leads abiertos en estado ASIGNADO/CONTACTADO/EN_VISITA/EN_NEGOCIACION — umbral revisable).</li>
+      <li>De los disponibles restantes, <strong>asigna al que tenga MENOS leads abiertos</strong> (esto es el "ponderado por disponibilidad").</li>
+      <li><strong>Empate</strong>: rota por turno (round-robin estricto) — el coordinador lleva la rotación.</li>
+    </ol>
+
+    <p><strong>Tiempo</strong>: &lt; 5 min desde entrada del lead al CRM.</p>
+
+    <h2>OVERRIDES · En este orden de prioridad</h2>
+
+    <p>Cuando aplica un override, <strong>sustituye al default</strong>. Si dos overrides se aplican a la vez, gana el de mayor prioridad (1 &gt; 2 &gt; 3).</p>
+
+    <h3>Override 1 — Especialista por perfil</h3>
+
+    <p><strong>Cuándo aplica</strong>:</p>
+    <ul>
+      <li>El perfil del lead tiene un especialista designado (ej. María-compradores, Juan-anticresistas).</li>
+      <li>El especialista está activo y disponible (no saturado).</li>
+    </ul>
+
+    <p><strong>Cómo funciona</strong>:</p>
+    <ul>
+      <li>Asignar al especialista del perfil.</li>
+      <li>Si el especialista está saturado → seguir bajando: ¿hay otro especialista del mismo perfil? Si no → ir al Override 2.</li>
+    </ul>
+
+    <p><strong>Cuándo NO aplica</strong>:</p>
+    <ul>
+      <li>No hay especialista designado para el perfil.</li>
+      <li>El especialista está en vacaciones / día libre / saturado.</li>
+    </ul>
+
+    <h3>Override 2 — Especialista por zona o tipo de inmueble</h3>
+
+    <p><strong>Cuándo aplica</strong>:</p>
+    <ul>
+      <li>El lead corresponde a una zona o tipo de inmueble con especialista designado (ej. Carla-zona sur, Pedro-terrenos).</li>
+      <li>Especialista activo y disponible.</li>
+    </ul>
+
+    <p><strong>Cómo funciona</strong>:</p>
+    <ul>
+      <li>Asignar al especialista de zona/inmueble.</li>
+      <li>Si hay más de un especialista (ej. uno de zona, otro de inmueble) → priorizar el de <strong>inmueble</strong> (más específico).</li>
+      <li>Si el especialista está saturado → ir al Override 3 o al Default.</li>
+    </ul>
+
+    <h3>Override 3 — Afinidad</h3>
+
+    <p><strong>Cuándo aplica</strong>:</p>
+    <ul>
+      <li>El lead viene con relación previa a un closer:
+        <ul>
+          <li>Referido directo de un cliente del closer.</li>
+          <li>Vínculo personal mencionado por el lead ("me recomendó Juan").</li>
+          <li>Lead que ya estuvo en cartera del closer antes (reactivación).</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p><strong>Cómo funciona</strong>:</p>
+    <ul>
+      <li>Asignar al closer con afinidad si está activo y disponible.</li>
+      <li>Si el closer está saturado → <strong>igual asignar</strong> (la relación pesa más que la carga); flag al coordinador para monitorear carga.</li>
+    </ul>
+
+    <h2>Asignación según PRIORIDAD COMÚN</h2>
+
+    <p>Las reglas anteriores aplican igual para todos los leads, pero la <strong>prioridad de etiqueta común</strong> modula la atención:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Prioridad</th>
+          <th>Tratamiento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Aplicar regla con preferencia al especialista. Si especialista saturado, escalar a Eduardo antes de pasar a Default.</td>
+        </tr>
+        <tr>
+          <td><span class="badge-media">Media</span></td>
+          <td>Aplicar regla normal (Default u Override que corresponda).</td>
+        </tr>
+        <tr>
+          <td><span class="badge-baja">Baja</span></td>
+          <td>Default puro · sin necesidad de especialista · cualquier closer activo</td>
+        </tr>
+        <tr>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td><strong>NO se asigna a closer</strong>. Queda en cartera del coordinador (CURIOSO recibe newsletter; NO POTENCIAL queda para revisión semestral).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Casos límite</h2>
+
+    <h3>Closer en vacaciones / licencia / día libre</h3>
+
+    <ul>
+      <li><strong>No está en la lista de "activos del día"</strong> — el coordinador mantiene una vista diaria.</li>
+      <li>Sus leads en curso se redistribuyen si hay urgencia (visita agendada en su ausencia) o quedan pausados con <code>estado_actual</code> sin cambio.</li>
+    </ul>
+
+    <h3>Closer saturado (&gt; 15 leads abiertos)</h3>
+
+    <ul>
+      <li><strong>Excluido automáticamente del default</strong> durante el día.</li>
+      <li>Si todos los especialistas están saturados → aplicar Default sobre el menos saturado.</li>
+      <li>Si todos los closers están saturados → escalar a Eduardo: ¿contratar suplente temporal? ¿pausar campañas?</li>
+    </ul>
+
+    <h3>Múltiples especialistas para el mismo perfil</h3>
+
+    <ul>
+      <li>El coordinador rota entre ellos (round-robin entre especialistas del mismo perfil).</li>
+    </ul>
+
+    <h3>Lead que volvió después de DESCARTADO</h3>
+
+    <ul>
+      <li>Tratar como lead nuevo: reentrar al embudo desde el paso 1.</li>
+      <li><strong>Preferir asignar al closer original</strong> si todavía está activo (Override 3 por afinidad).</li>
+      <li>Documentar en <code>notas_libres</code>: "Lead reactivado el [fecha], originalmente DESCARTADO el [fecha previa]".</li>
+    </ul>
+
+    <h3>Lead que vuelve por OTRO perfil (ej. comprador que ahora quiere vender)</h3>
+
+    <ul>
+      <li>Crear <strong>lead nuevo con el nuevo perfil</strong> (no editar el anterior).</li>
+      <li>En <code>notas_libres</code>: "Lead existente con perfil X, ahora consulta por Y".</li>
+      <li>Asignar según las reglas normales del nuevo perfil. Considerar afinidad si el closer original está activo.</li>
+    </ul>
+
+    <h3>Lead que llega FUERA de horario</h3>
+
+    <ul>
+      <li><strong>Autorespondedor WhatsApp</strong> envía mensaje de cortesía con horario de atención y promesa de respuesta al siguiente día hábil.</li>
+      <li>El mensaje queda en la cola del coordinador.</li>
+      <li><strong>SLA del lead se mide desde la apertura de la oficina al día siguiente</strong>, no desde la entrada del mensaje.</li>
+      <li>El coordinador procesa la cola apenas abre la oficina, antes de cualquier otra tarea.</li>
+    </ul>
+
+    <h3>No hay ningún closer disponible en 5 min</h3>
+
+    <ul>
+      <li><strong>Escalar al suplente del coordinador / closer de guardia</strong> designado para el día.</li>
+      <li>Si tampoco hay suplente → escalar a Eduardo (decisión: él toma el lead o lo pone en espera explícita).</li>
+      <li>Nunca dejar un lead sin asignar &gt; 30 min desde entrada.</li>
+    </ul>
+
+    <h2>Suplente del coordinador</h2>
+
+    <p><strong>Función</strong>: tomar el rol del coordinador cuando el coordinador titular falta (enfermedad, licencia, vacaciones).</p>
+
+    <p><strong>Quién</strong>: un closer designado, rotativo cada semana o mes (a definir con Eduardo).</p>
+
+    <p><strong>Capacitación mínima</strong>:</p>
+    <ul>
+      <li>Conoce el embudo de 1 página.</li>
+      <li>Sabe identificar los 8 perfiles (Router).</li>
+      <li>Sabe aplicar el filtro CURIOSO.</li>
+      <li>Sabe la lista de closers activos del día y las reglas de asignación.</li>
+    </ul>
+
+    <p><strong>Modelo durante suplencia</strong>: <strong>Mínimo</strong> (no se exige modelo Alto al suplente, solo Mínimo: recepción + Router + asignación + registro). Los closers asumen la calificación profunda mientras dure la suplencia.</p>
+
+    <h2>Canal de handoff coordinador → closer (recomendación)</h2>
+
+    <p><strong>Recomendación</strong>: grupo de WhatsApp de oficina con <strong>estructura de mensaje obligatoria</strong>:</p>
+
+    <pre><code>🆕 NUEVO LEAD · [ID-XXX]
+👤 [Nombre completo]
+📞 [Teléfono]
+🏷️ Perfil: [Comprador / Vendedor / ...]
+🎯 Prioridad: 🟢 ALTA / 🟡 MEDIA / 🟠 BAJA
+📍 Zona: [Distrito]
+💰 Monto: S/[monto]
+⏱️ Timing: [Inmediato / Corto / Medio / Largo]
+👨‍💼 Asignado a: @[NombreCloser]
+📋 Dossier: [link a archivo o resumen]
+
+⏰ Asignado el [fecha-hora]. Acuse "RECIBIDO" en &lt; 15 min.</code></pre>
+
+    <p>El closer asignado responde <strong>"RECIBIDO [hora]"</strong> en el mismo hilo. Eso dispara el SLA del primer contacto.</p>
+
+    <p><strong>Alternativa más robusta</strong>: cuando el Proyecto 2 reescriba el CRM, integrar el handoff dentro del CRM (notificación push + acuse de recibo registrado automáticamente).</p>
+
+    <h2>Acuse de recibo y SLA</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Hito</th>
+          <th>Tiempo máximo</th>
+          <th>Si no se cumple</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Asignación (coord → closer)</td>
+          <td>&lt; 5 min desde entrada al CRM</td>
+          <td>Coordinador escala al suplente</td>
+        </tr>
+        <tr>
+          <td>Acuse de recibo del closer</td>
+          <td>&lt; 15 min desde asignación</td>
+          <td>Coordinador reasigna al siguiente closer disponible</td>
+        </tr>
+        <tr>
+          <td>Primer contacto del closer al lead</td>
+          <td>&lt; 30 min · mismo día (antes de 8pm)</td>
+          <td>Coordinador escala a Eduardo · reasigna si reincide</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>El CRM debe registrar cada uno de estos tiempos (campos <code>fecha_hora_asignacion</code>, <code>acuse_recibo_closer</code>, <code>sla_*_cumplido</code>).</p>
+
+    <h2>Lista cerrada de closers activos (PENDIENTE — completar con Eduardo)</h2>
+
+    <div class="callout-warn">
+      <p>Esta sección la llena Eduardo. Sin esta lista, las reglas no se pueden aplicar.</p>
+    </div>
+
+    <h3>Closers activos del equipo</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre completo</th>
+          <th>Especialización por perfil (si tiene)</th>
+          <th>Especialización por zona/inmueble (si tiene)</th>
+          <th>Notas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>[Pendiente]</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>[Pendiente]</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>[Pendiente]</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>...</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Coordinador</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Notas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>[Pendiente]</td>
+          <td>Rol exclusivo · no vende</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Suplente del coordinador (closer de guardia)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Rotación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>[Pendiente]</td>
+          <td>Semanal / Mensual / Fijo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Modelos de asignación por perfil (referencia para el coordinador)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Perfil</th>
+          <th>Especialistas designados (si los hay)</th>
+          <th>Default a todos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Comprador</td>
+          <td>[Pendiente]</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td>Vendedor</td>
+          <td>[Pendiente]</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td>Arrendador</td>
+          <td>[Pendiente]</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td>Arrendatario</td>
+          <td>[Pendiente]</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td>Anticresista acreedor</td>
+          <td>[Pendiente]</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td>Anticresista deudor</td>
+          <td>[Pendiente]</td>
+          <td>Sí</td>
+        </tr>
+        <tr>
+          <td>Constructora</td>
+          <td>[Pendiente — usualmente Eduardo o un closer senior]</td>
+          <td>No (selectivo)</td>
+        </tr>
+        <tr>
+          <td>Closer postulante</td>
+          <td>[Pendiente — usualmente Eduardo]</td>
+          <td>No (selectivo)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Verificación</h2>
+
+    <ul>
+      <li>✅ La regla default cubre el 80% de los casos sin ambigüedad.</li>
+      <li>✅ Los 3 overrides tienen orden claro (1 &gt; 2 &gt; 3) sin conflictos.</li>
+      <li>✅ Los casos límite tienen regla específica, no improvisación.</li>
+      <li>✅ El SLA de 5 min está respaldado por escalación al suplente.</li>
+      <li>✅ La lista de closers es cerrada (no aceptar entradas no listadas en el CRM).</li>
+      <li>✅ El canal de handoff fuerza acuse de recibo (visible para el coordinador).</li>
+    </ul>
+
+    <p><em>Versión 1 · 2026-05-14 · RE/MAX Master Arequipa · Proyecto 1 — Anexo del Entregable 3</em></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">v1.0 · 2026-05-18</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#003DA5">
+  <meta name="description" content="Anexo del Entregable 4 · Los 11 estados por los que pasa un lead en el CRM de RE/MAX Master Arequipa, transiciones válidas, SLAs y reportes derivados.">
+  <title>Anexo · Estados del Lead · RE/MAX Master</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Primarios de marca */
+      --master-blue: #003DA5;
+      --remax-red: #FF1200;
+      --remax-blue: #0043FF;
+      --cream: #F7F5EE;
+      --white: #FFFFFF;
+      --black: #010101;
+      --charcoal: #232323;
+
+      /* Secundarios */
+      --bridge-blue: #0C2749;
+      --dark-blue: #000E35;
+      --bridge-red: #AA1120;
+      --sky-blue: #A3D4F2;
+
+      /* Estados del embudo (sistema, no marca) */
+      --estado-alta: #2A9D8F;
+      --estado-media: #E9B949;
+      --estado-baja: #E76F51;
+      --estado-descarte: #7A2E2E;
+
+      /* Neutros UI */
+      --gris-borde: #E0E0E0;
+      --gris-texto-suave: #6C757D;
+      --fondo-app: var(--cream);
+      --fondo-tarjeta: var(--white);
+      --texto-principal: var(--charcoal);
+      --texto-titulo: var(--bridge-blue);
+      --acento-primario: var(--master-blue);
+      --acento-secundario: var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(12, 39, 73, 0.08), 0 1px 2px rgba(12, 39, 73, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 4px solid var(--master-blue);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .site-brand .brand-master { color: var(--sky-blue); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .site-nav a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--acento-primario);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--bridge-blue); }
+
+    strong { font-weight: 700; color: var(--bridge-blue); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(163, 212, 242, 0.08); }
+
+    /* Blockquote */
+    blockquote {
+      margin: 1.25em 0;
+      padding: 0.75em 1.1em;
+      border-left: 4px solid var(--acento-primario);
+      background-color: var(--fondo-tarjeta);
+      color: var(--charcoal);
+      font-style: italic;
+      border-radius: 0 var(--radio) var(--radio) 0;
+    }
+
+    blockquote p:last-child { margin-bottom: 0; }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(12, 39, 73, 0.06);
+      color: var(--bridge-blue);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1em 1.1em;
+      border-radius: var(--radio);
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--master-blue);
+      color: var(--bridge-blue);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* Badges de prioridad */
+    .badge-alta,
+    .badge-media,
+    .badge-baja,
+    .badge-descarte {
+      display: inline-block;
+      padding: 0.18em 0.65em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .badge-alta {
+      background-color: var(--estado-alta);
+      color: var(--white);
+    }
+
+    .badge-media {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .badge-baja {
+      background-color: var(--estado-baja);
+      color: var(--white);
+    }
+
+    .badge-descarte {
+      background-color: var(--estado-descarte);
+      color: var(--white);
+    }
+
+    /* Banner de draft */
+    .draft-banner {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+      padding: 0.75em 1.1em;
+      border-radius: var(--radio);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px dashed var(--bridge-red);
+    }
+
+    .draft-banner::before {
+      content: "BORRADOR · ";
+      font-weight: 700;
+      color: var(--bridge-red);
+      letter-spacing: 0.04em;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--sky-blue);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Diagrama de estados */
+    .diagrama-estados {
+      margin: 1.5em 0;
+      padding: 1em;
+      background-color: var(--fondo-tarjeta);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra-tarjeta);
+      overflow-x: auto;
+    }
+
+    .diagrama-estados svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
+
+    .leyenda-diagrama {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5em 1.25em;
+      margin-top: 0.75em;
+      font-size: 0.85rem;
+      color: var(--gris-texto-suave);
+    }
+
+    .leyenda-diagrama .swatch {
+      display: inline-block;
+      width: 0.9em;
+      height: 0.9em;
+      border-radius: 3px;
+      margin-right: 0.4em;
+      vertical-align: -1px;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">RE/MAX <span class="brand-master">Master</span> · Arequipa</a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <h1>Anexo — Estados del Lead</h1>
+    <h3>Entregable 4 del Proyecto 1 · v2</h3>
+
+    <blockquote>
+      <p>Define los <strong>11 estados</strong> por los que pasa un lead desde que entra hasta que se cierra, los <strong>criterios de transición</strong> entre ellos, los <strong>SLAs</strong> de cada estado y los <strong>reportes</strong> que se derivan.</p>
+      <p><strong>v2 · 2026-05-18:</strong> se agregó el estado <strong>CAPTADO</strong> para los perfiles propietarios (Vendedor, Arrendador, Anticresista deudor, Constructora). Refleja el momento en que el propietario firma la exclusividad y la propiedad entra a la cartera publicable, antes de que aparezca un adquirente. Cambio implementado en el CRM Apps Script y validado por Eduardo en Sprint 1 del Proyecto 2.</p>
+    </blockquote>
+
+    <h2>Los 11 estados</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Estado</th>
+          <th>Definición</th>
+          <th>¿Aplica a?</th>
+          <th>¿Terminal?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>NUEVO</strong></td>
+          <td>Lead recién registrado en CRM, aún no entra al filtro</td>
+          <td>Todos los perfiles</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>EN_CALIFICACION</strong></td>
+          <td>Coordinador está aplicando el flujo del perfil</td>
+          <td>Todos los perfiles</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>ASIGNADO</strong></td>
+          <td>Closer recibió el lead + acusó recibo, aún no contacta</td>
+          <td>Todos los perfiles</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>CONTACTADO</strong></td>
+          <td>Closer hizo primer contacto (llamada/WhatsApp)</td>
+          <td>Todos los perfiles</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>EN_VISITA</strong></td>
+          <td>Visita agendada o realizada</td>
+          <td>Todos los perfiles</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>EN_NEGOCIACION</strong></td>
+          <td>Lead avanzó de la visita a discusión de cierre (precio, condiciones, contrato)</td>
+          <td>Todos los perfiles</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>CAPTADO</strong> ★</td>
+          <td>Propietario firmó exclusividad · propiedad entra a la cartera publicable de la oficina</td>
+          <td><strong>Solo propietarios</strong> (Vendedor · Arrendador · Anticresista deudor · Constructora)</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>CERRADO_GANADO</strong> ✓</td>
+          <td>Contrato firmado (compraventa, alquiler, anticresis, exclusividad ramp-up, onboarding closer)</td>
+          <td>Todos los perfiles</td>
+          <td><strong>Sí</strong></td>
+        </tr>
+        <tr>
+          <td><strong>CERRADO_PERDIDO</strong></td>
+          <td>Lead eligió otra opción o se enfrió definitivamente</td>
+          <td>Todos los perfiles</td>
+          <td><strong>Sí</strong> (revisar a +45 días)</td>
+        </tr>
+        <tr>
+          <td><strong>DESCARTADO</strong></td>
+          <td>Filtrado como CURIOSO o NO POTENCIAL en calificación</td>
+          <td>Todos los perfiles</td>
+          <td><strong>Sí</strong> (revisar a +45 días)</td>
+        </tr>
+        <tr>
+          <td><strong>APLAZADO</strong></td>
+          <td>Lead pide esperar (timing no es ahora); se reactiva en <code>fecha_reactivacion</code></td>
+          <td>Todos los perfiles</td>
+          <td>No (vuelve a NUEVO)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-info">
+      <p>★ <strong>CAPTADO es exclusivo de perfiles propietarios.</strong> Si un adquirente (Comprador · Arrendatario · Anticresista acreedor) intenta moverse a CAPTADO, el CRM revierte el cambio y muestra un mensaje. Razón: CAPTADO refleja una firma de exclusividad del <strong>dueño del inmueble</strong>, evento que no aplica a quien busca adquirir uso o propiedad. La automatización del CRM detecta esto vía la lista <code>PERFILES_PROPIETARIO</code> y dispara un evento secundario: crea/actualiza la fila correspondiente en la hoja <code>propiedades</code> con <code>estado_exclusividad = "Firmada"</code>.</p>
+    </div>
+
+    <h2>Mapa de transiciones válidas</h2>
+
+    <div class="diagrama-estados">
+      <svg viewBox="0 0 900 980" role="img" aria-labelledby="diag-title diag-desc" xmlns="http://www.w3.org/2000/svg">
+        <title id="diag-title">Máquina de estados del lead</title>
+        <desc id="diag-desc">Diagrama de los 11 estados de un lead (NUEVO, EN_CALIFICACION, ASIGNADO, CONTACTADO, EN_VISITA, EN_NEGOCIACION, CAPTADO, CERRADO_GANADO, CERRADO_PERDIDO, DESCARTADO, APLAZADO) y las transiciones válidas entre ellos. CAPTADO solo aplica a perfiles propietarios. CERRADO_GANADO, CERRADO_PERDIDO y DESCARTADO son terminales. APLAZADO retorna a NUEVO al cumplirse la fecha de reactivación.</desc>
+
+        <defs>
+          <marker id="flecha" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--bridge-blue)"/>
+          </marker>
+          <marker id="flecha-aplazado" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--estado-media)"/>
+          </marker>
+        </defs>
+
+        <style>
+          .estado-rect { stroke: var(--bridge-blue); stroke-width: 1.5; rx: 8; ry: 8; }
+          .estado-label { font-family: var(--font-base); font-weight: 600; font-size: 14px; text-anchor: middle; dominant-baseline: middle; }
+          .estado-label-claro { fill: var(--white); }
+          .estado-label-oscuro { fill: var(--charcoal); }
+          .flecha-line { stroke: var(--bridge-blue); stroke-width: 1.6; fill: none; }
+          .flecha-aplazado { stroke: var(--estado-media); stroke-width: 1.6; stroke-dasharray: 6 4; fill: none; }
+          .flecha-captado { stroke: var(--bridge-blue); stroke-width: 1.6; stroke-dasharray: 3 3; fill: none; }
+          .arista-label { font-family: var(--font-base); font-size: 10px; fill: var(--bridge-blue); text-anchor: middle; }
+          .nota-svg { font-family: var(--font-base); font-size: 11px; fill: var(--gris-texto-suave); }
+        </style>
+
+        <!-- Columna principal (centro x=450) -->
+
+        <!-- NUEVO -->
+        <g>
+          <rect class="estado-rect" x="370" y="20" width="160" height="48" fill="var(--master-blue)"/>
+          <text class="estado-label estado-label-claro" x="450" y="44">NUEVO</text>
+        </g>
+
+        <!-- EN_CALIFICACION -->
+        <g>
+          <rect class="estado-rect" x="350" y="120" width="200" height="48" fill="var(--master-blue)"/>
+          <text class="estado-label estado-label-claro" x="450" y="144">EN_CALIFICACION</text>
+        </g>
+
+        <!-- ASIGNADO -->
+        <g>
+          <rect class="estado-rect" x="370" y="220" width="160" height="48" fill="var(--master-blue)"/>
+          <text class="estado-label estado-label-claro" x="450" y="244">ASIGNADO</text>
+        </g>
+
+        <!-- CONTACTADO -->
+        <g>
+          <rect class="estado-rect" x="370" y="320" width="160" height="48" fill="var(--master-blue)"/>
+          <text class="estado-label estado-label-claro" x="450" y="344">CONTACTADO</text>
+        </g>
+
+        <!-- EN_VISITA -->
+        <g>
+          <rect class="estado-rect" x="370" y="430" width="160" height="48" fill="var(--estado-alta)"/>
+          <text class="estado-label estado-label-claro" x="450" y="454">EN_VISITA</text>
+        </g>
+
+        <!-- EN_NEGOCIACION -->
+        <g>
+          <rect class="estado-rect" x="350" y="540" width="200" height="48" fill="var(--estado-alta)"/>
+          <text class="estado-label estado-label-claro" x="450" y="564">EN_NEGOCIACION</text>
+        </g>
+
+        <!-- CAPTADO (a la derecha, exclusivo propietarios) -->
+        <g>
+          <rect class="estado-rect" x="690" y="485" width="180" height="56" fill="var(--estado-alta)" stroke="var(--bridge-red)" stroke-width="2"/>
+          <text class="estado-label estado-label-claro" x="780" y="505">CAPTADO ★</text>
+          <text x="780" y="525" font-family="var(--font-base)" font-size="9.5" fill="var(--white)" text-anchor="middle" font-weight="500">(solo propietarios)</text>
+        </g>
+
+        <!-- CERRADO_GANADO (terminal) -->
+        <g>
+          <rect class="estado-rect" x="350" y="660" width="200" height="56" fill="var(--estado-alta)" stroke="var(--bridge-blue)" stroke-width="3"/>
+          <text class="estado-label estado-label-claro" x="450" y="682">CERRADO_GANADO ✓</text>
+          <text x="450" y="702" font-family="var(--font-base)" font-size="10" fill="var(--white)" text-anchor="middle" font-style="italic">terminal</text>
+        </g>
+
+        <!-- CERRADO_PERDIDO (derecha, terminal) -->
+        <g>
+          <rect class="estado-rect" x="690" y="660" width="180" height="56" fill="var(--estado-baja)" stroke="var(--bridge-blue)" stroke-width="3"/>
+          <text class="estado-label estado-label-claro" x="780" y="682">CERRADO_PERDIDO</text>
+          <text x="780" y="702" font-family="var(--font-base)" font-size="10" fill="var(--white)" text-anchor="middle" font-style="italic">terminal · revisar +45 días</text>
+        </g>
+
+        <!-- DESCARTADO (izquierda, terminal) -->
+        <g>
+          <rect class="estado-rect" x="30" y="320" width="180" height="56" fill="var(--estado-descarte)" stroke="var(--bridge-blue)" stroke-width="3"/>
+          <text class="estado-label estado-label-claro" x="120" y="342">DESCARTADO</text>
+          <text x="120" y="362" font-family="var(--font-base)" font-size="10" fill="var(--white)" text-anchor="middle" font-style="italic">terminal · revisar +45 días</text>
+        </g>
+
+        <!-- APLAZADO (izquierda inferior) -->
+        <g>
+          <rect class="estado-rect" x="30" y="540" width="180" height="56" fill="var(--estado-media)" stroke="var(--bridge-blue)" stroke-width="1.5"/>
+          <text class="estado-label estado-label-oscuro" x="120" y="562">APLAZADO</text>
+          <text x="120" y="582" font-family="var(--font-base)" font-size="10" fill="var(--charcoal)" text-anchor="middle" font-style="italic">vuelve a NUEVO</text>
+        </g>
+
+        <!-- ===================== FLECHAS ===================== -->
+
+        <!-- 1. NUEVO → EN_CALIFICACION -->
+        <line class="flecha-line" x1="450" y1="68" x2="450" y2="118" marker-end="url(#flecha)"/>
+
+        <!-- 2. EN_CALIFICACION → ASIGNADO -->
+        <line class="flecha-line" x1="450" y1="168" x2="450" y2="218" marker-end="url(#flecha)"/>
+
+        <!-- 3. EN_CALIFICACION → DESCARTADO -->
+        <path class="flecha-line" d="M 350 150 L 250 150 L 250 332 L 212 332" marker-end="url(#flecha)"/>
+
+        <!-- 4. ASIGNADO → CONTACTADO -->
+        <line class="flecha-line" x1="450" y1="268" x2="450" y2="318" marker-end="url(#flecha)"/>
+
+        <!-- 5. ASIGNADO → DESCARTADO -->
+        <path class="flecha-line" d="M 370 250 L 280 250 L 280 348 L 212 348" marker-end="url(#flecha)"/>
+
+        <!-- 6. CONTACTADO → EN_VISITA -->
+        <line class="flecha-line" x1="450" y1="368" x2="450" y2="428" marker-end="url(#flecha)"/>
+
+        <!-- 7. CONTACTADO → DESCARTADO -->
+        <path class="flecha-line" d="M 370 360 L 220 360 L 212 360" marker-end="url(#flecha)"/>
+
+        <!-- 8. CONTACTADO → APLAZADO -->
+        <path class="flecha-aplazado" d="M 370 355 L 310 355 L 310 568 L 212 568" marker-end="url(#flecha-aplazado)"/>
+
+        <!-- 9. EN_VISITA → EN_NEGOCIACION -->
+        <line class="flecha-line" x1="450" y1="478" x2="450" y2="538" marker-end="url(#flecha)"/>
+
+        <!-- 10. EN_VISITA → CAPTADO (transición especial, línea punteada) -->
+        <path class="flecha-captado" d="M 530 450 L 690 505" marker-end="url(#flecha)"/>
+        <text class="arista-label" x="605" y="465">★ propietarios</text>
+
+        <!-- 11. EN_VISITA → CERRADO_PERDIDO -->
+        <path class="flecha-line" d="M 530 465 L 620 465 L 620 685 L 690 685" marker-end="url(#flecha)"/>
+
+        <!-- 12. EN_VISITA → APLAZADO -->
+        <path class="flecha-aplazado" d="M 370 460 L 270 460 L 270 558 L 212 558" marker-end="url(#flecha-aplazado)"/>
+
+        <!-- 13. EN_NEGOCIACION → CAPTADO -->
+        <path class="flecha-captado" d="M 550 555 L 690 530" marker-end="url(#flecha)"/>
+        <text class="arista-label" x="625" y="545">★ propietarios</text>
+
+        <!-- 14. EN_NEGOCIACION → CERRADO_GANADO -->
+        <line class="flecha-line" x1="450" y1="588" x2="450" y2="658" marker-end="url(#flecha)"/>
+
+        <!-- 15. EN_NEGOCIACION → CERRADO_PERDIDO -->
+        <path class="flecha-line" d="M 550 575 L 650 575 L 650 680 L 690 680" marker-end="url(#flecha)"/>
+
+        <!-- 16. EN_NEGOCIACION → APLAZADO -->
+        <path class="flecha-aplazado" d="M 350 575 L 250 575 L 250 568 L 212 568" marker-end="url(#flecha-aplazado)"/>
+
+        <!-- 17. CAPTADO → CERRADO_GANADO -->
+        <path class="flecha-line" d="M 780 541 L 780 620 L 550 620 L 550 660" marker-end="url(#flecha)"/>
+
+        <!-- 18. CAPTADO → CERRADO_PERDIDO -->
+        <line class="flecha-line" x1="780" y1="541" x2="780" y2="658" marker-end="url(#flecha)"/>
+
+        <!-- 19. CAPTADO → APLAZADO -->
+        <path class="flecha-aplazado" d="M 690 520 L 240 520 L 240 545 L 212 545" marker-end="url(#flecha-aplazado)"/>
+
+        <!-- 20. APLAZADO → NUEVO (reactivación) -->
+        <path class="flecha-aplazado" d="M 120 540 L 120 44 L 368 44" marker-end="url(#flecha-aplazado)"/>
+        <text class="arista-label" x="60" y="290" transform="rotate(-90 60 290)" fill="var(--estado-media)">reactivación</text>
+
+        <!-- 21. APLAZADO → CERRADO_PERDIDO (si no responde tras 3 intentos) -->
+        <path class="flecha-line" d="M 210 580 L 230 580 L 230 760 L 780 760 L 780 718" marker-end="url(#flecha)"/>
+        <text class="arista-label" x="500" y="755">si no responde tras 3 intentos</text>
+
+        <!-- Notas auxiliares -->
+        <text class="nota-svg" x="450" y="800" text-anchor="middle">Flechas continuas azules: transiciones del flujo principal · Flechas punteadas ámbar: APLAZADO / reactivación · Flechas punteadas finas: CAPTADO (solo propietarios)</text>
+        <text class="nota-svg" x="450" y="822" text-anchor="middle">Cajas con borde grueso: estados terminales · Borde rojo en CAPTADO: estado exclusivo de perfiles propietarios</text>
+      </svg>
+
+      <div class="leyenda-diagrama" aria-hidden="true">
+        <span><span class="swatch" style="background-color: var(--master-blue);"></span>Estados de entrada</span>
+        <span><span class="swatch" style="background-color: var(--estado-alta);"></span>Estados activos / cierre ganado</span>
+        <span><span class="swatch" style="background-color: var(--estado-media);"></span>APLAZADO</span>
+        <span><span class="swatch" style="background-color: var(--estado-baja);"></span>CERRADO_PERDIDO</span>
+        <span><span class="swatch" style="background-color: var(--estado-descarte);"></span>DESCARTADO</span>
+      </div>
+    </div>
+
+    <h3>Reglas</h3>
+    <ul>
+      <li>No se puede saltar estados intermedios (ej. NUEVO no va directo a CERRADO_GANADO).</li>
+      <li>DESCARTADO, CERRADO_GANADO, CERRADO_PERDIDO son terminales (para reactivar se crea un lead nuevo; el sistema marca la <code>fecha_reactivacion</code> a +45 días).</li>
+      <li>APLAZADO es el único estado no-terminal que vuelve atrás (vuelve a NUEVO al cumplirse <code>fecha_reactivacion</code>).</li>
+      <li><strong>CAPTADO</strong> solo aplica a perfiles propietarios. Se entra desde EN_VISITA (cuando la visita del propietario termina en firma de exclusividad) o desde EN_NEGOCIACION (cuando la negociación de condiciones de captación cierra con firma). De CAPTADO se sale a CERRADO_GANADO (la propiedad efectivamente se transacciona), CERRADO_PERDIDO (el propietario retira la exclusividad antes de cerrar) o APLAZADO. <strong>No se puede ir directo de CAPTADO a EN_VISITA / EN_NEGOCIACION</strong>: si el propietario quiere renegociar, se usa APLAZADO + reactivación como lead nuevo.</li>
+    </ul>
+
+    <h2>Transiciones — quién, cuándo, condición</h2>
+
+    <h3>NUEVO → EN_CALIFICACION</h3>
+    <ul>
+      <li><strong>Quién</strong>: Coordinador</li>
+      <li><strong>Cuándo</strong>: Apenas registra el lead y empieza el Router</li>
+      <li><strong>Condición</strong>: Lead tiene datos mínimos (nombre completo + teléfono + canal)</li>
+      <li><strong>SLA</strong>: Inmediato</li>
+    </ul>
+
+    <h3>EN_CALIFICACION → DESCARTADO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Coordinador</li>
+      <li><strong>Cuándo</strong>: Filtro CURIOSO activo o calificación arroja NO POTENCIAL / NO COLOCABLE / NO CAPTABLE / NO APTO con gate duro confirmado</li>
+      <li><strong>Condición</strong>: Etiqueta cae en prioridad <span class="badge-descarte">Descarte</span></li>
+      <li><strong>Acción asociada</strong>: Cerrar amable · ofrecer newsletter educativo · NO se asigna a closer</li>
+    </ul>
+
+    <h3>EN_CALIFICACION → ASIGNADO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Coordinador</li>
+      <li><strong>Cuándo</strong>: Calificación completa + etiqueta + asignación al closer + closer acusa recibo</li>
+      <li><strong>Condición</strong>: Prioridad ≠ DESCARTE · <code>closer_asignado</code> lleno · <code>acuse_recibo_closer</code> = TRUE</li>
+      <li><strong>SLA</strong>: &lt; 5 min</li>
+    </ul>
+
+    <h3>ASIGNADO → CONTACTADO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer</li>
+      <li><strong>Cuándo</strong>: Closer hace primer contacto exitoso (lead respondió)</li>
+      <li><strong>Condición</strong>: Hay registro del contacto (mensaje enviado, llamada realizada con respuesta)</li>
+      <li><strong>SLA</strong>: &lt; 30 min · mismo día (antes de las 8pm)</li>
+      <li><strong>Si no se cumple</strong>: coordinador escala al cierre del día; reasigna si reincide al día siguiente</li>
+    </ul>
+
+    <h3>ASIGNADO → DESCARTADO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer</li>
+      <li><strong>Cuándo</strong>: En el primer contacto el closer detecta un gate duro que el coordinador no validó (ej. lead miente sobre titularidad)</li>
+      <li><strong>Condición</strong>: Razón documentada en <code>red_flags</code> y <code>motivo_perdida</code></li>
+    </ul>
+
+    <h3>CONTACTADO → EN_VISITA</h3>
+    <ul>
+      <li><strong>Quién</strong>: Coordinador (modelo Alto) / Closer (modelo Mínimo)</li>
+      <li><strong>Cuándo</strong>: Visita agendada con fecha confirmada</li>
+      <li><strong>Condición</strong>: <code>fecha_visita_agendada</code> ≥ fecha actual · DNI capturado · gates duros validados</li>
+      <li><strong>SLA</strong>: Agendar dentro de 48-72hrs si <span class="badge-alta">Alta</span> · 1 semana si <span class="badge-media">Media</span> · 2 semanas si <span class="badge-baja">Baja</span></li>
+    </ul>
+
+    <h3>CONTACTADO → APLAZADO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer</li>
+      <li><strong>Cuándo</strong>: Lead responde pero pide esperar (cambio de planes, espera de crédito, situación familiar)</li>
+      <li><strong>Condición</strong>: <code>fecha_reactivacion</code> capturada · razón documentada en notas</li>
+    </ul>
+
+    <h3>CONTACTADO → DESCARTADO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer</li>
+      <li><strong>Cuándo</strong>: Lead no quiere avanzar (cambió de idea, eligió otra inmobiliaria, etc.) o no responde después de 3 intentos en 7 días</li>
+      <li><strong>Condición</strong>: <code>motivo_perdida</code> documentado</li>
+    </ul>
+
+    <h3>EN_VISITA → EN_NEGOCIACION</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer</li>
+      <li><strong>Cuándo</strong>: Visita realizada + lead interesado en avanzar</li>
+      <li><strong>Condición</strong>: <code>visita_realizada</code> = TRUE · <code>resultado_visita</code> = "Avanza a negociación"</li>
+    </ul>
+
+    <h3>EN_VISITA → CAPTADO ★ (solo propietarios)</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer / Director comercial</li>
+      <li><strong>Cuándo</strong>: La visita al propietario termina con firma de exclusividad en sitio (caso "captación rápida" del modelo del Super Proceso n7)</li>
+      <li><strong>Condición</strong>: <code>perfil</code> ∈ {Vendedor, Arrendador, Anticresista deudor, Constructora} · contrato de exclusividad firmado · ACM presentado</li>
+      <li><strong>Acción asociada</strong>: el CRM crea/actualiza automáticamente la fila correspondiente en la hoja <code>propiedades</code> con <code>estado_exclusividad = "Firmada"</code> y registra la actividad en la hoja <code>actividades</code></li>
+    </ul>
+
+    <h3>EN_VISITA → CERRADO_PERDIDO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer</li>
+      <li><strong>Cuándo</strong>: Visita realizada + lead no quiere avanzar</li>
+      <li><strong>Condición</strong>: <code>resultado_visita</code> = "No le gustó esta propiedad" o "Interesado pero no decide" tras 7 días sin avance</li>
+    </ul>
+
+    <h3>EN_VISITA → APLAZADO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer</li>
+      <li><strong>Cuándo</strong>: Visita reprogramada o lead pide esperar después de la visita</li>
+      <li><strong>Condición</strong>: <code>numero_reprogramaciones</code> ≤ 2 (al pasar de 2 → considerar DESCARTADO por riesgo CURIOSO)</li>
+    </ul>
+
+    <h3>EN_NEGOCIACION → CAPTADO ★ (solo propietarios)</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer / Director comercial</li>
+      <li><strong>Cuándo</strong>: La negociación de condiciones con el propietario (comisión, precio de salida, plazo de exclusividad) cierra con firma de contrato</li>
+      <li><strong>Condición</strong>: <code>perfil</code> ∈ {Vendedor, Arrendador, Anticresista deudor, Constructora} · contrato de exclusividad firmado</li>
+      <li><strong>Acción asociada</strong>: misma que en EN_VISITA → CAPTADO (alta/actualización en <code>propiedades</code> con <code>estado_exclusividad = "Firmada"</code>)</li>
+    </ul>
+
+    <h3>EN_NEGOCIACION → CERRADO_GANADO ✓</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer</li>
+      <li><strong>Cuándo</strong>: Contrato firmado (compraventa, alquiler o cierre directo de adquirentes que no pasan por CAPTADO)</li>
+      <li><strong>Condición</strong>: <code>monto_final_cierre</code> capturado · documentación de cierre completa</li>
+      <li><strong>Cuándo aplica este atajo (sin pasar por CAPTADO)</strong>: principalmente perfiles adquirentes (Comprador, Arrendatario, Anticresista acreedor) y operaciones donde no hay paso intermedio de "propiedad en cartera"</li>
+    </ul>
+
+    <h3>CAPTADO → CERRADO_GANADO ✓</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer / Director comercial</li>
+      <li><strong>Cuándo</strong>: La operación real sobre la propiedad captada se materializa (compraventa firmada, contrato de alquiler firmado, anticresis ejecutada)</li>
+      <li><strong>Condición</strong>: <code>monto_final_cierre</code> capturado · documentación de cierre completa</li>
+    </ul>
+
+    <h3>CAPTADO → CERRADO_PERDIDO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer / Director comercial</li>
+      <li><strong>Cuándo</strong>: El propietario retira la exclusividad antes de cerrar (cambió de inmobiliaria, retiró la propiedad del mercado, etc.)</li>
+      <li><strong>Condición</strong>: <code>motivo_perdida</code> documentado · <code>estado_exclusividad</code> en <code>propiedades</code> se mueve a "Retirada"</li>
+    </ul>
+
+    <h3>CAPTADO → APLAZADO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer / Director comercial</li>
+      <li><strong>Cuándo</strong>: La propiedad queda activa en cartera pero entra en pausa (espera de saneamiento, retoque de fotos, ajuste de precio antes de re-publicar)</li>
+      <li><strong>Condición</strong>: <code>fecha_reactivacion</code> capturada</li>
+    </ul>
+
+    <h3>EN_NEGOCIACION → CERRADO_PERDIDO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer</li>
+      <li><strong>Cuándo</strong>: Negociación rota (no se llegó a acuerdo de precio, lead se retiró, propiedad ya no disponible)</li>
+      <li><strong>Condición</strong>: <code>motivo_perdida</code> documentado</li>
+    </ul>
+
+    <h3>EN_NEGOCIACION → APLAZADO</h3>
+    <ul>
+      <li><strong>Quién</strong>: Closer</li>
+      <li><strong>Cuándo</strong>: Negociación pausada por factor externo (espera de crédito, viaje del cliente, etc.)</li>
+      <li><strong>Condición</strong>: <code>fecha_reactivacion</code> capturada</li>
+    </ul>
+
+    <h3>APLAZADO → NUEVO (reactivación)</h3>
+    <ul>
+      <li><strong>Quién</strong>: Auto (sistema) o coordinador</li>
+      <li><strong>Cuándo</strong>: Se cumple <code>fecha_reactivacion</code></li>
+      <li><strong>Condición</strong>: El sistema genera alerta al coordinador · el coordinador re-contacta · si responde → entra como NUEVO en el embudo</li>
+      <li><strong>Si no responde tras 3 intentos</strong>: pasa a CERRADO_PERDIDO</li>
+    </ul>
+
+    <h2>SLA por estado (tiempo máximo en cada estado)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Estado</th>
+          <th>SLA máximo</th>
+          <th>Si se excede</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>NUEVO</td>
+          <td>Inmediato</td>
+          <td>Alerta al coordinador</td>
+        </tr>
+        <tr>
+          <td>EN_CALIFICACION</td>
+          <td>&lt; 5 min</td>
+          <td>Coordinador escala / se le suma a la cola</td>
+        </tr>
+        <tr>
+          <td>ASIGNADO</td>
+          <td>&lt; 30 min · mismo día (antes de las 8pm)</td>
+          <td>Coordinador reasigna</td>
+        </tr>
+        <tr>
+          <td>CONTACTADO</td>
+          <td>7 días sin pasar a siguiente estado</td>
+          <td>Closer documenta o se reasigna</td>
+        </tr>
+        <tr>
+          <td>EN_VISITA</td>
+          <td>48-72hrs (<span class="badge-alta">Alta</span>), 1 semana (<span class="badge-media">Media</span>), 2 semanas (<span class="badge-baja">Baja</span>)</td>
+          <td>Reagendar o escalar</td>
+        </tr>
+        <tr>
+          <td>EN_NEGOCIACION</td>
+          <td>4 semanas sin cambio</td>
+          <td>Escalar a Eduardo · revisar precio o estrategia</td>
+        </tr>
+        <tr>
+          <td>CAPTADO ★</td>
+          <td>Sin SLA de cierre (la propiedad puede vivir en cartera meses); SLA derivado = el del plazo de exclusividad firmado</td>
+          <td>Re-evaluar precio · disparar campañas de marketing · si la exclusividad vence, mover a CERRADO_PERDIDO o renegociar</td>
+        </tr>
+        <tr>
+          <td>APLAZADO</td>
+          <td>Hasta <code>fecha_reactivacion</code></td>
+          <td>Auto-alerta · re-contactar</td>
+        </tr>
+        <tr>
+          <td>CERRADO_*</td>
+          <td>Terminal</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>DESCARTADO</td>
+          <td>Terminal (fecha de reactivación a +45 días)</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Reglas de reactivación</h2>
+    <ul>
+      <li><strong>APLAZADO con <code>fecha_reactivacion</code></strong> → se reactiva automáticamente al cumplirse la fecha (vuelve a NUEVO).</li>
+      <li><strong>DESCARTADO</strong> → el sistema marca la <code>fecha_reactivacion</code> a +45 días; al llegar esa fecha aparece en la alerta de reactivación del Dashboard. El coordinador reactiva si hay nueva señal (ej. el lead vuelve a escribir). En la reactivación, <strong>crea un lead nuevo</strong> vinculado al anterior por <code>lead_original_id</code>.</li>
+      <li><strong>CERRADO_PERDIDO</strong> → similar a DESCARTADO. Revisión a los +45 días como parte del newsletter educativo.</li>
+      <li><strong>CERRADO_GANADO</strong> → no se reactiva como mismo lead. Si el cliente vuelve con otra consulta (ej. comprador que ahora vende), crear lead nuevo.</li>
+    </ul>
+
+    <h2>Reportes derivados (que el Proyecto 2 debe exponer)</h2>
+
+    <h3>Reporte 1 — Funnel actual (instantánea del CRM)</h3>
+    <ul>
+      <li>¿Cuántos leads en cada estado HOY?</li>
+      <li>Comparativa: semana anterior vs actual.</li>
+    </ul>
+
+    <h3>Reporte 2 — Tiempos promedio en cada estado</h3>
+    <ul>
+      <li>NUEVO → EN_CALIFICACION: minutos.</li>
+      <li>EN_CALIFICACION → ASIGNADO: minutos.</li>
+      <li>ASIGNADO → CONTACTADO: horas.</li>
+      <li>CONTACTADO → EN_VISITA: días.</li>
+      <li>EN_VISITA → EN_NEGOCIACION: días.</li>
+      <li>EN_NEGOCIACION → CERRADO_GANADO: días.</li>
+    </ul>
+
+    <h3>Reporte 3 — Tasa de conversión por etapa</h3>
+    <ul>
+      <li>% de NUEVO → ASIGNADO (debería ser ~100% si no es CURIOSO).</li>
+      <li>% de ASIGNADO → CONTACTADO (mide eficiencia closer).</li>
+      <li>% de CONTACTADO → EN_VISITA (mide calidad de calificación).</li>
+      <li>% de EN_VISITA → EN_NEGOCIACION (mide efectividad de visita).</li>
+      <li>% de EN_NEGOCIACION → CERRADO_GANADO (mide cierre).</li>
+      <li><strong>Tasa global de conversión</strong>: CERRADO_GANADO / leads totales entrantes (hoy = 0%).</li>
+    </ul>
+
+    <h3>Reporte 4 — SLA cumplido por etapa</h3>
+    <ul>
+      <li>% de leads con asignación &lt; 5 min.</li>
+      <li>% de leads con primer contacto en &lt; 30 min mismo día.</li>
+      <li>% de leads con visita ALTA en 48-72hrs.</li>
+      <li><strong>Métrica única del embudo</strong>: % de leads con todos los SLAs del embudo cumplidos.</li>
+    </ul>
+
+    <h3>Reporte 5 — Performance por closer</h3>
+    <ul>
+      <li>Leads recibidos · contactados · visitados · cerrados.</li>
+      <li>Tasa de conversión personal.</li>
+      <li>Tiempo promedio entre asignación y primer contacto.</li>
+    </ul>
+
+    <h3>Reporte 6 — Performance por origen</h3>
+    <ul>
+      <li>Leads por canal (WhatsApp / Llamada / Web / Referido).</li>
+      <li>Leads por fuente (Facebook / Instagram / TikTok / etc.).</li>
+      <li>Costo por lead (cuando se tenga el dato).</li>
+      <li>Tasa de conversión por origen — identifica las fuentes que traen leads que se convierten.</li>
+    </ul>
+
+    <h3>Reporte 7 — Performance por perfil</h3>
+    <ul>
+      <li>Distribución de leads entre los 8 perfiles.</li>
+      <li>Tasa de conversión por perfil (¿cerramos más vendedores o compradores?).</li>
+      <li>Tiempo promedio en el embudo por perfil.</li>
+    </ul>
+
+    <h3>Reporte 8 — Cartera APLAZADA</h3>
+    <ul>
+      <li>Próximas reactivaciones (esta semana, este mes).</li>
+      <li>Leads APLAZADOS sin <code>fecha_reactivacion</code> (riesgo de olvido).</li>
+    </ul>
+
+    <h2>Conexión con el resto del embudo</h2>
+    <ul>
+      <li><strong>Campos</strong>: el estado vive en <code>estado_actual</code> (Anexo-Campos-CRM, campo 26). Los cambios alimentan la hoja <code>actividades</code> del modelo del Proyecto 2: cada cambio de estado se inserta como fila con <code>tipo_actividad='cambio_estado'</code>, <code>fecha_hora</code> y <code>usuario</code>. La vista del historial de un lead es un filtro de <code>actividades</code> por <code>lead_id</code>. <strong>(v2: <code>historial_estados</code> ya no es columna en <code>personas</code>; ver Changelog del Anexo-Campos-CRM.)</strong></li>
+      <li><strong>Etiquetas</strong>: la prioridad común determina el SLA en EN_VISITA y EN_NEGOCIACION (Anexo-Tabla-Etiquetas).</li>
+      <li><strong>Asignación</strong>: el estado ASIGNADO se alcanza solo después de aplicar las reglas de asignación (Anexo-Reglas-Asignacion).</li>
+      <li><strong>Página 1</strong>: el flowchart simplificado del Bloque 6 es una vista resumida de este anexo.</li>
+    </ul>
+
+    <h2>Verificación</h2>
+    <ul>
+      <li>Los 11 estados cubren todos los momentos del lead, incluyendo el paso intermedio CAPTADO para propietarios.</li>
+      <li>Cada transición tiene quién, cuándo y condición claros.</li>
+      <li>Los SLAs son medibles desde el CRM (auto-calculables).</li>
+      <li>Las reactivaciones (APLAZADO, DESCARTADO, CERRADO_PERDIDO) tienen regla explícita.</li>
+      <li>Los reportes están listados y derivan de los campos del CRM nuevo.</li>
+      <li>La restricción "CAPTADO solo aplica a propietarios" está implementada en el Apps Script del CRM (Sprint 1 del Proyecto 2) — si un adquirente intenta moverse a CAPTADO, el cambio se revierte automáticamente.</li>
+    </ul>
+
+    <h2>Changelog v1 → v2 (2026-05-18)</h2>
+
+    <p><strong>Contexto:</strong> durante el Sprint 1 del Proyecto 2 se detectó que el ciclo de vida de los perfiles propietarios (Vendedor, Arrendador, Anticresista deudor, Constructora) necesitaba un estado intermedio entre la firma de exclusividad y el cierre efectivo de la operación. Sin él, el CRM no podía distinguir "propiedad en cartera publicable" de "lead en negociación", y los reportes mezclaban ambos momentos. Eduardo autorizó el cambio.</p>
+
+    <h3>Agregados</h3>
+    <ul>
+      <li>Estado <strong>CAPTADO</strong> (#11) — exclusivo de perfiles propietarios. Marca el momento en que la propiedad firma exclusividad y entra a la cartera publicable.</li>
+      <li>Transición <strong>EN_VISITA → CAPTADO</strong> (captación rápida en visita).</li>
+      <li>Transición <strong>EN_NEGOCIACION → CAPTADO</strong> (firma tras negociación de condiciones).</li>
+      <li>Transiciones <strong>CAPTADO → CERRADO_GANADO / CERRADO_PERDIDO / APLAZADO</strong>.</li>
+      <li>Acción asociada: el CRM crea/actualiza fila en hoja <code>propiedades</code> con <code>estado_exclusividad = "Firmada"</code>.</li>
+    </ul>
+
+    <h3>Sin cambios</h3>
+    <ul>
+      <li>Los 10 estados originales mantienen sus definiciones y transiciones.</li>
+      <li>Los adquirentes (Comprador, Arrendatario, Anticresista acreedor) siguen pasando directamente de EN_NEGOCIACION a CERRADO_GANADO sin tocar CAPTADO.</li>
+    </ul>
+
+    <hr>
+
+    <p><em>Versión 1 · 2026-05-14 · RE/MAX Master Arequipa · Proyecto 1 — Anexo del Entregable 4</em><br>
+    <em>Versión 2 · 2026-05-18 · editada por el Proyecto 2 con autorización de Eduardo (Sprint 1, estado CAPTADO).</em></p>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">v2 · 2026-05-18</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

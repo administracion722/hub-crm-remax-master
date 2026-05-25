@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#003DA5">
+  <meta name="description" content="Cheatsheet operativo del perfil ANTICRESISTA ACREEDOR: guía rápida del coordinador para calificar leads que buscan colocar dinero en anticresis.">
+  <title>Cheatsheet · Perfil Anticresista Acreedor · RE/MAX Master</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Primarios de marca */
+      --master-blue: #003DA5;
+      --remax-red: #FF1200;
+      --remax-blue: #0043FF;
+      --cream: #F7F5EE;
+      --white: #FFFFFF;
+      --black: #010101;
+      --charcoal: #232323;
+
+      /* Secundarios */
+      --bridge-blue: #0C2749;
+      --dark-blue: #000E35;
+      --bridge-red: #AA1120;
+      --sky-blue: #A3D4F2;
+
+      /* Estados del embudo (sistema, no marca) */
+      --estado-alta: #2A9D8F;
+      --estado-media: #E9B949;
+      --estado-baja: #E76F51;
+      --estado-descarte: #7A2E2E;
+
+      /* Neutros UI */
+      --gris-borde: #E0E0E0;
+      --gris-texto-suave: #6C757D;
+      --fondo-app: var(--cream);
+      --fondo-tarjeta: var(--white);
+      --texto-principal: var(--charcoal);
+      --texto-titulo: var(--bridge-blue);
+      --acento-primario: var(--master-blue);
+      --acento-secundario: var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(12, 39, 73, 0.08), 0 1px 2px rgba(12, 39, 73, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 4px solid var(--master-blue);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .site-brand .brand-master { color: var(--sky-blue); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .site-nav a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--acento-primario);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--bridge-blue); }
+
+    strong { font-weight: 700; color: var(--bridge-blue); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(163, 212, 242, 0.08); }
+
+    /* Blockquote */
+    blockquote {
+      margin: 1.25em 0;
+      padding: 0.75em 1.1em;
+      border-left: 4px solid var(--acento-primario);
+      background-color: var(--fondo-tarjeta);
+      color: var(--charcoal);
+      font-style: italic;
+      border-radius: 0 var(--radio) var(--radio) 0;
+    }
+
+    blockquote p:last-child { margin-bottom: 0; }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(12, 39, 73, 0.06);
+      color: var(--bridge-blue);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1em 1.1em;
+      border-radius: var(--radio);
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--master-blue);
+      color: var(--bridge-blue);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* Badges de prioridad */
+    .badge-alta,
+    .badge-media,
+    .badge-baja,
+    .badge-descarte {
+      display: inline-block;
+      padding: 0.18em 0.65em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .badge-alta {
+      background-color: var(--estado-alta);
+      color: var(--white);
+    }
+
+    .badge-media {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .badge-baja {
+      background-color: var(--estado-baja);
+      color: var(--white);
+    }
+
+    .badge-descarte {
+      background-color: var(--estado-descarte);
+      color: var(--white);
+    }
+
+    /* Banner de draft */
+    .draft-banner {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+      padding: 0.75em 1.1em;
+      border-radius: var(--radio);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px dashed var(--bridge-red);
+    }
+
+    .draft-banner::before {
+      content: "BORRADOR · ";
+      font-weight: 700;
+      color: var(--bridge-red);
+      letter-spacing: 0.04em;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--sky-blue);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">RE/MAX <span class="brand-master">Master</span> · Arequipa</a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Cheatsheet · Perfil ANTICRESISTA ACREEDOR</h1>
+    <h3>(Quien COLOCA dinero) · Para el coordinador</h3>
+
+    <blockquote>
+      <p><strong>Flujo completo</strong>: <code>Flujos/flujo-anticresista_acreedor.md</code> · <strong>Etiquetas</strong>: ver <code>Anexo-Tabla-Etiquetas.md</code></p>
+    </blockquote>
+
+    <h2>1. Apertura</h2>
+
+    <blockquote>
+      <p><em>"Buen día, le atiende [Nombre] de RE/MAX Master. ¿Me da su nombre completo, ciudad, cómo nos contactó?"</em></p>
+    </blockquote>
+
+    <p><strong>Script educativo OBLIGATORIO</strong>:</p>
+    <blockquote>
+      <p><em>"¿Sabe qué es anticresis? Es el USO del inmueble a cambio de un monto que se DEVUELVE al final del plazo. Plazo es 2-10 años, va con <strong>escritura pública e inscripción en SUNARP</strong>. Su derecho es de USO, no de propiedad."</em></p>
+    </blockquote>
+
+    <div class="callout-warn">
+      <p><strong>Si no entiende o confunde con alquiler/préstamo</strong> → educar primero · si persiste confusión → <span class="badge-descarte">Curioso</span>.</p>
+    </div>
+
+    <h2>2. Preguntas clave de calificación (en orden)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Pregunta</th>
+          <th>Qué mide</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>¿Entiende anticresis = uso a cambio de monto devuelto, escritura + SUNARP?</td>
+          <td>Comprensión (gate)</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>¿Para qué uso? (Vivir · sub-arrendar para renta · comercial)</td>
+          <td>Propósito</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Tipo de propiedad: casa/depto, dorms, m², parqueo</td>
+          <td>Necesidad</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Zona + tolerancia aledañas</td>
+          <td>Ubicación</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>¿Cuánto monto (S/ o USD) y cuándo lo tiene líquido?</strong> (Gate: ≥USD 20,000)</td>
+          <td><strong>Monto</strong> (clave)</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>¿En cuánto tiempo necesita entrar al inmueble? (0-2 sem · 2-4 sem · +1m)</td>
+          <td>Timing</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><strong>¿Cuántos años necesita o acepta el inmueble?</strong> (Gate: 2-10 años)</td>
+          <td><strong>Horizonte</strong> (clave)</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>¿Acepta escritura pública + inscripción SUNARP? ¿Entiende que es USO, no propiedad?</td>
+          <td>Disposición legal</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>¿Dinero líquido HOY, o requiere liquidar? (CTS · plazo fijo · herencia · retorno extranjero)</td>
+          <td>Fuente</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>¿Hay otro decisor? (cónyuge si patrimonio común, familia que aporta)</td>
+          <td>Grupo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>3. Gates duros</h2>
+
+    <ul>
+      <li>✅ <strong>Monto ≥ USD 20,000</strong></li>
+      <li>✅ <strong>Horizonte 2-10 años</strong> (art. 1095 CC persona natural)</li>
+      <li>✅ Acepta <strong>escritura pública + SUNARP</strong> (sin esto → NO COLOCABLE)</li>
+      <li>✅ Dinero líquido o con <strong>fecha cierta</strong> de liquidez</li>
+      <li>✅ DNI antes de agendar visita</li>
+      <li>✅ Dossier al closer antes de la visita</li>
+      <li>✅ Firma de escritura pública + inscripción SUNARP (cierre)</li>
+    </ul>
+
+    <h2>4. Matriz de etiquetado</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Prioridad</th>
+          <th>Condición</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🟢 <strong>COLOCABLE</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Monto líquido + horizonte 2-10 años + acepta SUNARP</td>
+        </tr>
+        <tr>
+          <td>🟡 <strong>COLOCABLE_condicional</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Bloqueador conocido (CTS/herencia en proceso) con fecha cierta</td>
+        </tr>
+        <tr>
+          <td>🟡 <strong>SEMI-COLOCABLE</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Match con deudor no aparece hoy (zona muy específica o características raras)</td>
+        </tr>
+        <tr>
+          <td>🔴 <strong>NO COLOCABLE</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Bajo ticket (&lt;USD 20k) · horizonte fuera de 2-10a · rechaza SUNARP · sin dinero ni fecha</td>
+        </tr>
+        <tr>
+          <td>🔴 <strong>CURIOSO</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Evade · "viendo nomás" · no se compromete después del script educativo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>5. Cierre y handoff al closer</h2>
+
+    <p><strong>Cierre con el lead</strong>:</p>
+    <blockquote>
+      <p><em>"Le envío PDF dashboard comparativo con opciones que mejor calzan con sus requerimientos y monto."</em></p>
+      <p><em>"Cerremos la visita ahora, y le envío el PDF antes."</em></p>
+      <p><em>"Para agendar, su DNI por WhatsApp."</em></p>
+      <p><em>"Un día antes le confirmo. Una hora antes nos vemos en la dirección."</em></p>
+    </blockquote>
+
+    <div class="callout-info">
+      <p>🎯 <strong>Agendar visita ANTES del envío del PDF</strong> (compromete al acreedor, evita pérdida).</p>
+    </div>
+
+    <p><strong>Dossier para el closer</strong>:</p>
+    <ul>
+      <li>Nombre + decisores + DNI</li>
+      <li>Uso (vivir / sub-arrendar / comercial)</li>
+      <li>Zona + características</li>
+      <li>Monto + estado de liquidez (líquido hoy / fecha cierta)</li>
+      <li>Timing + horizonte aceptado</li>
+      <li>Disposición legal confirmada (SUNARP)</li>
+      <li>Inmuebles elegidos en el PDF</li>
+      <li>Red flags</li>
+    </ul>
+
+    <h2>6. Red flags</h2>
+
+    <ul>
+      <li>No entiende el producto (confunde con alquiler/préstamo personal)</li>
+      <li>Horizonte &lt; 2 años o &gt; 10 años</li>
+      <li><strong>Rechaza SUNARP</strong> (sin protección legal)</li>
+      <li>Se resiste a grupo WhatsApp</li>
+      <li>≥2 reprogramaciones</li>
+      <li>Dinero no liquidado <strong>sin fecha cierta</strong></li>
+    </ul>
+
+    <h2>7. Tips tácticos clave</h2>
+
+    <ol>
+      <li><strong>Script educativo es crítico</strong> — diferenciar anticresis (uso × monto devuelto) vs alquiler (renta perdida) vs compra (propiedad transferida). Si no entiende, no avanza.</li>
+      <li><strong>Agendar visita ANTES de enviar el PDF</strong> (compromete al acreedor).</li>
+      <li><strong>Mostrar peores opciones primero, mejor al final</strong> (facilita match con deudor).</li>
+      <li><strong>Match con deudor es responsabilidad de la oficina</strong> (legal + lógica comercial).</li>
+    </ol>
+
+    <p><em>Cheatsheet v1 · 2026-05-15 · RE/MAX Master Arequipa</em></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">v1.0 · 2026-05-18</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

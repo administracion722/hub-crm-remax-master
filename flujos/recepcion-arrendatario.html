@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flujo de recepción de arrendatario — RE/MAX Master</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --rojo: #AA1120;
+    --verde: #2A9D8F;
+    --amarillo: #E9B949;
+    --azul: #003DA5;
+    --gris: #6C757D;
+    --texto: #0C2749;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 1300px;
+    margin: 2rem auto;
+    padding: 0 1.5rem 4rem;
+    line-height: 1.55;
+    color: var(--texto);
+    background: #F7F5EE;
+  }
+  h1 {
+    border-bottom: 3px solid var(--azul);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  h2 {
+    margin-top: 2.5rem;
+    color: var(--azul);
+    border-left: 4px solid var(--azul);
+    padding-left: 0.75rem;
+  }
+  .meta { color: var(--gris); font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .intro, .nota, .pendientes {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0 2rem;
+  }
+  .nota {
+    border-left: 4px solid var(--amarillo);
+    background: #fff8e6;
+    font-size: 0.95rem;
+  }
+  .pendientes {
+    border-left: 4px solid var(--rojo);
+  }
+  .pendientes ol { padding-left: 1.2rem; }
+  .pendientes li { margin-bottom: 0.6rem; }
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 1rem 0 0.5rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+  .legend-color { width: 22px; height: 22px; border-radius: 4px; border: 2px solid #999; }
+  .mermaid {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    background: #fff;
+  }
+  th, td {
+    border: 1px solid #e0e0e0;
+    padding: 0.6rem 0.85rem;
+    text-align: left;
+    font-size: 0.92rem;
+    vertical-align: top;
+  }
+  th { background: #f1f5f9; font-weight: 600; }
+  .badge {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  .badge-pot { background: var(--verde); }
+  .badge-semi { background: var(--amarillo); color: #232323; }
+  .badge-no { background: var(--gris); }
+  .badge-cur { background: #adb5bd; color: #333; }
+</style>
+</head>
+<body>
+
+<h1>Flujo de recepción y calificación de arrendatario</h1>
+<p class="meta">RE/MAX Master · v1 · 2026-05-07</p>
+
+<div class="intro">
+  <p><strong>Cómo leer:</strong> el lead entra arriba. Cada rombo es una decisión y muestra las respuestas posibles del arrendatario. Cada caja final coloreada es la <strong>etiqueta</strong> con la que el lead queda en el CRM y dispara la siguiente acción.</p>
+  <p>El flujo es continuo: identidad → tipo de inmueble → zona → presupuesto de renta → timing → garantía / fiador → decisor → cierre tentativo → DNI → <strong>evaluación de riesgo crediticio + contractual</strong> → visita con doble confirmación → firma de contrato 1–3 días después.</p>
+  <p><strong>El timing no descalifica:</strong> POT, SEMI y NO POT pasan todos al cierre y a la visita. La etiqueta solo modula la <em>prioridad y velocidad</em> de la visita (POT 24–72 h · SEMI 1–2 semanas · NO POT cita prolongada en cola baja). Sí descalifican: las 6 variantes que falla la evaluación de riesgo (NoPotCred · NoPotEnd · NoPotProt · NoPotCap · NoPotGar · NoPotProt2) y NoPotZona (sin oferta en su rango).</p>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-color" style="background:#d4edda; border-color:#2A9D8F"></div> POTENCIAL · camino a contrato</div>
+  <div class="legend-item"><div class="legend-color" style="background:#fff3cd; border-color:#E9B949"></div> SEMI / re-encuadre</div>
+  <div class="legend-item"><div class="legend-color" style="background:#e2e3e5; border-color:#6C757D"></div> No prioritario / fin del filtro</div>
+  <div class="legend-item"><div class="legend-color" style="background:#cfe2f3; border-color:#003DA5"></div> Cierre y handoff</div>
+  <div class="legend-item"><div class="legend-color" style="background:#fff; border-color:#0C2749"></div> Decisión / pregunta abierta</div>
+</div>
+
+<h2>Flujo completo</h2>
+
+<div class="mermaid">
+flowchart TD
+    Start([Lead entra: WhatsApp o llamada])
+    Start --> Adapt[Adaptarse al canal preferido<br/>recomendar llamada para no ser pesado]
+    Adapt --> P1[P1 - Nombre, ciudad de residencia,<br/>canal por donde nos contacto]
+    P1 --> Q1{Da nombre completo?}
+    Q1 -->|No| CurFin[CURIOSO: cerrar amable]
+    Q1 -->|Si| P234[P2-P4 - Uso, tipo de inmueble,<br/>caracteristicas minimas]
+    P234 --> P5[P5 - Zona + tolerancia aledanas]
+    P5 --> P6[P6 - Presupuesto de renta + moneda]
+    P6 --> Coh{Renta coherente con<br/>la zona?}
+    Coh -->|Si| PotNat[POTENCIAL natural<br/>renta calza con la zona]
+    PotNat --> P7
+    Coh -->|No| SA{Sondeo A:<br/>conoce las rentas<br/>reales de la zona?}
+    SA -->|"Se sorprende, recien investiga"| RecienInv[Recien investigando<br/>etiqueta segun timing<br/>SEMI o NO POT]
+    SA -->|Ya conoce| SB{Sondeo B:<br/>acepta zonas<br/>aledanas?}
+    SB -->|Si| Recal[POTENCIAL recalibrado<br/>ajustar zona en SIGI]
+    SB -->|"No, quiere esa zona"| SC{Sondeo C:<br/>acepta inmueble<br/>mas chico?}
+    SC -->|"Si, podria evaluarlo"| AjustTipo[POTENCIAL ajustado<br/>marcar tipo en SIGI]
+    SC -->|No| NoPotZona[NO POTENCIAL<br/>NoPotZona: no calzamos]
+    Recal --> P7
+    AjustTipo --> P7
+    RecienInv --> P7
+
+    P7[P7 - TIMING:<br/>en cuanto tiempo<br/>tiene que mudarse?]
+    P7 --> Plazo{Plazo de mudanza?}
+    Plazo -->|0-2 semanas| Pot[POTENCIAL]
+    Plazo -->|"2 semanas - 1 mes"| Semi[SEMI-POTENCIAL]
+    Plazo -->|"1 - 2 meses"| NoPot[NO POTENCIAL]
+    Plazo -->|"viendo nomas o no sabe"| Resc{Pregunta de rescate:<br/>no tienes urgencia<br/>o no decidiste<br/>si te mudas pronto?}
+    Resc -->|No tengo urgencia| NoPot
+    Resc -->|"No decidi aun"| Cur[CURIOSO]
+    Resc -->|"Sigue evasivo"| Cur
+
+    Pot --> P8
+    Semi --> P8
+    NoPot --> P8
+    P8[P8 - GARANTIA + INGRESOS / FIADOR<br/>que ofrece y como sustenta?]
+    P8 --> Gar{Que ofrece como garantia?}
+    Gar -->|"Mes adelantado + mes garantia"| GMes[Estandar<br/>validar liquidez disponible]
+    Gar -->|Fiador solidario| GFia[Capturar datos del fiador:<br/>edad, ingresos, bien que respalda]
+    Gar -->|Deposito mayor| GDep[Validar fondo disponible<br/>en cuenta]
+    Gar -->|"No tiene aun, busca aval"| GBlock[BLOQUEADOR: fiador pendiente<br/>POTENCIAL_condicional<br/>capturar fecha esperada]
+
+    GMes --> P9
+    GFia --> P9
+    GDep --> P9
+    GBlock --> P9
+
+    NoPotZona --> P8Np[P8 - GARANTIA + INGRESOS<br/>registro para inteligencia futura<br/>tipo y monto de garantia ofrecida]
+    P8Np --> Nurture
+
+    P9[P9 - DECISOR REAL]
+    P9 --> Dec{Hay mas de un decisor?<br/>conyuge, coarrendatario, fiador}
+    Dec -->|No, unico| Anuncio
+    Dec -->|Si| ScriptDec[Ofrecer la opcion del grupo de WhatsApp:<br/>te ahorra reenviar info<br/>todos ven, comparan y discuten]
+    ScriptDec --> Acepta{Acepta la opcion<br/>del grupo?}
+    Acepta -->|Si| Anuncio
+    Acepta -->|"Se resiste, raro"| ConRiesgo[Marcar riesgo y continuar<br/>sin grupo]
+    ConRiesgo --> Anuncio
+
+    Anuncio[CIERRE - Anuncio:<br/>te enviare dashboard, escoge favoritas<br/>para coordinar visita]
+    Anuncio --> PedirDNI[Pedir DNI por WhatsApp<br/>requisito para agendar la visita]
+    PedirDNI --> CoordVis[Coordinar visita tentativa<br/>fecha + hora + todos los decisores]
+    CoordVis --> EvalRiesgo[EVALUACION DE RIESGO + CONTRACTUAL<br/>la oficina valida en paralelo<br/>10 items internos con el DNI]
+    EvalRiesgo --> EvalQ{Pasa todos los gates?}
+    EvalQ -->|"Comportamiento crediticio negativo"| NoPotCred[NO POTENCIAL<br/>NoPotCred]
+    EvalQ -->|Sobre-endeudamiento| NoPotEnd[NO POTENCIAL<br/>NoPotEnd]
+    EvalQ -->|Protestos vigentes| NoPotProt[NO POTENCIAL<br/>NoPotProt]
+    EvalQ -->|Capacidad insuficiente| NoPotCap[NO POTENCIAL<br/>NoPotCap]
+    EvalQ -->|Garantia no aceptable| NoPotGar[NO POTENCIAL<br/>NoPotGar]
+    EvalQ -->|Rechaza protecciones contractuales| NoPotProt2[NO POTENCIAL<br/>NoPotProt2]
+    EvalQ -->|"Si, pasa todo"| RutaPDF{Acepto la opcion<br/>del grupo?}
+    RutaPDF -->|"No, unico o resistio"| Envio
+    RutaPDF -->|Si| MsgDatos[Por WhatsApp, ANTES del dashboard:<br/>nombres y celulares<br/>de los demas decisores]
+    MsgDatos --> RecibeDatos[Lead envia nombres + numeros]
+    RecibeDatos --> CrearGrupo[Crear grupo de WhatsApp<br/>con TODOS los decisores]
+    CrearGrupo --> Envio
+    Envio[Enviar dashboard comparativo<br/>priorizado por calce]
+    Envio --> Escoge[El grupo o lead<br/>escoge favoritas]
+    Escoge --> ConfDia[1 dia antes de la visita:<br/>te confirmo la visita de manana]
+    ConfDia --> ConfDiaQ{Confirma o reprograma?}
+    ConfDiaQ -->|Confirma| ConfHora[1 hora antes de la visita:<br/>en una hora estamos contigo]
+    ConfDiaQ -->|Reprograma| Reprog[Acordar nueva fecha y hora<br/>con todos los decisores<br/>y reiniciar el ciclo]
+    Reprog --> ConfDia
+    ConfHora --> ConfHoraQ{Confirma o reprograma?}
+    ConfHoraQ -->|Confirma| Contexto[Compilar contexto detallado<br/>y enviarlo al closer ANTES]
+    ConfHoraQ -->|Reprograma| Reprog
+    Contexto --> PrioVis[Prioridad segun etiqueta:<br/>POTENCIAL 24-72h · SEMI 1-2 semanas<br/>NO POTENCIAL 3-4 semanas en cola baja]
+    PrioVis --> Visita[VISITA con todos los decisores<br/>Closer: peores primero,<br/>mejor opcion al final]
+    Visita --> Firma[Firma de contrato 1-3 dias post-visita<br/>+ entrega de garantia<br/>+ 1er mes adelantado]
+
+    Cur --> Nurture[Material informativo<br/>+ newsletter mensual de zona]
+    CurFin --> Nurture
+    NoPotCred --> Nurture
+    NoPotEnd --> Nurture
+    NoPotProt --> Nurture
+    NoPotCap --> Nurture
+    NoPotGar --> Nurture
+    NoPotProt2 --> Nurture
+
+    classDef happy fill:#d4edda,stroke:#2A9D8F,stroke-width:2px,color:#0C2749;
+    classDef semi fill:#fff3cd,stroke:#E9B949,stroke-width:2px,color:#232323;
+    classDef terminal fill:#e2e3e5,stroke:#6C757D,color:#212529;
+    classDef cierre fill:#cfe2f3,stroke:#003DA5,stroke-width:2px,color:#0C2749;
+
+    class Pot,Visita,Firma,PotNat,Recal,AjustTipo happy
+    class Semi,RecienInv,GBlock semi
+    class NoPot,NoPotZona,NoPotCred,NoPotEnd,NoPotProt,NoPotCap,NoPotGar,NoPotProt2,Cur,CurFin,Nurture,P8Np terminal
+    class Anuncio,PedirDNI,CoordVis,EvalRiesgo,Envio,Escoge,ConfDia,ConfHora,ScriptDec,MsgDatos,RecibeDatos,CrearGrupo,Contexto,PrioVis,ConfDiaQ,ConfHoraQ,Reprog cierre
+</div>
+
+<div class="nota">
+  <strong>Por qué pedir el DNI antes de coordinar la visita (y no después):</strong> el arrendatario ya pasó todo el filtro y mostró intención real (avanzó a cierre y aceptó recibir el dashboard). Pedir el DNI como <em>requisito para agendar la visita</em> ancla el compromiso antes de bloquear la agenda del closer y evita que la cita se "enfríe". Se enmarca como trámite operativo, no como filtro de desconfianza. Internamente, el DNI también dispara el bloque de evaluación de riesgo crediticio y contractual de la oficina.
+</div>
+
+<div class="nota">
+  <strong>Evaluación de riesgo crediticio + contractual (paralela, antes de coordinar visita):</strong> con el DNI en mano, la oficina valida en paralelo —y antes de comprometer agenda del closer— los siguientes 10 puntos. No se le piden al lead; son verificación interna. Si alguno falla, el lead pasa a NO POTENCIAL con la variante específica para que el seguimiento sepa qué gate falló.
+  <ul>
+    <li>Comportamiento crediticio</li>
+    <li>Historial de pago</li>
+    <li>Nivel de endeudamiento</li>
+    <li>Deudas negativas</li>
+    <li>Protestos</li>
+    <li>Clasificación financiera</li>
+    <li>Capacidad aparente frente al alquiler (ingresos vs renta pedida)</li>
+    <li>Nivel de garantía ofrecida</li>
+    <li>Señales de riesgo oculto</li>
+    <li>Condiciones mínimas de protección contractual aceptadas</li>
+  </ul>
+</div>
+
+<div class="nota">
+  <strong>Doble confirmación de la visita con opción de reprogramación:</strong> un día antes ("te confirmo la visita de mañana a las HH:MM") y una hora antes ("en una hora estamos contigo en la dirección X"). En cualquiera de los dos puntos el arrendatario puede pedir reprogramar; si lo hace, se acuerda una nueva fecha y hora con <em>todos</em> los decisores y se reinicia el ciclo de confirmación (1 día antes → 1 hora antes) sobre la nueva fecha. <strong>Política:</strong> más de 2 reprogramaciones consecutivas sin razón clara → marcar riesgo y bajar prioridad (probable CURIOSO disfrazado).
+</div>
+
+<div class="nota">
+  <strong>Contexto que se envía al closer ANTES de la visita:</strong> nombre del arrendatario y de todos los decisores (cónyuge, coarrendatarios, fiador) · DNI · zona objetivo + tolerancia · tipo de inmueble + características mínimas (dormitorios, parqueo, mascotas, amoblado) · presupuesto de renta + moneda · timing · forma de garantía ofrecida (mes adelantado + mes garantía / fiador / depósito / aval) · ingresos declarados + sustento (boletas, RUC, declaración jurada) · resultado resumido de la evaluación de riesgo (pasó / pasó con observación) · favoritas elegidas del dashboard · notas relevantes del filtro. El closer lee esto antes de salir a la visita y arma su estrategia.
+</div>
+
+<div class="nota">
+  <strong>Estrategia del closer durante la visita:</strong> mostrar primero las opciones que <em>no calzan tanto</em> (caras o con defectos visibles) y dejar la mejor opción para el final. Permite que el arrendatario compare y vea por qué la última es la mejor — facilita el cierre por <strong>contraoferta de renta o condiciones</strong>, que es el objetivo de la visita. La firma del contrato se agenda 1–3 días después.
+</div>
+
+<h2>Clasificación final y siguiente acción</h2>
+
+<table>
+  <thead>
+    <tr><th>Etiqueta</th><th>Cuándo aplica</th><th>Cierre completo</th><th>Visita</th><th>Seguimiento</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="badge badge-pot">POTENCIAL</span></td><td>Mudanza 0–2 sem · pasa evaluación de riesgo · garantía aceptable</td><td>Sí</td><td><strong>Prioridad alta · 24–72 h</strong></td><td>Closer · firma 1–3 días post-visita · 24h post-firma · 7d</td></tr>
+    <tr><td><span class="badge badge-pot">POTENCIAL_condicional</span></td><td>Mudanza 0–2 sem con bloqueador conocido (fiador pendiente, boleta pendiente)</td><td>Sí</td><td>Prioridad alta si avanza el bloqueador antes de la fecha</td><td>Mismo + seguimiento del bloqueador y fecha esperada</td></tr>
+    <tr><td><span class="badge badge-semi">SEMI-POTENCIAL</span></td><td>Mudanza 2 sem–1 mes · pasa evaluación de riesgo</td><td>Sí</td><td><strong>Prioridad media · 1–2 semanas</strong> tras filtro</td><td>Re-contacto a 2 semanas + alerta por triggers</td></tr>
+    <tr><td><span class="badge badge-no">NO POTENCIAL</span></td><td>Mudanza 1–2 meses o sin urgencia · pasa evaluación de riesgo</td><td>Sí</td><td><strong>Prioridad baja · cita prolongada 3–4 semanas en cola baja</strong></td><td>Newsletter + alerta por triggers · subir a SEMI / POT si la urgencia aparece</td></tr>
+    <tr><td><span class="badge badge-no">NoPotZona</span></td><td>Falla sub-flujo A/B/C de renta vs zona</td><td>—</td><td>—</td><td>Re-evaluar si baja expectativa o aparece zona aledaña</td></tr>
+    <tr><td><span class="badge badge-no">NoPotCred</span></td><td>Comportamiento crediticio negativo</td><td>—</td><td>—</td><td>Nurturing largo · re-evaluar 6–12 meses</td></tr>
+    <tr><td><span class="badge badge-no">NoPotEnd</span></td><td>Sobre-endeudamiento</td><td>—</td><td>—</td><td>Re-evaluar si cambia su situación financiera</td></tr>
+    <tr><td><span class="badge badge-no">NoPotProt</span></td><td>Protestos vigentes</td><td>—</td><td>—</td><td>Bloqueado hasta levantamiento del protesto</td></tr>
+    <tr><td><span class="badge badge-no">NoPotCap</span></td><td>Capacidad aparente insuficiente para la renta pedida</td><td>—</td><td>—</td><td>Sugerir rango de renta más bajo · re-evaluar con fiador con ingresos</td></tr>
+    <tr><td><span class="badge badge-no">NoPotGar</span></td><td>No tiene garantía aceptable y rechaza alternativas</td><td>—</td><td>—</td><td>Nurturing</td></tr>
+    <tr><td><span class="badge badge-no">NoPotProt2</span></td><td>Rechaza condiciones mínimas de protección contractual</td><td>—</td><td>—</td><td>Cerrar — no firmamos sin esas condiciones</td></tr>
+    <tr><td><span class="badge badge-cur">CURIOSO</span></td><td>Q1 sin nombre completo · "no decidí aún" · sigue evasivo</td><td>—</td><td>—</td><td>Newsletter educativo opcional</td></tr>
+  </tbody>
+</table>
+
+<h2>Triggers que aceleran SEMI a POTENCIAL</h2>
+
+<p>Eventos que hay que monitorear y avisarle al lead cuando ocurran. Cualquiera puede subir un SEMI a POTENCIAL en días.</p>
+
+<table>
+  <thead>
+    <tr><th>Trigger</th><th>Por qué genera urgencia</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Vencimiento del contrato actual del lead</strong></td><td>Forzado a mudarse en una fecha conocida — la urgencia se vuelve real al acercarse el vencimiento.</td></tr>
+    <tr><td><strong>Cambio de trabajo o ingreso a universidad</strong></td><td>Urgencia repentina por ubicación cercana al nuevo trabajo o campus.</td></tr>
+    <tr><td><strong>Cambio en composición familiar</strong></td><td>Matrimonio, hijo, divorcio, mudanza independiente del adulto joven — cambia tamaño y zona requerida.</td></tr>
+    <tr><td><strong>Disponibilidad inesperada de aval o fiador solidario</strong></td><td>Quita el bloqueador típico de garantía y libera el avance del flujo.</td></tr>
+    <tr><td><strong>Salida del cónyuge o coarrendatario actual</strong></td><td>Necesita renta más baja con urgencia para sostener el alquiler solo.</td></tr>
+    <tr><td><strong>Subida del dólar (para quien gana en USD)</strong></td><td>Gana poder de pago para zonas premium en soles.</td></tr>
+    <tr><td><strong>Entrada de temporada universitaria (febrero–marzo / agosto)</strong></td><td>Ola de demanda — quien no se mueve queda sin opciones disponibles en la zona.</td></tr>
+    <tr><td><strong>Bajada de renta de una propiedad de su lista</strong></td><td>Oportunidad puntual sobre la opción que ya estaba evaluando.</td></tr>
+  </tbody>
+</table>
+
+<h2>Mejor momento del año para alquilar (orientación al arrendatario)</h2>
+
+<p>Para guiar (no forzar) al lead que tiene flexibilidad de timing. Estamos para guiar, no para presionar.</p>
+
+<table>
+  <thead>
+    <tr><th>Período</th><th>Característica del mercado</th><th>Para qué le sirve al arrendatario</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Enero–Febrero</strong></td><td>Reactivación post-fiestas + cambios laborales</td><td>Mayor inventario, mejor poder de elección</td></tr>
+    <tr><td><strong>Marzo–Abril</strong></td><td>Pico universitario y corporativo</td><td>Mejor variedad pero más competencia, decidir rápido</td></tr>
+    <tr><td><strong>Mayo–Julio</strong></td><td>Punto de equilibrio</td><td>Negociación más calmada, menos urgencia visible al arrendador</td></tr>
+    <tr><td><strong>Agosto–Octubre</strong></td><td>Segundo pico universitario + traslados corporativos</td><td>Buena oferta, decidir rápido</td></tr>
+    <tr><td><strong>Noviembre–Diciembre</strong></td><td>Arrendadores con prisa por no dejar vacío en cierre de año</td><td>Mejor descuento de renta vía contraoferta</td></tr>
+  </tbody>
+</table>
+
+<h2>Por qué grupo de WhatsApp con todos los decisores</h2>
+
+<ul>
+  <li>Evita visita "en vano" donde el decisor real (cónyuge, coarrendatario, fiador) no estuvo.</li>
+  <li>Evita que otra inmobiliaria les gane el inmueble mientras los decisores se ponen de acuerdo entre ellos.</li>
+  <li>Es el canal por el que aceptaron la conversación en primer lugar.</li>
+  <li>Permite enviar dashboards comparativos con ventajas y desventajas ajustadas a sus requerimientos.</li>
+  <li>Le ahorra al arrendatario tener que reenviar la información a cada decisor — todos discuten en el mismo lugar.</li>
+</ul>
+
+<h2>Pendientes para validar con la dueña</h2>
+
+<div class="pendientes">
+  <ol>
+    <li><strong>Lista exacta de fuentes de la evaluación de riesgo crediticio:</strong> ¿Sentinel? ¿Equifax? ¿Infocorp? ¿Las tres? ¿Hay un proveedor preferido o un acuerdo comercial?</li>
+    <li><strong>Umbrales de capacidad</strong> vs renta pedida: ¿el ratio renta/ingresos máximo aceptable? (ej. 30%, 35%, 40% del ingreso bruto).</li>
+    <li><strong>Política de fiador solidario:</strong> ¿qué requisitos mínimos del fiador? ¿edad, ingresos, tipo de bien que respalda, si debe estar libre de cargas?</li>
+    <li><strong>Condiciones mínimas de protección contractual:</strong> listar explícitamente — cláusula de penalidad, plazo mínimo, política de mascotas, depósito de garantía, formato del contrato (escritura pública o legalización notarial según monto).</li>
+    <li><strong>Política de re-evaluación</strong> para NoPotCred y NoPotEnd: ¿cuándo se re-activa el lead? ¿meses fijos o cuando el lead nos avisa que cambió?</li>
+    <li><strong>Triggers SEMI adicionales</strong> específicos del mercado de Arequipa que conozcas y no estén en la tabla.</li>
+    <li><strong>Validar señales de los Sondeos A/B/C</strong> de renta vs zona: ¿las preguntas reflejan cómo lees al arrendatario en la realidad?</li>
+  </ol>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: { useMaxWidth: true, curve: 'basis', htmlLabels: true },
+    securityLevel: 'loose'
+  });
+</script>
+
+</body>
+</html>

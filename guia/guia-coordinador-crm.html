@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#003DA5">
+  <meta name="description" content="Guía del coordinador del CRM RE/MAX Master Arequipa: cómo llenar el sistema día a día, mover estados y manejar casos especiales.">
+  <title>Guía del coordinador — CRM · RE/MAX Master</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Primarios de marca */
+      --master-blue: #003DA5;
+      --remax-red: #FF1200;
+      --remax-blue: #0043FF;
+      --cream: #F7F5EE;
+      --white: #FFFFFF;
+      --black: #010101;
+      --charcoal: #232323;
+
+      /* Secundarios */
+      --bridge-blue: #0C2749;
+      --dark-blue: #000E35;
+      --bridge-red: #AA1120;
+      --sky-blue: #A3D4F2;
+
+      /* Estados del embudo (sistema, no marca) */
+      --estado-alta: #2A9D8F;
+      --estado-media: #E9B949;
+      --estado-baja: #E76F51;
+      --estado-descarte: #7A2E2E;
+
+      /* Neutros UI */
+      --gris-borde: #E0E0E0;
+      --gris-texto-suave: #6C757D;
+      --fondo-app: var(--cream);
+      --fondo-tarjeta: var(--white);
+      --texto-principal: var(--charcoal);
+      --texto-titulo: var(--bridge-blue);
+      --acento-primario: var(--master-blue);
+      --acento-secundario: var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(12, 39, 73, 0.08), 0 1px 2px rgba(12, 39, 73, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 4px solid var(--master-blue);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .site-brand .brand-master { color: var(--sky-blue); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .site-nav a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--acento-primario);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--bridge-blue); }
+
+    strong { font-weight: 700; color: var(--bridge-blue); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(163, 212, 242, 0.08); }
+
+    /* Blockquote */
+    blockquote {
+      margin: 1.25em 0;
+      padding: 0.75em 1.1em;
+      border-left: 4px solid var(--acento-primario);
+      background-color: var(--fondo-tarjeta);
+      color: var(--charcoal);
+      font-style: italic;
+      border-radius: 0 var(--radio) var(--radio) 0;
+    }
+
+    blockquote p:last-child { margin-bottom: 0; }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(12, 39, 73, 0.06);
+      color: var(--bridge-blue);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1em 1.1em;
+      border-radius: var(--radio);
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--master-blue);
+      color: var(--bridge-blue);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* Badges de prioridad */
+    .badge-alta,
+    .badge-media,
+    .badge-baja,
+    .badge-descarte {
+      display: inline-block;
+      padding: 0.18em 0.65em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .badge-alta {
+      background-color: var(--estado-alta);
+      color: var(--white);
+    }
+
+    .badge-media {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .badge-baja {
+      background-color: var(--estado-baja);
+      color: var(--white);
+    }
+
+    .badge-descarte {
+      background-color: var(--estado-descarte);
+      color: var(--white);
+    }
+
+    /* Banner de draft */
+    .draft-banner {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+      padding: 0.75em 1.1em;
+      border-radius: var(--radio);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px dashed var(--bridge-red);
+    }
+
+    .draft-banner::before {
+      content: "BORRADOR · ";
+      font-weight: 700;
+      color: var(--bridge-red);
+      letter-spacing: 0.04em;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--sky-blue);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">RE/MAX <span class="brand-master">Master</span> · Arequipa</a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Guía del coordinador — CRM RE/MAX Master</h1>
+
+    <p>Esta guía te enseña a llenar el CRM día a día. Si la sigues, los reportes salen solos y nadie pierde un lead.</p>
+
+    <div class="callout-info">
+      <p><strong>Antes de empezar:</strong> abre la hoja <code>personas</code> del Google Sheet. Ahí vive el 90% de tu trabajo.</p>
+    </div>
+
+    <h2>Las 3 reglas duras</h2>
+
+    <ol>
+      <li><strong>Una fila = un lead.</strong> Nunca metas dos personas en la misma fila, ni el mismo lead en dos filas.</li>
+      <li><strong>El campo <code>closer_asignado</code> nunca queda vacío y nunca dice "OFICINA".</strong> Si no sabes a quién asignarlo, déjalo así un momento y luego elige uno de la lista — pero antes de que pase a <code>CONTACTADO</code> ya tiene que estar lleno.</li>
+      <li><strong>El estado se mueve en orden.</strong> No puedes saltar de <code>NUEVO</code> a <code>CERRADO_GANADO</code>. El CRM te bloquea si lo intentas.</li>
+    </ol>
+
+    <h2>Cuando llega un lead nuevo</h2>
+
+    <p>Llena estas columnas <strong>en este orden</strong>. Cada vez que llenas una, el CRM hace algo automático.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Orden</th>
+          <th>Columna</th>
+          <th>Qué poner</th>
+          <th>Qué pasa solo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>fecha_hora_entrada</code></td>
+          <td>Fecha y hora actual</td>
+          <td>El CRM genera el <code>lead_id</code> (formato <code>YYYYMMDD-NNN</code>)</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>canal</code></td>
+          <td>WhatsApp · Llamada · Web · Presencial · Email</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>origen</code></td>
+          <td>Facebook · Instagram · TikTok · Web Master · Google Ads · Referido · Presencial · Otros</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>nombre_completo</code></td>
+          <td>Nombre + al menos un apellido</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>telefono</code></td>
+          <td>Formato +51 9XX XXX XXX</td>
+          <td>El CRM avisa si ya existe ese teléfono (posible duplicado)</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><code>perfil</code></td>
+          <td>Comprador · Vendedor · Arrendador · Arrendatario · Anticresista acreedor · Anticresista deudor · Constructora · Closer postulante</td>
+          <td>El CRM filtra el dropdown de etiqueta para mostrar solo las que aplican a ese perfil</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><code>etiqueta_especifica</code></td>
+          <td>La que corresponda al perfil (ver <a href="../anexos/anexo-tabla-etiquetas.html">Anexo-Tabla-Etiquetas</a>)</td>
+          <td>El CRM llena <code>prioridad_comun</code> solo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Estado inicial:</strong> déjalo en <code>NUEVO</code>. Cuando empieces a aplicar el flujo de calificación, muévelo a <code>EN_CALIFICACION</code>.</p>
+
+    <h2>Cómo mover un lead de estado</h2>
+
+    <p>El estado vive en la columna <code>estado_actual</code>. Estos son los movimientos válidos.</p>
+
+    <pre><code>NUEVO → EN_CALIFICACION → ASIGNADO → CONTACTADO → EN_VISITA → EN_NEGOCIACION → CERRADO_GANADO
+                       ↓           ↓            ↓             ↓
+                  DESCARTADO   DESCARTADO   APLAZADO     CAPTADO (solo propietarios)
+                                            CERRADO_PERDIDO</code></pre>
+
+    <p><strong>Reglas prácticas:</strong></p>
+
+    <ul>
+      <li><strong><code>NUEVO → EN_CALIFICACION</code>:</strong> apenas empieces a aplicar el flujo del perfil.</li>
+      <li><strong><code>EN_CALIFICACION → ASIGNADO</code>:</strong> llena <code>closer_asignado</code> y el CRM mueve solo el estado.</li>
+      <li><strong><code>ASIGNADO → CONTACTADO</code>:</strong> cuando el closer hizo primer contacto exitoso.</li>
+      <li><strong><code>CONTACTADO → EN_VISITA</code>:</strong> llena <code>fecha_visita_agendada</code> y el CRM mueve el estado solo. Solo en este momento se marca <code>sla_contacto_cumplido</code> (si la visita se agendó el mismo día).</li>
+      <li><strong><code>EN_VISITA → CAPTADO</code></strong> (solo propietarios: Vendedor, Arrendador, Anticresista deudor, Constructora): cuando se firmó la exclusividad. <strong>El CRM crea o actualiza solo la fila en la hoja <code>propiedades</code> con <code>estado_exclusividad = "Firmada"</code>.</strong></li>
+      <li><strong><code>EN_NEGOCIACION → CERRADO_GANADO</code>:</strong> llena <code>monto_final_cierre</code> y el CRM mueve el estado solo.</li>
+      <li><strong><code>* → CERRADO_PERDIDO</code>:</strong> llena <code>motivo_perdida</code> y el CRM mueve el estado solo.</li>
+      <li><strong><code>* → DESCARTADO</code> (etiqueta <span class="badge-descarte">Descarte</span>):</strong> el CRM llena solo <code>fecha_reactivacion</code> con la fecha de hoy + 45 días.</li>
+      <li><strong><code>* → APLAZADO</code>:</strong> TÚ tienes que llenar <code>fecha_reactivacion</code> (no se llena solo en este caso).</li>
+    </ul>
+
+    <div class="callout-warn">
+      <p>Si intentas un salto no válido, el CRM revierte el cambio y te muestra los estados a los que sí puedes ir.</p>
+    </div>
+
+    <h2>Casos especiales</h2>
+
+    <h3>Caso 1 — Lead que ya estuvo antes (reactivación)</h3>
+
+    <p>Pasa cuando un lead <code>DESCARTADO</code>, <code>CERRADO_PERDIDO</code> o <code>APLAZADO</code> vuelve a escribir.</p>
+
+    <ol>
+      <li><strong>NO edites la fila vieja.</strong> Esa queda como histórico.</li>
+      <li>Crea una fila nueva con todo el flujo normal.</li>
+      <li>En la columna <code>lead_original_id</code>, pega el <code>lead_id</code> del lead anterior (ejemplo: <code>20260301-007</code>).</li>
+      <li>El CRM llena solo la columna <code>closer_historico</code> con el closer que atendió al lead anterior — para que tú asignes ese mismo closer si todavía está activo.</li>
+    </ol>
+
+    <h3>Caso 2 — Vendedor que también quiere comprar (<code>POTENCIAL_doble</code>)</h3>
+
+    <p>Pasa cuando el vendedor te dice "vendo esta para comprar otra".</p>
+
+    <ol>
+      <li>Llena la fila del Vendedor normal.</li>
+      <li>En <code>etiqueta_especifica</code> elige <code>POTENCIAL_doble</code>.</li>
+      <li><strong>El CRM crea solo una fila nueva con perfil Comprador</strong>, copiando teléfono, nombre, canal y origen. Esa fila nace en estado <code>EN_CALIFICACION</code>.</li>
+      <li>Tú completas la calificación del lead Comprador desde ahí.</li>
+    </ol>
+
+    <p>Lo mismo aplica para <code>CAPTABLE_doble</code> en perfil Anticresista deudor — el CRM crea la contraparte Anticresista acreedor.</p>
+
+    <p>(El perfil Arrendador no tiene etiqueta <code>_doble</code>, así que no aplica.)</p>
+
+    <h3>Caso 3 — Lead propietario que firma exclusividad (<code>CAPTADO</code>)</h3>
+
+    <p>Solo aplica a Vendedor, Arrendador, Anticresista deudor y Constructora.</p>
+
+    <ol>
+      <li>Mueve <code>estado_actual</code> a <code>CAPTADO</code>.</li>
+      <li>El CRM crea o actualiza solo la fila en la hoja <code>propiedades</code>.</li>
+      <li>Marca <code>estado_exclusividad = "Firmada"</code> en esa fila.</li>
+      <li>Si más adelante el propietario retira la exclusividad, mueve a <code>CERRADO_PERDIDO</code> — el CRM actualiza solo a <code>estado_exclusividad = "Retirada"</code>.</li>
+    </ol>
+
+    <div class="callout-warn">
+      <p>Si por error intentas poner <code>CAPTADO</code> a un adquirente (Comprador, Arrendatario, Anticresista acreedor), el CRM te lo revierte y te avisa.</p>
+    </div>
+
+    <h2>Lo que el CRM hace solo (no te asustes)</h2>
+
+    <p>Estas cosas no las tienes que llenar — pasan al editar otras columnas:</p>
+
+    <ul>
+      <li><code>lead_id</code> — al llenar <code>fecha_hora_entrada</code>.</li>
+      <li><code>prioridad_comun</code> — al llenar <code>etiqueta_especifica</code>.</li>
+      <li><code>fecha_hora_asignacion</code> — al llenar <code>closer_asignado</code>.</li>
+      <li><code>sla_asignacion_cumplido</code> — calculado.</li>
+      <li><code>sla_contacto_cumplido</code> — al llenar <code>fecha_visita_agendada</code>.</li>
+      <li><code>tiempo_total_embudo</code> — al cerrar el lead.</li>
+      <li><code>tipo_operacion</code> — derivado del perfil.</li>
+      <li><code>gates_completos</code> — al marcar todos los <code>gate_*</code> del perfil.</li>
+      <li><code>closer_historico</code> — al llenar <code>lead_original_id</code>.</li>
+      <li><code>fecha_reactivacion</code> — al pasar a <code>DESCARTADO</code> con etiqueta <span class="badge-descarte">Descarte</span> (auto +45 días).</li>
+      <li>Alta en la hoja <code>propiedades</code> — al pasar a <code>CAPTADO</code>.</li>
+      <li>Lead espejo en <code>personas</code> — al elegir etiqueta <code>_doble</code>.</li>
+      <li>Filas en la hoja <code>actividades</code> — cada vez que cambias algo importante (cambio de estado, asignación de closer, visita agendada, etc.).</li>
+    </ul>
+
+    <h2>Errores comunes y cómo evitarlos</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Error</th>
+          <th>Cómo evitarlo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Editar la fila vieja de un lead reactivado</td>
+          <td>Crea fila nueva y enlaza con <code>lead_original_id</code>.</td>
+        </tr>
+        <tr>
+          <td>Poner texto libre en <code>closer_asignado</code> ("Thais") en lugar de elegir del dropdown</td>
+          <td>Usa siempre el dropdown — el formato canónico es "Nombre + primer apellido" (ej. "Thais Lazo").</td>
+        </tr>
+        <tr>
+          <td>Poner "x", "OFICINA" o "DESCONOCIDO" en <code>closer_asignado</code></td>
+          <td>Está prohibido. Si no hay closer asignado todavía, déjalo vacío hasta que lo decidas.</td>
+        </tr>
+        <tr>
+          <td>Saltar de <code>NUEVO</code> a <code>CONTACTADO</code> directamente</td>
+          <td>El CRM no te deja. Pasa por <code>EN_CALIFICACION</code> → <code>ASIGNADO</code> → <code>CONTACTADO</code>.</td>
+        </tr>
+        <tr>
+          <td>Olvidar llenar <code>motivo_perdida</code> al cerrar perdido</td>
+          <td>Llénalo siempre — el reporte gerencial necesita el motivo.</td>
+        </tr>
+        <tr>
+          <td>Olvidar llenar <code>fecha_reactivacion</code> al pasar a <code>APLAZADO</code></td>
+          <td>Sin esa fecha, el lead se pierde. Si no sabes la fecha exacta, pon una estimación.</td>
+        </tr>
+        <tr>
+          <td>Marcar <code>CAPTADO</code> en un lead Comprador</td>
+          <td>El CRM te revierte. <code>CAPTADO</code> es solo para propietarios.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Si algo se rompe</h2>
+
+    <ol>
+      <li><strong>No borres filas</strong> sin avisar. Cada fila tiene historia (la hoja <code>actividades</code> apunta a su <code>lead_id</code>).</li>
+      <li>Si el CRM revirtió un cambio tuyo y no entiendes por qué, lee el mensaje de error que sale — siempre dice qué estados o valores sí son válidos.</li>
+      <li>Si el dropdown de una columna se quedó vacío, avisa para correr <code>setupCompleto</code> desde Apps Script.</li>
+      <li>Para cualquier duda de campo: ver <a href="../anexos/diccionario-crm.html">Diccionario-CRM</a>. Para etiquetas: <a href="../anexos/anexo-tabla-etiquetas.html">Anexo-Tabla-Etiquetas</a>. Para estados: <a href="../anexos/anexo-estados-lead.html">Anexo-Estados-Lead</a>.</li>
+    </ol>
+
+    <p><em>Versión 1 · 2026-05-18 · RE/MAX Master Arequipa · Proyecto 2 — Guía operativa del CRM</em></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">v1.0 · 2026-05-18</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

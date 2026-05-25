@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#003DA5">
+  <meta name="description" content="Diccionario maestro de las 50+ etiquetas de los 8 flujos mapeadas a 4 prioridades comunes (Alta, Media, Baja, Descarte) con SLA y reglas operativas.">
+  <title>Anexo · Tabla Maestra de Etiquetas · RE/MAX Master</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Primarios de marca */
+      --master-blue: #003DA5;
+      --remax-red: #FF1200;
+      --remax-blue: #0043FF;
+      --cream: #F7F5EE;
+      --white: #FFFFFF;
+      --black: #010101;
+      --charcoal: #232323;
+
+      /* Secundarios */
+      --bridge-blue: #0C2749;
+      --dark-blue: #000E35;
+      --bridge-red: #AA1120;
+      --sky-blue: #A3D4F2;
+
+      /* Estados del embudo (sistema, no marca) */
+      --estado-alta: #2A9D8F;
+      --estado-media: #E9B949;
+      --estado-baja: #E76F51;
+      --estado-descarte: #7A2E2E;
+
+      /* Neutros UI */
+      --gris-borde: #E0E0E0;
+      --gris-texto-suave: #6C757D;
+      --fondo-app: var(--cream);
+      --fondo-tarjeta: var(--white);
+      --texto-principal: var(--charcoal);
+      --texto-titulo: var(--bridge-blue);
+      --acento-primario: var(--master-blue);
+      --acento-secundario: var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(12, 39, 73, 0.08), 0 1px 2px rgba(12, 39, 73, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 4px solid var(--master-blue);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .site-brand .brand-master { color: var(--sky-blue); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .site-nav a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--acento-primario);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--bridge-blue); }
+
+    strong { font-weight: 700; color: var(--bridge-blue); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(163, 212, 242, 0.08); }
+
+    /* Blockquote */
+    blockquote {
+      margin: 1.25em 0;
+      padding: 0.75em 1.1em;
+      border-left: 4px solid var(--acento-primario);
+      background-color: var(--fondo-tarjeta);
+      color: var(--charcoal);
+      font-style: italic;
+      border-radius: 0 var(--radio) var(--radio) 0;
+    }
+
+    blockquote p:last-child { margin-bottom: 0; }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(12, 39, 73, 0.06);
+      color: var(--bridge-blue);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1em 1.1em;
+      border-radius: var(--radio);
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--master-blue);
+      color: var(--bridge-blue);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* Badges de prioridad */
+    .badge-alta,
+    .badge-media,
+    .badge-baja,
+    .badge-descarte {
+      display: inline-block;
+      padding: 0.18em 0.65em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .badge-alta {
+      background-color: var(--estado-alta);
+      color: var(--white);
+    }
+
+    .badge-media {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .badge-baja {
+      background-color: var(--estado-baja);
+      color: var(--white);
+    }
+
+    .badge-descarte {
+      background-color: var(--estado-descarte);
+      color: var(--white);
+    }
+
+    /* Banner de draft */
+    .draft-banner {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+      padding: 0.75em 1.1em;
+      border-radius: var(--radio);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px dashed var(--bridge-red);
+    }
+
+    .draft-banner::before {
+      content: "BORRADOR · ";
+      font-weight: 700;
+      color: var(--bridge-red);
+      letter-spacing: 0.04em;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--sky-blue);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">RE/MAX <span class="brand-master">Master</span> · Arequipa</a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Anexo — Tabla Maestra de Etiquetas</h1>
+    <h3>Entregable 2 del Proyecto 1 · v2</h3>
+
+    <blockquote>
+      <p>Mapea las 50+ etiquetas que usan los 8 flujos a 4 prioridades comunes, para que reportes, SLA y asignación sean comparables entre perfiles. Las etiquetas específicas siguen viviendo en cada flujo; este anexo es el <strong>diccionario maestro</strong>.</p>
+      <p><strong>v2 · 2026-05-18:</strong> se documenta el comportamiento automático del CRM para las etiquetas <code>POTENCIAL_doble</code> (Vendedor) y <code>CAPTABLE_doble</code> (Anticresista deudor): el Apps Script genera un <strong>lead espejo</strong> del perfil contraparte. Ver regla operativa 7 abajo.</p>
+    </blockquote>
+
+    <h2>Las 4 prioridades comunes</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Prioridad</th>
+          <th>Color</th>
+          <th>Definición</th>
+          <th>SLA implícito</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Verde</td>
+          <td>Lead caliente · alta probabilidad de cierre · atención prioritaria</td>
+          <td>Primer contacto mismo día · visita en <strong>48-72 hrs</strong></td>
+        </tr>
+        <tr>
+          <td><span class="badge-media">Media</span></td>
+          <td>Amarillo</td>
+          <td>Lead con potencial pero con condiciones (timing, documentos, precio, gap mercado)</td>
+          <td>Primer contacto mismo día · visita en <strong>1 semana</strong></td>
+        </tr>
+        <tr>
+          <td><span class="badge-baja">Baja</span></td>
+          <td>Naranja</td>
+          <td>Potencial bajo pero no descartado · cartera de seguimiento</td>
+          <td>Primer contacto en 48hrs · seguimiento mensual</td>
+        </tr>
+        <tr>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Rojo</td>
+          <td>Lead no viable hoy · queda en CRM para reactivación / newsletter educativo / datos</td>
+          <td>Sin SLA de visita · fecha de reactivación a +45 días</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Etiquetas por perfil</h2>
+
+    <h3>1. COMPRADOR</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Prioridad</th>
+          <th>Cuándo se aplica</th>
+          <th>Acción inmediata</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>POTENCIAL</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Timing inmediato + financiamiento claro + presupuesto coherente con mercado</td>
+          <td>Mostrar opciones premium · agendar visita en 48hrs</td>
+        </tr>
+        <tr>
+          <td><strong>POTENCIAL_condicional</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Encaja en todo pero falta resolver 1 condición (ej. crédito en evaluación)</td>
+          <td>Resolver condición primero · visita cuando se confirme</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI-POTENCIAL</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Timing medio (3-6 meses) o presupuesto con gap moderado</td>
+          <td>Cartera activa · mantener contacto mensual</td>
+        </tr>
+        <tr>
+          <td><strong>NO POTENCIAL</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Sin financiamiento + sin timing + presupuesto irreal</td>
+          <td>Newsletter educativo · reactivación a +45 días</td>
+        </tr>
+        <tr>
+          <td><strong>CURIOSO</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>No da nombre, evasivo, "estoy viendo nomás"</td>
+          <td>Cerrar amable · newsletter educativo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2. VENDEDOR</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Prioridad</th>
+          <th>Cuándo se aplica</th>
+          <th>Acción inmediata</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>POTENCIAL</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Documentación completa + precio coherente + urgencia real</td>
+          <td>Captar exclusiva · ACM + publicación premium</td>
+        </tr>
+        <tr>
+          <td><strong>POTENCIAL_doble</strong> ⚙</td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Vende para comprar (genera 2 leads: vendedor + comprador)</td>
+          <td>Captar exclusiva + activar perfil Comprador en paralelo. <strong>Automatización CRM (v2):</strong> al seleccionar esta etiqueta, el Apps Script crea automáticamente el lead espejo de perfil Comprador con <code>lead_original_id</code> apuntando al lead Vendedor.</td>
+        </tr>
+        <tr>
+          <td><strong>POTENCIAL_condicional</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Docs OK pero precio con gap, o docs incompletos pero precio OK</td>
+          <td>Resolver gap (ACM) o completar docs antes de publicar</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI-POTENCIAL</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Motivación tibia o sin urgencia, pero captable</td>
+          <td>Cartera estándar · seguimiento mensual</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI_condicional</strong></td>
+          <td><span class="badge-baja">Baja</span></td>
+          <td>Múltiples condiciones por resolver (legal + precio + motivación)</td>
+          <td>Solo si se resuelven · seguimiento bimestral</td>
+        </tr>
+        <tr>
+          <td><strong>NO_POTENCIAL_condicional</strong></td>
+          <td><span class="badge-baja">Baja</span></td>
+          <td>Casi descartable pero hay 1 punto rescatable</td>
+          <td>Revisar en 3 meses</td>
+        </tr>
+        <tr>
+          <td><strong>NO POTENCIAL</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Sin docs + precio irreal + sin motivación</td>
+          <td>Solo reactivar si cambia escenario</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>3. ARRENDADOR</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Prioridad</th>
+          <th>Cuándo se aplica</th>
+          <th>Acción inmediata</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>SUPER POTENCIAL</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Renta coherente + propiedad lista + dueño urgente</td>
+          <td>Captar exclusiva · publicación premium · prioridad máxima</td>
+        </tr>
+        <tr>
+          <td><strong>POTENCIAL</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Renta coherente + docs OK</td>
+          <td>Captar exclusiva · publicación estándar</td>
+        </tr>
+        <tr>
+          <td><strong>POTENCIAL_condicional</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>OK con 1 condición pendiente (mejoras a propiedad, ajuste renta)</td>
+          <td>Cerrar condición primero</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI-POTENCIAL</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Renta con gap moderado o disponibilidad parcial</td>
+          <td>Negociar renta · cartera activa</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI_condicional</strong></td>
+          <td><span class="badge-baja">Baja</span></td>
+          <td>Múltiples condiciones</td>
+          <td>Cartera secundaria</td>
+        </tr>
+        <tr>
+          <td><strong>NO_POTENCIAL_condicional</strong></td>
+          <td><span class="badge-baja">Baja</span></td>
+          <td>Casi descartable pero rescatable</td>
+          <td>Revisar en 3 meses</td>
+        </tr>
+        <tr>
+          <td><strong>NO POTENCIAL</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Renta irreal + propiedad no apta + sin docs</td>
+          <td>Solo reactivar si cambia</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>4. ARRENDATARIO</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Prioridad</th>
+          <th>Cuándo se aplica</th>
+          <th>Acción inmediata</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>POTENCIAL</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Crediticio aprobado + garantía + presupuesto coherente + timing inmediato</td>
+          <td>Mostrar opciones · agendar visita en 48hrs</td>
+        </tr>
+        <tr>
+          <td><strong>POTENCIAL_condicional</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Encaja pero crediticio condicional o garantía parcial</td>
+          <td>Resolver condición · visita cuando se confirme</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI-POTENCIAL</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Crediticio aprobado pero presupuesto con gap, o garantía justa</td>
+          <td>Cartera activa · negociar</td>
+        </tr>
+        <tr>
+          <td><strong>NoPotZona</strong></td>
+          <td><span class="badge-baja">Baja</span></td>
+          <td>Solo descalifica zona (presupuesto y crediticio OK)</td>
+          <td>Ofrecer zonas alternas · seguimiento</td>
+        </tr>
+        <tr>
+          <td><strong>NoPotCred</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Crediticio rechazado (gate duro)</td>
+          <td>No avanzar · informar de mejora crediticia · revisar a +45 días</td>
+        </tr>
+        <tr>
+          <td><strong>NoPotEnd</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Endeudamiento alto / múltiples obligaciones</td>
+          <td>No avanzar</td>
+        </tr>
+        <tr>
+          <td><strong>NoPotProt</strong> / <strong>NoPotProt2</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Sin garantía aceptable (sin fiador, sin depósito, sin mes adelantado)</td>
+          <td>No avanzar sin garantía válida</td>
+        </tr>
+        <tr>
+          <td><strong>NoPotCap</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Capacidad de pago insuficiente vs renta solicitada</td>
+          <td>No avanzar</td>
+        </tr>
+        <tr>
+          <td><strong>NoPotGar</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Garantía rechazada (fiador insolvente, etc.)</td>
+          <td>No avanzar</td>
+        </tr>
+        <tr>
+          <td><strong>NO POTENCIAL</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Combinación de descartes</td>
+          <td>Newsletter educativo · revisar a +45 días</td>
+        </tr>
+        <tr>
+          <td><strong>CURIOSO</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>No da nombre · evasivo</td>
+          <td>Cerrar amable</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>5. ANTICRESISTA ACREEDOR (quien coloca dinero)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Prioridad</th>
+          <th>Cuándo se aplica</th>
+          <th>Acción inmediata</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>COLOCABLE</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Monto disponible coherente + horizonte 2-5 años + fuente de dinero válida + timing inmediato</td>
+          <td>Mostrar opciones de propiedades en anticresis · agendar visita</td>
+        </tr>
+        <tr>
+          <td><strong>COLOCABLE_condicional</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Encaja con 1 condición (validación de fuente, espera de liquidez)</td>
+          <td>Resolver condición primero</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI-COLOCABLE</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Monto con gap moderado o horizonte fuera de rango óptimo</td>
+          <td>Cartera activa · educar sobre opciones</td>
+        </tr>
+        <tr>
+          <td><strong>NO COLOCABLE</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Monto insuficiente para opciones disponibles, horizonte incompatible</td>
+          <td>Newsletter educativo</td>
+        </tr>
+        <tr>
+          <td><strong>CURIOSO</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Confusión de producto · no da nombre</td>
+          <td>Cerrar amable · script educativo sobre anticresis</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>6. ANTICRESISTA DEUDOR (quien entrega propiedad)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Prioridad</th>
+          <th>Cuándo se aplica</th>
+          <th>Acción inmediata</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>CAPTABLE</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Titularidad clara + monto coherente + plazo 2-5 años + dispuesto a mudar</td>
+          <td>Captar exclusiva · publicar</td>
+        </tr>
+        <tr>
+          <td><strong>CAPTABLE_doble</strong> ⚙</td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Anticresista deudor que también busca colocar dinero en otra anticresis (genera 2 leads)</td>
+          <td>Captar + activar perfil Anticresista acreedor. <strong>Automatización CRM (v2):</strong> al seleccionar esta etiqueta, el Apps Script crea automáticamente el lead espejo de perfil Anticresista acreedor con <code>lead_original_id</code> apuntando al lead Anticresista deudor.</td>
+        </tr>
+        <tr>
+          <td><strong>CAPTABLE_condicional</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Encaja con 1 condición (resolver copropiedad, ajustar monto)</td>
+          <td>Cerrar condición primero</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI-CAPTABLE</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Monto/plazo con gap moderado</td>
+          <td>Negociar · cartera activa</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI_condicional</strong></td>
+          <td><span class="badge-baja">Baja</span></td>
+          <td>Múltiples condiciones por resolver</td>
+          <td>Solo si se resuelven</td>
+        </tr>
+        <tr>
+          <td><strong>NO_CAPTABLE_condicional</strong></td>
+          <td><span class="badge-baja">Baja</span></td>
+          <td>Casi descartable, rescatable</td>
+          <td>Revisar en 3 meses</td>
+        </tr>
+        <tr>
+          <td><strong>NoCapTit</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Sin titularidad clara (gate legal)</td>
+          <td>No captar sin SUNARP en regla</td>
+        </tr>
+        <tr>
+          <td><strong>NoCapPlazo</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Plazo solicitado fuera de rango operable</td>
+          <td>No captar</td>
+        </tr>
+        <tr>
+          <td><strong>NoCapMud</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>No dispuesto a mudar (gate operativo)</td>
+          <td>No captar</td>
+        </tr>
+        <tr>
+          <td><strong>NO CAPTABLE</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Combinación de descartes</td>
+          <td>Reactivar si cambia escenario</td>
+        </tr>
+        <tr>
+          <td><strong>CURIOSO</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Confusión de producto · evasivo</td>
+          <td>Cerrar amable · script educativo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>7. CONSTRUCTORA</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Prioridad</th>
+          <th>Cuándo se aplica</th>
+          <th>Acción inmediata</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>POTENCIAL (exclusividad)</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Licencia OK + saneamiento OK + dispuestos a exclusividad comercial</td>
+          <td>Cerrar acuerdo de exclusividad · ramp-up</td>
+        </tr>
+        <tr>
+          <td><strong>POTENCIAL (compartido)</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Licencia OK + saneamiento OK + modelo compartido (no exclusiva)</td>
+          <td>Cerrar acuerdo compartido · ramp-up</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI (legal)</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Licencia o saneamiento pendientes (gate duro)</td>
+          <td>Esperar regularización · cartera latente</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI (precio)</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Legal OK pero precio fuera de mercado</td>
+          <td>Negociar precio o pasar a observación</td>
+        </tr>
+        <tr>
+          <td><strong>NO POTENCIAL</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Sin licencia + sin saneamiento + precio irreal</td>
+          <td>No avanzar hasta cambio</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>8. CLOSER POSTULANTE (selectivo)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Prioridad</th>
+          <th>Cuándo se aplica</th>
+          <th>Acción inmediata</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>APTO</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Track record + referencias + alineación cultural + 4 atributos de marca</td>
+          <td>Onboarding inmediato</td>
+        </tr>
+        <tr>
+          <td><strong>EN EVALUACIÓN</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Encaja parcialmente, requiere entrevista profunda o validación</td>
+          <td>Agendar 2da entrevista · validar referencias</td>
+        </tr>
+        <tr>
+          <td><strong>NO APTO (mentalidad)</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>No alineado con la cultura de la oficina</td>
+          <td>Rechazo cordial</td>
+        </tr>
+        <tr>
+          <td><strong>NO APTO (track)</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Sin track record verificable</td>
+          <td>Rechazo cordial · invitar a postular en 1 año</td>
+        </tr>
+        <tr>
+          <td><strong>NO APTO (alineación)</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>No alineado con los 4 atributos de marca</td>
+          <td>Rechazo cordial</td>
+        </tr>
+        <tr>
+          <td><strong>NO APTO (referencias)</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Referencias negativas o incompletas</td>
+          <td>Rechazo cordial</td>
+        </tr>
+        <tr>
+          <td><strong>CURIOSO</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>No da info clara · evasivo</td>
+          <td>Cerrar amable</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Vista invertida: ¿qué etiquetas caen en cada prioridad?</h2>
+
+    <h3><span class="badge-alta">Alta</span> (atención prioritaria · visita 48-72 hrs)</h3>
+    <ul>
+      <li>Comprador: POTENCIAL</li>
+      <li>Vendedor: POTENCIAL · POTENCIAL_doble</li>
+      <li>Arrendador: SUPER POTENCIAL · POTENCIAL</li>
+      <li>Arrendatario: POTENCIAL</li>
+      <li>Anticresista acreedor: COLOCABLE</li>
+      <li>Anticresista deudor: CAPTABLE · CAPTABLE_doble</li>
+      <li>Constructora: POTENCIAL (exclusividad) · POTENCIAL (compartido)</li>
+      <li>Closer postulante: APTO</li>
+    </ul>
+
+    <h3><span class="badge-media">Media</span> (cartera activa · visita 1 semana)</h3>
+    <ul>
+      <li>Todos los <code>_condicional</code></li>
+      <li>Todos los <code>SEMI-POTENCIAL</code> / <code>SEMI-COLOCABLE</code> / <code>SEMI-CAPTABLE</code></li>
+      <li>Constructora: SEMI (legal) · SEMI (precio)</li>
+      <li>Closer postulante: EN EVALUACIÓN</li>
+    </ul>
+
+    <h3><span class="badge-baja">Baja</span> (seguimiento mensual)</h3>
+    <ul>
+      <li>Todos los <code>SEMI_condicional</code></li>
+      <li>Todos los <code>NO_POTENCIAL_condicional</code> / <code>NO_CAPTABLE_condicional</code></li>
+      <li>Arrendatario: NoPotZona (solo gap de zona)</li>
+    </ul>
+
+    <h3><span class="badge-descarte">Descarte</span> (sin SLA de visita · revisar a +45 días)</h3>
+    <ul>
+      <li>Todos los <code>NO POTENCIAL</code> / <code>NO COLOCABLE</code> / <code>NO CAPTABLE</code> / <code>NO APTO</code></li>
+      <li>Arrendatario: NoPotCred · NoPotEnd · NoPotProt · NoPotProt2 · NoPotCap · NoPotGar</li>
+      <li>Anticresista deudor: NoCapTit · NoCapPlazo · NoCapMud</li>
+      <li>Todos los <code>CURIOSO</code></li>
+    </ul>
+
+    <h2>Reglas operativas de etiquetado</h2>
+
+    <ol>
+      <li><strong>Una sola etiqueta específica por lead</strong> (la del perfil correspondiente).</li>
+      <li><strong>Una sola prioridad común por lead</strong> (derivada de la etiqueta específica).</li>
+      <li><strong>La etiqueta se asigna al cierre de la calificación</strong> (paso 5 del embudo maestro), no antes.</li>
+      <li><strong>La etiqueta puede cambiar durante el ciclo de vida</strong>:
+        <ul>
+          <li>Sube a ALTA si se resuelve una condición (POTENCIAL_condicional → POTENCIAL).</li>
+          <li>Baja a BAJA/DESCARTE si se confirma un gate duro negativo.</li>
+        </ul>
+      </li>
+      <li><strong>Si la etiqueta baja a DESCARTE</strong>, el lead pasa al estado DESCARTADO (ver Anexo-Estados-Lead), pero <strong>NO se elimina del CRM</strong> — queda para reactivación / newsletter / data histórica.</li>
+      <li><strong>CURIOSO es siempre DESCARTE</strong>, en todos los perfiles que lo usan (Comprador, Arrendatario, Anticresista×2, Closer).</li>
+      <li><strong><code>_doble</code></strong> (POTENCIAL_doble, CAPTABLE_doble) implica generar un <strong>lead secundario</strong> del perfil cruzado, no etiquetarlo en el mismo registro. <strong>(v2) Automatizado en el CRM:</strong> el Apps Script crea el lead espejo en cuanto se selecciona la etiqueta <code>_doble</code>:
+        <ul>
+          <li><code>POTENCIAL_doble</code> (Vendedor) → lead espejo perfil <strong>Comprador</strong>.</li>
+          <li><code>CAPTABLE_doble</code> (Anticresista deudor) → lead espejo perfil <strong>Anticresista acreedor</strong>.</li>
+          <li>El espejo arrastra teléfono · nombre · canal · origen del lead madre y nace en estado <code>EN_CALIFICACION</code> con <code>lead_original_id</code> apuntando al lead madre. El coordinador completa la calificación del espejo desde ese estado.</li>
+          <li>El perfil <strong>Arrendador</strong> no tiene etiqueta <code>_doble</code> en esta tabla, así que la automatización no aplica.</li>
+        </ul>
+      </li>
+      <li><strong>El reporte gerencial usa la prioridad común</strong>; el reporte por perfil usa la etiqueta específica.</li>
+    </ol>
+
+    <h2>Conexión con el CRM (Anexo-Campos-CRM)</h2>
+
+    <ul>
+      <li>Campo <code>etiqueta_especifica</code> (lista cerrada de ~50 valores) — guarda el valor textual exacto de este anexo. El dropdown del CRM se filtra por <code>perfil</code> (cada perfil ve solo sus etiquetas).</li>
+      <li>Campo <code>prioridad_comun</code> (lista cerrada: ALTA · MEDIA · BAJA · DESCARTE) — se llena <strong>automáticamente</strong> desde <code>etiqueta_especifica</code> (Apps Script, derivada del mapeo de esta tabla).</li>
+      <li>Etiquetas marcadas con ⚙ disparan automatizaciones del CRM al seleccionarlas (ver regla operativa 7).</li>
+    </ul>
+
+    <p><em>Versión 1 · 2026-05-14 · RE/MAX Master Arequipa · Proyecto 1 — Anexo del Entregable 2</em><br>
+    <em>Versión 2 · 2026-05-18 · documenta el comportamiento de lead espejo automático para <code>_doble</code> (Sprint 1 del Proyecto 2).</em></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">v1.0 · 2026-05-18</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

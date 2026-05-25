@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#003DA5">
+  <meta name="description" content="Flujo de recepción y calificación de closer / agente postulante · RE/MAX Master Arequipa (borrador).">
+  <title>Flujo de recepción y calificación de closer / agente postulante · BORRADOR · RE/MAX Master</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Primarios de marca */
+      --master-blue: #003DA5;
+      --remax-red: #FF1200;
+      --remax-blue: #0043FF;
+      --cream: #F7F5EE;
+      --white: #FFFFFF;
+      --black: #010101;
+      --charcoal: #232323;
+
+      /* Secundarios */
+      --bridge-blue: #0C2749;
+      --dark-blue: #000E35;
+      --bridge-red: #AA1120;
+      --sky-blue: #A3D4F2;
+
+      /* Estados del embudo (sistema, no marca) */
+      --estado-alta: #2A9D8F;
+      --estado-media: #E9B949;
+      --estado-baja: #E76F51;
+      --estado-descarte: #7A2E2E;
+
+      /* Neutros UI */
+      --gris-borde: #E0E0E0;
+      --gris-texto-suave: #6C757D;
+      --fondo-app: var(--cream);
+      --fondo-tarjeta: var(--white);
+      --texto-principal: var(--charcoal);
+      --texto-titulo: var(--bridge-blue);
+      --acento-primario: var(--master-blue);
+      --acento-secundario: var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(12, 39, 73, 0.08), 0 1px 2px rgba(12, 39, 73, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 4px solid var(--master-blue);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .site-brand .brand-master { color: var(--sky-blue); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .site-nav a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--acento-primario);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--bridge-blue); }
+
+    strong { font-weight: 700; color: var(--bridge-blue); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(163, 212, 242, 0.08); }
+
+    /* Blockquote */
+    blockquote {
+      margin: 1.25em 0;
+      padding: 0.75em 1.1em;
+      border-left: 4px solid var(--acento-primario);
+      background-color: var(--fondo-tarjeta);
+      color: var(--charcoal);
+      font-style: italic;
+      border-radius: 0 var(--radio) var(--radio) 0;
+    }
+
+    blockquote p:last-child { margin-bottom: 0; }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(12, 39, 73, 0.06);
+      color: var(--bridge-blue);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1em 1.1em;
+      border-radius: var(--radio);
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--master-blue);
+      color: var(--bridge-blue);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* Badges de prioridad */
+    .badge-alta,
+    .badge-media,
+    .badge-baja,
+    .badge-descarte {
+      display: inline-block;
+      padding: 0.18em 0.65em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .badge-alta {
+      background-color: var(--estado-alta);
+      color: var(--white);
+    }
+
+    .badge-media {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .badge-baja {
+      background-color: var(--estado-baja);
+      color: var(--white);
+    }
+
+    .badge-descarte {
+      background-color: var(--estado-descarte);
+      color: var(--white);
+    }
+
+    /* Banner de draft */
+    .draft-banner {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+      padding: 0.75em 1.1em;
+      border-radius: var(--radio);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px dashed var(--bridge-red);
+    }
+
+    .draft-banner::before {
+      content: "BORRADOR · ";
+      font-weight: 700;
+      color: var(--bridge-red);
+      letter-spacing: 0.04em;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--sky-blue);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">RE/MAX <span class="brand-master">Master</span> · Arequipa</a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <h1>Flujo de recepción y calificación de closer / agente postulante</h1>
+
+    <div class="draft-banner">Este flujo lo generó la IA siguiendo el patrón de los 6 flujos existentes y los nodos n6c y n23 del Super Proceso. NO está validado. Eduardo debe revisar antes de usar en operación.</div>
+
+    <p>RE/MAX Master · v1-DRAFT · 2026-05-14</p>
+
+    <blockquote>
+      <p><strong>NOTA DE BORRADOR:</strong> este flujo lo generó la IA siguiendo el patrón de los 6 flujos existentes y los nodos n6c (documentación del closer postulante) y n23 (capacitación) del Super Proceso. NO está validado. Eduardo debe revisar especialmente: el perfil exacto del closer ideal, los criterios de rechazo, y cómo se valida el track record.</p>
+    </blockquote>
+
+    <p><strong>Cómo leer:</strong> el lead entra arriba. Cada rombo es una decisión y muestra las respuestas posibles del postulante. Cada caja final coloreada es la <strong>etiqueta</strong> con la que el lead queda en el CRM y dispara la siguiente acción.</p>
+
+    <p><strong>ESTE ES EL ÚNICO FLUJO SELECTIVO.</strong> Los otros 7 perfiles son de captación universal — todo lead entra de alguna forma. Aquí NO: si el postulante no cumple el perfil de RE/MAX Master (track record, ética, estilo de venta, alineación con los 4 atributos de marca), se rechaza con cordialidad y se mantiene la relación profesional. La oficina busca closers ambiciosos, con mentalidad emprendedora, que valoren los sistemas y procesos, y que quieran construir marca personal — no perfiles conformistas ni que busquen solo sueldo fijo.</p>
+
+    <p><strong>El ancla del flujo es el modelo de la oficina:</strong> RE/MAX Master se está rediseñando como una máquina de generación de oportunidades — la IA y el sistema prospectan, califican y preparan; el closer solo cierra. Al closer hay que comunicarle esto como una ventaja (recibe leads calificados y contexto pre-armado), no como un control.</p>
+
+    <h2>Leyenda de colores del diagrama</h2>
+
+    <ul>
+      <li>🟢 <strong>Verde</strong> — APTO · pasa a capacitación (n23)</li>
+      <li>🟡 <strong>Amarillo</strong> — EN EVALUACIÓN · falta validar algo · segunda entrevista</li>
+      <li>⚪ <strong>Gris</strong> — NO APTO · rechazo cordial · se mantiene relación profesional</li>
+      <li>🔵 <strong>Azul</strong> — Cierre y handoff (a capacitación / onboarding)</li>
+      <li>⬜ <strong>Blanco</strong> — Decisión / pregunta abierta</li>
+    </ul>
+
+    <h2>Flujo completo</h2>
+
+    <div class="mermaid">
+flowchart TD
+    Start([Lead entra: WhatsApp o llamada])
+    Start --> Adapt[Adaptarse al canal preferido<br/>recomendar llamada o entrevista presencial<br/>el filtro de closer es conversacional]
+    Adapt --> P1[P1 - Identidad:<br/>nombre completo · edad · ciudad<br/>como se entero de la convocatoria]
+    P1 --> Q1{Da nombre completo<br/>y muestra interes real?}
+    Q1 -->|"No, solo curiosea"| CurFin[CURIOSO: cerrar amable<br/>dejar puerta abierta]
+    Q1 -->|Si| P2[P2 - EXPERIENCIA:<br/>tiene experiencia en ventas?<br/>en inmobiliaria especificamente?<br/>cuanto tiempo]
+
+    P2 --> Exp{Perfil de experiencia?}
+    Exp -->|"Closer inmobiliario con track record"| P3Track
+    Exp -->|"Vendedor de otro rubro, sin inmobiliaria"| P3Sin
+    Exp -->|"Sin experiencia en ventas"| SondMent{Sondeo de mentalidad:<br/>por que ventas inmobiliarias?<br/>tolera ingreso variable?}
+    SondMent -->|"Mentalidad emprendedora clara"| P3Sin
+    SondMent -->|"Busca sueldo fijo / seguridad"| NoAptoMent[NO APTO<br/>no calza con el modelo<br/>de la oficina · rechazo cordial]
+
+    P3Track[P3 - TRACK RECORD:<br/>volumen de cierres · ticket promedio<br/>segmentos en los que cerro<br/>pedir cifras concretas]
+    P3Track --> ValTrack{Track record<br/>verificable y solido?}
+    ValTrack -->|"Si, cifras claras"| P4
+    ValTrack -->|"Dice tener pero sin cifras"| SemiTrack[EN EVALUACION<br/>pedir referencias verificables<br/>segunda conversacion]
+    ValTrack -->|"Track record debil o inventado"| NoAptoTrack[NO APTO<br/>no cumple el estandar · rechazo cordial]
+    SemiTrack --> P4
+
+    P3Sin[P3 - POTENCIAL:<br/>habilidades comerciales · presencia<br/>disposicion a formarse<br/>por que RE/MAX Master]
+    P3Sin --> P4
+
+    P4[P4 - ALINEACION CON LOS 4 ATRIBUTOS:<br/>como entiende el servicio al cliente?<br/>que opina de vender con data vs corazonada?<br/>esta dispuesto a usar CRM y sistemas?]
+    P4 --> Alin{Alineacion con<br/>la cultura Master?}
+    Alin -->|"Alta · valora sistemas y servicio"| P5
+    Alin -->|"Media · le cuesta lo tecnologico"| SemiAlin[EN EVALUACION<br/>evaluar disposicion real a aprender<br/>en segunda entrevista]
+    Alin -->|"Baja · estilo de venta agresivo o solitario"| NoAptoAlin[NO APTO<br/>choca con los valores de la oficina<br/>rechazo cordial]
+    SemiAlin --> P5
+
+    P5[P5 - EXPECTATIVAS:<br/>expectativa de ingresos · disponibilidad horaria<br/>entiende el modelo (la maquina prepara, el closer cierra)?]
+    P5 --> Exp2{Expectativas<br/>realistas y alineadas?}
+    Exp2 -->|Si| P6Doc
+    Exp2 -->|"Espera sueldo fijo o no entiende el modelo"| ReEnc[Re-encuadre del modelo:<br/>explicar ventaja de leads calificados<br/>+ contexto pre-armado + marca personal]
+    ReEnc --> Exp2b{Tras el re-encuadre<br/>sigue interesado?}
+    Exp2b -->|Si| P6Doc
+    Exp2b -->|No| NoAptoExp[NO APTO<br/>expectativas incompatibles · rechazo cordial]
+
+    P6Doc[P6 - DOCUMENTACION (gate duro):<br/>CV actualizado · certificacion de agente si aplica<br/>antecedentes penales · referencias profesionales<br/>verificables]
+    P6Doc --> Doc{Documentacion<br/>completa y limpia?}
+    Doc -->|Si| ChequeoRef[Documental ejecuta<br/>chequeo de referencias por telefono]
+    Doc -->|"Falta o pendiente"| SemiDoc[EN EVALUACION<br/>no avanza hasta completar expediente]
+    SemiDoc --> ChequeoRef
+    ChequeoRef --> RefQ{Referencias<br/>confirman el perfil?}
+    RefQ -->|Si| Cierre
+    RefQ -->|"Referencias con red flags"| NoAptoRef[NO APTO<br/>antecedentes o referencias negativas<br/>rechazo cordial]
+
+    Cierre[CIERRE - APTO:<br/>handoff a capacitacion n23<br/>onboarding · shadowing · playbook de cierre]
+    Cierre --> Contexto[Registrar en CRM:<br/>perfil completo · track record · referencias<br/>fecha de inicio de capacitacion]
+    Contexto --> Handoff[HANDOFF a n23 - Capacitacion y formacion del closer]
+
+    CurFin --> Fin[Fin del filtro · puerta abierta]
+    NoAptoMent --> Fin
+    NoAptoTrack --> Fin
+    NoAptoAlin --> Fin
+    NoAptoExp --> Fin
+    NoAptoRef --> Fin
+
+    classDef happy fill:#d4edda,stroke:#2a9d8f,stroke-width:2px,color:#0d3a2c;
+    classDef semi fill:#fff3cd,stroke:#e9c46a,stroke-width:2px,color:#5a4500;
+    classDef terminal fill:#e2e3e5,stroke:#6c757d,color:#212529;
+    classDef cierre fill:#cfe2f3,stroke:#457b9d,stroke-width:2px,color:#0d3a5c;
+
+    class P3Track,P3Sin,Cierre happy
+    class SemiTrack,SemiAlin,SemiDoc,ReEnc semi
+    class CurFin,NoAptoMent,NoAptoTrack,NoAptoAlin,NoAptoExp,NoAptoRef,Fin terminal
+    class P6Doc,ChequeoRef,Contexto,Handoff cierre
+    </div>
+
+    <h2>Clasificación final y siguiente acción</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Track record</th>
+          <th>Alineación cultural</th>
+          <th>Documentación</th>
+          <th>Siguiente acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>APTO</strong></td>
+          <td>Verificable o potencial claro</td>
+          <td>Alta</td>
+          <td>Completa, referencias OK</td>
+          <td>Handoff a capacitación (n23)</td>
+        </tr>
+        <tr>
+          <td><strong>EN EVALUACIÓN</strong></td>
+          <td>Pendiente de cifras o referencias</td>
+          <td>Media, a confirmar</td>
+          <td>Incompleta</td>
+          <td>Segunda entrevista · completar expediente</td>
+        </tr>
+        <tr>
+          <td><strong>NO APTO (mentalidad)</strong></td>
+          <td>—</td>
+          <td>Busca sueldo fijo / conformista</td>
+          <td>—</td>
+          <td>Rechazo cordial · puerta abierta</td>
+        </tr>
+        <tr>
+          <td><strong>NO APTO (track record)</strong></td>
+          <td>Débil o no verificable</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Rechazo cordial · puerta abierta</td>
+        </tr>
+        <tr>
+          <td><strong>NO APTO (alineación)</strong></td>
+          <td>—</td>
+          <td>Estilo agresivo o solitario</td>
+          <td>—</td>
+          <td>Rechazo cordial · puerta abierta</td>
+        </tr>
+        <tr>
+          <td><strong>NO APTO (referencias)</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td>Red flags en antecedentes</td>
+          <td>Rechazo cordial</td>
+        </tr>
+        <tr>
+          <td><strong>CURIOSO</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Cerrar amable · dejar puerta abierta</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Notas de criterio para el rechazo cordial</h2>
+
+    <blockquote>
+      <p><strong>Por qué el rechazo se hace con cuidado:</strong> un closer rechazado hoy puede ser un buen referido mañana, o un postulante apto en un año cuando madure. El rechazo nunca es despectivo — se agradece el interés, se es honesto sobre el porqué si el postulante lo pide, y se deja la puerta abierta. La oficina no quema relaciones.</p>
+    </blockquote>
+
+    <blockquote>
+      <p><strong>Por qué se valida el track record con cifras y no con palabras:</strong> "tengo experiencia" no dice nada. "Cerré 14 operaciones en 2025, ticket promedio USD 80,000, principalmente en Cayma y Yanahuara" sí. Si el postulante no puede dar cifras, no necesariamente miente — pero hay que verificar con referencias antes de avanzar.</p>
+    </blockquote>
+
+    <blockquote>
+      <p><strong>El re-encuadre del modelo es clave:</strong> muchos closers vienen de un modelo donde ellos hacen todo — prospectan, califican, cierran. El modelo de RE/MAX Master es distinto: la máquina prepara, el closer cierra. Hay que comunicarlo como lo que es —una ventaja: más cierres, menos trabajo administrativo, leads ya calificados— no como una pérdida de autonomía.</p>
+    </blockquote>
+
+    <h2>Pendientes para validar con la dueña</h2>
+
+    <ol>
+      <li><strong>El perfil exacto del closer ideal:</strong> el Mapa Maestro da rasgos generales (ambicioso, emprendedor, valora sistemas). ¿Hay criterios más concretos? ¿Edad, experiencia mínima, certificación obligatoria o no?</li>
+      <li><strong>Cómo se valida el track record:</strong> ¿se piden contratos, se llama a la oficina anterior, se cruza con el SGI de RE/MAX Perú? El Paso 3 necesita un método concreto.</li>
+      <li><strong>El modelo económico del closer:</strong> ¿es asociado con RUC propio (como dice el Mapa Maestro), 100% comisión, hay algún fijo inicial? Esto define el Paso 5 y hoy es parcialmente suposición.</li>
+      <li><strong>Quién hace las entrevistas:</strong> ¿Eduardo, un director comercial, el agente IA de captación de closers? El flujo asume varias conversaciones — definir responsable.</li>
+      <li><strong>Capacitación (n23):</strong> este flujo termina en el handoff a capacitación. Validar que el contenido de n23 (4 atributos, playbook, shadowing) esté definido, o marcarlo como pendiente aparte.</li>
+      <li><strong>¿Cuántos closers se necesitan y en qué plazo?</strong> El filtro es selectivo, pero la oficina necesita crecer. Definir si hay una meta de reclutamiento que module qué tan estricto es el filtro.</li>
+    </ol>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">v1-DRAFT · 2026-05-14</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true});</script>
+
+</body>
+</html>

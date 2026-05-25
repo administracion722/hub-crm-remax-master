@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#003DA5">
+  <meta name="description" content="Cheatsheet operativo del perfil COMPRADOR: guía rápida del coordinador para calificar leads que buscan adquirir una propiedad.">
+  <title>Cheatsheet · Perfil Comprador · RE/MAX Master</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Primarios de marca */
+      --master-blue: #003DA5;
+      --remax-red: #FF1200;
+      --remax-blue: #0043FF;
+      --cream: #F7F5EE;
+      --white: #FFFFFF;
+      --black: #010101;
+      --charcoal: #232323;
+
+      /* Secundarios */
+      --bridge-blue: #0C2749;
+      --dark-blue: #000E35;
+      --bridge-red: #AA1120;
+      --sky-blue: #A3D4F2;
+
+      /* Estados del embudo (sistema, no marca) */
+      --estado-alta: #2A9D8F;
+      --estado-media: #E9B949;
+      --estado-baja: #E76F51;
+      --estado-descarte: #7A2E2E;
+
+      /* Neutros UI */
+      --gris-borde: #E0E0E0;
+      --gris-texto-suave: #6C757D;
+      --fondo-app: var(--cream);
+      --fondo-tarjeta: var(--white);
+      --texto-principal: var(--charcoal);
+      --texto-titulo: var(--bridge-blue);
+      --acento-primario: var(--master-blue);
+      --acento-secundario: var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(12, 39, 73, 0.08), 0 1px 2px rgba(12, 39, 73, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 4px solid var(--master-blue);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .site-brand .brand-master { color: var(--sky-blue); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .site-nav a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--acento-primario);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--bridge-blue); }
+
+    strong { font-weight: 700; color: var(--bridge-blue); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(163, 212, 242, 0.08); }
+
+    /* Blockquote */
+    blockquote {
+      margin: 1.25em 0;
+      padding: 0.75em 1.1em;
+      border-left: 4px solid var(--acento-primario);
+      background-color: var(--fondo-tarjeta);
+      color: var(--charcoal);
+      font-style: italic;
+      border-radius: 0 var(--radio) var(--radio) 0;
+    }
+
+    blockquote p:last-child { margin-bottom: 0; }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(12, 39, 73, 0.06);
+      color: var(--bridge-blue);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1em 1.1em;
+      border-radius: var(--radio);
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--master-blue);
+      color: var(--bridge-blue);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* Badges de prioridad */
+    .badge-alta,
+    .badge-media,
+    .badge-baja,
+    .badge-descarte {
+      display: inline-block;
+      padding: 0.18em 0.65em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .badge-alta {
+      background-color: var(--estado-alta);
+      color: var(--white);
+    }
+
+    .badge-media {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .badge-baja {
+      background-color: var(--estado-baja);
+      color: var(--white);
+    }
+
+    .badge-descarte {
+      background-color: var(--estado-descarte);
+      color: var(--white);
+    }
+
+    /* Banner de draft */
+    .draft-banner {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+      padding: 0.75em 1.1em;
+      border-radius: var(--radio);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px dashed var(--bridge-red);
+    }
+
+    .draft-banner::before {
+      content: "BORRADOR · ";
+      font-weight: 700;
+      color: var(--bridge-red);
+      letter-spacing: 0.04em;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--sky-blue);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">RE/MAX <span class="brand-master">Master</span> · Arequipa</a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Cheatsheet · Perfil COMPRADOR</h1>
+    <h3>Para el coordinador · consulta mientras habla con el lead</h3>
+
+    <blockquote>
+      <p><strong>Flujo completo</strong>: <code>Flujos/flujo-comprador.md</code> (1631 líneas) · <strong>Etiquetas</strong>: ver <code>Anexo-Tabla-Etiquetas.md</code> · <strong>Estados</strong>: ver <code>Anexo-Estados-Lead.md</code></p>
+    </blockquote>
+
+    <h2>1. Apertura</h2>
+
+    <blockquote>
+      <p><em>"Buen día, le atiende [Nombre] de RE/MAX Master. Para atenderlo mejor, ¿me puede dar su <strong>nombre completo</strong>, ciudad de residencia y por dónde nos contactó?"</em></p>
+    </blockquote>
+
+    <div class="callout-warn">
+      <p><strong>Si no da nombre completo</strong> → <span class="badge-descarte">Curioso</span> · cerrar amable · ofrecer newsletter.</p>
+      <p><strong>Tip</strong>: pasar a llamada si está por WhatsApp (filtro es denso, llamada es más eficiente).</p>
+    </div>
+
+    <h2>2. Preguntas clave de calificación (en orden)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Pregunta</th>
+          <th>Qué mide</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>¿Para qué uso (vivienda, inversión, mixto)? Tipo de propiedad y características mínimas (dorms, baños, cochera, área)</td>
+          <td>Necesidad</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>¿Qué zona busca? ¿Tolera distritos aledaños?</td>
+          <td>Ubicación</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>¿Cuál es su presupuesto? (en S/ o USD)</td>
+          <td>Capacidad</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>¿En cuánto tiempo necesita mudarse?</strong></td>
+          <td><strong>Timing</strong> (clave)</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>¿Cómo lo va a financiar? Crédito hipotecario · contado · vende otra propiedad · anticresis</td>
+          <td>Financiamiento</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>¿Hay más de un decisor de vivienda? (cónyuge, padres, socios)</td>
+          <td>Grupo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>3. Gates duros (no se saltan)</h2>
+
+    <ul>
+      <li>✅ <strong>Nombre completo</strong> capturado</li>
+      <li>✅ <strong>DNI</strong> pedido por WhatsApp <strong>antes</strong> de agendar visita (ancla compromiso)</li>
+      <li>✅ Doble confirmación de cita (1 día antes + 1 hora antes)</li>
+      <li>✅ Dossier compilado para el closer <strong>antes</strong> de la visita</li>
+    </ul>
+
+    <h2>4. Matriz de etiquetado</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Prioridad</th>
+          <th>Condición</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🟢 <strong>POTENCIAL</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Timing 0-2 meses + financiamiento OK + presupuesto coherente con zona</td>
+        </tr>
+        <tr>
+          <td>🟢 <strong>POTENCIAL_doble</strong></td>
+          <td><span class="badge-alta">Alta</span></td>
+          <td>Vende otra propiedad → <strong>2 leads</strong> (activar perfil Vendedor en paralelo)</td>
+        </tr>
+        <tr>
+          <td>🟡 <strong>POTENCIAL_condicional</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Encaja pero falta resolver 1 cosa (crédito en evaluación)</td>
+        </tr>
+        <tr>
+          <td>🟡 <strong>SEMI-POTENCIAL</strong></td>
+          <td><span class="badge-media">Media</span></td>
+          <td>Timing 3-6 meses O gap moderado de presupuesto</td>
+        </tr>
+        <tr>
+          <td>🔴 <strong>NO POTENCIAL</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>Timing &gt;6m sin intención · rechaza zonas/crédito/ajustes</td>
+        </tr>
+        <tr>
+          <td>🔴 <strong>CURIOSO</strong></td>
+          <td><span class="badge-descarte">Descarte</span></td>
+          <td>No da nombre · "estoy viendo nomás" · evasivo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>5. Cierre y handoff al closer</h2>
+
+    <p><strong>Cierre con el lead</strong>:</p>
+    <blockquote>
+      <p><em>"Le envío un PDF con mis 5 opciones favoritas según lo que me ha dicho. Para coordinar visita, ¿me puede enviar su DNI por WhatsApp?"</em></p>
+      <p><em>"Un día antes le confirmo la visita."</em></p>
+      <p><em>"Una hora antes le aviso que estamos en camino."</em></p>
+    </blockquote>
+
+    <p><strong>Dossier para el closer</strong> (compilar):</p>
+    <ul>
+      <li>Nombres + DNI de TODOS los decisores</li>
+      <li>Zona objetivo + tolerancia</li>
+      <li>Presupuesto + moneda</li>
+      <li>Timing exacto</li>
+      <li>Financiamiento (forma + estado)</li>
+      <li>5 propiedades favoritas elegidas (PDF)</li>
+      <li>Notas / red flags</li>
+    </ul>
+
+    <h2>6. Red flags · señales de CURIOSO disfrazado</h2>
+
+    <ul>
+      <li>No da nombre completo</li>
+      <li>Timing vago ("cuando se pueda")</li>
+      <li>Se resiste a grupo WhatsApp con cónyuge/familia</li>
+      <li><strong>≥2 reprogramaciones</strong> sin razón clara → marcar riesgo CURIOSO</li>
+    </ul>
+
+    <h2>7. Tip táctico clave</h2>
+
+    <ol>
+      <li><strong>Grupo WhatsApp con todos los decisores</strong> — evita viajes en vano, acelera acuerdo entre cónyuge/familia, todos ven el mismo PDF.</li>
+      <li><strong>PDF ordenado</strong>: peores opciones primero, mejor al final (facilita contraoferta y decisión).</li>
+      <li><strong>DNI antes de la cita</strong>, no después — ancla compromiso y filtra curiosos.</li>
+    </ol>
+
+    <p><em>Cheatsheet v1 · 2026-05-15 · RE/MAX Master Arequipa</em></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">v1.0 · 2026-05-18</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

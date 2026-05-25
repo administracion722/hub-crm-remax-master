@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#003DA5">
+  <meta name="description" content="Flujo de recepción y calificación de constructora · RE/MAX Master Arequipa (borrador).">
+  <title>Flujo de recepción y calificación de constructora · BORRADOR · RE/MAX Master</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Primarios de marca */
+      --master-blue: #003DA5;
+      --remax-red: #FF1200;
+      --remax-blue: #0043FF;
+      --cream: #F7F5EE;
+      --white: #FFFFFF;
+      --black: #010101;
+      --charcoal: #232323;
+
+      /* Secundarios */
+      --bridge-blue: #0C2749;
+      --dark-blue: #000E35;
+      --bridge-red: #AA1120;
+      --sky-blue: #A3D4F2;
+
+      /* Estados del embudo (sistema, no marca) */
+      --estado-alta: #2A9D8F;
+      --estado-media: #E9B949;
+      --estado-baja: #E76F51;
+      --estado-descarte: #7A2E2E;
+
+      /* Neutros UI */
+      --gris-borde: #E0E0E0;
+      --gris-texto-suave: #6C757D;
+      --fondo-app: var(--cream);
+      --fondo-tarjeta: var(--white);
+      --texto-principal: var(--charcoal);
+      --texto-titulo: var(--bridge-blue);
+      --acento-primario: var(--master-blue);
+      --acento-secundario: var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(12, 39, 73, 0.08), 0 1px 2px rgba(12, 39, 73, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 4px solid var(--master-blue);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .site-brand .brand-master { color: var(--sky-blue); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .site-nav a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--acento-primario);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--bridge-blue); }
+
+    strong { font-weight: 700; color: var(--bridge-blue); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(163, 212, 242, 0.08); }
+
+    /* Blockquote */
+    blockquote {
+      margin: 1.25em 0;
+      padding: 0.75em 1.1em;
+      border-left: 4px solid var(--acento-primario);
+      background-color: var(--fondo-tarjeta);
+      color: var(--charcoal);
+      font-style: italic;
+      border-radius: 0 var(--radio) var(--radio) 0;
+    }
+
+    blockquote p:last-child { margin-bottom: 0; }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(12, 39, 73, 0.06);
+      color: var(--bridge-blue);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1em 1.1em;
+      border-radius: var(--radio);
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--master-blue);
+      color: var(--bridge-blue);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* Badges de prioridad */
+    .badge-alta,
+    .badge-media,
+    .badge-baja,
+    .badge-descarte {
+      display: inline-block;
+      padding: 0.18em 0.65em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .badge-alta {
+      background-color: var(--estado-alta);
+      color: var(--white);
+    }
+
+    .badge-media {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .badge-baja {
+      background-color: var(--estado-baja);
+      color: var(--white);
+    }
+
+    .badge-descarte {
+      background-color: var(--estado-descarte);
+      color: var(--white);
+    }
+
+    /* Banner de draft */
+    .draft-banner {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+      padding: 0.75em 1.1em;
+      border-radius: var(--radio);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px dashed var(--bridge-red);
+    }
+
+    .draft-banner::before {
+      content: "BORRADOR · ";
+      font-weight: 700;
+      color: var(--bridge-red);
+      letter-spacing: 0.04em;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--sky-blue);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">RE/MAX <span class="brand-master">Master</span> · Arequipa</a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <h1>Flujo de recepción y calificación de constructora</h1>
+
+    <div class="draft-banner">Este flujo lo generó la IA siguiendo el patrón de los 6 flujos existentes. NO está validado. Eduardo debe revisar antes de usar en operación.</div>
+
+    <p>RE/MAX Master · v1-DRAFT · 2026-05-14</p>
+
+    <blockquote>
+      <p><strong>NOTA DE BORRADOR:</strong> este flujo lo generó la IA siguiendo el patrón de los 6 flujos existentes y la descripción del perfil "Captación Constructoras" del Super Proceso. NO está validado. Eduardo debe revisar especialmente: las preguntas de calificación, los umbrales de etiqueta, y el modelo de comisión con constructoras (que suele ser distinto al de propietarios individuales).</p>
+    </blockquote>
+
+    <p><strong>Cómo leer:</strong> el lead entra arriba. Cada rombo es una decisión y muestra las respuestas posibles de la constructora. Cada caja final coloreada es la <strong>etiqueta</strong> con la que el lead queda en el CRM y dispara la <strong>asignación de marketing y prioridad comercial</strong>.</p>
+
+    <p><strong>El ancla del flujo es la comercialización del proyecto</strong> — RE/MAX Master ofrece a la constructora un equipo de closers, marketing segmentado y un sistema de gestión de leads. A diferencia del vendedor individual (una propiedad), la constructora trae un proyecto completo: múltiples unidades, preventa, plazos largos.</p>
+
+    <p><strong>Captación selectiva-condicional:</strong> no toda constructora entra. A diferencia de la captación universal de propietarios, aquí sí hay un filtro de viabilidad — el proyecto debe tener licencias, saneamiento y un precio coherente con el mercado de la zona. Un proyecto sin documentación en regla es un riesgo legal para la oficina.</p>
+
+    <h2>Leyenda de colores del diagrama</h2>
+
+    <ul>
+      <li>🟢 <strong>Verde</strong> — POTENCIAL · proyecto viable · marketing premium + closers asignados</li>
+      <li>🟡 <strong>Amarillo</strong> — SEMI · proyecto con pendientes · marketing estándar tras subsanar</li>
+      <li>⚪ <strong>Gris</strong> — NO POTENCIAL · proyecto inviable hoy / cartera latente</li>
+      <li>🔵 <strong>Azul</strong> — Cierre y handoff (visita a obra + firma de contrato de comercialización)</li>
+      <li>⬜ <strong>Blanco</strong> — Decisión / pregunta abierta</li>
+    </ul>
+
+    <h2>Flujo completo</h2>
+
+    <div class="mermaid">
+flowchart TD
+    Start([Lead entra: WhatsApp o llamada])
+    Start --> Via{Origen del lead}
+    Via -->|"Outbound (oficina detecta proyecto)"| OutBreak[Vimos su proyecto en construccion<br/>o anuncio de preventa<br/>Le ofrecemos comercializacion profesional]
+    Via -->|Inbound| InBreak[Constructora busca comercializar<br/>diferenciador: equipo de closers<br/>+ marketing segmentado + CRM]
+    OutBreak --> P1
+    InBreak --> P1
+
+    P1[P1 - Identidad de la empresa:<br/>razon social · RUC · representante legal<br/>nombre y cargo del contacto]
+    P1 --> Q1{Es empresa formal<br/>con RUC activo?}
+    Q1 -->|No, informal o sin RUC| NoPotForm[NO POTENCIAL<br/>no se puede contratar formalmente<br/>riesgo legal y tributario]
+    Q1 -->|Si| P2[P2 - El proyecto:<br/>ubicacion · tipo (vivienda/oficina/mixto)<br/>numero de unidades · etapa de avance]
+
+    P2 --> P3[P3 - Estado legal del proyecto]
+    P3 --> Legal{Tiene licencia de edificacion<br/>+ partida del terreno<br/>+ saneamiento en regla?}
+    Legal -->|"Si, todo en regla"| P4
+    Legal -->|"Parcial, en tramite"| SemiLegal[SEMI<br/>captacion condicional<br/>no se publica hasta subsanar<br/>acompanar en el tramite]
+    Legal -->|"No tiene, recien empieza"| NoPotLegal[NO POTENCIAL<br/>cartera latente<br/>re-contactar cuando tenga licencias]
+    SemiLegal --> P4
+
+    P4[P4 - PRECIO por unidad<br/>y precio por m2 del proyecto]
+    P4 --> Coh{Precio coherente con<br/>el mercado de la zona?}
+    Coh -->|Si| P5
+    Coh -->|No, sobrevalorado| SondPrecio{Sondeo: acepta<br/>asesoria de precio<br/>con data de mercado?}
+    SondPrecio -->|"Si, abierto a ajustar"| P5
+    SondPrecio -->|"No, precio fijo"| SemiPrecio[SEMI<br/>marketing estandar<br/>probable rotacion lenta<br/>revisar en 60 dias]
+    SemiPrecio --> P5
+
+    P5[P5 - MODELO COMERCIAL:<br/>comision o fee por unidad vendida<br/>exclusividad total o compartida<br/>plazo del contrato de comercializacion]
+    P5 --> Modelo{Acepta modelo<br/>de comercializacion<br/>de RE/MAX Master?}
+    Modelo -->|"Si, exclusividad"| PotExcl[POTENCIAL<br/>exclusividad · marketing premium<br/>closers dedicados]
+    Modelo -->|"Si, pero compartida"| PotComp[POTENCIAL compartido<br/>marketing estandar<br/>compite con otras inmobiliarias]
+    Modelo -->|"No acepta condiciones"| NoPotModelo[NO POTENCIAL<br/>no hay acuerdo comercial<br/>mantener relacion para futuro]
+
+    PotExcl --> P6
+    PotComp --> P6
+    P6[P6 - CAPACIDAD del proyecto:<br/>tiene caseta de ventas? planos? renders?<br/>departamento o piso modelo?]
+    P6 --> Cap{Tiene material<br/>de ventas listo?}
+    Cap -->|Si| Cierre
+    Cap -->|"Parcial o nada"| BriefMat[Acordar produccion de material:<br/>renders, brochure, recorrido virtual<br/>coordinar con area de contenido]
+    BriefMat --> Cierre
+
+    Cierre[CIERRE - Coordinar visita a obra:<br/>representante legal + director comercial<br/>revisar avance + firmar contrato de comercializacion]
+    Cierre --> PedirDocs[Solicitar expediente completo:<br/>licencia · partida · planos aprobados<br/>cronograma de obra · lista de precios]
+    PedirDocs --> Contexto[Compilar contexto del proyecto<br/>y cargarlo al CRM + asignar closers<br/>ANTES de iniciar comercializacion]
+    Contexto --> Handoff[HANDOFF al equipo de closers<br/>+ activacion de marketing del proyecto]
+
+    NoPotForm --> Nurture[Cartera latente<br/>re-contacto cuando formalice]
+    NoPotLegal --> Nurture
+    NoPotModelo --> Nurture
+
+    classDef happy fill:#d4edda,stroke:#2a9d8f,stroke-width:2px,color:#0d3a2c;
+    classDef semi fill:#fff3cd,stroke:#e9c46a,stroke-width:2px,color:#5a4500;
+    classDef terminal fill:#e2e3e5,stroke:#6c757d,color:#212529;
+    classDef cierre fill:#cfe2f3,stroke:#457b9d,stroke-width:2px,color:#0d3a5c;
+
+    class PotExcl,PotComp,Cierre happy
+    class SemiLegal,SemiPrecio,BriefMat semi
+    class NoPotForm,NoPotLegal,NoPotModelo,Nurture terminal
+    class PedirDocs,Contexto,Handoff cierre
+    </div>
+
+    <h2>Clasificación final y siguiente acción</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Etiqueta</th>
+          <th>Filtro legal</th>
+          <th>Modelo comercial</th>
+          <th>Marketing</th>
+          <th>Siguiente acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>POTENCIAL (exclusividad)</strong></td>
+          <td>En regla</td>
+          <td>Exclusividad firmada</td>
+          <td>Premium + closers dedicados</td>
+          <td>Visita a obra · contrato · activación</td>
+        </tr>
+        <tr>
+          <td><strong>POTENCIAL (compartido)</strong></td>
+          <td>En regla</td>
+          <td>Comercialización compartida</td>
+          <td>Estándar</td>
+          <td>Visita a obra · contrato · activación</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI (legal)</strong></td>
+          <td>En trámite</td>
+          <td>Por definir</td>
+          <td>Suspendido hasta subsanar</td>
+          <td>Acompañar en el trámite · revisar en 30-60 días</td>
+        </tr>
+        <tr>
+          <td><strong>SEMI (precio)</strong></td>
+          <td>En regla</td>
+          <td>Por definir</td>
+          <td>Estándar</td>
+          <td>Revisar rotación en 60 días</td>
+        </tr>
+        <tr>
+          <td><strong>NO POTENCIAL</strong></td>
+          <td>Sin licencias / informal / sin acuerdo</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Cartera latente · re-contacto futuro</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Triggers que aceleran SEMI a POTENCIAL</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Trigger</th>
+          <th>Por qué genera urgencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Licencia de edificación aprobada</strong></td>
+          <td>Desbloquea la comercialización legal del proyecto.</td>
+        </tr>
+        <tr>
+          <td><strong>Constructora baja el precio a rango de mercado</strong></td>
+          <td>El proyecto se vuelve colocable; activar marketing premium.</td>
+        </tr>
+        <tr>
+          <td><strong>Avance de obra llega a hito de preventa</strong></td>
+          <td>Más del 80% de transacciones 2026 son en preventa — momento óptimo.</td>
+        </tr>
+        <tr>
+          <td><strong>Competencia comercializadora abandona el proyecto</strong></td>
+          <td>Oportunidad de pasar de compartido a exclusividad.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Pendientes para validar con la dueña</h2>
+
+    <ol>
+      <li><strong>Modelo de comisión con constructoras:</strong> ¿es % por unidad, fee fijo, o mixto? ¿Cambia según exclusividad? Esto define el Paso 5 y hoy es una suposición.</li>
+      <li><strong>Umbral de "número de unidades":</strong> ¿hay un mínimo de unidades para que valga la pena? ¿Un proyecto de 4 departamentos se trata igual que uno de 80?</li>
+      <li><strong>Quién valida el estado legal:</strong> ¿el agente Documental del Super Proceso, un abogado externo, o la propia oficina? El Paso 3 es un gate duro y necesita un responsable claro.</li>
+      <li><strong>Material de ventas:</strong> ¿RE/MAX Master produce el material (renders, brochure) y lo cobra, lo exige a la constructora, o es negociable caso a caso?</li>
+      <li><strong>Relación con el flujo de comprador:</strong> los leads que genere el proyecto, ¿entran al flujo de comprador normal o tienen un sub-flujo de preventa? Validar la conexión.</li>
+    </ol>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">v1-DRAFT · 2026-05-14</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true});</script>
+
+</body>
+</html>

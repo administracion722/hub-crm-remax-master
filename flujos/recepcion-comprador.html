@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flujo de recepción de comprador — RE/MAX Master</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --rojo: #AA1120;
+    --verde: #2A9D8F;
+    --amarillo: #E9B949;
+    --azul: #003DA5;
+    --gris: #6C757D;
+    --texto: #0C2749;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 1300px;
+    margin: 2rem auto;
+    padding: 0 1.5rem 4rem;
+    line-height: 1.55;
+    color: var(--texto);
+    background: #F7F5EE;
+  }
+  h1 {
+    border-bottom: 3px solid var(--azul);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  h2 {
+    margin-top: 2.5rem;
+    color: var(--azul);
+    border-left: 4px solid var(--azul);
+    padding-left: 0.75rem;
+  }
+  .meta { color: var(--gris); font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .intro, .nota, .pendientes {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0 2rem;
+  }
+  .nota {
+    border-left: 4px solid var(--amarillo);
+    background: #fff8e6;
+    font-size: 0.95rem;
+  }
+  .pendientes {
+    border-left: 4px solid var(--rojo);
+  }
+  .pendientes ol { padding-left: 1.2rem; }
+  .pendientes li { margin-bottom: 0.6rem; }
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 1rem 0 0.5rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+  .legend-color { width: 22px; height: 22px; border-radius: 4px; border: 2px solid #999; }
+  .mermaid {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    background: #fff;
+  }
+  th, td {
+    border: 1px solid #e0e0e0;
+    padding: 0.6rem 0.85rem;
+    text-align: left;
+    font-size: 0.92rem;
+    vertical-align: top;
+  }
+  th { background: #f1f5f9; font-weight: 600; }
+  .badge {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  .badge-pot { background: var(--verde); }
+  .badge-semi { background: var(--amarillo); color: #232323; }
+  .badge-no { background: var(--gris); }
+  .badge-cur { background: #adb5bd; color: #333; }
+</style>
+</head>
+<body>
+
+<h1>Flujo de recepción y calificación de comprador</h1>
+<p class="meta">RE/MAX Master · v6 · 2026-05-06</p>
+
+<div class="intro">
+  <p><strong>Cómo leer:</strong> el lead entra arriba. Cada rombo es una decisión y muestra las respuestas posibles del comprador. Cada caja final coloreada es la <strong>etiqueta</strong> con la que el lead queda en el CRM y dispara la siguiente acción.</p>
+  <p>El flujo es continuo: identidad → tipo de propiedad → zona → presupuesto → timing → financiamiento (siempre, también para no potenciales) → decisor → cierre → DNI → visita con doble confirmación.</p>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-color" style="background:#d4edda; border-color:#2A9D8F"></div> POTENCIAL · camino a venta</div>
+  <div class="legend-item"><div class="legend-color" style="background:#fff3cd; border-color:#E9B949"></div> SEMI / re-encuadre</div>
+  <div class="legend-item"><div class="legend-color" style="background:#e2e3e5; border-color:#6C757D"></div> No prioritario / fin del filtro</div>
+  <div class="legend-item"><div class="legend-color" style="background:#cfe2f3; border-color:#003DA5"></div> Cierre y handoff</div>
+  <div class="legend-item"><div class="legend-color" style="background:#fff; border-color:#0C2749"></div> Decisión / pregunta abierta</div>
+</div>
+
+<h2>Flujo completo</h2>
+
+<div class="mermaid">
+flowchart TD
+    Start([Lead entra: WhatsApp o llamada])
+    Start --> Adapt[Adaptarse al canal preferido<br/>recomendar llamada para no ser pesado]
+    Adapt --> P1[P1 - Nombre, ciudad de residencia,<br/>canal por donde nos contacto]
+    P1 --> Q1{Da nombre completo?}
+    Q1 -->|No| CurFin[CURIOSO: cerrar amable]
+    Q1 -->|Si| P234[P2-P4 - Uso, tipo de propiedad,<br/>caracteristicas mínimas]
+    P234 --> P5[P5 - Zona + tolerancia aledanas]
+    P5 --> P6[P6 - Presupuesto]
+    P6 --> Coh{Coherente con<br/>precios de la zona?}
+    Coh -->|Si| P7
+    Coh -->|No| SA{Sondeo A:<br/>conoce los precios<br/>de la zona?}
+    SA -->|"Se sorprende, recien investiga"| RecienInv[Recien investigando<br/>etiqueta segun timing<br/>SEMI o NO POT]
+    SA -->|Ya conoce| SB{Sondeo B:<br/>acepta zonas<br/>aledanas?}
+    SB -->|Si| Recal[POTENCIAL recalibrado<br/>ajustar zona en SIGI]
+    SB -->|"No, quiere esa zona"| SC{Sondeo C:<br/>acepta sumar<br/>credito hipotecario?}
+    SC -->|"Si, podria evaluarlo"| AjustFin[POTENCIAL ajustado<br/>marcar financiamiento]
+    SC -->|No| NoPotZona[NO POTENCIAL<br/>no calzamos en esta busqueda]
+    Recal --> P7
+    AjustFin --> P7
+    RecienInv --> P7
+
+    P7[P7 - TIMING:<br/>En cuanto tiempo<br/>tiene que mudarse?]
+    P7 --> Plazo{Plazo de mudanza?}
+    Plazo -->|0-2 meses| Pot[POTENCIAL]
+    Plazo -->|3-6 meses| Semi[SEMI-POTENCIAL]
+    Plazo -->|"+6 meses con intencion"| NoPot[NO POTENCIAL]
+    Plazo -->|"viendo nomas o no sabe"| Resc{Pregunta de rescate:<br/>no tienes urgencia<br/>o no decidiste<br/>si compras este ano?}
+    Resc -->|No tengo urgencia| NoPot
+    Resc -->|"No decidi aun"| Cur[CURIOSO]
+    Resc -->|"Sigue evasivo"| Cur
+
+    Pot --> P8
+    Semi --> P8
+    P8[P8 - FORMA DE FINANCIAMIENTO]
+    P8 --> Fin{Como paga?}
+    Fin -->|Credito hipotecario| FCred[Banco + carta de aprobacion<br/>+ Mivivienda si valor menor o igual a S/464,200]
+    Fin -->|Contado| FCont[Fondos en cuenta<br/>o requiere liquidar?<br/>CTS, plazo fijo, otra venta]
+    Fin -->|Vende otra propiedad| FVende[DOBLE LEAD<br/>POTENCIAL_condicional<br/>+ abrir captacion en paralelo]
+    Fin -->|Anticresis o mixto| FAnti[Validar plazo + propietario dispuesto<br/>escritura publica + SUNARP<br/>casi siempre baja a SEMI]
+
+    FCred --> P9
+    FCont --> P9
+    FVende --> P9
+    FAnti --> P9
+
+    NoPot --> P8Np[P8 - FORMA DE FINANCIAMIENTO<br/>registro para inteligencia futura<br/>credito, contado, vende otra, anticresis]
+    NoPotZona --> P8Np
+    P8Np --> Nurture
+
+    P9[P9 - DECISOR REAL]
+    P9 --> Dec{Hay mas de un<br/>decisor de vivienda?}
+    Dec -->|No, unico| Anuncio
+    Dec -->|Si| ScriptDec[Ofrecer la opcion del grupo de WhatsApp:<br/>te ahorra reenviar info<br/>todos ven, comparan y discuten]
+    ScriptDec --> Acepta{Acepta la opcion<br/>del grupo?}
+    Acepta -->|Si| Anuncio
+    Acepta -->|"Se resiste, raro"| ConRiesgo[Marcar riesgo y continuar<br/>sin grupo]
+    ConRiesgo --> Anuncio
+
+    Anuncio[CIERRE - Anuncio:<br/>te enviare PDF, escoge de 1 a 5 favoritas<br/>para coordinar visita]
+    Anuncio --> PedirDNI[Pedir DNI por WhatsApp<br/>requisito para agendar la cita]
+    PedirDNI --> CoordVis[Coordinar visita tentativa<br/>fecha + hora + todos los decisores]
+    CoordVis --> RutaPDF{El comprador acepto<br/>la opcion del grupo?}
+    RutaPDF -->|"No, unico o resistio"| Envio
+    RutaPDF -->|Si| MsgDatos[Por WhatsApp, ANTES del PDF:<br/>Pasame los nombres y celulares<br/>de los demas decisores]
+    MsgDatos --> RecibeDatos[Comprador envia nombres + numeros<br/>por WhatsApp]
+    RecibeDatos --> CrearGrupo[Crear grupo de WhatsApp<br/>con TODOS los decisores]
+    CrearGrupo --> Envio
+    Envio[Enviar PDF dashboard<br/>al grupo o al WhatsApp del comprador]
+    Envio --> Escoge[El grupo o comprador<br/>escoge de 1 a 5 favoritas en el PDF]
+    Escoge --> ConfDia[1 dia antes de la visita:<br/>Te confirmo la visita de manana]
+    ConfDia --> ConfDiaQ{Confirma o reprograma?}
+    ConfDiaQ -->|Confirma| ConfHora[1 hora antes de la visita:<br/>Recordatorio: en una hora estamos contigo]
+    ConfDiaQ -->|Reprograma| Reprog[Acordar nueva fecha y hora<br/>con todos los decisores<br/>y reiniciar el ciclo de confirmacion]
+    Reprog --> ConfDia
+    ConfHora --> ConfHoraQ{Confirma o reprograma?}
+    ConfHoraQ -->|Confirma| Contexto[Compilar contexto detallado del comprador<br/>y enviarlo al closer asignado<br/>ANTES de la visita]
+    ConfHoraQ -->|Reprograma| Reprog
+    Contexto --> Visita[VISITA con todos los decisores<br/>Closer: peores primero,<br/>mejor opcion al final]
+    Visita --> Objetivo[Objetivo: contraoferta]
+
+    Cur --> Nurture[Material informativo<br/>+ newsletter mensual de zona]
+    CurFin --> Nurture
+
+    classDef happy fill:#d4edda,stroke:#2A9D8F,stroke-width:2px,color:#0C2749;
+    classDef semi fill:#fff3cd,stroke:#E9B949,stroke-width:2px,color:#232323;
+    classDef terminal fill:#e2e3e5,stroke:#6C757D,color:#212529;
+    classDef cierre fill:#cfe2f3,stroke:#003DA5,stroke-width:2px,color:#0C2749;
+
+    class Pot,Visita,Objetivo,Recal,AjustFin happy
+    class Semi,RecienInv semi
+    class NoPot,NoPotZona,Cur,CurFin,Nurture,P8Np terminal
+    class Anuncio,PedirDNI,CoordVis,Envio,Escoge,ConfDia,ConfHora,ScriptDec,MsgDatos,RecibeDatos,CrearGrupo,Contexto,ConfDiaQ,ConfHoraQ,Reprog cierre
+</div>
+
+<div class="nota">
+  <strong>Por qué pedir el DNI antes de coordinar la visita (y no después):</strong> el comprador ya pasó todo el filtro y mostró intención real (avanzó a cierre y aceptó recibir el PDF). Pedir el DNI como <em>requisito para agendar la cita</em> ancla el compromiso antes de bloquear la agenda del closer y evita que la cita se "enfríe". Se enmarca como trámite operativo, no como filtro de desconfianza.
+</div>
+
+<div class="nota">
+  <strong>Doble confirmación de la cita con opción de reprogramación:</strong> un día antes ("te confirmo la visita de mañana a las HH:MM") y una hora antes ("en una hora estamos contigo en la dirección X"). En cualquiera de los dos puntos el comprador puede pedir reprogramar; si lo hace, se acuerda una nueva fecha y hora con <em>todos</em> los decisores y se reinicia el ciclo de confirmación (1 día antes → 1 hora antes) sobre la nueva fecha. <strong>Política:</strong> más de 2 reprogramaciones consecutivas sin razón clara → marcar riesgo y bajar prioridad (probable CURIOSO disfrazado).
+</div>
+
+<div class="nota">
+  <strong>Contexto que se envía al closer ANTES de la visita:</strong> nombre del comprador y de todos los decisores · DNI · zona objetivo + tolerancia · características requeridas · presupuesto · timing · forma de financiamiento (banco, estado de la carta, Mivivienda si aplica, fondos, etc.) · propiedades elegidas en el dashboard · notas relevantes del filtro (sondeos respondidos, red flags, triggers SEMI activos). El closer lee esto antes de salir a la visita y arma su estrategia.
+</div>
+
+<div class="nota">
+  <strong>Estrategia del closer durante la visita:</strong> mostrar primero las opciones que <em>no calzan tanto</em> (caras o con defectos visibles) y dejar la mejor opción para el final. Permite que el comprador compare y vea por qué la última es la mejor — facilita la <strong>contraoferta</strong>, que es el objetivo de la visita.
+</div>
+
+<h2>Clasificación final y siguiente acción</h2>
+
+<table>
+  <thead>
+    <tr><th>Etiqueta</th><th>Pregunta financiamiento</th><th>Cierre completo</th><th>Visita</th><th>Seguimiento</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="badge badge-pot">POTENCIAL</span></td><td>Sí</td><td>Sí</td><td>Con todos los decisores · 24–72 h</td><td>Closer · 24h post-visita · 3d · 7d</td></tr>
+    <tr><td><span class="badge badge-pot">POTENCIAL_condicional</span></td><td>Sí</td><td>Sí</td><td>Si avanza la venta espejo</td><td>Mismo + paralelo en captación</td></tr>
+    <tr><td><span class="badge badge-semi">SEMI-POTENCIAL</span></td><td>Sí</td><td>Sí</td><td>Si avanza tras seguimiento</td><td>Re-contacto a 4 semanas + alerta por triggers</td></tr>
+    <tr><td><span class="badge badge-no">NO POTENCIAL</span></td><td>Sí (registro para inteligencia futura)</td><td>—</td><td>—</td><td>Material educativo + newsletter mensual</td></tr>
+    <tr><td><span class="badge badge-cur">CURIOSO</span></td><td>—</td><td>—</td><td>—</td><td>Newsletter educativo opcional</td></tr>
+  </tbody>
+</table>
+
+<h2>Triggers que aceleran SEMI a POTENCIAL</h2>
+
+<p>Eventos que hay que monitorear y avisarle al lead cuando ocurran. Cualquiera puede subir un SEMI a POTENCIAL en días.</p>
+
+<table>
+  <thead>
+    <tr><th>Trigger</th><th>Por qué genera urgencia</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Carta de aprobación bancaria con vigencia próxima a vencer</strong></td><td>La carta dura 30–90 días según el banco. Si vence, hay que rehacer toda la evaluación y la tasa puede ser peor.</td></tr>
+    <tr><td><strong>Bajada de tasas hipotecarias</strong></td><td>En 2026 las tasas en Perú bajaron de ~8.9% a ~8.4–8.6%. Cada 0.3–0.5 pp menos = miles de soles ahorrados en intereses.</td></tr>
+    <tr><td><strong>Bajada del dólar</strong></td><td>Para quien ahorra en soles: las propiedades en USD se vuelven más accesibles.</td></tr>
+    <tr><td><strong>Subida del dólar</strong></td><td>Para quien ahorra en USD: gana poder de compra para propiedades en soles.</td></tr>
+    <tr><td><strong>Lanzamiento de proyecto inmobiliario nuevo en su zona</strong></td><td>Más del 80% de las transacciones 2026 son en preventa o construcción, con mejores condiciones que estrenado.</td></tr>
+    <tr><td><strong>Cambios en Mivivienda</strong></td><td>Subida del Bono del Buen Pagador, ampliación del valor máximo de vivienda, o cambio en cuota inicial mínima.</td></tr>
+    <tr><td><strong>Bajada de precio de una propiedad de su lista</strong></td><td>Oportunidad puntual sobre la opción que ya estaba evaluando.</td></tr>
+    <tr><td><strong>Tiempo de mercado reducido</strong></td><td>En 2026 los proyectos pasan de 26 a 17 meses promedio en venta. Si encuentra algo que le calza, no debe esperar.</td></tr>
+    <tr><td><strong>Negociación de cierre de año (noviembre-diciembre)</strong></td><td>Vendedores con prisa por cerrar el año aceptan contraofertas más fuertes.</td></tr>
+  </tbody>
+</table>
+
+<h2>Mejor momento del año para comprar (orientación al comprador)</h2>
+
+<p>Para guiar (no forzar) al lead que tiene 3–6 meses de horizonte. Estamos para guiar, no para presionar.</p>
+
+<table>
+  <thead>
+    <tr><th>Período</th><th>Característica del mercado</th><th>Para qué le sirve al comprador</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Enero–Marzo</strong></td><td>Mayor inventario tras fiestas, reactivación del primer trimestre</td><td>Comparar y conocer la oferta amplia</td></tr>
+    <tr><td><strong>Abril–Mayo</strong></td><td>Punto de equilibrio, menos saturación de compradores</td><td>Evaluar opciones con tranquilidad</td></tr>
+    <tr><td><strong>Junio–Julio</strong></td><td>Menor competencia (muchos esperan medio aguinaldo de julio)</td><td>Mejor poder de negociación</td></tr>
+    <tr><td><strong>Agosto–Octubre</strong></td><td>Lanzamientos de proyectos nuevos para fin de año</td><td>Bueno si quiere estrenar / preventa</td></tr>
+    <tr><td><strong>Noviembre–Diciembre</strong></td><td>Vendedores con prisa por cerrar el año</td><td>Mejor descuento posible vía contraoferta</td></tr>
+  </tbody>
+</table>
+
+<h2>Por qué grupo de WhatsApp con todos los decisores</h2>
+
+<ul>
+  <li>Evita visita "en vano" donde el decisor real no estuvo.</li>
+  <li>Evita que otra inmobiliaria les gane la propiedad mientras los decisores se ponen de acuerdo entre ellos.</li>
+  <li>Es el canal por el que aceptaron la conversación en primer lugar.</li>
+  <li>Permite enviar dashboards comparativos con ventajas y desventajas ajustadas a sus requerimientos.</li>
+  <li>Le ahorra al comprador tener que reenviar la información a cada decisor — todos discuten en el mismo lugar.</li>
+</ul>
+
+<h2>Pendientes para validar con la dueña</h2>
+
+<div class="pendientes">
+  <ol>
+    <li><strong>Validar las señales del Sondeo A, B y C</strong> en el sub-flujo de presupuesto incoherente. ¿Las preguntas reflejan cómo lees tú al comprador en la realidad?</li>
+    <li><strong>Cuadro de bancos × tipo de propiedad</strong>: documentar qué acepta y qué no acepta cada banco peruano (BCP, BBVA, Interbank, Scotiabank, Mibanco, Banco de la Nación). Esto se incorpora como regla dura en el Paso 8.a — Crédito hipotecario.</li>
+    <li><strong>Triggers SEMI adicionales</strong>: ¿hay otros triggers de tu experiencia que no estén en la tabla? Cambios regulatorios, anuncios de obras de infraestructura cercanas, tendencia de precios local.</li>
+  </ol>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: { useMaxWidth: true, curve: 'basis', htmlLabels: true },
+    securityLevel: 'loose'
+  });
+</script>
+
+</body>
+</html>

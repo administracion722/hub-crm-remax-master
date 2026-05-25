@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#003DA5">
+  <meta name="description" content="Anexo del Entregable 5 · Contrato de campos obligatorios del CRM de RE/MAX Master Arequipa: ~40 campos en personas, gates por perfil, listas cerradas y mapeo al Excel actual.">
+  <title>Anexo · Campos del CRM · RE/MAX Master</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Primarios de marca */
+      --master-blue: #003DA5;
+      --remax-red: #FF1200;
+      --remax-blue: #0043FF;
+      --cream: #F7F5EE;
+      --white: #FFFFFF;
+      --black: #010101;
+      --charcoal: #232323;
+
+      /* Secundarios */
+      --bridge-blue: #0C2749;
+      --dark-blue: #000E35;
+      --bridge-red: #AA1120;
+      --sky-blue: #A3D4F2;
+
+      /* Estados del embudo (sistema, no marca) */
+      --estado-alta: #2A9D8F;
+      --estado-media: #E9B949;
+      --estado-baja: #E76F51;
+      --estado-descarte: #7A2E2E;
+
+      /* Neutros UI */
+      --gris-borde: #E0E0E0;
+      --gris-texto-suave: #6C757D;
+      --fondo-app: var(--cream);
+      --fondo-tarjeta: var(--white);
+      --texto-principal: var(--charcoal);
+      --texto-titulo: var(--bridge-blue);
+      --acento-primario: var(--master-blue);
+      --acento-secundario: var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(12, 39, 73, 0.08), 0 1px 2px rgba(12, 39, 73, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 4px solid var(--master-blue);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .site-brand .brand-master { color: var(--sky-blue); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .site-nav a {
+      color: var(--white);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--acento-primario);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--bridge-blue); }
+
+    strong { font-weight: 700; color: var(--bridge-blue); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(163, 212, 242, 0.08); }
+
+    /* Blockquote */
+    blockquote {
+      margin: 1.25em 0;
+      padding: 0.75em 1.1em;
+      border-left: 4px solid var(--acento-primario);
+      background-color: var(--fondo-tarjeta);
+      color: var(--charcoal);
+      font-style: italic;
+      border-radius: 0 var(--radio) var(--radio) 0;
+    }
+
+    blockquote p:last-child { margin-bottom: 0; }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(12, 39, 73, 0.06);
+      color: var(--bridge-blue);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    pre {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1em 1.1em;
+      border-radius: var(--radio);
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--master-blue);
+      color: var(--bridge-blue);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* Banner de draft */
+    .draft-banner {
+      background-color: var(--estado-media);
+      color: var(--charcoal);
+      padding: 0.75em 1.1em;
+      border-radius: var(--radio);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px dashed var(--bridge-red);
+    }
+
+    .draft-banner::before {
+      content: "BORRADOR · ";
+      font-weight: 700;
+      color: var(--bridge-red);
+      letter-spacing: 0.04em;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--bridge-blue);
+      color: var(--white);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--sky-blue);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">RE/MAX <span class="brand-master">Master</span> · Arequipa</a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Anexo — Campos obligatorios del CRM</h1>
+    <h3>Entregable 5 del Proyecto 1 · Input directo al Proyecto 2 · v3</h3>
+
+    <blockquote>
+      <p>Este documento es el <strong>contrato</strong> con el Proyecto 2 (rediseño del CRM): las columnas del nuevo CRM se derivan exactamente de esta lista. Cada campo aquí está justificado por el embudo de la Página 1.</p>
+      <p><strong>v2 · 2026-05-16:</strong> el Proyecto 2, en su Sprint 0 de diagnóstico, detectó 4 campos faltantes (<code>tipo_operacion</code>, <code>ciudad_residencia</code>, <code>lead_original_id</code>, <code>sector</code>) y un patrón inconsistente en los gates de validación. Eduardo autorizó editar este contrato directamente.</p>
+      <p><strong>v3 · 2026-05-18:</strong> durante Sprint 1 del Proyecto 2 se agregó el estado <code>CAPTADO</code> (Anexo-Estados-Lead v2), se agregó la columna <code>closer_historico</code> (campo 40) para apoyar reactivaciones sin reabrir la hoja <code>vinculos</code>, y se decidió <strong>diferir la hoja <code>vinculos</code> (N:M) a la migración NocoDB de la Etapa 3</strong>. Los cambios v2 → v3 se listan en el Changelog al final.</p>
+    </blockquote>
+
+    <h2>Principios de diseño del CRM</h2>
+    <ol>
+      <li><strong>Una fila = un lead.</strong> No se mezclan leads en una misma fila.</li>
+      <li><strong>Cero "DESCONOCIDO" como destino final.</strong> Todo campo crítico tiene lista cerrada.</li>
+      <li><strong>Cero "OFICINA" en <code>closer_asignado</code>.</strong> Siempre nombre real.</li>
+      <li><strong>Cada campo tiene un MOMENTO obligatorio</strong> (cuándo debe estar lleno) y un RESPONSABLE.</li>
+      <li><strong>Listas cerradas en campos críticos</strong> (canal, origen, perfil, closer, etiqueta, prioridad, estado) — el CRM debe validar entrada, no aceptar texto libre.</li>
+      <li><strong>Auditoría automática</strong>: fecha/hora de cada cambio de estado, capturada por el sistema, no por el usuario.</li>
+    </ol>
+
+    <h2>A. Identificación del lead (al recibir — coordinador)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Campo</th>
+          <th>Tipo</th>
+          <th>Obligatorio en</th>
+          <th>Quién llena</th>
+          <th>Validación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>fecha_hora_entrada</code></td>
+          <td>Fecha-hora</td>
+          <td>Al recibir</td>
+          <td>Auto-timestamp</td>
+          <td>Sistema</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>canal</code></td>
+          <td>Lista cerrada: WhatsApp · Llamada · Web · Presencial · Email</td>
+          <td>Al recibir</td>
+          <td>Coordinador</td>
+          <td>Lista cerrada</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>origen</code></td>
+          <td>Lista cerrada: Facebook · Instagram · TikTok · Web Master · Google Ads · Referido · Presencial · Otros</td>
+          <td>Al recibir</td>
+          <td>Coordinador</td>
+          <td>Lista cerrada · si Web, UTM si existe</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>nombre_completo</code></td>
+          <td>Texto</td>
+          <td>Al recibir (filtro CURIOSO)</td>
+          <td>Coordinador</td>
+          <td>Mínimo 2 palabras</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>telefono</code></td>
+          <td>Texto · 9 dígitos sin +51</td>
+          <td>Al recibir</td>
+          <td>Coordinador</td>
+          <td>Formato peruano (9 dígitos). Duplicado permitido (reactivación) — se resalta en naranja, no se rechaza</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>B. Routeo (al identificar perfil)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Campo</th>
+          <th>Tipo</th>
+          <th>Obligatorio en</th>
+          <th>Quién llena</th>
+          <th>Validación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>6</td>
+          <td><code>perfil</code></td>
+          <td>Lista cerrada de 8: Comprador · Vendedor · Arrendador · Arrendatario · AnticresistaAcreedor · AnticresistaDeudor · Constructora · CloserPostulante</td>
+          <td>Después del Router (paso 2)</td>
+          <td>Coordinador</td>
+          <td>Lista cerrada · 1 sola opción</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><code>es_curioso</code></td>
+          <td>Booleano</td>
+          <td>Al cerrar filtro CURIOSO</td>
+          <td>Coordinador</td>
+          <td>Si es TRUE, salta a estado DESCARTADO</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>C. Calificación (al aplicar el flujo del perfil)</h2>
+
+    <h3>Campos universales (todos los perfiles)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Campo</th>
+          <th>Tipo</th>
+          <th>Obligatorio en</th>
+          <th>Quién llena</th>
+          <th>Validación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>8</td>
+          <td><code>dni</code></td>
+          <td>Texto 8 dígitos</td>
+          <td>Antes de agendar visita</td>
+          <td>Coordinador</td>
+          <td>Validar 8 dígitos · gate duro</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><code>zona_distrito</code></td>
+          <td>Lista cerrada (distritos de Arequipa)</td>
+          <td>Calificación</td>
+          <td>Coordinador</td>
+          <td>Lista cerrada extensible</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><code>monto</code></td>
+          <td>Número (soles)</td>
+          <td>Calificación</td>
+          <td>Coordinador</td>
+          <td>&gt; 0 · contexto: precio venta / renta / anticresis</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><code>timing</code></td>
+          <td>Lista cerrada: Inmediato (0-1 mes) · Corto (1-3) · Medio (3-6) · Largo (&gt;6) · Sin definir</td>
+          <td>Calificación</td>
+          <td>Coordinador</td>
+          <td>Lista cerrada</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><code>etiqueta_especifica</code></td>
+          <td>Texto (etiqueta del perfil, ver Anexo-Tabla-Etiquetas)</td>
+          <td>Final de calificación</td>
+          <td>Coordinador</td>
+          <td>Lista cerrada según perfil. <strong>(v3) Automatización lead espejo:</strong> si se selecciona <code>POTENCIAL_doble</code> (perfil Vendedor) o <code>CAPTABLE_doble</code> (perfil Anticresista deudor), el Apps Script genera automáticamente un lead nuevo en <code>personas</code> con el perfil contraparte (Comprador o Anticresista acreedor respectivamente), arrastrando teléfono · nombre · canal · origen del lead original, con <code>lead_original_id</code> apuntando al lead madre y <code>estado_actual = EN_CALIFICACION</code>. Arrendador no tiene etiqueta _doble en la tabla del Proyecto 1, así que el caso no aplica.</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><code>prioridad_comun</code></td>
+          <td>Lista cerrada: ALTA · MEDIA · BAJA · DESCARTE</td>
+          <td>Final de calificación</td>
+          <td>Coordinador</td>
+          <td>Lista cerrada · derivada de etiqueta</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><code>gates_completos</code></td>
+          <td>Booleano derivado</td>
+          <td>Antes de agendar</td>
+          <td>Sistema (fórmula)</td>
+          <td>TRUE si todos los gates aplicables al perfil del lead están en TRUE. Los gates individuales se materializan como columnas booleanas <code>gate_*</code> en la hoja específica de cada perfil — ver sección "Campos específicos por perfil" abajo. <strong>(v2: reemplaza al antiguo <code>gates_validados</code> JSON, que no era operable en Sheets.)</strong></td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><code>red_flags</code></td>
+          <td>Texto libre opcional</td>
+          <td>Cuando aplique</td>
+          <td>Coordinador / Closer</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Campos específicos por perfil (opcionales según <code>perfil</code>)</h3>
+
+    <p><strong>Comprador</strong>:</p>
+    <ul>
+      <li><code>forma_financiamiento</code> — Lista: Cash · Crédito hipotecario · Crédito constructor · A definir</li>
+      <li><code>decisores</code> — Texto (nombres y vínculos: cónyuge, padres, socios)</li>
+      <li><code>caracteristicas_buscadas</code> — Texto estructurado (dormitorios, baños, cochera, etc.)</li>
+      <li><code>distritos_interes</code> — Multi-select sobre la lista cerrada de distritos (v2)</li>
+      <li><code>gate_carta_bancaria</code> — Booleano · sustento de capacidad de pago (v2)</li>
+      <li><code>gate_capacidad_pago</code> — Booleano · validada por el closer (v2)</li>
+    </ul>
+
+    <p><strong>Vendedor</strong>:</p>
+    <ul>
+      <li><code>copropietarios</code> — Texto (nombres + DNIs)</li>
+      <li><code>motivacion_venta</code> — Lista: Mudanza · Liquidez · Herencia · Inversión · Otro</li>
+      <li><code>gap_precio_mercado</code> — Número (% diferencia con mercado, calculado por ACM)</li>
+      <li><code>gate_partida_registral</code> — Booleano · acredita titularidad SUNARP (v2)</li>
+      <li><code>gate_hr_pu</code> — Booleano · Hoja Resumen + Predio Urbano municipal (v2)</li>
+      <li><code>gate_saneamiento</code> — Booleano · sin cargas ni gravámenes pendientes (v2)</li>
+    </ul>
+
+    <p><strong>Arrendador</strong>:</p>
+    <ul>
+      <li><code>copropietarios</code> — Texto</li>
+      <li><code>motivacion_alquiler</code> — Lista</li>
+      <li><code>gap_renta_mercado</code> — Número</li>
+      <li><code>gate_partida_registral</code> — Booleano · acredita titularidad SUNARP (v2)</li>
+      <li><code>gate_hr_pu</code> — Booleano · Hoja Resumen + Predio Urbano municipal (v2)</li>
+    </ul>
+
+    <p><strong>Arrendatario</strong>:</p>
+    <ul>
+      <li><code>garantia_ofrecida</code> — Lista: Mes adelantado · Fiador · Depósito · Combinación</li>
+      <li><code>ingresos_mensuales</code> — Número</li>
+      <li><code>riesgo_crediticio</code> — Lista: Aprobado · Condicional · Rechazado · Pendiente</li>
+      <li><code>distritos_interes</code> — Multi-select sobre la lista cerrada de distritos (v2)</li>
+      <li><code>gate_crediticio_aprobado</code> — Booleano · derivado de <code>riesgo_crediticio = Aprobado</code> (v2)</li>
+      <li><code>gate_garantia</code> — Booleano · garantía verificada y aceptada (v2)</li>
+      <li><code>gate_sustento_ingresos</code> — Booleano · documentación de ingresos validada (v2)</li>
+    </ul>
+
+    <p><strong>Anticresista acreedor</strong> (quien coloca dinero):</p>
+    <ul>
+      <li><code>horizonte_anos</code> — Número (2-5 típico)</li>
+      <li><code>fuente_dinero</code> — Texto (ahorros, préstamo, herencia, etc.)</li>
+      <li><code>gate_liquidez</code> — Booleano · monto disponible verificado (v2)</li>
+    </ul>
+
+    <p><strong>Anticresista deudor</strong> (quien entrega propiedad):</p>
+    <ul>
+      <li><code>motivacion</code> — Lista</li>
+      <li><code>gate_partida</code> — Booleano · partida registral del inmueble en regla (v2)</li>
+      <li><code>gate_saneamiento</code> — Booleano · sin cargas ni gravámenes. <strong>(v2: reemplaza al antiguo <code>documentacion_legal_completa</code> por consistencia con el patrón <code>gate_*</code>.)</strong></li>
+    </ul>
+
+    <p><strong>Constructora</strong> <em>(perfil DRAFT — esquema sujeto a refinamiento cuando el flujo se valide)</em>:</p>
+    <ul>
+      <li><code>nombre_constructora</code> — Texto · lista cerrada extensible</li>
+      <li><code>nombre_proyecto</code> — Texto</li>
+      <li><code>numero_unidades</code> — Número</li>
+      <li><code>modelo_comercial</code> — Lista: Exclusividad · Compartido · Mixto</li>
+      <li><code>gate_licencia</code> — Booleano · licencia de edificación aprobada. <strong>(v2: reemplaza al antiguo <code>licencia_edificacion</code> por consistencia con el patrón <code>gate_*</code>.)</strong></li>
+      <li><code>gate_partida_terreno</code> — Booleano · partida del terreno en regla (v2)</li>
+      <li><code>gate_saneamiento</code> — Booleano · sin cargas ni gravámenes pendientes (v2)</li>
+    </ul>
+
+    <p><strong>Closer postulante</strong> <em>(perfil DRAFT — esquema sujeto a refinamiento cuando el flujo se valide)</em>:</p>
+    <ul>
+      <li><code>track_record_anos</code> — Número</li>
+      <li><code>cierres_ultimos_12m</code> — Número</li>
+      <li><code>alineacion_marca</code> — Lista: Alta · Media · Baja</li>
+      <li><code>gate_cv</code> — Booleano · CV completo y actualizado (v2)</li>
+      <li><code>gate_antecedentes_penales</code> — Booleano · antecedentes penales limpios (v2)</li>
+      <li><code>gate_referencias</code> — Booleano · referencias profesionales verificadas. <strong>(v2: reemplaza al antiguo <code>referencias_verificadas</code> por consistencia con el patrón <code>gate_*</code>.)</strong></li>
+    </ul>
+
+    <h2>D. Asignación (al pasar al closer)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Campo</th>
+          <th>Tipo</th>
+          <th>Obligatorio en</th>
+          <th>Quién llena</th>
+          <th>Validación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>16</td>
+          <td><code>closer_asignado</code></td>
+          <td>Lista cerrada de nombres reales (ver Anexo-Reglas-Asignacion)</td>
+          <td>&lt; 30 min desde entrada</td>
+          <td>Coordinador</td>
+          <td><strong>NUNCA "OFICINA", NUNCA vacío</strong></td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td><code>fecha_hora_asignacion</code></td>
+          <td>Fecha-hora</td>
+          <td>Al asignar</td>
+          <td>Auto-timestamp</td>
+          <td>Sistema</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td><code>regla_asignacion_aplicada</code></td>
+          <td>Lista cerrada: Default (turno+disponibilidad) · Especialista perfil · Especialista zona · Afinidad · Suplente</td>
+          <td>Al asignar</td>
+          <td>Coordinador</td>
+          <td>Lista cerrada</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td><code>acuse_recibo_closer</code></td>
+          <td>Booleano + fecha-hora</td>
+          <td>&lt; 1 hora desde asignación</td>
+          <td>Closer</td>
+          <td>Si NO se acusa → escalación</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>E. Visita (al agendar y ejecutar)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Campo</th>
+          <th>Tipo</th>
+          <th>Obligatorio en</th>
+          <th>Quién llena</th>
+          <th>Validación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>20</td>
+          <td><code>fecha_visita_agendada</code></td>
+          <td>Fecha-hora</td>
+          <td>Al agendar</td>
+          <td>Coordinador (Alto) / Closer (Mínimo)</td>
+          <td>≥ fecha actual</td>
+        </tr>
+        <tr>
+          <td>21</td>
+          <td><code>confirmacion_1dia_antes</code></td>
+          <td>Booleano + fecha-hora</td>
+          <td>24h antes de visita</td>
+          <td>Coordinador</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>22</td>
+          <td><code>confirmacion_1hora_antes</code></td>
+          <td>Booleano + fecha-hora</td>
+          <td>1h antes de visita</td>
+          <td>Coordinador</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>23</td>
+          <td><code>visita_realizada</code></td>
+          <td>Booleano</td>
+          <td>Después de visita</td>
+          <td>Closer</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>24</td>
+          <td><code>resultado_visita</code></td>
+          <td>Lista cerrada: Avanza a negociación · Negociación cayó, sigue buscando · No le gustó esta propiedad · Interesado pero no decide · No asistió · Reprogramó</td>
+          <td>Después de visita</td>
+          <td>Closer</td>
+          <td>Lista cerrada</td>
+        </tr>
+        <tr>
+          <td>25</td>
+          <td><code>numero_reprogramaciones</code></td>
+          <td>Número</td>
+          <td>Cuando aplique</td>
+          <td>Coordinador</td>
+          <td>≥ 2 → marcar riesgo CURIOSO</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>F. Cierre (al finalizar el lead)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Campo</th>
+          <th>Tipo</th>
+          <th>Obligatorio en</th>
+          <th>Quién llena</th>
+          <th>Validación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>26</td>
+          <td><code>estado_actual</code></td>
+          <td>Lista cerrada: NUEVO · EN_CALIFICACION · ASIGNADO · CONTACTADO · EN_VISITA · EN_NEGOCIACION · <strong>CAPTADO</strong> · CERRADO_GANADO · CERRADO_PERDIDO · DESCARTADO · APLAZADO</td>
+          <td>Siempre actualizado</td>
+          <td>Coordinador / Closer</td>
+          <td>Lista cerrada · transiciones válidas en Anexo-Estados-Lead v2. <strong>CAPTADO solo aplica a perfiles propietarios</strong> (Vendedor · Arrendador · Anticresista deudor · Constructora); si un adquirente intenta moverse a CAPTADO, el CRM revierte el cambio.</td>
+        </tr>
+        <tr>
+          <td>27</td>
+          <td><code>fecha_cambio_estado</code></td>
+          <td>Fecha-hora</td>
+          <td>Cada cambio</td>
+          <td>Auto-timestamp</td>
+          <td>Sistema</td>
+        </tr>
+        <tr>
+          <td>28</td>
+          <td><code>monto_final_cierre</code></td>
+          <td>Número</td>
+          <td>Al CERRAR_GANADO</td>
+          <td>Closer</td>
+          <td>&gt; 0</td>
+        </tr>
+        <tr>
+          <td>29</td>
+          <td><code>motivo_perdida</code></td>
+          <td>Lista cerrada: Eligió otra opción · Se enfrió · Precio fuera de rango · No documentos · Otro</td>
+          <td>Al CERRAR_PERDIDO</td>
+          <td>Closer</td>
+          <td>Lista cerrada</td>
+        </tr>
+        <tr>
+          <td>30</td>
+          <td><code>fecha_reactivacion</code></td>
+          <td>Fecha</td>
+          <td>Al APLAZAR</td>
+          <td>Coordinador</td>
+          <td>Fecha futura · alerta al cumplirse</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>G. Metadata / auditoría (auto-calculados)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Campo</th>
+          <th>Tipo</th>
+          <th>Cómo se calcula</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>31</td>
+          <td><code>sla_asignacion_cumplido</code></td>
+          <td>Booleano</td>
+          <td><code>fecha_hora_asignacion - fecha_hora_entrada &lt; 30 min</code></td>
+        </tr>
+        <tr>
+          <td>32</td>
+          <td><code>sla_contacto_cumplido</code></td>
+          <td>Booleano</td>
+          <td>Primer cambio a CONTACTADO en el mismo día calendario</td>
+        </tr>
+        <tr>
+          <td>33</td>
+          <td><code>tiempo_total_en_embudo</code></td>
+          <td>Duración</td>
+          <td><code>fecha_cierre - fecha_hora_entrada</code></td>
+        </tr>
+        <tr>
+          <td>34</td>
+          <td><code>historial_estados</code></td>
+          <td>Vista derivada (no es columna)</td>
+          <td>Se materializa filtrando la hoja <code>actividades</code> por <code>lead_id</code> y <code>tipo_actividad='cambio_estado'</code>. <strong>(v2: deja de ser columna en <code>personas</code>; cada cambio de estado se inserta como fila en la hoja <code>actividades</code> con tipo <code>cambio_estado</code>, fecha-hora y usuario.)</strong></td>
+        </tr>
+        <tr>
+          <td>35</td>
+          <td><code>notas_libres</code></td>
+          <td>Texto multilínea opcional</td>
+          <td>Manual, todos los roles</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>H. Campos universales agregados en v2 y v3 (en hoja <code>personas</code>)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Campo</th>
+          <th>Tipo</th>
+          <th>Obligatorio en</th>
+          <th>Quién llena</th>
+          <th>Validación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>36</td>
+          <td><code>tipo_operacion</code></td>
+          <td>Lista cerrada derivada: Compraventa · Alquiler · Anticresis · Proyecto · Postulación</td>
+          <td>Auto</td>
+          <td>Sistema (fórmula desde <code>perfil</code>)</td>
+          <td>Mapeo: comprador/vendedor → Compraventa · arrendador/arrendatario → Alquiler · anticresista_acreedor/anticresista_deudor → Anticresis · constructora → Proyecto · closer_postulante → Postulación. <strong>Habilita la métrica innegociable: cierres en compraventa por mes/asesor/perfil.</strong></td>
+        </tr>
+        <tr>
+          <td>37</td>
+          <td><code>ciudad_residencia</code></td>
+          <td>Texto libre</td>
+          <td>Al recibir</td>
+          <td>Coordinador</td>
+          <td>Default implícito "Arequipa" si no se llena. Promovible a lista cerrada cuando se estabilicen los valores. Útil para segmentar marketing y identificar al comprador foráneo.</td>
+        </tr>
+        <tr>
+          <td>38</td>
+          <td><code>lead_original_id</code></td>
+          <td>Texto (FK self-referential a <code>lead_id</code>)</td>
+          <td>Solo si es reactivación</td>
+          <td>Coordinador / Sistema</td>
+          <td>Vacío = lead nuevo. Lleno = apunta al lead anterior que fue reactivado (DESCARTADO o CERRADO_PERDIDO que volvió — ver Anexo-Estados-Lead, regla de reactivación).</td>
+        </tr>
+        <tr>
+          <td>39</td>
+          <td><code>closer_historico</code> <em>(v3)</em></td>
+          <td>Texto (nombre canónico del closer del lead original)</td>
+          <td>Auto, cuando se llena <code>lead_original_id</code></td>
+          <td>Sistema (Apps Script)</td>
+          <td>Cuando el coordinador escribe un <code>lead_original_id</code>, el CRM busca ese lead, lee su <code>closer_asignado</code> y lo escribe acá. Es <strong>lookup, no link</strong>: la fila vieja puede borrarse y el dato queda. Permite respetar la regla "el closer que cerró antes vuelve a atender al cliente reactivado" sin re-abrir la hoja <code>vinculos</code>. Si se vacía <code>lead_original_id</code>, este campo se limpia.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>I. Campos que viven en otras tablas del modelo (no en <code>personas</code>)</h2>
+
+    <p>Por la decisión de modelado del Proyecto 2 (5 hojas relacionadas alineadas al nodo n24 del Super Proceso + 8 hojas por perfil + Closers + Diccionario), algunos campos viven fuera de la tabla de leads:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Campo</th>
+          <th>Hoja</th>
+          <th>Tipo</th>
+          <th>Notas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>sector</code></td>
+          <td><code>propiedades</code></td>
+          <td>Texto libre</td>
+          <td>Sector comercial (Vallecito, Umacollo, Cristo Rey, Challapampa, etc.). Complementa al <code>zona_distrito</code>/<code>distrito</code> de la propiedad. <strong>(v2: campo nuevo, agregado por D3 del Sprint 0 del Proyecto 2.)</strong></td>
+        </tr>
+        <tr>
+          <td><code>estado_cartera</code> (en el Sheet: "Estado en cartera", col J)</td>
+          <td><code>propiedades</code></td>
+          <td>Lista cerrada: Firmada · Cerrada · Retirada</td>
+          <td>Estado de la propiedad en la cartera. Se setea automáticamente: <code>CAPTADO</code>→Firmada · <code>CERRADO_GANADO</code>→Cerrada · <code>CERRADO_PERDIDO</code>/<code>DESCARTADO</code>→sale de la cartera. <strong>(v4: alineado al CRM real — antes figuraba como <code>estado_exclusividad</code> con valores Firmada/Vencida/Retirada/Renovada, que no se implementaron.)</strong></td>
+        </tr>
+        <tr>
+          <td><code>historial_estados</code></td>
+          <td><code>actividades</code></td>
+          <td>Filas (no columna)</td>
+          <td>Cada cambio de estado se inserta como fila tipada <code>cambio_estado</code>. La vista del historial de un lead es un filtro de <code>actividades</code> por <code>lead_id</code>.</td>
+        </tr>
+        <tr>
+          <td><code>gate_*</code> por perfil</td>
+          <td>hoja del perfil correspondiente</td>
+          <td>Booleano</td>
+          <td>Los gates específicos viven distribuidos por perfil — ver sección C de campos específicos. <strong>(v2: reemplaza al antiguo JSON <code>gates_validados</code>.)</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>J. Sobre la hoja <code>vinculos</code> (N:M persona ↔ propiedad) <em>(v3)</em></h2>
+
+    <p>El nodo n24 del Super Proceso prevé una tabla <code>vinculos</code> para modelar relaciones N:M entre personas (típicamente adquirentes) y propiedades: visitas, ofertas, negociaciones cruzadas.</p>
+
+    <div class="callout-info">
+      <p><strong>Decisión v3 (Sprint 1 del Proyecto 2):</strong> la hoja <code>vinculos</code> <strong>queda diferida a la migración NocoDB de la Etapa 3 del Mapa Maestro</strong>. Razón: la implementación N:M en Google Sheets requiere fórmulas de cross-reference y mantenimiento manual que el equipo de coordinación todavía no maneja con fluidez. Sheets ralentiza la operación diaria sin entregar valor inmediato porque los reportes que la usarían (visitas cruzadas por adquirente, "qué propiedades vio el lead X") aún no son críticos en Sprint 1.</p>
+    </div>
+
+    <p><strong>Sustituto operativo:</strong></p>
+    <ul>
+      <li>Las visitas se registran en <code>actividades</code> con <code>tipo_actividad='visita'</code> y referencia al <code>lead_id</code> y a la <code>propiedad_id</code>. Es una relación N:M materializada por logs, no por tabla relacional.</li>
+      <li>El campo <code>closer_historico</code> (campo 39, v3) absorbe el caso de uso "respetar el closer del lead original al reactivar", que era el más urgente de los que cubría <code>vinculos</code>.</li>
+    </ul>
+
+    <p><strong>Cuándo se reactiva:</strong> en la Etapa 3 del Mapa Maestro, cuando todo migra a NocoDB y la relación N:M se vuelve nativa (linked records). El CRM Sheets actual ya escribe data limpia que la migración puede leer (lead_id, propiedad_id en <code>actividades</code>).</p>
+
+    <h2>Total v3: ~40 campos en <code>personas</code> + gates distribuidos + 2 campos en <code>propiedades</code></h2>
+
+    <ul>
+      <li><strong>15 campos universales</strong> en <code>personas</code> (los originales 1-15, con <code>gates_validados</code> reemplazado por <code>gates_completos</code> derivado).</li>
+      <li><strong>20 campos</strong> universales originales 16-35 en <code>personas</code> (con <code>historial_estados</code> ahora vista derivada, no columna; <code>estado_actual</code> ahora con 11 valores incluyendo CAPTADO).</li>
+      <li><strong>4 campos universales nuevos en <code>personas</code></strong> (<code>tipo_operacion</code>, <code>ciudad_residencia</code>, <code>lead_original_id</code>, <code>closer_historico</code>).</li>
+      <li><strong>Campos específicos por perfil</strong> distribuidos en las 8 hojas de perfil (incluyendo gates booleanos y <code>distritos_interes</code> para comprador y arrendatario).</li>
+      <li><strong>2 campos en <code>propiedades</code></strong>: <code>sector</code> y <code>estado_exclusividad</code>.</li>
+      <li><strong>Hoja <code>vinculos</code></strong>: diferida a NocoDB (Etapa 3 del Mapa Maestro).</li>
+    </ul>
+
+    <h2>Reglas críticas de validación (no negociables)</h2>
+
+    <ol>
+      <li><strong><code>closer_asignado</code></strong> — lista cerrada de nombres reales. Si vacío o "OFICINA" → el sistema rechaza el guardado.</li>
+      <li><strong><code>origen</code></strong> — lista cerrada. Si no se identifica → "Otros — sin identificar" (explícito, no DESCONOCIDO).</li>
+      <li><strong><code>perfil</code></strong> — siempre 1 de 8. Sin opción "Otro".</li>
+      <li><strong><code>estado_actual</code></strong> — siempre 1 de la lista. Transiciones inválidas bloqueadas (ej. no se puede pasar de NUEVO directo a CERRADO_GANADO sin pasar por los intermedios — ver Anexo-Estados-Lead).</li>
+      <li><strong><code>telefono</code></strong> — 9 dígitos. NO se exige único (una reactivación reusa el teléfono); el duplicado se resalta en naranja como aviso, no se bloquea.</li>
+      <li><strong><code>dni</code></strong> — se valida el formato (8 dígitos). No se bloquea por repetido.</li>
+      <li><strong><code>sla_*_cumplido</code></strong> — auto-calculados, no editables manualmente.</li>
+    </ol>
+
+    <h2>Mapeo al CRM Excel actual (qué se preserva, renombra, agrega, elimina)</h2>
+
+    <h3>Columnas del Excel actual (Sheet 1: 16 columnas)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Columna actual</th>
+          <th>Acción</th>
+          <th>Mapea a</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>FECHA</td>
+          <td>Renombrar</td>
+          <td><code>fecha_hora_entrada</code></td>
+        </tr>
+        <tr>
+          <td>TELEFONO</td>
+          <td>Preservar</td>
+          <td><code>telefono</code></td>
+        </tr>
+        <tr>
+          <td>CLIENTE</td>
+          <td>Renombrar</td>
+          <td><code>nombre_completo</code></td>
+        </tr>
+        <tr>
+          <td>DETALLE</td>
+          <td>Descomponer</td>
+          <td>→ <code>perfil</code> + <code>caracteristicas_buscadas</code> + otros</td>
+        </tr>
+        <tr>
+          <td>PROPIEDAD</td>
+          <td>Renombrar</td>
+          <td><code>caracteristicas_buscadas</code> (compradores) o <code>tipo_inmueble</code> (vendedores)</td>
+        </tr>
+        <tr>
+          <td>DISTRITO</td>
+          <td><strong>Descomponer + lista cerrada</strong></td>
+          <td><code>distrito</code> (lista cerrada de 20 distritos · hoja <code>propiedades</code>) + <code>sector</code> (texto libre · hoja <code>propiedades</code>). <strong>(v2: el antiguo <code>zona_distrito</code> se desdobla — ver D3 del Sprint 0 del Proyecto 2.)</strong></td>
+        </tr>
+        <tr>
+          <td>ASESOR</td>
+          <td><strong>Limpiar + lista cerrada</strong></td>
+          <td><code>closer_asignado</code> (eliminar "OFICINA", DESCONOCIDO; lista cerrada de 15 nombres canónicos — ver D2)</td>
+        </tr>
+        <tr>
+          <td>DE DONDE VIENE</td>
+          <td>Renombrar + normalizar</td>
+          <td><code>origen</code> (lista cerrada)</td>
+        </tr>
+        <tr>
+          <td>GESTION</td>
+          <td>Descomponer</td>
+          <td>→ <code>estado_actual</code> + filas en hoja <code>actividades</code> con <code>tipo_actividad='cambio_estado'</code>. <strong>(v2: el historial pasa a <code>actividades</code>.)</strong></td>
+        </tr>
+        <tr>
+          <td>COMENTARIO 1/2/3</td>
+          <td>Consolidar</td>
+          <td><code>notas_libres</code> + filas en <code>actividades</code> (tipo <code>nota_libre</code> o el tipo aplicable).</td>
+        </tr>
+        <tr>
+          <td>FECHA / FECHA 2 / FECHA 3</td>
+          <td>Descomponer</td>
+          <td>→ filas en <code>actividades</code> (cada fecha es un evento con su <code>fecha_hora</code> y <code>tipo_actividad</code>).</td>
+        </tr>
+        <tr>
+          <td>(col P corrupta)</td>
+          <td><strong>Eliminar</strong></td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Columnas que el Excel actual NO tiene y son obligatorias en el nuevo CRM</h3>
+
+    <ul>
+      <li><code>canal</code> (WA/Llamada/Web/...) — hoy se infiere, mañana es explícito.</li>
+      <li><code>perfil</code> (1 de 8) — hoy embedido en DETALLE/PROPIEDAD, mañana es columna.</li>
+      <li><code>etiqueta_especifica</code> + <code>prioridad_comun</code> — hoy no existe.</li>
+      <li><code>fecha_hora_asignacion</code> + <code>regla_asignacion_aplicada</code> + <code>acuse_recibo_closer</code> — hoy no se mide.</li>
+      <li><code>confirmacion_1dia_antes</code> + <code>confirmacion_1hora_antes</code> — hoy no se hace.</li>
+      <li><code>resultado_visita</code> (lista cerrada) — hoy texto libre.</li>
+      <li><code>sla_*_cumplido</code> (campos auto) — hoy no existen.</li>
+      <li><code>motivo_perdida</code> (lista cerrada) — hoy no se registra.</li>
+    </ul>
+
+    <h3>Hojas del Excel actual (Sheet 2: Compradores, Sheet 3/4: Métricas)</h3>
+
+    <ul>
+      <li><strong>Sheet 2 (Compradores)</strong> — Tiene esbozo de calificación (TIENE NECESIDAD · TIENE URGENCIA · REALISTA CON EL PRECIO · POTENCIAL). El Proyecto 2 los <strong>migra como campos específicos del perfil Comprador</strong> y agrega los faltantes.</li>
+      <li><strong>Sheet 3/4 (Métricas/Actividad)</strong> — Son tableros de actividad, no de leads. El Proyecto 2 los <strong>regenera como reportes/vistas</strong> sobre la tabla maestra de leads (no como hojas paralelas).</li>
+    </ul>
+
+    <h2>Conexión con el Proyecto 2 (CRM)</h2>
+
+    <p>El Proyecto 2 recibe este anexo como contrato. Debe:</p>
+
+    <ol>
+      <li><strong>Crear las columnas</strong> según el esquema definido en el Sprint 0 del Proyecto 2 (Google Sheet con 15 hojas: 5 del nodo n24 + Closers + Diccionario + 8 por perfil). El número total de campos es ~39 universales + gates distribuidos + 1 en <code>propiedades</code> — ver secciones C, F, H, I de este anexo.</li>
+      <li><strong>Implementar listas cerradas</strong> para los campos críticos (canal, origen, perfil, closer, distrito, etiqueta, prioridad, estado, regla_asignacion, resultado_visita, motivo_perdida, tipo_operacion derivado).</li>
+      <li><strong>Migrar los ~250 leads</strong> del Excel actual a la nueva estructura, con regla de limpieza:
+        <ul>
+          <li>"DESCONOCIDO" en ASESOR → asignar manualmente o marcar <code>pendiente_asignacion</code>.</li>
+          <li>"OFICINA" en ASESOR → asignar al closer del turno del día de entrada (si es identificable) o <code>pendiente_asignacion</code>.</li>
+          <li>Filas duplicadas por teléfono → consolidar en una sola.</li>
+        </ul>
+      </li>
+      <li><strong>Generar reportes/vistas</strong> (no hojas) para las métricas de SLA, conversión por etapa, fuentes de leads, performance por closer.</li>
+      <li><strong>Mantener compatibilidad con el Super Proceso</strong> (n4-n5) — los nombres de campos deberían alinearse con el JSON de handoff del nodo n5.</li>
+    </ol>
+
+    <h2>Verificación</h2>
+
+    <ul>
+      <li>Cada campo de los 8 obligatorios de la Página 1 está en este anexo.</li>
+      <li>Cada paso del embudo (recepción → cierre) tiene los campos que necesita.</li>
+      <li>Las listas cerradas eliminan las inconsistencias del Excel actual.</li>
+      <li>Los campos específicos por perfil cubren los outputs de los 8 flujos detallados.</li>
+      <li>La transición Mínimo → Alto se refleja en quién llena qué (coordinador asume más campos en F3).</li>
+    </ul>
+
+    <hr>
+
+    <p><em>Versión 1 · 2026-05-14 · RE/MAX Master Arequipa · Proyecto 1 — Anexo del Entregable 5</em><br>
+    <em>Versión 2 · 2026-05-16 · editada por el Proyecto 2 con autorización de Eduardo (Sprint 0, decisiones D3, D6, D7).</em><br>
+    <em>Versión 3 · 2026-05-18 · editada por el Proyecto 2 durante Sprint 1 (estado CAPTADO, columna <code>closer_historico</code>, vínculos diferidos a NocoDB, automatización lead espejo).</em></p>
+
+    <h2>Changelog v1 → v2 (2026-05-16)</h2>
+
+    <p><strong>Contexto:</strong> el Proyecto 2 inició su diagnóstico de arranque (Sprint 0). Detectó 4 campos faltantes que los flujos sí recogen, y un patrón inconsistente en los gates de validación. Eduardo autorizó editar el contrato directamente en lugar de mantener una adenda paralela.</p>
+
+    <p><strong>Agregados:</strong></p>
+    <ul>
+      <li><code>tipo_operacion</code> (campo 36, derivado de <code>perfil</code>) — habilita la métrica innegociable de cierres por mes/asesor/perfil.</li>
+      <li><code>ciudad_residencia</code> (campo 37, texto en <code>personas</code>).</li>
+      <li><code>lead_original_id</code> (campo 38, FK self-referential en <code>personas</code>).</li>
+      <li><code>sector</code> (en <code>propiedades</code>, no en <code>personas</code>) — sector comercial complementario al distrito.</li>
+      <li><code>distritos_interes</code> (multi-select, en hojas <code>comprador</code> y <code>arrendatario</code>).</li>
+      <li><code>gates_completos</code> (booleano derivado en <code>personas</code>, reemplaza al antiguo JSON <code>gates_validados</code>).</li>
+      <li>Gates booleanos individuales distribuidos en cada hoja de perfil (<code>gate_carta_bancaria</code>, <code>gate_partida_registral</code>, <code>gate_hr_pu</code>, <code>gate_saneamiento</code>, <code>gate_crediticio_aprobado</code>, <code>gate_garantia</code>, <code>gate_sustento_ingresos</code>, <code>gate_liquidez</code>, <code>gate_partida</code>, <code>gate_partida_terreno</code>, <code>gate_cv</code>, <code>gate_antecedentes_penales</code>).</li>
+    </ul>
+
+    <p><strong>Renombrados (por consistencia con el patrón <code>gate_*</code>):</strong></p>
+    <ul>
+      <li><code>licencia_edificacion</code> → <code>gate_licencia</code> (hoja <code>constructora</code>).</li>
+      <li><code>documentacion_legal_completa</code> → <code>gate_saneamiento</code> (hoja <code>anticresista_deudor</code>).</li>
+      <li><code>referencias_verificadas</code> → <code>gate_referencias</code> (hoja <code>closer_postulante</code>).</li>
+    </ul>
+
+    <p><strong>Eliminados como columna (pasan a otras estructuras):</strong></p>
+    <ul>
+      <li><code>gates_validados</code> (campo 14) — el JSON desaparece; se reemplaza por <code>gates_completos</code> derivado + columnas <code>gate_*</code> distribuidas.</li>
+      <li><code>historial_estados</code> (campo 34) — deja de ser columna; cada cambio de estado se inserta como fila en la hoja <code>actividades</code> con <code>tipo_actividad='cambio_estado'</code>.</li>
+    </ul>
+
+    <p><strong>Ítems técnicos pendientes para Sprint 1 del Proyecto 2:</strong></p>
+    <ul>
+      <li>Resolver el solapamiento entre <code>zona_distrito</code> (campo 9 universal en <code>personas</code>) y la convivencia con <code>distrito</code> (en <code>propiedades</code>) + <code>distritos_interes</code> (en hojas <code>comprador</code>/<code>arrendatario</code>). Pendiente de decisión explícita: ¿se elimina el campo 9, se mantiene como "distrito principal del lead", o se reusa para algo distinto?</li>
+      <li>Definir el formato físico del <code>lead_id</code> (autonumérico vs UUID vs fecha+secuencia).</li>
+      <li>Definir cómo se implementa el multi-select de <code>distritos_interes</code> en Sheets (texto separado por comas vs columnas booleanas por distrito).</li>
+      <li>Definir las reglas exactas de migración del CRM.xlsx (skill <code>limpiador-crm</code>).</li>
+    </ul>
+
+    <p><strong>Referencia:</strong> el plan completo de Sprint 0 con las 7 decisiones (D1–D7) vive en <code>~/.claude/plans/vamos-a-iniciar-el-iridescent-bear.md</code> del Proyecto 2.</p>
+
+    <h2>Changelog v2 → v3 (2026-05-18)</h2>
+
+    <p><strong>Contexto:</strong> durante el Sprint 1 del Proyecto 2 (construcción del CRM Sheets vivo con Apps Script), Eduardo cargó los primeros leads reales y detectó tres ajustes necesarios para que la operación diaria fluya y para que el equipo de coordinación pueda leer el contrato sin contradicciones con el CRM en uso.</p>
+
+    <p><strong>Agregados:</strong></p>
+    <ul>
+      <li>Estado <code>CAPTADO</code> en <code>estado_actual</code> (campo 26) — exclusivo de perfiles propietarios. Ver Anexo-Estados-Lead v2.</li>
+      <li>Campo 39 <code>closer_historico</code> en <code>personas</code> — autocompletado por Apps Script desde <code>lead_original_id</code>. Permite respetar la regla "el closer que cerró antes vuelve a atender al cliente reactivado" sin reabrir la hoja <code>vinculos</code>.</li>
+      <li>Campo <code>estado_exclusividad</code> en <code>propiedades</code> (sección I) — se setea automáticamente a "Firmada" cuando un lead propietario pasa a <code>CAPTADO</code>.</li>
+    </ul>
+
+    <p><strong>Automatizaciones nuevas (documentadas en este anexo):</strong></p>
+    <ul>
+      <li>Lead espejo automático cuando <code>etiqueta_especifica</code> ∈ {<code>POTENCIAL_doble</code>, <code>CAPTABLE_doble</code>} — el CRM genera la contraparte (Comprador / Anticresista acreedor) automáticamente, conservando teléfono, nombre, canal, origen, y enlazando con <code>lead_original_id</code>.</li>
+      <li>Alta/actualización de fila en <code>propiedades</code> cuando un lead propietario entra a <code>CAPTADO</code>.</li>
+      <li>Autocompletado de <code>closer_historico</code> cuando se llena <code>lead_original_id</code>.</li>
+    </ul>
+
+    <p><strong>Diferidos a NocoDB / Etapa 3 del Mapa Maestro:</strong></p>
+    <ul>
+      <li>Hoja <code>vinculos</code> (N:M persona ↔ propiedad). Razón: la implementación N:M en Sheets ralentiza la operación sin entregar valor inmediato. Las visitas y ofertas se registran en <code>actividades</code> con <code>lead_id</code> + <code>propiedad_id</code> como log; cuando migre a NocoDB se materializa como linked record nativo.</li>
+    </ul>
+
+    <p><strong>Sin cambios respecto a v2:</strong></p>
+    <ul>
+      <li>Las listas cerradas críticas (canal, origen, perfil, etiquetas, distrito, motivo_perdida, regla_asignacion, resultado_visita).</li>
+      <li>Los gates <code>gate_*</code> distribuidos por hoja de perfil.</li>
+      <li>Los campos auto-calculados (sla_*, tiempo_total_embudo, gates_completos).</li>
+      <li>Los 4 campos universales agregados en v2 (<code>tipo_operacion</code>, <code>ciudad_residencia</code>, <code>lead_original_id</code> siguen igual; <code>closer_historico</code> se suma en v3).</li>
+    </ul>
+
+    <h2>Changelog v3 → v4 (2026-05-25)</h2>
+
+    <p><strong>Contexto:</strong> tras varios ajustes quirúrgicos en el CRM (Apps Script), se auditaron los inputs contra el código real y Eduardo autorizó alinear el contrato con lo que el CRM efectivamente hace, para que el coordinador no lea contradicciones.</p>
+
+    <p><strong>Alineaciones al CRM real:</strong></p>
+    <ul>
+      <li><code>telefono</code> (campo 5 + regla crítica 5): ya <strong>no</strong> es "+51 9XX XXX XXX" ni "único". Es 9 dígitos sin +51; el duplicado se resalta en naranja (no se bloquea), porque una reactivación reusa el teléfono.</li>
+      <li><code>dni</code> (regla crítica 6): se valida formato (8 dígitos), no se bloquea por repetido.</li>
+      <li><code>resultado_visita</code> (campo 24): ahora 6 opciones — se agregó "Negociación cayó, sigue buscando" y "No le gustó" se renombró a "No le gustó esta propiedad" (no cierra el lead).</li>
+      <li><code>estado_exclusividad</code> → en el CRM es la columna <strong>"Estado en cartera"</strong> (<code>propiedades</code> col J) con valores <strong>Firmada · Cerrada · Retirada</strong> (no Vencida/Renovada).</li>
+      <li>Fecha de reactivación automática: <strong>+45 días</strong> (no +6 meses) — ver Anexo-Estados-Lead.</li>
+    </ul>
+
+    <p><strong>Pendientes de código (no de contrato), documentados en <code>outputs-proyecto-2-crm/Hallazgos-Codigo-CRM.md</code>:</strong> des-asignación al borrar closer, candado de estados terminales, blindaje de columnas SLA. El contrato describe la intención; el código se ajustará después.</p>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">v3 · 2026-05-25</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

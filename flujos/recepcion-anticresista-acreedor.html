@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flujo de recepción de anticresista acreedor — RE/MAX Master</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --rojo: #AA1120;
+    --verde: #2A9D8F;
+    --amarillo: #E9B949;
+    --azul: #003DA5;
+    --gris: #6C757D;
+    --texto: #0C2749;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 1300px;
+    margin: 2rem auto;
+    padding: 0 1.5rem 4rem;
+    line-height: 1.55;
+    color: var(--texto);
+    background: #F7F5EE;
+  }
+  h1 {
+    border-bottom: 3px solid var(--azul);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  h2 {
+    margin-top: 2.5rem;
+    color: var(--azul);
+    border-left: 4px solid var(--azul);
+    padding-left: 0.75rem;
+  }
+  .meta { color: var(--gris); font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .intro, .nota, .pendientes {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0 2rem;
+  }
+  .nota {
+    border-left: 4px solid var(--amarillo);
+    background: #fff8e6;
+    font-size: 0.95rem;
+  }
+  .pendientes {
+    border-left: 4px solid var(--rojo);
+  }
+  .pendientes ol { padding-left: 1.2rem; }
+  .pendientes li { margin-bottom: 0.6rem; }
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 1rem 0 0.5rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+  .legend-color { width: 22px; height: 22px; border-radius: 4px; border: 2px solid #999; }
+  .mermaid {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    background: #fff;
+  }
+  th, td {
+    border: 1px solid #e0e0e0;
+    padding: 0.6rem 0.85rem;
+    text-align: left;
+    font-size: 0.92rem;
+    vertical-align: top;
+  }
+  th { background: #f1f5f9; font-weight: 600; }
+  .badge {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  .badge-pot { background: var(--verde); }
+  .badge-semi { background: var(--amarillo); color: #232323; }
+  .badge-no { background: var(--gris); }
+  .badge-cur { background: #adb5bd; color: #333; }
+</style>
+</head>
+<body>
+
+<h1>Flujo de recepción y calificación de anticresista acreedor</h1>
+<p class="meta">RE/MAX Master · v1 · 2026-05-05</p>
+
+<div class="intro">
+  <p><strong>Cómo leer:</strong> el lead entra arriba. Cada rombo es una decisión y muestra las respuestas posibles del acreedor. Cada caja final coloreada es la <strong>etiqueta</strong> con la que el lead queda en el CRM y dispara la siguiente acción.</p>
+  <p>El flujo es continuo: identidad → comprensión del producto → uso → tipo y zona → monto → mudanza → horizonte de uso → disposición legal → fuente del dinero → decisor → cierre → visita → firma de escritura pública.</p>
+  <p><strong>Producto:</strong> anticresis (Código Civil peruano, arts. 1091-1096). El acreedor entrega el dinero y recibe el inmueble en uso por un plazo pactado. Al final del plazo se devuelve íntegro el dinero al acreedor y el inmueble al deudor. La operación se formaliza con escritura pública e inscripción SUNARP.</p>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-color" style="background:#d4edda; border-color:#2A9D8F"></div> COLOCABLE · camino a firma de escritura</div>
+  <div class="legend-item"><div class="legend-color" style="background:#fff3cd; border-color:#E9B949"></div> SEMI / re-encuadre</div>
+  <div class="legend-item"><div class="legend-color" style="background:#e2e3e5; border-color:#6C757D"></div> No prioritario / fin del filtro</div>
+  <div class="legend-item"><div class="legend-color" style="background:#cfe2f3; border-color:#003DA5"></div> Cierre y handoff</div>
+  <div class="legend-item"><div class="legend-color" style="background:#fff; border-color:#0C2749"></div> Decisión / pregunta abierta</div>
+</div>
+
+<h2>Flujo completo</h2>
+
+<div class="mermaid">
+flowchart TD
+    Start([Lead entra: WhatsApp o llamada])
+    Start --> Adapt[Adaptarse al canal preferido<br/>recomendar llamada para no ser pesado]
+    Adapt --> P1[P1 - Nombre, ciudad, origen, canal]
+    P1 --> Q1{Da nombre completo?}
+    Q1 -->|No| CurFin[CURIOSO: cerrar amable]
+    Q1 -->|Si| P2[P2 - Sondeo de comprension:<br/>sabe que es anticresis?<br/>por que prefiere esto a alquiler/compra?]
+    P2 --> Q2{Comprension del producto?}
+    Q2 -->|"Entiende y tiene razon clara"| P3
+    Q2 -->|"Confunde con alquiler u otro"| Educar[Script educativo:<br/>anticresis = uso del inmueble<br/>a cambio de monto que se devuelve<br/>plazo + escritura + SUNARP]
+    Educar --> Q2b{Tras la explicacion<br/>sigue interesado?}
+    Q2b -->|Si| P3
+    Q2b -->|"Se asusta o evita"| CurFin
+    Q2 -->|"Solo investiga, no le aplica"| CurFin
+
+    P3[P3 - USO del inmueble:<br/>vivir el / familia o sub-arrendar o comercial?]
+    P3 --> Q3{Para que lo usa?}
+    Q3 -->|"Vivir el o su familia"| P4
+    Q3 -->|"Sub-arrendar para renta"| P4
+    Q3 -->|"Comercial / oficina"| P4
+    Q3 -->|"No lo tengo definido"| EduUso[Educar 3 usos posibles<br/>y volver a P3]
+    EduUso --> P3
+
+    P4[P4 - Tipo de propiedad y caracteristicas minimas<br/>casa o depto, dormitorios, m2, estacionamiento]
+    P4 --> P5[P5 - Zona + tolerancia aledanas]
+    P5 --> P6[P6 - MONTO disponible:<br/>cuanto en USD o S/<br/>y cuando lo tiene liquido]
+
+    P6 --> Ticket{Monto mayor o igual<br/>a USD 20,000?}
+    Ticket -->|No| NoColTicket[NO COLOCABLE - bajo ticket minimo<br/>derivar a alquiler tradicional]
+    Ticket -->|Si| Coh{Coherente con<br/>valores de anticresis<br/>en la zona declarada?}
+
+    Coh -->|Si| P7
+    Coh -->|No| SA{Sondeo A:<br/>conoce los valores<br/>tipicos de anticresis<br/>en esa zona?}
+    SA -->|"Se sorprende, recien investiga"| RecienInv[Recien investigando<br/>etiqueta segun horizonte<br/>SEMI o NO COLOCABLE]
+    SA -->|Ya conoce| SB{Sondeo B:<br/>acepta zonas<br/>aledanas?}
+    SB -->|Si| Recal[COLOCABLE recalibrado<br/>ajustar zona en SIGI]
+    SB -->|"No, quiere esa zona"| SC{Sondeo C:<br/>acepta bajar<br/>caracteristicas<br/>o m2?}
+    SC -->|"Si, podria evaluarlo"| AjustChar[COLOCABLE ajustado<br/>recortar caracteristicas]
+    SC -->|No| NoColMonto[NO COLOCABLE<br/>no calzamos en esta busqueda]
+    Recal --> P7
+    AjustChar --> P7
+    RecienInv --> P7
+
+    P7[P7 - TIMING de mudanza:<br/>en cuanto tiempo<br/>tiene que entrar al inmueble?]
+    P7 --> Plazo{Plazo de mudanza?}
+    Plazo -->|0-2 semanas| Pot[Mudanza POTENCIAL<br/>visita 24-72h]
+    Plazo -->|2-4 semanas| Semi[Mudanza SEMI<br/>visita 1-2 semanas]
+    Plazo -->|"mas de 1 mes"| NoPotMud[Mudanza NO POTENCIAL<br/>enviar informacion igual<br/>cita en tiempo prolongado]
+    Plazo -->|"viendo nomas o no sabe"| Resc{Pregunta de rescate:<br/>no tienes urgencia<br/>o no decidiste<br/>si haces anticresis este ano?}
+    Resc -->|No tengo urgencia| NoPotMud
+    Resc -->|"No decidi aun"| Cur[CURIOSO]
+    Resc -->|"Sigue evasivo"| Cur
+
+    Pot --> P8
+    Semi --> P8
+    NoPotMud --> P8
+    P8[P8 - HORIZONTE de uso:<br/>cuantos anos necesita<br/>o acepta el inmueble?]
+    P8 --> Hor{Horizonte de uso?}
+    Hor -->|"2 a 10 anos persona natural"| P9
+    Hor -->|"menos de 2 anos"| NoColHor[NO COLOCABLE<br/>plazo corto no compensa<br/>fricción notarial y registral]
+    Hor -->|"mas de 10 anos"| NoColLegal[NO COLOCABLE<br/>excede limite legal<br/>art. 1095 CC persona natural]
+    Hor -->|"no se / lo que sea"| ResHor{Rescate horizonte:<br/>te sirve un plazo<br/>de 3 a 5 anos?}
+    ResHor -->|Si| P9
+    ResHor -->|No, sigue evasivo| Cur
+
+    P9[P9 - DISPOSICION LEGAL:<br/>aceptas escritura publica<br/>e inscripcion SUNARP?<br/>entiendes que tu derecho es de USO,<br/>no de propiedad?]
+    P9 --> Legal{Acepta escritura<br/>+ SUNARP?}
+    Legal -->|"Si, entiende"| P10
+    Legal -->|"Si firma pero no quiere SUNARP"| EduSUN[Explicar: sin SUNARP<br/>tu credito no esta protegido<br/>frente a terceros<br/>casi siempre cambia de opinion]
+    EduSUN --> Legal2{Acepta tras<br/>explicacion?}
+    Legal2 -->|Si| P10
+    Legal2 -->|No| NoColLegal2[NO COLOCABLE<br/>sin proteccion legal<br/>Master no avanza la operacion]
+    Legal -->|"No quiere notario"| NoColLegal2
+
+    P10[P10 - FUENTE del dinero:<br/>liquido en cuenta hoy<br/>o requiere liquidar?<br/>CTS, plazo fijo, herencia, retorno del extranjero]
+    P10 --> Fuente{Estado del dinero?}
+    Fuente -->|"Liquido en cuenta"| P11
+    Fuente -->|"Liquidar instrumento con plazo conocido"| FCondPlazo[COLOCABLE_condicional<br/>marcar fecha de liquidez<br/>seguimiento programado]
+    Fuente -->|"Herencia o retorno en proceso"| FCondProc[COLOCABLE_condicional<br/>validar avance del proceso<br/>seguimiento mensual]
+    Fuente -->|"No lo tiene aun"| NoColFuente[NO COLOCABLE<br/>regresa cuando tengas el dinero]
+
+    FCondPlazo --> P11
+    FCondProc --> P11
+
+    P11[P11 - DECISOR REAL]
+    P11 --> Dec{Hay otro decisor?<br/>conyuge si patrimonio comun<br/>familia que aporta al monto}
+    Dec -->|No, unico| Anuncio
+    Dec -->|Si| ScriptDec[Ofrecer la opcion del grupo de WhatsApp:<br/>te ahorra reenviar info<br/>todos ven, comparan y discuten]
+    ScriptDec --> Acepta{Acepta la opcion<br/>del grupo?}
+    Acepta -->|Si| Anuncio
+    Acepta -->|"Se resiste, raro"| ConRiesgo[Marcar riesgo y continuar<br/>sin grupo]
+    ConRiesgo --> Anuncio
+
+    Anuncio[CIERRE - Anuncio:<br/>te enviare PDF dashboard comparativo<br/>con las opciones que mejor calzan<br/>con tus requerimientos y monto]
+    Anuncio --> ConfDNI[Pedir DNI por WhatsApp ANTES de agendar<br/>requisito para coordinar la visita<br/>ingreso a edificios + registro SIGI]
+    ConfDNI --> CoordVis[Cerrar la visita ANTES del envio del PDF<br/>llamada o canal preferido del acreedor<br/>fecha + hora + todos los decisores<br/>POT 24-72h · SEMI 1-2 semanas · NO POT prolongada<br/>compromete al lead, evita perderlo]
+    CoordVis --> RutaPDF{El acreedor acepto<br/>la opcion del grupo?}
+    RutaPDF -->|"No, unico o resistio"| Envio
+    RutaPDF -->|Si| MsgDatos[Por WhatsApp, ANTES del dashboard:<br/>pasame los nombres y celulares<br/>de los demas decisores]
+    MsgDatos --> RecibeDatos[Acreedor envia nombres + numeros<br/>por WhatsApp]
+    RecibeDatos --> CrearGrupo[Crear grupo de WhatsApp<br/>con TODOS los decisores]
+    CrearGrupo --> Envio
+    Envio[Enviar PDF dashboard comparativo<br/>con inmuebles SIGI elegibles para anticresis<br/>priorizados por calce con sus requerimientos<br/>al grupo o al WhatsApp del acreedor]
+    Envio --> Escoge[El grupo o acreedor<br/>escoge 3-4 favoritas del dashboard]
+    Escoge --> ConfDia[1 dia antes de la visita:<br/>te confirmo la visita de manana]
+    ConfDia --> QConfDia{Confirma o<br/>quiere reprogramar?}
+    QConfDia -->|Confirma| ConfHora[1 hora antes de la visita:<br/>recordatorio final<br/>nos vemos en X minutos en la direccion]
+    QConfDia -->|"Quiere reprogramar"| Reprog[Reprogramar visita:<br/>acordar nueva fecha + hora<br/>con todos los decisores<br/>volver al ciclo de confirmacion]
+    Reprog --> ConfDia
+    ConfHora --> QConfHora{Confirma o<br/>tiene imprevisto?}
+    QConfHora -->|Confirma| Contexto[Compilar contexto detallado del acreedor<br/>y enviarlo al closer asignado<br/>ANTES de la visita]
+    QConfHora -->|"Imprevisto, reprograma"| Reprog
+    Contexto --> Visita[VISITA con todos los decisores<br/>Closer: peores primero,<br/>mejor opcion al final]
+    Visita --> Match[Una vez elegido el inmueble:<br/>cruce con el deudor del inmueble<br/>presentacion entre partes<br/>validacion legal de la propiedad]
+    Match --> Escritura[FIRMA de escritura publica<br/>en notaria + inscripcion SUNARP<br/>entrega del inmueble al acreedor]
+
+    NoColTicket --> Nurture[Material informativo<br/>+ newsletter mensual de zona]
+    NoColMonto --> Nurture
+    NoColHor --> Nurture
+    NoColLegal --> Nurture
+    NoColLegal2 --> Nurture
+    NoColFuente --> Nurture
+    Cur --> Nurture
+    CurFin --> Nurture
+
+    classDef happy fill:#d4edda,stroke:#2A9D8F,stroke-width:2px,color:#0C2749;
+    classDef semi fill:#fff3cd,stroke:#E9B949,stroke-width:2px,color:#232323;
+    classDef terminal fill:#e2e3e5,stroke:#6C757D,color:#212529;
+    classDef cierre fill:#cfe2f3,stroke:#003DA5,stroke-width:2px,color:#0C2749;
+
+    class Pot,Visita,Match,Escritura,Recal,AjustChar happy
+    class Semi,NoPotMud,RecienInv,FCondPlazo,FCondProc semi
+    class NoColTicket,NoColMonto,NoColHor,NoColLegal,NoColLegal2,NoColFuente,Cur,CurFin,Nurture terminal
+    class Anuncio,CoordVis,Envio,Escoge,ConfDia,ConfDNI,ConfHora,Reprog,ScriptDec,MsgDatos,RecibeDatos,CrearGrupo,Contexto,Educar,EduUso,EduSUN cierre
+</div>
+
+<div class="nota">
+  <strong>Por qué pedir el DNI antes de agendar la visita:</strong> el DNI es requisito operativo para coordinar la visita (ingreso a edificios, registro en SIGI, identificación del cliente ante el deudor del inmueble), no un filtro de calificación. Se pide cuando el acreedor ya está a punto de comprometer fecha y hora — en ese momento hay intención clara y la solicitud no genera rechazo.
+</div>
+
+<div class="nota">
+  <strong>Contexto que se envía al closer ANTES de la visita:</strong> nombre del acreedor y de todos los decisores · DNI · uso del inmueble (vivir / sub-arrendar / comercial) · zona objetivo + tolerancia · características requeridas · monto disponible (USD o S/) y estado de liquidez · timing de mudanza · horizonte de uso aceptado (años) · disposición legal confirmada (escritura + SUNARP) · inmuebles elegidos del PDF dashboard · notas relevantes del filtro (sondeos respondidos, red flags, triggers SEMI activos, fecha de liquidez si aplica). El closer lee esto antes de salir a la visita y arma su estrategia.
+</div>
+
+<div class="nota">
+  <strong>Estrategia del closer durante la visita:</strong> mostrar primero las opciones que <em>no calzan tanto</em> (ubicación menos cómoda o detalles a corregir) y dejar la mejor opción para el final. Permite que el acreedor compare y vea por qué la última es la mejor — facilita la decisión de avanzar al match con el deudor y a la firma de escritura.
+</div>
+
+<div class="nota">
+  <strong>Diferencia anticresis vs alquiler vs compra (script educativo del P2):</strong> en <em>alquiler</em> se paga renta mensual que no se recupera. En <em>compra</em> se transfiere la propiedad y se desembolsa el valor total. En <em>anticresis</em> se entrega un monto (típicamente 10–30% del valor del inmueble), se recibe el inmueble en uso por un plazo pactado, y al final del plazo el deudor devuelve íntegro el dinero y el acreedor devuelve el inmueble. El acreedor no se vuelve dueño — su derecho es de uso, garantizado por escritura pública e inscripción SUNARP.
+</div>
+
+<div class="nota">
+  <strong>Validación legal del inmueble (responsabilidad de la oficina, no del acreedor):</strong> antes de presentar el match, Master verifica en la partida registral que el inmueble esté libre de cargas, embargos y litigios; que estén identificados todos los copropietarios; que el cónyuge del propietario figure y firmará si corresponde a sociedad de gananciales; y que no haya adeudos de servicios, predial ni arbitrios que puedan trabar la inscripción.
+</div>
+
+<div class="nota">
+  <strong>Reprogramación de la visita:</strong> en cualquiera de los dos puntos de confirmación (1 día antes y 1 hora antes) el acreedor puede reportar un imprevisto. La respuesta es siempre la misma — acordar nueva fecha y hora con todos los decisores y reiniciar el ciclo de confirmación (no insistir con la fecha original). Si el lead pide más de 2 reprogramaciones consecutivas sin una razón clara, marcar como riesgo y bajar la prioridad de seguimiento — probablemente sea CURIOSO disfrazado.
+</div>
+
+<h2>Clasificación final y siguiente acción</h2>
+
+<table>
+  <thead>
+    <tr><th>Etiqueta</th><th>Cumple los 3 gates</th><th>Cierre completo</th><th>Visita</th><th>Seguimiento</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><span class="badge badge-pot">COLOCABLE</span></td><td>Sí · monto líquido + horizonte 2-10 años + acepta SUNARP</td><td>Sí</td><td>Con todos los decisores · urgencia según mudanza: POT (0-2 sem) → 24-72h · SEMI (2-4 sem) → 1-2 semanas · NO POT (+1 mes) → cita prolongada</td><td>Closer · 24h post-visita · 3d · 7d · firma de escritura</td></tr>
+    <tr><td><span class="badge badge-pot">COLOCABLE_condicional</span></td><td>Sí pero con bloqueador conocido (liquidar CTS / herencia en proceso / copropietarios pendientes)</td><td>Sí</td><td>Si avanza el bloqueador</td><td>Mismo + alerta en fecha de liquidez o avance del bloqueador</td></tr>
+    <tr><td><span class="badge badge-semi">SEMI-COLOCABLE</span></td><td>Sí pero match SIGI no aparece hoy (zona muy específica o características poco comunes)</td><td>Sí</td><td>Si avanza tras seguimiento</td><td>Re-contacto a 4 semanas + alerta por triggers</td></tr>
+    <tr><td><span class="badge badge-no">NO COLOCABLE</span></td><td>Falla algún gate de forma irrecuperable (monto bajo USD 20k · horizonte fuera de 2-10 años · rechaza SUNARP · no tiene el dinero ni fecha cierta)</td><td>—</td><td>—</td><td>Material educativo + newsletter mensual</td></tr>
+    <tr><td><span class="badge badge-cur">CURIOSO</span></td><td>Evade · "estoy viendo nomás" · no se compromete con monto u horizonte</td><td>—</td><td>—</td><td>Newsletter educativo opcional</td></tr>
+  </tbody>
+</table>
+
+<h2>Triggers que aceleran SEMI a COLOCABLE</h2>
+
+<p>Eventos que hay que monitorear y avisarle al lead cuando ocurran. Cualquiera puede subir un SEMI a COLOCABLE en días.</p>
+
+<table>
+  <thead>
+    <tr><th>Trigger</th><th>Por qué genera urgencia</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Ingreso al SIGI de un inmueble que calza con su búsqueda</strong></td><td>El match es la pieza crítica. Cuando aparece un inmueble en su zona, dentro de su monto y con sus características, el SEMI sube a COLOCABLE inmediatamente.</td></tr>
+    <tr><td><strong>Bajada de tasas de depósitos a plazo fijo en bancos peruanos</strong></td><td>Si los plazos fijos rinden menos, la anticresis se vuelve más atractiva como destino del ahorro (aunque no genere intereses, da uso del inmueble que vale más que la tasa perdida).</td></tr>
+    <tr><td><strong>Subida del USD para acreedor con ahorros en USD</strong></td><td>Su poder de monto en S/ aumenta — puede colocar en inmuebles más caros o en zonas más cotizadas.</td></tr>
+    <tr><td><strong>Bajada del USD para acreedor con ahorros en S/</strong></td><td>Inmuebles cotizados en USD se vuelven más accesibles en su moneda.</td></tr>
+    <tr><td><strong>Cumplimiento de fecha en que tendrá líquido</strong></td><td>CTS de mayo/noviembre, vencimiento de plazo fijo, llegada de herencia, transferencia del retorno del extranjero. Cambia de COLOCABLE_condicional a COLOCABLE.</td></tr>
+    <tr><td><strong>Cambio familiar que precipita necesidad de vivienda</strong></td><td>Fin de contrato de alquiler actual, mudanza por trabajo, hijo que entra al colegio en zona específica, separación. La urgencia de mudanza acelera la decisión.</td></tr>
+    <tr><td><strong>Bajada del monto declarado de un inmueble que ya estaba en su radar</strong></td><td>Oportunidad puntual: el inmueble que evaluaba ahora calza con su monto disponible.</td></tr>
+    <tr><td><strong>Negociación de cierre de año (noviembre-diciembre)</strong></td><td>Deudores con prisa por cerrar el año aceptan montos más bajos o plazos más cortos a favor del acreedor.</td></tr>
+  </tbody>
+</table>
+
+<h2>Mejor momento del año para colocar (orientación al acreedor)</h2>
+
+<p>Los meses ventajosos para el acreedor están definidos por la presión del lado deudor: cuando los propietarios necesitan liquidez con urgencia, hay más oferta de inmuebles entrando al SIGI bajo modalidad de anticresis.</p>
+
+<table>
+  <thead>
+    <tr><th>Período</th><th>Característica del mercado deudor</th><th>Para qué le sirve al acreedor</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Enero–Marzo</strong></td><td>Deudores con presión por matrículas escolares y deudas acumuladas de fin de año anterior</td><td>Mayor oferta de inmuebles entrando al SIGI bajo modalidad de anticresis</td></tr>
+    <tr><td><strong>Abril–Mayo</strong></td><td>Punto de equilibrio del mercado, menor presión inmediata</td><td>Evaluar opciones con tranquilidad, sin presión de cerrar rápido</td></tr>
+    <tr><td><strong>Junio–Julio</strong></td><td>Deudores con presión por gastos de medio año, pensiones escolares del segundo trimestre</td><td>Buen poder de negociación sobre monto y condiciones</td></tr>
+    <tr><td><strong>Agosto–Octubre</strong></td><td>Deudores apurados por gastos próximos a fin de año y compromisos del cuarto trimestre</td><td>Inmuebles con monto negociable a la baja</td></tr>
+    <tr><td><strong>Noviembre–Diciembre</strong></td><td>Deudores con prisa por cerrar el año (deudas, gratificaciones que no alcanzan)</td><td>Mejor poder de negociación del año en monto y plazo</td></tr>
+  </tbody>
+</table>
+
+<h2>Por qué grupo de WhatsApp con todos los decisores</h2>
+
+<ul>
+  <li>Evita visita "en vano" donde el decisor real (cónyuge, padres que aportan) no estuvo.</li>
+  <li>Evita que el inmueble del SIGI se lo lleve otro acreedor mientras los decisores se ponen de acuerdo entre ellos.</li>
+  <li>Es el canal por el que aceptaron la conversación en primer lugar.</li>
+  <li>Permite enviar el PDF dashboard comparativo de inmuebles SIGI con ventajas y desventajas ajustadas a su búsqueda y monto.</li>
+  <li>Le ahorra al acreedor tener que reenviar la información a cada decisor — todos discuten en el mismo lugar.</li>
+  <li>Cuando se identifica el inmueble candidato, la contraparte (deudor + cónyuge si aplica) entra al mismo grupo para coordinar firma y entrega.</li>
+</ul>
+
+<h2>Pendientes para validar con la dueña</h2>
+
+<div class="pendientes">
+  <ol>
+    <li><strong>Ticket mínimo USD 20,000:</strong> ¿es el corte correcto en Arequipa hoy? ¿Hay diferenciación por moneda (S/ vs USD)? ¿Operaciones bajo este monto se descartan totalmente o se derivan a alquiler tradicional?</li>
+    <li><strong>Plazo mínimo razonable:</strong> ¿2 años es el corte correcto, o aceptamos 1 año excepcional? Operaciones cortas no compensan la fricción notarial y registral, pero podría haber casos puntuales que valgan la pena.</li>
+    <li><strong>Calendario de presión del deudor (tabla "mejor momento del año"):</strong> hoy es hipótesis basada en lógica financiera. Validar contra la experiencia real de Master en años anteriores con anticresis.</li>
+    <li><strong>Inmuebles fuera del SIGI:</strong> ¿se acepta trabajar inmuebles que el acreedor trae de portales externos (Adondevivir, Properati) o se rechaza para mantener trazabilidad y comisión Master?</li>
+    <li><strong>Script educativo del P2 (anticresis vs alquiler vs compra):</strong> ¿hay materiales (folletos, video, infografía) ya hechos por Master que el agente pueda compartir, o se construye en el momento?</li>
+    <li><strong>Cierre del ciclo con flujo deudor:</strong> validar que el flujo paralelo de anticresista_deudor (todavía por construir) genere la oferta que este flujo (acreedor) demanda. El SIGI los cruza, pero el match operativo lo hace alguien — definir quién (captador de Master, closer, oficina central).</li>
+    <li><strong>Caso "el acreedor ya trae un inmueble específico en mente":</strong> no contemplado en este flujo v1. ¿Se atiende con un sub-flujo aparte (validación legal del inmueble + apertura de captación al propietario) o se rechaza?</li>
+    <li><strong>Política de comisión específica para anticresis:</strong> ¿se mantiene 50/50 estándar Master sobre el monto de anticresis, o hay variante (porcentaje del valor del inmueble, fee fijo notarial)?</li>
+  </ol>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: { useMaxWidth: true, curve: 'basis', htmlLabels: true },
+    securityLevel: 'loose'
+  });
+</script>
+
+</body>
+</html>

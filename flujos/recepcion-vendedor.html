@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flujo de recepción de vendedor (= propietario) — RE/MAX Master</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --rojo: #AA1120;
+    --verde: #2A9D8F;
+    --amarillo: #E9B949;
+    --azul: #003DA5;
+    --gris: #6C757D;
+    --texto: #0C2749;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 1300px;
+    margin: 2rem auto;
+    padding: 0 1.5rem 4rem;
+    line-height: 1.55;
+    color: var(--texto);
+    background: #F7F5EE;
+  }
+  h1 {
+    border-bottom: 3px solid var(--azul);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  h2 {
+    margin-top: 2.5rem;
+    color: var(--azul);
+    border-left: 4px solid var(--azul);
+    padding-left: 0.75rem;
+  }
+  .meta { color: var(--gris); font-size: 0.95rem; margin-bottom: 1.5rem; }
+  .intro, .nota, .pendientes {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0 2rem;
+  }
+  .nota {
+    border-left: 4px solid var(--amarillo);
+    background: #fff8e6;
+    font-size: 0.95rem;
+  }
+  .pendientes {
+    border-left: 4px solid var(--rojo);
+  }
+  .pendientes ol { padding-left: 1.2rem; }
+  .pendientes li { margin-bottom: 0.6rem; }
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 1rem 0 0.5rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+  .legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+  .legend-color { width: 22px; height: 22px; border-radius: 4px; border: 2px solid #999; }
+  .mermaid {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    overflow-x: auto;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    background: #fff;
+  }
+  th, td {
+    border: 1px solid #e0e0e0;
+    padding: 0.6rem 0.85rem;
+    text-align: left;
+    font-size: 0.92rem;
+    vertical-align: top;
+  }
+  th { background: #f1f5f9; font-weight: 600; }
+  .badge {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  .badge-pot { background: var(--verde); }
+  .badge-semi { background: var(--amarillo); color: #232323; }
+  .badge-no { background: var(--gris); }
+  .matriz td { text-align: center; font-weight: 600; }
+  .matriz td.pot { background: #d4edda; color: #0C2749; }
+  .matriz td.semi { background: #fff3cd; color: #232323; }
+  .matriz td.no { background: #e2e3e5; color: #212529; }
+  .matriz th { text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>Flujo de recepción y calificación de vendedor (= propietario)</h1>
+<p class="meta">RE/MAX Master · v1 · 2026-05-05</p>
+
+<div class="intro">
+  <p><strong>Cómo leer:</strong> el lead entra arriba. Cada rombo es una decisión y muestra las respuestas posibles del propietario. Cada caja final coloreada es la <strong>etiqueta</strong> con la que el lead queda en el CRM y dispara la <strong>asignación de marketing</strong> (premium / estándar / mínimo).</p>
+  <p><strong>El ancla del flujo es el ACM gratuito</strong> ("valorización gratuita de mercado") — diferenciador de RE/MAX Master, sustentado por base de datos propia, homologaciones y fuentes online. El lead llega buscando esa valorización, o la oficina lo prospecta tras ver su anuncio.</p>
+  <p><strong>Captación universal:</strong> toda propiedad entra a la cartera. Las propiedades NO POTENCIAL se publican como <em>carnada de cartera</em> — atraen leads compradores que después se redirigen a otras propiedades. La etiqueta no decide si se capta, decide cuánto marketing recibe.</p>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-color" style="background:#d4edda; border-color:#2A9D8F"></div> POTENCIAL · marketing premium</div>
+  <div class="legend-item"><div class="legend-color" style="background:#fff3cd; border-color:#E9B949"></div> SEMI · marketing estándar</div>
+  <div class="legend-item"><div class="legend-color" style="background:#e2e3e5; border-color:#6C757D"></div> NO POTENCIAL · marketing mínimo / carnada</div>
+  <div class="legend-item"><div class="legend-color" style="background:#cfe2f3; border-color:#003DA5"></div> Cierre y handoff (visita + firma)</div>
+  <div class="legend-item"><div class="legend-color" style="background:#fff; border-color:#0C2749"></div> Decisión / pregunta abierta</div>
+</div>
+
+<h2>Flujo completo</h2>
+
+<div class="mermaid">
+flowchart TD
+    Start([Lead entra: WhatsApp o llamada])
+    Start --> Via{Origen del lead}
+    Via -->|"Outbound (elite 1)"| OutBreak[Vimos su anuncio<br/>en cartel, periodico o Facebook<br/>Le ofrecemos ACM gratis]
+    Via -->|Inbound| InBreak[Lead llama pidiendo ACM<br/>diferenciador de RE/MAX Master]
+    OutBreak --> Captura
+    InBreak --> Captura
+
+    Captura[Captura de informacion basica:<br/>nombre · ubicacion · precio en mente<br/>titularidad · motivo de venta]
+    Captura --> Tit{Titularidad}
+    Tit -->|Unico dueno| DocReq
+    Tit -->|Copropietarios| GrupoWA[Crear grupo de WhatsApp<br/>con todos los titulares<br/>todos firman exclusividad]
+    Tit -->|"No es el propietario"| NoEsProp[Hijos o familiares ayudan a vender<br/>por salud o edad del titular<br/>verificar autorizacion o poder notarial]
+    Tit -->|"Vende-para-comprar"| DobleLead[DOBLE LEAD<br/>captacion + busqueda en paralelo<br/>etiqueta POTENCIAL_doble]
+
+    GrupoWA --> DocReq
+    NoEsProp --> DocReq
+    DobleLead --> DocReq
+
+    DocReq[Solicitud de documentos obligatorios por WhatsApp:<br/>DNI · Partida registral · HR · PU<br/>Fotos del inmueble + link Google Maps<br/>o ubicacion exacta]
+    DocReq --> Verif{Datos de partida<br/>coinciden con<br/>la propiedad real?}
+    Verif -->|Si| EstGap
+    Verif -->|"No, edificaciones no declaradas"| PregEdif[Por WhatsApp: preguntas minimas<br/>sobre edificaciones reales<br/>no declaradas en la partida]
+    PregEdif --> EstGap
+    EstGap[Estimacion preliminar<br/>gap precio vs valor comercial<br/>con base de datos propia]
+
+    EstGap --> Matriz{Cruce<br/>Plazo x Gap precio}
+
+    Matriz -->|"0-3m + 0 a 5%"| Pot[POTENCIAL]
+    Matriz -->|"0-3m + 5 a 9%"| PotCondA[POTENCIAL_condicional]
+    Matriz -->|"0-3m + mas de 10%"| SemiCondA[SEMI_condicional]
+    Matriz -->|"3-6m + 0 a 5%"| PotCondB[POTENCIAL_condicional]
+    Matriz -->|"3-6m + 5 a 9%"| Semi[SEMI-POTENCIAL]
+    Matriz -->|"3-6m + mas de 10%"| SemiCondB[SEMI_condicional]
+    Matriz -->|"mas de 6m + 0 a 5%"| SemiCondC[SEMI_condicional]
+    Matriz -->|"mas de 6m + 5 a 9%"| NoCond[NO_POTENCIAL_condicional]
+    Matriz -->|"mas de 6m + mas de 10%"| NoPot[NO POTENCIAL<br/>carnada de cartera]
+
+    Pot --> Agenda
+    PotCondA --> Agenda
+    PotCondB --> Agenda
+    Semi --> Agenda
+    SemiCondA --> Agenda
+    SemiCondB --> Agenda
+    SemiCondC --> Agenda
+    NoCond --> Agenda
+    NoPot --> Agenda
+
+    Agenda[Agendar entrega del ACM en la propiedad<br/>idealmente mismo dia o al dia siguiente<br/>menor competencia, mayor cierre]
+    Agenda --> Disp{Propietario tiene<br/>tiempo en 0-1 dia?}
+    Disp -->|Si| PreTrabajo
+    Disp -->|"No, agendar mas adelante"| Nurturing[Mientras se agenda la cita:<br/>contenido de valor · newsletter<br/>recordatorios de la cita pendiente]
+    Nurturing --> PreTrabajo
+    PreTrabajo[Pre-trabajo digital paralelo:<br/>equipo legal pre-arma contrato virtual<br/>equipo de marketing arma ACM detallado]
+    PreTrabajo --> Confirmar[30 min a 1 hora antes de la visita:<br/>confirmar por WhatsApp]
+    Confirmar --> ConfDec{Confirma<br/>o reprograma?}
+    ConfDec -->|Confirma| Contexto[Compilar contexto detallado<br/>y enviarlo al director comercial<br/>ANTES de salir a la propiedad]
+    ConfDec -->|Reprograma| Reprog[Acordar nueva fecha y hora<br/>con todos los titulares<br/>reiniciar ciclo de confirmacion<br/>no insistir con la fecha original]
+    Reprog --> Confirmar
+    Contexto --> Visita[VISITA del director comercial:<br/>presenta el ACM<br/>explica beneficios RE/MAX Master]
+
+    Visita --> NegCom[Negociacion de comision:<br/>grandes baja el porcentaje<br/>chicas sube el porcentaje]
+    NegCom --> RutaPrecio{Acuerdo sobre<br/>precio de salida}
+    RutaPrecio -->|Acepta el sugerido del ACM| PotFinal[POTENCIAL final<br/>marketing premium]
+    RutaPrecio -->|Mantiene su precio rigido| EtiqInicial[Etiqueta inicial<br/>se mantiene]
+    RutaPrecio -->|Acuerdo intermedio| Recalc[Recalculo<br/>de etiqueta]
+
+    PotFinal --> Firma
+    EtiqInicial --> Firma
+    Recalc --> Firma
+
+    Firma[Edita el contrato virtual en tablet<br/>contrato en exclusiva o exclusiva compartida<br/>FIRMA DIGITAL en sitio · validez legal en Peru]
+    Firma --> Estudio[Estudio de titulos:<br/>verifica titularidad, cargas,<br/>gravamenes y saneamiento]
+    Estudio --> EvalSegm[Evaluador y segmentador de marketing<br/>define segmento principal<br/>+ segmentos secundarios]
+    EvalSegm --> Produccion[Produccion de fotos y videos<br/>organico y pagado<br/>para cada segmento definido]
+    Produccion --> Handoff[Activar campana segun etiqueta:<br/>premium · estandar · minimo]
+    Handoff --> Dashboards[Dashboards periodicos al propietario:<br/>vistas · leads · visitas · ofertas<br/>comparativos vs ACM original]
+
+    classDef happy fill:#d4edda,stroke:#2A9D8F,stroke-width:2px,color:#0C2749;
+    classDef semi fill:#fff3cd,stroke:#E9B949,stroke-width:2px,color:#232323;
+    classDef terminal fill:#e2e3e5,stroke:#6C757D,color:#212529;
+    classDef cierre fill:#cfe2f3,stroke:#003DA5,stroke-width:2px,color:#0C2749;
+
+    class Pot,PotCondA,PotCondB,PotFinal happy
+    class Semi,SemiCondA,SemiCondB,SemiCondC semi
+    class NoCond,NoPot terminal
+    class GrupoWA,NoEsProp,DobleLead,PregEdif,Agenda,Nurturing,PreTrabajo,Confirmar,Reprog,Contexto,Visita,NegCom,Firma,Estudio,EvalSegm,Produccion,Handoff,Dashboards,EtiqInicial,Recalc cierre
+</div>
+
+<div class="nota">
+  <strong>Contexto que se envía al director comercial ANTES de la visita:</strong> nombre del propietario y de todos los titulares · DNI · ubicación de la propiedad · documentación recibida · precio en mente · gap estimado vs valor comercial · plazo de venta · motivo de venta (si se obtuvo) · sub-flujo aplicado (copropietarios / sucesión / vende-para-comprar) · etiqueta preliminar · red flags. El director comercial lee esto antes de salir y arma su estrategia de negociación.
+</div>
+
+<div class="nota">
+  <strong>Reprogramación de la visita (confirmación 1 hora antes):</strong> en la confirmación por WhatsApp, el propietario puede reportar un imprevisto y pedir reprogramar. Respuesta única — acordar nueva fecha y hora con <em>todos los titulares</em> (clave si son copropietarios o pareja en gananciales) y reiniciar el ciclo de confirmación; <strong>no insistir con la fecha original</strong>. Si pide más de 2 reprogramaciones consecutivas sin razón clara, marcar como riesgo: probablemente el propietario no está realmente decidido a vender — bajar prioridad operativa hasta nueva validación y considerar si la etiqueta debe degradarse a versión <em>_condicional</em>.
+</div>
+
+<div class="nota">
+  <strong>Por qué firma digital en vivo:</strong> sin firma digital en la propiedad, el propietario tiende a reconsiderar al día siguiente cuando se trae el contrato impreso con los cambios negociados. La firma digital con validez legal en Perú (certificadora homologada por INDECOPI / RENIEC) cierra la decisión irreversiblemente y aprovecha el momentum de la negociación + la presentación del ACM.
+</div>
+
+<div class="nota">
+  <strong>Negociación de comisión:</strong> es esperada en toda visita. Tabla guía operativa — propiedades grandes (alto valor) bajan el porcentaje de comisión pero suben el margen absoluto; propiedades chicas suben el porcentaje para que la operación sea rentable. El director comercial llega con un rango aprobado, ajusta en tablet y firma en sitio.
+</div>
+
+<div class="nota">
+  <strong>El propietario decide el precio final, pero la oficina siempre sugiere el óptimo según el ACM.</strong> Tres rutas posibles en la visita: <em>acepta el sugerido</em> → POTENCIAL automático · <em>mantiene su precio rígido</em> → la etiqueta queda donde caía por gap inicial · <em>acuerdo intermedio</em> → recálculo de etiqueta. En las tres rutas se firma exclusividad — solo cambia el marketing premium asignado.
+</div>
+
+<div class="nota">
+  <strong>Tipo de contrato:</strong> siempre <strong>en exclusiva</strong> o <strong>en exclusiva compartida</strong>, dependiendo del resultado de la negociación de comisión. Nunca contratos abiertos. La exclusiva compartida es la salida cuando el propietario quiere mantener relación con otros agentes pero acepta el liderazgo de RE/MAX Master.
+</div>
+
+<div class="nota">
+  <strong>Edificaciones no declaradas (Arequipa) — verificación antes del ACM:</strong> en Arequipa la mayoría de propietarios no declara las construcciones nuevas o ampliaciones a la municipalidad. Por eso, apenas se reciben los documentos por WhatsApp, se le pregunta al propietario si los datos de la partida registral coinciden con su propiedad actual. Si no coinciden, se le hacen <em>solo las preguntas necesarias</em> para contextualizar las edificaciones reales no declaradas. <strong>Por qué hacerlo antes del ACM:</strong> si el ACM se elabora con datos incompletos, hay que rehacerlo y volver a la propiedad otro día — y ahí se pierde al lead por la competencia. La verificación previa garantiza que el ACM se haga bien la primera vez.
+</div>
+
+<div class="nota">
+  <strong>Estudio de títulos (post-firma):</strong> después de firmar el contrato, el equipo legal hace el estudio de títulos formal sobre la partida registral. Este estudio verifica titularidad, cargas, gravámenes y si hay algo por sanear (sucesiones no inscritas, embargos, hipotecas vigentes, problemas de tracto sucesivo, etc.). Si aparece algo, se gestiona el saneamiento en paralelo al marketing.
+</div>
+
+<h2>Matriz de clasificación: Plazo × Gap de precio</h2>
+
+<p>Cruce de las dos variables que determinan la etiqueta. Ningún caso se rechaza — todos terminan en captación firmada con marketing diferenciado.</p>
+
+<table class="matriz">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Gap 0 a +5%<br/><small>(coherente · puede estar por debajo)</small></th>
+      <th>Gap +5% a +9%<br/><small>(alto)</small></th>
+      <th>Gap +10% o más<br/><small>(muy alto)</small></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0–3 meses<br/><small>(prisa · dialoga)</small></th>
+      <td class="pot">POTENCIAL</td>
+      <td class="pot">POTENCIAL_condicional</td>
+      <td class="semi">SEMI_condicional</td>
+    </tr>
+    <tr>
+      <th>3–6 meses<br/><small>(medio)</small></th>
+      <td class="pot">POTENCIAL_condicional</td>
+      <td class="semi">SEMI-POTENCIAL</td>
+      <td class="semi">SEMI_condicional</td>
+    </tr>
+    <tr>
+      <th>+6 meses<br/><small>(sin urgencia)</small></th>
+      <td class="semi">SEMI_condicional</td>
+      <td class="no">NO_POTENCIAL_condicional</td>
+      <td class="no">NO POTENCIAL</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="nota">
+  <strong>Asimetría de la matriz:</strong> la matriz no es simétrica. La prisa hace al propietario flexible (la condición de precio se destraba con el ACM), pero la falta de urgencia no se puede forzar. Por eso "0–3 m + +10%" se queda en SEMI_condicional, mientras que "+6 m + 0–5%" también es SEMI_condicional aunque parecía mejor: el gap de precio era bajo, pero sin urgencia no se moviliza el cierre.
+</div>
+
+<h2>Etiquetas, plan de acción y marketing asignado</h2>
+
+<table>
+  <thead>
+    <tr><th>Etiqueta</th><th>Cuándo aplica</th><th>Condición a destrabar</th><th>Marketing</th><th>Seguimiento</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="badge badge-pot">POTENCIAL</span></td>
+      <td>Prisa + precio coherente</td>
+      <td>—</td>
+      <td>Premium completo: fotos profesionales, video, redes pagadas, MLS, portales premium</td>
+      <td>Director comercial · update semanal · ofertas reportadas en 24 h</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-pot">POTENCIAL_condicional</span></td>
+      <td>Una variable fuera de rango (precio un poco alto + prisa, o plazo medio + precio coherente)</td>
+      <td>Bajar precio al rango ACM o trigger de mercado que acelere urgencia</td>
+      <td>Premium con monitoreo de la condición</td>
+      <td>Update semanal · alerta por triggers</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-pot">POTENCIAL_doble</span></td>
+      <td>Vende-para-comprar</td>
+      <td>Sincronizar cierre de venta con cierre de compra</td>
+      <td>Premium en captación + cartera espejo en compra</td>
+      <td>Doble seguimiento sincronizado</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-semi">SEMI-POTENCIAL</span></td>
+      <td>Caso medio (3–6 m + gap 5–9%)</td>
+      <td>Acelerar urgencia o ajustar precio</td>
+      <td>Estándar: fotos básicas, MLS, portales gratuitos</td>
+      <td>Re-evaluación cada 4 semanas + alerta por triggers</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-semi">SEMI_condicional</span></td>
+      <td>Una variable bien y la otra muy mal (prisa + precio muy inflado · sin urgencia + precio coherente · plazo medio + precio muy alto)</td>
+      <td>Doble esfuerzo: ajuste fuerte de precio o trigger externo</td>
+      <td>Estándar con plan explícito</td>
+      <td>Re-evaluación cada 4 semanas</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-no">NO_POTENCIAL_condicional</span></td>
+      <td>Ambas variables mal pero negociables (sin urgencia + precio alto, no extremo)</td>
+      <td>Doble ajuste: bajar precio + aparecer evento de urgencia</td>
+      <td>Mínimo con dashboard de seguimiento</td>
+      <td>Re-contacto a 3 meses</td>
+    </tr>
+    <tr>
+      <td><span class="badge badge-no">NO POTENCIAL</span></td>
+      <td>Sin urgencia + precio muy inflado</td>
+      <td>—</td>
+      <td>Mínimo absoluto: solo MLS · carnada de cartera para atraer leads de compra</td>
+      <td>Mantener relación · trigger de mercado puede reactivar</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Comisión y plazo de exclusividad (guía para el director comercial)</h2>
+
+<h3>Tabla de comisión negociable</h3>
+
+<table>
+  <thead>
+    <tr><th>Valor de la propiedad</th><th>Comisión</th><th>Notas</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Hasta USD 70,000</strong></td><td><strong>USD 2,500 fijos (incluido IGV)</strong></td><td>Comisión mínima — propiedades chicas no soportan % bajo</td></tr>
+    <tr><td>Más de USD 70,000</td><td>Negociable por porcentaje</td><td>A mayor valor, menor % pero mayor margen absoluto. Pendiente: tabla de tramos</td></tr>
+  </tbody>
+</table>
+
+<h3>Plazo de exclusividad</h3>
+
+<table>
+  <thead>
+    <tr><th>Caso</th><th>Plazo</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Estándar</strong> (todas las etiquetas)</td><td><strong>4 meses mínimo</strong></td></tr>
+    <tr><td><strong>Excepción</strong>: vendedor POTENCIAL · POTENCIAL_condicional · POTENCIAL_doble con expectativa razonable de venta en menos de un mes</td><td>1 mes (negociado en la visita)</td></tr>
+  </tbody>
+</table>
+
+<h2>Documentación requerida</h2>
+
+<h3>Obligatorios para la captación (se piden por WhatsApp antes de la visita)</h3>
+
+<table>
+  <thead>
+    <tr><th>Documento</th><th>Para qué sirve</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>DNI vigente</strong> de todos los titulares (CE o pasaporte si extranjero)</td><td>Identificación legal en contrato y escritura</td></tr>
+    <tr><td><strong>Partida registral</strong> (SUNARP)</td><td>Acreditar titularidad e insumo para el estudio de títulos</td></tr>
+    <tr><td><strong>HR (Hoja de Resumen) y PU (Predio Urbano)</strong> — autovalúo municipal</td><td>Valor fiscal del predio y características declaradas</td></tr>
+    <tr><td><strong>Fotos del inmueble + link de Google Maps</strong> o ubicación exacta</td><td>Insumo para ACM y verificación de zona</td></tr>
+  </tbody>
+</table>
+
+<h3>Casos especiales (según titularidad)</h3>
+
+<table>
+  <thead>
+    <tr><th>Situación</th><th>Documento adicional</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Persona jurídica</td><td>Partida registral de la empresa + vigencia de poder del representante legal</td></tr>
+    <tr><td>Matrimonio en sociedad de gananciales</td><td>DNI de ambos cónyuges (ambos firman)</td></tr>
+    <tr><td>No es el propietario (hijos / familiares ayudan a vender)</td><td>Autorización formal o poder notarial del titular</td></tr>
+  </tbody>
+</table>
+
+<h3>Se obtienen después de la firma (estudio de títulos y saneamiento)</h3>
+
+<table>
+  <thead>
+    <tr><th>Documento</th><th>Cuándo</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Certificado Registral Inmobiliario (CRI) o certificado literal</td><td>Estudio de títulos post-firma</td></tr>
+    <tr><td>Constancia de no adeudo del impuesto predial</td><td>Saneamiento previo a venta</td></tr>
+    <tr><td>Constancia de no adeudo de arbitrios</td><td>Saneamiento previo a venta</td></tr>
+    <tr><td>Recibos al día (luz, agua, gas)</td><td>Refuerzan no-adeudo</td></tr>
+    <tr><td>Declaratoria de herederos inscrita / saneamiento de sucesión</td><td>Si el estudio de títulos lo detecta</td></tr>
+    <tr><td>Minuta + comprobante de Impuesto de Alcabala (a cargo del comprador)</td><td>En la compra-venta posterior</td></tr>
+  </tbody>
+</table>
+
+<div class="nota">
+  <strong>Regla operativa:</strong> se firma con los 4 obligatorios. El estudio de títulos formal post-firma descubre cualquier carga, gravamen, problema de tracto sucesivo o sucesión no inscrita; el saneamiento se gestiona en paralelo al marketing. Si aparecen problemas serios, la etiqueta queda en versión <em>_condicional</em> hasta que se resuelvan.
+</div>
+
+<h2>Triggers que aceleran SEMI / NO POTENCIAL → POTENCIAL</h2>
+
+<p>Eventos que hay que monitorear y avisarle al propietario cuando ocurran. Cualquiera puede subir un SEMI o NO POTENCIAL_condicional a POTENCIAL en días.</p>
+
+<table>
+  <thead>
+    <tr><th>Trigger</th><th>Por qué reactiva</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Documentación regularizada</strong> (partida actualizada, sucesión inscrita, no-adeudo emitido)</td><td>Desbloquea contrato pleno + marketing premium</td></tr>
+    <tr><td><strong>Propietario acepta ajustar el precio al sugerido por el ACM</strong></td><td>Cierra el gap, sube etiqueta automáticamente</td></tr>
+    <tr><td><strong>Bajada de tasas hipotecarias en Perú 2026</strong> (de ~8.9% a ~8.4–8.6%)</td><td>Más compradores activos = mejor momento de salida</td></tr>
+    <tr><td><strong>Bajada del dólar</strong> (vendedor en USD) o subida (vendedor en soles)</td><td>Cambio de poder adquisitivo del comprador objetivo</td></tr>
+    <tr><td><strong>Lanzamiento de proyecto inmobiliario en su zona</strong></td><td>Competencia directa → urgencia de salir antes</td></tr>
+    <tr><td><strong>Cambio en plazo personal</strong> (mudanza confirmada, oferta laboral, divorcio)</td><td>Timing colapsa, propietario más flexible en PEC</td></tr>
+    <tr><td><strong>Cambios en Mivivienda</strong> (Bono del Buen Pagador, valor máximo de vivienda)</td><td>Amplía universo de compradores en su rango</td></tr>
+    <tr><td><strong>Oferta concreta de comprador</strong> (incluso fuera del rango pedido)</td><td>Realidad del mercado fuerza ajuste de precio</td></tr>
+    <tr><td><strong>Cierre de año (noviembre–diciembre)</strong></td><td>Compradores con bono + presión de cerrar año</td></tr>
+  </tbody>
+</table>
+
+<h2>Mejor momento del año para vender (Perú 2026)</h2>
+
+<p>Para guiar (no presionar) al propietario que tiene 3–6 meses de horizonte. Estamos para asesorar, no para forzar.</p>
+
+<table>
+  <thead>
+    <tr><th>Período</th><th>Característica del mercado</th><th>Para qué le sirve al vendedor</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Enero–Marzo</strong></td><td>Reactivación post-fiestas, demanda creciente</td><td>Posicionarse antes del peak de demanda</td></tr>
+    <tr><td><strong>Marzo–Mayo</strong></td><td>Peak de demanda en Perú (segundo trimestre)</td><td>Mejor poder de venta, máxima exposición</td></tr>
+    <tr><td><strong>Junio–Julio</strong></td><td>Medio aguinaldo de julio sube poder de compra</td><td>Cierres rápidos con compradores con liquidez</td></tr>
+    <tr><td><strong>Agosto–Octubre</strong></td><td>Lanzamientos de preventa competidores</td><td>Resaltar inmueble listo vs preventa (entrega inmediata)</td></tr>
+    <tr><td><strong>Noviembre–Diciembre</strong></td><td>Compradores con bono de fin de año + presión de cerrar el año</td><td>Solo si urge cerrar el año (menor margen)</td></tr>
+  </tbody>
+</table>
+
+<h2>Sub-flujos por titularidad</h2>
+
+<ul>
+  <li><strong>Único dueño:</strong> flujo lineal, sin ramificaciones especiales.</li>
+  <li><strong>Copropietarios / pareja en sociedad de gananciales:</strong> ofrecer grupo de WhatsApp con todos los titulares; todos firman la exclusividad. Le ahorra al propietario reenviar info y todos discuten en el mismo lugar (igual que el grupo de decisores en compra).</li>
+  <li><strong>No es el propietario:</strong> en casos donde el titular tiene problemas de salud o edad avanzada, los hijos o familiares suelen ayudar a vender y son los que toman la decisión de venta. Verificar que tengan autorización formal o poder notarial del titular antes de avanzar. Las sucesiones no inscritas u otros problemas de titularidad se descubren y resuelven posteriormente en el estudio de títulos.</li>
+  <li><strong>Vende-para-comprar:</strong> doble lead — se abre captación + búsqueda en paralelo, etiqueta <code>POTENCIAL_doble</code>. La cartera de propiedades en compra se sincroniza con el cierre de la venta espejo.</li>
+</ul>
+
+<h2>Seguimiento post-captación: dashboards al propietario</h2>
+
+<p>Una vez firmado el contrato y publicada la propiedad, se le envía al propietario <strong>periódicamente</strong> un dashboard con la actividad de su propiedad. Cumple dos funciones: <strong>mantener la confianza</strong> en la exclusividad firmada y <strong>dar evidencia objetiva</strong> para sustentar un eventual ajuste de precio.</p>
+
+<table>
+  <thead>
+    <tr><th>KPI del dashboard</th><th>Para qué le sirve al propietario</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Vistas del anuncio en MLS y portales</td><td>Ver si el anuncio está siendo descubierto</td></tr>
+    <tr><td>Leads compradores que pidieron información</td><td>Demanda real sobre la propiedad</td></tr>
+    <tr><td>Visitas agendadas y realizadas</td><td>Avance del embudo de venta</td></tr>
+    <tr><td>Ofertas recibidas (si las hay)</td><td>Realidad de mercado vs su precio</td></tr>
+    <tr><td>Comparativos del mercado actual vs el ACM original</td><td>Detectar cambios de mercado que justifiquen ajuste</td></tr>
+    <tr><td>Recomendaciones de la oficina</td><td>Plan de acción concreto: ajustar precio, fotos nuevas, etc.</td></tr>
+  </tbody>
+</table>
+
+<h2>Pendientes para validar con la dueña</h2>
+
+<div class="pendientes">
+  <ol>
+    <li><strong>Plantilla del contrato virtual editable</strong> — definir formato y certificadora de firma digital (INDECOPI / RENIEC) que se usará en la tablet del director comercial.</li>
+    <li><strong>Tramos de comisión por porcentaje</strong> para propiedades de más de USD 70,000 — qué % aplica a cada tramo (USD 70k–150k · 150k–300k · 300k+). El monto fijo de USD 2,500 + IGV para propiedades de 70k para abajo ya está confirmado.</li>
+    <li><strong>Política de exclusividad compartida</strong> — definir cuándo se ofrece (¿solo si no se logra exclusiva pura?) y cómo se reparte la comisión con otros agentes.</li>
+    <li><strong>Equipo o aliado para el estudio de títulos post-firma</strong> — ¿se hace internamente o con notario / abogado aliado? ¿Plazo estándar para tener el estudio listo?</li>
+    <li><strong>Saneamiento de propiedades con problemas</strong> — protocolo cuando el estudio de títulos detecta cargas, gravámenes, sucesión no inscrita: ¿qué casos se asumen, cuáles se derivan, cuáles se descartan?</li>
+    <li><strong>Tabla de zonas Arequipa con valor referencial por m²</strong> — para detectar el gap de precio en la primera llamada (sin esperar el ACM detallado).</li>
+    <li><strong>Política operativa de "carnada de cartera"</strong> — confirmar que NO POTENCIAL se publica en MLS para atraer leads de compra que se redirigen, y validar que esto está aceptado por los propietarios al firmar.</li>
+    <li><strong>Rol del evaluador y segmentador de marketing</strong> — definir entregables del paso (segmento principal + secundarios), inputs que recibe (ACM, etiqueta, características de la propiedad) y cómo entrega los segmentos al equipo de producción de fotos y videos.</li>
+    <li><strong>Frecuencia y formato del dashboard al propietario</strong> — ¿semanal? ¿quincenal? ¿qué KPIs son obligatorios y cuáles opcionales?</li>
+    <li><strong>Triggers SEMI adicionales</strong> — señales de tu experiencia no listadas (cambio de zonificación, nueva obra pública cercana, revaloración por nueva infraestructura local).</li>
+  </ol>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'default',
+    flowchart: { useMaxWidth: true, curve: 'basis', htmlLabels: true },
+    securityLevel: 'loose'
+  });
+</script>
+
+</body>
+</html>
