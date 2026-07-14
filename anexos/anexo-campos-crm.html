@@ -609,7 +609,7 @@
       <li><code>gate_saneamiento</code> — Booleano · sin cargas ni gravámenes pendientes (v2)</li>
     </ul>
 
-    <p><strong>Closer postulante</strong> <em>(perfil DRAFT — esquema sujeto a refinamiento cuando el flujo se valide)</em>:</p>
+    <p><strong>Agente postulante</strong> <em>(perfil DRAFT — esquema sujeto a refinamiento cuando el flujo se valide)</em>:</p>
     <ul>
       <li><code>track_record_anos</code> — Número</li>
       <li><code>cierres_ultimos_12m</code> — Número</li>
@@ -855,7 +855,7 @@
           <td>Lista cerrada derivada: Compraventa · Alquiler · Anticresis · Proyecto · Postulación</td>
           <td>Auto</td>
           <td>Sistema (fórmula desde <code>perfil</code>)</td>
-          <td>Mapeo: comprador/vendedor → Compraventa · arrendador/arrendatario → Alquiler · anticresista_acreedor/anticresista_deudor → Anticresis · constructora → Proyecto · closer_postulante → Postulación. <strong>Habilita la métrica innegociable: cierres en compraventa por mes/asesor/perfil.</strong></td>
+          <td>Mapeo: comprador/vendedor → Compraventa · arrendador/arrendatario → Alquiler · anticresista_acreedor/anticresista_deudor → Anticresis · constructora → Proyecto · agente_postulante → Postulación. <strong>Habilita la métrica innegociable: cierres en compraventa por mes/asesor/perfil.</strong></td>
         </tr>
         <tr>
           <td>37</td>
@@ -1113,7 +1113,7 @@
     <ul>
       <li><code>licencia_edificacion</code> → <code>gate_licencia</code> (hoja <code>constructora</code>).</li>
       <li><code>documentacion_legal_completa</code> → <code>gate_saneamiento</code> (hoja <code>anticresista_deudor</code>).</li>
-      <li><code>referencias_verificadas</code> → <code>gate_referencias</code> (hoja <code>closer_postulante</code>).</li>
+      <li><code>referencias_verificadas</code> → <code>gate_referencias</code> (hoja <code>agente_postulante</code>).</li>
     </ul>
 
     <p><strong>Eliminados como columna (pasan a otras estructuras):</strong></p>
