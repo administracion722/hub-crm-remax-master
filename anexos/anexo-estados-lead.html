@@ -450,7 +450,7 @@
         </tr>
         <tr>
           <td><strong>EN_CALIFICACION</strong></td>
-          <td>Coordinador está aplicando el flujo del perfil</td>
+          <td>Coordinadora está aplicando el flujo del perfil</td>
           <td>Todos los perfiles</td>
           <td>No</td>
         </tr>
@@ -512,7 +512,7 @@
     </table>
 
     <div class="callout-info">
-      <p>★ <strong>CAPTADO es exclusivo de perfiles propietarios.</strong> Si un adquirente (Comprador · Arrendatario · Anticresista acreedor) intenta moverse a CAPTADO, el CRM revierte el cambio y muestra un mensaje. Razón: CAPTADO refleja una firma de exclusividad del <strong>dueño del inmueble</strong>, evento que no aplica a quien busca adquirir uso o propiedad. La automatización del CRM detecta esto vía la lista <code>PERFILES_PROPIETARIO</code> y dispara un evento secundario: crea/actualiza la fila correspondiente en la hoja <code>propiedades</code> con <code>estado_exclusividad = "Firmada"</code>.</p>
+      <p>★ <strong>CAPTADO es exclusivo de perfiles propietarios.</strong> Si un adquirente (Comprador · Arrendatario · Anticresista acreedor) intenta moverse a CAPTADO, el CRM revierte el cambio y muestra un mensaje. Razón: CAPTADO refleja una firma de exclusividad del <strong>dueño del inmueble</strong>, evento que no aplica a quien busca adquirir uso o propiedad. La automatización del CRM detecta esto vía la lista <code>PERFILES_PROPIETARIO</code> y dispara un evento secundario: crea/actualiza la fila correspondiente en la hoja <code>propiedades</code> con <code>estado_cartera = "En cartera"</code>.</p>
     </div>
 
     <h2>Mapa de transiciones válidas</h2>
@@ -711,7 +711,7 @@
 
     <h3>NUEVO → EN_CALIFICACION</h3>
     <ul>
-      <li><strong>Quién</strong>: Coordinador</li>
+      <li><strong>Quién</strong>: Coordinadora</li>
       <li><strong>Cuándo</strong>: Apenas registra el lead y empieza el Router</li>
       <li><strong>Condición</strong>: Lead tiene datos mínimos (nombre completo + teléfono + canal)</li>
       <li><strong>SLA</strong>: Inmediato</li>
@@ -719,7 +719,7 @@
 
     <h3>EN_CALIFICACION → DESCARTADO</h3>
     <ul>
-      <li><strong>Quién</strong>: Coordinador</li>
+      <li><strong>Quién</strong>: Coordinadora</li>
       <li><strong>Cuándo</strong>: Filtro CURIOSO activo o calificación arroja NO POTENCIAL / NO COLOCABLE / NO CAPTABLE / NO APTO con gate duro confirmado</li>
       <li><strong>Condición</strong>: Etiqueta cae en prioridad <span class="badge-descarte">Descarte</span></li>
       <li><strong>Acción asociada</strong>: Cerrar amable · ofrecer newsletter educativo · NO se asigna a closer</li>
@@ -727,7 +727,7 @@
 
     <h3>EN_CALIFICACION → ASIGNADO</h3>
     <ul>
-      <li><strong>Quién</strong>: Coordinador</li>
+      <li><strong>Quién</strong>: Coordinadora</li>
       <li><strong>Cuándo</strong>: Calificación completa + etiqueta + asignación al closer + closer acusa recibo</li>
       <li><strong>Condición</strong>: Prioridad ≠ DESCARTE · <code>closer_asignado</code> lleno · <code>acuse_recibo_closer</code> = TRUE</li>
       <li><strong>SLA</strong>: &lt; 5 min</li>
@@ -751,7 +751,7 @@
 
     <h3>CONTACTADO → EN_VISITA</h3>
     <ul>
-      <li><strong>Quién</strong>: Coordinador (modelo Alto) / Closer (modelo Mínimo)</li>
+      <li><strong>Quién</strong>: Coordinadora (modelo Alto) / Closer (modelo Mínimo)</li>
       <li><strong>Cuándo</strong>: Visita agendada con fecha confirmada</li>
       <li><strong>Condición</strong>: <code>fecha_visita_agendada</code> ≥ fecha actual · DNI capturado · gates duros validados</li>
       <li><strong>SLA</strong>: Agendar dentro de 48-72hrs si <span class="badge-alta">Alta</span> · 1 semana si <span class="badge-media">Media</span> · 2 semanas si <span class="badge-baja">Baja</span></li>
@@ -780,10 +780,10 @@
 
     <h3>EN_VISITA → CAPTADO ★ (solo propietarios)</h3>
     <ul>
-      <li><strong>Quién</strong>: Closer / Director comercial</li>
+      <li><strong>Quién</strong>: Agente Hunter / Director Hunter</li>
       <li><strong>Cuándo</strong>: La visita al propietario termina con firma de exclusividad en sitio (caso "captación rápida" del modelo del Super Proceso n7)</li>
       <li><strong>Condición</strong>: <code>perfil</code> ∈ {Vendedor, Arrendador, Anticresista deudor, Constructora} · contrato de exclusividad firmado · ACM presentado</li>
-      <li><strong>Acción asociada</strong>: el CRM crea/actualiza automáticamente la fila correspondiente en la hoja <code>propiedades</code> con <code>estado_exclusividad = "Firmada"</code> y registra la actividad en la hoja <code>actividades</code></li>
+      <li><strong>Acción asociada</strong>: el CRM crea/actualiza automáticamente la fila correspondiente en la hoja <code>propiedades</code> con <code>estado_cartera = "En cartera"</code> y registra la actividad en la hoja <code>actividades</code></li>
     </ul>
 
     <h3>EN_VISITA → CERRADO_PERDIDO</h3>
@@ -802,10 +802,10 @@
 
     <h3>EN_NEGOCIACION → CAPTADO ★ (solo propietarios)</h3>
     <ul>
-      <li><strong>Quién</strong>: Closer / Director comercial</li>
+      <li><strong>Quién</strong>: Agente Hunter / Director Hunter</li>
       <li><strong>Cuándo</strong>: La negociación de condiciones con el propietario (comisión, precio de salida, plazo de exclusividad) cierra con firma de contrato</li>
       <li><strong>Condición</strong>: <code>perfil</code> ∈ {Vendedor, Arrendador, Anticresista deudor, Constructora} · contrato de exclusividad firmado</li>
-      <li><strong>Acción asociada</strong>: misma que en EN_VISITA → CAPTADO (alta/actualización en <code>propiedades</code> con <code>estado_exclusividad = "Firmada"</code>)</li>
+      <li><strong>Acción asociada</strong>: misma que en EN_VISITA → CAPTADO (alta/actualización en <code>propiedades</code> con <code>estado_cartera = "En cartera"</code>)</li>
     </ul>
 
     <h3>EN_NEGOCIACION → CERRADO_GANADO ✓</h3>
@@ -818,21 +818,21 @@
 
     <h3>CAPTADO → CERRADO_GANADO ✓</h3>
     <ul>
-      <li><strong>Quién</strong>: Closer / Director comercial</li>
+      <li><strong>Quién</strong>: Agente Hunter / Director Hunter</li>
       <li><strong>Cuándo</strong>: La operación real sobre la propiedad captada se materializa (compraventa firmada, contrato de alquiler firmado, anticresis ejecutada)</li>
       <li><strong>Condición</strong>: <code>monto_final_cierre</code> capturado · documentación de cierre completa</li>
     </ul>
 
     <h3>CAPTADO → CERRADO_PERDIDO</h3>
     <ul>
-      <li><strong>Quién</strong>: Closer / Director comercial</li>
+      <li><strong>Quién</strong>: Agente Hunter / Director Hunter</li>
       <li><strong>Cuándo</strong>: El propietario retira la exclusividad antes de cerrar (cambió de inmobiliaria, retiró la propiedad del mercado, etc.)</li>
-      <li><strong>Condición</strong>: <code>motivo_perdida</code> documentado · <code>estado_exclusividad</code> en <code>propiedades</code> se mueve a "Retirada"</li>
+      <li><strong>Condición</strong>: <code>motivo_perdida</code> documentado · <code>estado_cartera</code> en <code>propiedades</code> se mueve a "Retirada"</li>
     </ul>
 
     <h3>CAPTADO → APLAZADO</h3>
     <ul>
-      <li><strong>Quién</strong>: Closer / Director comercial</li>
+      <li><strong>Quién</strong>: Agente Hunter / Director Hunter</li>
       <li><strong>Cuándo</strong>: La propiedad queda activa en cartera pero entra en pausa (espera de saneamiento, retoque de fotos, ajuste de precio antes de re-publicar)</li>
       <li><strong>Condición</strong>: <code>fecha_reactivacion</code> capturada</li>
     </ul>
@@ -853,7 +853,7 @@
 
     <h3>APLAZADO → NUEVO (reactivación)</h3>
     <ul>
-      <li><strong>Quién</strong>: Auto (sistema) o coordinador</li>
+      <li><strong>Quién</strong>: Auto (sistema) o coordinadora</li>
       <li><strong>Cuándo</strong>: Se cumple <code>fecha_reactivacion</code></li>
       <li><strong>Condición</strong>: El sistema genera alerta al coordinador · el coordinador re-contacta · si responde → entra como NUEVO en el embudo</li>
       <li><strong>Si no responde tras 3 intentos</strong>: pasa a CERRADO_PERDIDO</li>
@@ -878,12 +878,12 @@
         <tr>
           <td>EN_CALIFICACION</td>
           <td>&lt; 5 min</td>
-          <td>Coordinador escala / se le suma a la cola</td>
+          <td>Coordinadora escala / se le suma a la cola</td>
         </tr>
         <tr>
           <td>ASIGNADO</td>
           <td>&lt; 30 min · mismo día (antes de las 8pm)</td>
-          <td>Coordinador reasigna</td>
+          <td>Coordinadora reasigna</td>
         </tr>
         <tr>
           <td>CONTACTADO</td>
@@ -1023,7 +1023,7 @@
       <li>Transición <strong>EN_VISITA → CAPTADO</strong> (captación rápida en visita).</li>
       <li>Transición <strong>EN_NEGOCIACION → CAPTADO</strong> (firma tras negociación de condiciones).</li>
       <li>Transiciones <strong>CAPTADO → CERRADO_GANADO / CERRADO_PERDIDO / APLAZADO</strong>.</li>
-      <li>Acción asociada: el CRM crea/actualiza fila en hoja <code>propiedades</code> con <code>estado_exclusividad = "Firmada"</code>.</li>
+      <li>Acción asociada: el CRM crea/actualiza fila en hoja <code>propiedades</code> con <code>estado_cartera = "En cartera"</code>.</li>
     </ul>
 
     <h3>Sin cambios</h3>

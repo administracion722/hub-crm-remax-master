@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#003DA5">
-  <meta name="description" content="Reglas para asignar leads a closers: regla default, 3 overrides, casos límite, SLA y canal de handoff coordinador → closer.">
+  <meta name="description" content="Reglas para asignar leads a los pools Hunter y Closer: regla default, 3 overrides, casos límite, SLA y canal de handoff Coordinadora → agente.">
   <title>Anexo · Reglas de Asignación de Leads · RE/MAX Master</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -395,14 +395,16 @@
 
     <h2>Propósito</h2>
 
-    <p>Hoy el campo <code>ASESOR</code> del CRM Excel mezcla nombres reales con "OFICINA", "DESCONOCIDO" y estados. Este anexo cierra ese hueco con:</p>
+    <p>Hoy el campo <code>ASESOR</code> del CRM Excel mezclaba nombres reales con "OFICINA", "DESCONOCIDO" y estados (ya migrado al CRM nuevo). Este anexo cierra ese hueco con:</p>
 
     <ol>
       <li><strong>Una regla default</strong> (la que aplica el 80% de los casos).</li>
       <li><strong>3 overrides</strong> (en orden de prioridad) para los casos donde el default no sirve.</li>
-      <li><strong>Reglas para casos límite</strong> (closer en vacaciones, saturado, lead que vuelve, etc.).</li>
-      <li><strong>Lista cerrada de closers activos</strong> — Eduardo la llena.</li>
+      <li><strong>Reglas para casos límite</strong> (agente en vacaciones, saturado, lead que vuelve, etc.).</li>
+      <li><strong>Roster de agentes activos</strong>, dividido en dos pools (Hunter / Closer) — vive en la hoja <code>Agentes</code>.</li>
     </ol>
+
+    <p><strong>Dos pools de agentes.</strong> El roster se divide en dos equipos según a quién atiende el lead: los <strong>Hunters</strong> toman los leads de <strong>propietario</strong> (Vendedor, Arrendador, Anticresista deudor, Constructora) y los <strong>Closers</strong> toman los leads de <strong>adquirente</strong> (Comprador, Arrendatario, Anticresista acreedor). Cada equipo tiene su Director y sus asistentes. La regla default, los overrides y los SLA de abajo son los mismos para ambos pools — solo cambia <strong>sobre qué pool</strong> se aplican, según el perfil del lead.</p>
 
     <h2>Regla DEFAULT · Round-robin ponderado por disponibilidad</h2>
 
@@ -410,10 +412,10 @@
 
     <p><strong>Cómo funciona</strong>:</p>
     <ol>
-      <li>El coordinador mira la lista de closers <strong>activos del día</strong> (excluye vacaciones, licencias, día libre).</li>
+      <li>La <strong>Coordinadora (Minnueth)</strong> identifica el pool que corresponde al perfil del lead (Hunter si es propietario, Closer si es adquirente) y mira la lista de <strong>agentes activos del día</strong> de ese pool (excluye vacaciones, licencias, día libre).</li>
       <li>De esa lista, <strong>excluye los saturados</strong> (&gt; 15 leads abiertos en estado ASIGNADO/CONTACTADO/EN_VISITA/EN_NEGOCIACION — umbral revisable).</li>
       <li>De los disponibles restantes, <strong>asigna al que tenga MENOS leads abiertos</strong> (esto es el "ponderado por disponibilidad").</li>
-      <li><strong>Empate</strong>: rota por turno (round-robin estricto) — el coordinador lleva la rotación.</li>
+      <li><strong>Empate</strong>: rota por turno (round-robin estricto) — la <strong>Coordinadora</strong> lleva la rotación.</li>
     </ol>
 
     <p><strong>Tiempo</strong>: &lt; 5 min desde entrada del lead al CRM.</p>
@@ -461,19 +463,19 @@
 
     <p><strong>Cuándo aplica</strong>:</p>
     <ul>
-      <li>El lead viene con relación previa a un closer:
+      <li>El lead viene con relación previa a un agente (del pool que le corresponde):
         <ul>
-          <li>Referido directo de un cliente del closer.</li>
+          <li>Referido directo de un cliente del agente.</li>
           <li>Vínculo personal mencionado por el lead ("me recomendó Juan").</li>
-          <li>Lead que ya estuvo en cartera del closer antes (reactivación).</li>
+          <li>Lead que ya estuvo en cartera del agente antes (reactivación).</li>
         </ul>
       </li>
     </ul>
 
     <p><strong>Cómo funciona</strong>:</p>
     <ul>
-      <li>Asignar al closer con afinidad si está activo y disponible.</li>
-      <li>Si el closer está saturado → <strong>igual asignar</strong> (la relación pesa más que la carga); flag al coordinador para monitorear carga.</li>
+      <li>Asignar al agente con afinidad si está activo y disponible.</li>
+      <li>Si el agente está saturado → <strong>igual asignar</strong> (la relación pesa más que la carga); flag a la Coordinadora para monitorear carga.</li>
     </ul>
 
     <h2>Asignación según PRIORIDAD COMÚN</h2>
@@ -498,43 +500,43 @@
         </tr>
         <tr>
           <td><span class="badge-baja">Baja</span></td>
-          <td>Default puro · sin necesidad de especialista · cualquier closer activo</td>
+          <td>Default puro · sin necesidad de especialista · cualquier agente activo del pool</td>
         </tr>
         <tr>
           <td><span class="badge-descarte">Descarte</span></td>
-          <td><strong>NO se asigna a closer</strong>. Queda en cartera del coordinador (CURIOSO recibe newsletter; NO POTENCIAL queda para revisión semestral).</td>
+          <td><strong>NO se asigna a ningún agente</strong>. Queda en cartera de la Coordinadora (CURIOSO recibe newsletter; NO POTENCIAL queda para revisión semestral).</td>
         </tr>
       </tbody>
     </table>
 
     <h2>Casos límite</h2>
 
-    <h3>Closer en vacaciones / licencia / día libre</h3>
+    <h3>Agente en vacaciones / licencia / día libre</h3>
 
     <ul>
-      <li><strong>No está en la lista de "activos del día"</strong> — el coordinador mantiene una vista diaria.</li>
+      <li><strong>No está en la lista de "activos del día"</strong> — la Coordinadora mantiene una vista diaria.</li>
       <li>Sus leads en curso se redistribuyen si hay urgencia (visita agendada en su ausencia) o quedan pausados con <code>estado_actual</code> sin cambio.</li>
     </ul>
 
-    <h3>Closer saturado (&gt; 15 leads abiertos)</h3>
+    <h3>Agente saturado (&gt; 15 leads abiertos)</h3>
 
     <ul>
       <li><strong>Excluido automáticamente del default</strong> durante el día.</li>
       <li>Si todos los especialistas están saturados → aplicar Default sobre el menos saturado.</li>
-      <li>Si todos los closers están saturados → escalar a Eduardo: ¿contratar suplente temporal? ¿pausar campañas?</li>
+      <li>Si todos los agentes del pool están saturados → escalar a Eduardo: ¿contratar suplente temporal? ¿pausar campañas?</li>
     </ul>
 
     <h3>Múltiples especialistas para el mismo perfil</h3>
 
     <ul>
-      <li>El coordinador rota entre ellos (round-robin entre especialistas del mismo perfil).</li>
+      <li>La Coordinadora rota entre ellos (round-robin entre especialistas del mismo perfil).</li>
     </ul>
 
     <h3>Lead que volvió después de DESCARTADO</h3>
 
     <ul>
       <li>Tratar como lead nuevo: reentrar al embudo desde el paso 1.</li>
-      <li><strong>Preferir asignar al closer original</strong> si todavía está activo (Override 3 por afinidad).</li>
+      <li><strong>Preferir asignar al agente original</strong> si todavía está activo (Override 3 por afinidad).</li>
       <li>Documentar en <code>notas_libres</code>: "Lead reactivado el [fecha], originalmente DESCARTADO el [fecha previa]".</li>
     </ul>
 
@@ -543,43 +545,43 @@
     <ul>
       <li>Crear <strong>lead nuevo con el nuevo perfil</strong> (no editar el anterior).</li>
       <li>En <code>notas_libres</code>: "Lead existente con perfil X, ahora consulta por Y".</li>
-      <li>Asignar según las reglas normales del nuevo perfil. Considerar afinidad si el closer original está activo.</li>
+      <li>Asignar según las reglas normales del nuevo perfil (que puede caer en el otro pool — en este ejemplo pasa del equipo Closer al Hunter). Considerar afinidad si el agente original está activo.</li>
     </ul>
 
     <h3>Lead que llega FUERA de horario</h3>
 
     <ul>
       <li><strong>Autorespondedor WhatsApp</strong> envía mensaje de cortesía con horario de atención y promesa de respuesta al siguiente día hábil.</li>
-      <li>El mensaje queda en la cola del coordinador.</li>
+      <li>El mensaje queda en la cola de la Coordinadora.</li>
       <li><strong>SLA del lead se mide desde la apertura de la oficina al día siguiente</strong>, no desde la entrada del mensaje.</li>
-      <li>El coordinador procesa la cola apenas abre la oficina, antes de cualquier otra tarea.</li>
+      <li>La Coordinadora procesa la cola apenas abre la oficina, antes de cualquier otra tarea.</li>
     </ul>
 
-    <h3>No hay ningún closer disponible en 5 min</h3>
+    <h3>No hay ningún agente disponible en 5 min</h3>
 
     <ul>
-      <li><strong>Escalar al suplente del coordinador / closer de guardia</strong> designado para el día.</li>
+      <li><strong>Escalar a la suplente de la Coordinadora (agente designado) / agente de guardia</strong> designado para el día.</li>
       <li>Si tampoco hay suplente → escalar a Eduardo (decisión: él toma el lead o lo pone en espera explícita).</li>
       <li>Nunca dejar un lead sin asignar &gt; 30 min desde entrada.</li>
     </ul>
 
-    <h2>Suplente del coordinador</h2>
+    <h2>Suplente de la Coordinadora</h2>
 
-    <p><strong>Función</strong>: tomar el rol del coordinador cuando el coordinador titular falta (enfermedad, licencia, vacaciones).</p>
+    <p><strong>Función</strong>: tomar el rol de la Coordinadora (Minnueth) cuando la titular falta (enfermedad, licencia, vacaciones).</p>
 
-    <p><strong>Quién</strong>: un closer designado, rotativo cada semana o mes (a definir con Eduardo).</p>
+    <p><strong>Quién</strong>: un agente designado, rotativo cada semana o mes (a definir con Eduardo).</p>
 
     <p><strong>Capacitación mínima</strong>:</p>
     <ul>
       <li>Conoce el embudo de 1 página.</li>
       <li>Sabe identificar los 8 perfiles (Router).</li>
       <li>Sabe aplicar el filtro CURIOSO.</li>
-      <li>Sabe la lista de closers activos del día y las reglas de asignación.</li>
+      <li>Sabe el roster de agentes activos del día (ambos pools) y las reglas de asignación.</li>
     </ul>
 
-    <p><strong>Modelo durante suplencia</strong>: <strong>Mínimo</strong> (no se exige modelo Alto al suplente, solo Mínimo: recepción + Router + asignación + registro). Los closers asumen la calificación profunda mientras dure la suplencia.</p>
+    <p><strong>Modelo durante suplencia</strong>: <strong>Mínimo</strong> (no se exige modelo Alto a la suplente, solo Mínimo: recepción + Router + asignación + registro). Los agentes asumen la calificación profunda mientras dure la suplencia.</p>
 
-    <h2>Canal de handoff coordinador → closer (recomendación)</h2>
+    <h2>Canal de handoff Coordinadora → agente (recomendación)</h2>
 
     <p><strong>Recomendación</strong>: grupo de WhatsApp de oficina con <strong>estructura de mensaje obligatoria</strong>:</p>
 
@@ -591,14 +593,14 @@
 📍 Zona: [Distrito]
 💰 Monto: S/[monto]
 ⏱️ Timing: [Inmediato / Corto / Medio / Largo]
-👨‍💼 Asignado a: @[NombreCloser]
+👨‍💼 Asignado a: @[NombreAgente]
 📋 Dossier: [link a archivo o resumen]
 
 ⏰ Asignado el [fecha-hora]. Acuse "RECIBIDO" en &lt; 15 min.</code></pre>
 
-    <p>El closer asignado responde <strong>"RECIBIDO [hora]"</strong> en el mismo hilo. Eso dispara el SLA del primer contacto.</p>
+    <p>El agente asignado responde <strong>"RECIBIDO [hora]"</strong> en el mismo hilo. Eso dispara el SLA del primer contacto.</p>
 
-    <p><strong>Alternativa más robusta</strong>: cuando el Proyecto 2 reescriba el CRM, integrar el handoff dentro del CRM (notificación push + acuse de recibo registrado automáticamente).</p>
+    <p><strong>Alternativa más robusta</strong>: integrar el handoff dentro del propio CRM (notificación push + acuse de recibo registrado automáticamente).</p>
 
     <h2>Acuse de recibo y SLA</h2>
 
@@ -612,76 +614,80 @@
       </thead>
       <tbody>
         <tr>
-          <td>Asignación (coord → closer)</td>
+          <td>Asignación (Coordinadora → agente)</td>
           <td>&lt; 5 min desde entrada al CRM</td>
-          <td>Coordinador escala al suplente</td>
+          <td>La Coordinadora escala a su suplente</td>
         </tr>
         <tr>
-          <td>Acuse de recibo del closer</td>
+          <td>Acuse de recibo del agente</td>
           <td>&lt; 15 min desde asignación</td>
-          <td>Coordinador reasigna al siguiente closer disponible</td>
+          <td>La Coordinadora reasigna al siguiente agente disponible</td>
         </tr>
         <tr>
-          <td>Primer contacto del closer al lead</td>
+          <td>Primer contacto del agente al lead</td>
           <td>&lt; 30 min · mismo día (antes de 8pm)</td>
-          <td>Coordinador escala a Eduardo · reasigna si reincide</td>
+          <td>La Coordinadora escala a Eduardo · reasigna si reincide</td>
         </tr>
       </tbody>
     </table>
 
     <p>El CRM debe registrar cada uno de estos tiempos (campos <code>fecha_hora_asignacion</code>, <code>acuse_recibo_closer</code>, <code>sla_*_cumplido</code>).</p>
 
-    <h2>Lista cerrada de closers activos (PENDIENTE — completar con Eduardo)</h2>
+    <h2>Roster de agentes activos</h2>
 
-    <div class="callout-warn">
-      <p>Esta sección la llena Eduardo. Sin esta lista, las reglas no se pueden aplicar.</p>
+    <div class="callout-info">
+      <p>El roster vive en la hoja <code>Agentes</code> del CRM (fuente de verdad, de tamaño <strong>variable</strong> — no un número fijo). Cada agente tiene categoría <strong>PLATA</strong> u <strong>ORO</strong> y pertenece a uno de los dos pools: <strong>Hunter</strong> o <strong>Closer</strong>.</p>
     </div>
 
-    <h3>Closers activos del equipo</h3>
+    <h3>Equipo Hunter — leads de propietario (Vendedor, Arrendador, Anticresista deudor, Constructora)</h3>
 
     <table>
       <thead>
         <tr>
-          <th>#</th>
-          <th>Nombre completo</th>
-          <th>Especialización por perfil (si tiene)</th>
-          <th>Especialización por zona/inmueble (si tiene)</th>
+          <th>Rol</th>
+          <th>Categoría</th>
           <th>Notas</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>1</td>
-          <td>[Pendiente]</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
+          <td>Director Hunter</td>
+          <td>ORO</td>
+          <td>Capta, visita y firma la exclusividad con el propietario</td>
         </tr>
         <tr>
-          <td>2</td>
-          <td>[Pendiente]</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>[Pendiente]</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-        </tr>
-        <tr>
-          <td>...</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>Asistentes Hunter</td>
+          <td>PLATA / ORO</td>
+          <td>Nombres vivos en la hoja <code>Agentes</code></td>
         </tr>
       </tbody>
     </table>
 
-    <h3>Coordinador</h3>
+    <h3>Equipo Closer — leads de adquirente (Comprador, Arrendatario, Anticresista acreedor)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Rol</th>
+          <th>Categoría</th>
+          <th>Notas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Director Closer</td>
+          <td>ORO</td>
+          <td>Lidera la negociación y el cierre con el adquirente</td>
+        </tr>
+        <tr>
+          <td>Asistentes Closer</td>
+          <td>PLATA / ORO</td>
+          <td>Nombres vivos en la hoja <code>Agentes</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Coordinadora</h3>
 
     <table>
       <thead>
@@ -692,13 +698,13 @@
       </thead>
       <tbody>
         <tr>
-          <td>[Pendiente]</td>
-          <td>Rol exclusivo · no vende</td>
+          <td>Minnueth</td>
+          <td>Rol exclusivo · no vende · orquesta la asignación en ambos pools</td>
         </tr>
       </tbody>
     </table>
 
-    <h3>Suplente del coordinador (closer de guardia)</h3>
+    <h3>Suplente de la Coordinadora (agente de guardia)</h3>
 
     <table>
       <thead>
@@ -709,18 +715,19 @@
       </thead>
       <tbody>
         <tr>
-          <td>[Pendiente]</td>
+          <td>Agente designado</td>
           <td>Semanal / Mensual / Fijo</td>
         </tr>
       </tbody>
     </table>
 
-    <h3>Modelos de asignación por perfil (referencia para el coordinador)</h3>
+    <h3>Modelos de asignación por pool y perfil (referencia para la Coordinadora)</h3>
 
     <table>
       <thead>
         <tr>
           <th>Perfil</th>
+          <th>Pool</th>
           <th>Especialistas designados (si los hay)</th>
           <th>Default a todos</th>
         </tr>
@@ -728,42 +735,50 @@
       <tbody>
         <tr>
           <td>Comprador</td>
-          <td>[Pendiente]</td>
+          <td>Closer</td>
+          <td>Ver hoja <code>Agentes</code></td>
           <td>Sí</td>
         </tr>
         <tr>
           <td>Vendedor</td>
-          <td>[Pendiente]</td>
+          <td>Hunter</td>
+          <td>Ver hoja <code>Agentes</code></td>
           <td>Sí</td>
         </tr>
         <tr>
           <td>Arrendador</td>
-          <td>[Pendiente]</td>
+          <td>Hunter</td>
+          <td>Ver hoja <code>Agentes</code></td>
           <td>Sí</td>
         </tr>
         <tr>
           <td>Arrendatario</td>
-          <td>[Pendiente]</td>
+          <td>Closer</td>
+          <td>Ver hoja <code>Agentes</code></td>
           <td>Sí</td>
         </tr>
         <tr>
           <td>Anticresista acreedor</td>
-          <td>[Pendiente]</td>
+          <td>Closer</td>
+          <td>Ver hoja <code>Agentes</code></td>
           <td>Sí</td>
         </tr>
         <tr>
           <td>Anticresista deudor</td>
-          <td>[Pendiente]</td>
+          <td>Hunter</td>
+          <td>Ver hoja <code>Agentes</code></td>
           <td>Sí</td>
         </tr>
         <tr>
           <td>Constructora</td>
-          <td>[Pendiente — usualmente Eduardo o un closer senior]</td>
+          <td>Hunter</td>
+          <td>Usualmente Eduardo o un agente senior</td>
           <td>No (selectivo)</td>
         </tr>
         <tr>
           <td>Closer postulante</td>
-          <td>[Pendiente — usualmente Eduardo]</td>
+          <td>— (reclutamiento, no entra a pool)</td>
+          <td>Usualmente Eduardo</td>
           <td>No (selectivo)</td>
         </tr>
       </tbody>
@@ -775,9 +790,9 @@
       <li>✅ La regla default cubre el 80% de los casos sin ambigüedad.</li>
       <li>✅ Los 3 overrides tienen orden claro (1 &gt; 2 &gt; 3) sin conflictos.</li>
       <li>✅ Los casos límite tienen regla específica, no improvisación.</li>
-      <li>✅ El SLA de 5 min está respaldado por escalación al suplente.</li>
-      <li>✅ La lista de closers es cerrada (no aceptar entradas no listadas en el CRM).</li>
-      <li>✅ El canal de handoff fuerza acuse de recibo (visible para el coordinador).</li>
+      <li>✅ El SLA de 5 min está respaldado por escalación a la suplente de la Coordinadora.</li>
+      <li>✅ El roster de agentes es cerrado (<code>closer_asignado</code> nunca acepta OFICINA/x/DESCONOCIDO; solo nombres de la hoja <code>Agentes</code>).</li>
+      <li>✅ El canal de handoff fuerza acuse de recibo (visible para la Coordinadora).</li>
     </ul>
 
     <p><em>Versión 1 · 2026-05-14 · RE/MAX Master Arequipa · Proyecto 1 — Anexo del Entregable 3</em></p>

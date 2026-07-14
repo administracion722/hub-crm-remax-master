@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#003DA5">
-  <meta name="description" content="Guía del coordinador del CRM RE/MAX Master Arequipa: cómo llenar el sistema día a día, mover estados y manejar casos especiales.">
-  <title>Guía del coordinador — CRM · RE/MAX Master</title>
+  <meta name="description" content="Guía de la Coordinadora del CRM RE/MAX Master Arequipa: cómo llenar el sistema día a día, mover estados y manejar casos especiales.">
+  <title>Guía de la Coordinadora — CRM · RE/MAX Master</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -386,7 +386,7 @@
   </header>
 
   <main>
-    <h1>Guía del coordinador — CRM RE/MAX Master</h1>
+    <h1>Guía de la Coordinadora — CRM RE/MAX Master</h1>
 
     <p>Esta guía te enseña a llenar el CRM día a día. Si la sigues, los reportes salen solos y nadie pierde un lead.</p>
 
@@ -476,10 +476,10 @@
 
     <ul>
       <li><strong><code>NUEVO → EN_CALIFICACION</code>:</strong> apenas empieces a aplicar el flujo del perfil.</li>
-      <li><strong><code>EN_CALIFICACION → ASIGNADO</code>:</strong> llena <code>closer_asignado</code> y el CRM mueve solo el estado.</li>
-      <li><strong><code>ASIGNADO → CONTACTADO</code>:</strong> cuando el closer hizo primer contacto exitoso.</li>
+      <li><strong><code>EN_CALIFICACION → ASIGNADO</code>:</strong> llena <code>closer_asignado</code> (agente del equipo Hunter si el lead es propietario, agente del equipo Closer si es adquirente) y el CRM mueve solo el estado.</li>
+      <li><strong><code>ASIGNADO → CONTACTADO</code>:</strong> cuando el agente hizo primer contacto exitoso.</li>
       <li><strong><code>CONTACTADO → EN_VISITA</code>:</strong> llena <code>fecha_visita_agendada</code> y el CRM mueve el estado solo. Solo en este momento se marca <code>sla_contacto_cumplido</code> (si la visita se agendó el mismo día).</li>
-      <li><strong><code>EN_VISITA → CAPTADO</code></strong> (solo propietarios: Vendedor, Arrendador, Anticresista deudor, Constructora): cuando se firmó la exclusividad. <strong>El CRM crea o actualiza solo la fila en la hoja <code>propiedades</code> con <code>estado_exclusividad = "Firmada"</code>.</strong></li>
+      <li><strong><code>EN_VISITA → CAPTADO</code></strong> (solo propietarios: Vendedor, Arrendador, Anticresista deudor, Constructora): cuando se firmó la exclusividad. <strong>El CRM crea o actualiza solo la fila en la hoja <code>propiedades</code> con <code>estado_cartera = "En cartera"</code>.</strong></li>
       <li><strong><code>EN_NEGOCIACION → CERRADO_GANADO</code>:</strong> llena <code>monto_final_cierre</code> y el CRM mueve el estado solo.</li>
       <li><strong><code>* → CERRADO_PERDIDO</code>:</strong> llena <code>motivo_perdida</code> y el CRM mueve el estado solo.</li>
       <li><strong><code>* → DESCARTADO</code> (etiqueta <span class="badge-descarte">Descarte</span>):</strong> el CRM llena solo <code>fecha_reactivacion</code> con la fecha de hoy + 45 días.</li>
@@ -500,7 +500,7 @@
       <li><strong>NO edites la fila vieja.</strong> Esa queda como histórico.</li>
       <li>Crea una fila nueva con todo el flujo normal.</li>
       <li>En la columna <code>lead_original_id</code>, pega el <code>lead_id</code> del lead anterior (ejemplo: <code>20260301-007</code>).</li>
-      <li>El CRM llena solo la columna <code>closer_historico</code> con el closer que atendió al lead anterior — para que tú asignes ese mismo closer si todavía está activo.</li>
+      <li>El CRM llena solo la columna <code>closer_historico</code> con el agente que atendió al lead anterior — para que tú asignes ese mismo agente si todavía está activo.</li>
     </ol>
 
     <h3>Caso 2 — Vendedor que también quiere comprar (<code>POTENCIAL_doble</code>)</h3>
@@ -525,8 +525,9 @@
     <ol>
       <li>Mueve <code>estado_actual</code> a <code>CAPTADO</code>.</li>
       <li>El CRM crea o actualiza solo la fila en la hoja <code>propiedades</code>.</li>
-      <li>Marca <code>estado_exclusividad = "Firmada"</code> en esa fila.</li>
-      <li>Si más adelante el propietario retira la exclusividad, mueve a <code>CERRADO_PERDIDO</code> — el CRM actualiza solo a <code>estado_exclusividad = "Retirada"</code>.</li>
+      <li>Marca <code>estado_cartera = "En cartera"</code> en esa fila.</li>
+      <li>Si el inmueble se vende (el lead pasa a <code>CERRADO_GANADO</code>), el CRM actualiza solo a <code>estado_cartera = "Vendida"</code>.</li>
+      <li>Si más adelante el propietario retira la exclusividad, mueve a <code>CERRADO_PERDIDO</code> — el CRM actualiza solo a <code>estado_cartera = "Retirada"</code>.</li>
     </ol>
 
     <div class="callout-warn">
@@ -550,7 +551,7 @@
       <li><code>fecha_reactivacion</code> — al pasar a <code>DESCARTADO</code> con etiqueta <span class="badge-descarte">Descarte</span> (auto +45 días).</li>
       <li>Alta en la hoja <code>propiedades</code> — al pasar a <code>CAPTADO</code>.</li>
       <li>Lead espejo en <code>personas</code> — al elegir etiqueta <code>_doble</code>.</li>
-      <li>Filas en la hoja <code>actividades</code> — cada vez que cambias algo importante (cambio de estado, asignación de closer, visita agendada, etc.).</li>
+      <li>Filas en la hoja <code>actividades</code> — cada vez que cambias algo importante (cambio de estado, asignación de agente, visita agendada, etc.).</li>
     </ul>
 
     <h2>Errores comunes y cómo evitarlos</h2>
@@ -573,7 +574,7 @@
         </tr>
         <tr>
           <td>Poner "x", "OFICINA" o "DESCONOCIDO" en <code>closer_asignado</code></td>
-          <td>Está prohibido. Si no hay closer asignado todavía, déjalo vacío hasta que lo decidas.</td>
+          <td>Está prohibido. Si no hay agente asignado todavía, déjalo vacío hasta que lo decidas.</td>
         </tr>
         <tr>
           <td>Saltar de <code>NUEVO</code> a <code>CONTACTADO</code> directamente</td>

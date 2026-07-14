@@ -192,7 +192,7 @@ flowchart TD
     NoCond --> Agenda
     NoPot --> Agenda
 
-    Agenda[Agendar visita tecnica del director comercial al inmueble<br/>idealmente mismo dia o al dia siguiente<br/>menor competencia, mayor cierre]
+    Agenda[Agendar visita tecnica del Director Hunter al inmueble<br/>idealmente mismo dia o al dia siguiente<br/>menor competencia, mayor cierre]
     Agenda --> Disp{Deudor tiene<br/>tiempo en 0-1 dia?}
     Disp -->|Si| PreTrabajo
     Disp -->|"No, agendar mas adelante"| Nurturing[Mientras se agenda la cita:<br/>contenido de valor sobre anticresis<br/>recordatorios de la cita pendiente]
@@ -200,10 +200,10 @@ flowchart TD
     PreTrabajo[Pre-trabajo digital paralelo:<br/>equipo legal pre-arma escritura virtual<br/>equipo de match identifica acreedores candidatos<br/>due diligence preliminar de la partida]
     PreTrabajo --> Confirmar[30 min a 1 hora antes de la visita:<br/>confirmar por WhatsApp]
     Confirmar --> ConfDec{Confirma<br/>o reprograma?}
-    ConfDec -->|Confirma| Contexto[Compilar contexto detallado del deudor<br/>y enviarlo al director comercial<br/>ANTES de salir al inmueble]
+    ConfDec -->|Confirma| Contexto[Compilar contexto detallado del deudor<br/>y enviarlo al Director Hunter<br/>ANTES de salir al inmueble]
     ConfDec -->|Reprograma| Reprog[Acordar nueva fecha y hora<br/>con todos los titulares y conyuge<br/>reiniciar ciclo de confirmacion<br/>no insistir con la fecha original]
     Reprog --> Confirmar
-    Contexto --> Visita[VISITA del director comercial al inmueble:<br/>inspeccion + presenta valorizacion<br/>presenta perfil de acreedores candidatos<br/>explica beneficios RE/MAX Master]
+    Contexto --> Visita[VISITA del Director Hunter al inmueble:<br/>inspeccion + presenta valorizacion<br/>presenta perfil de acreedores candidatos<br/>explica beneficios RE/MAX Master]
 
     Visita --> NegCom[Negociacion de comision:<br/>contratos grandes bajan el porcentaje<br/>contratos chicos suben el porcentaje]
     NegCom --> RutaMonto{Acuerdo sobre<br/>monto del contrato}
@@ -252,7 +252,7 @@ flowchart TD
 </div>
 
 <div class="nota">
-  <strong>Contexto que se envía al director comercial ANTES de la visita:</strong> nombre del deudor y de todos los titulares · DNI · ubicación del inmueble · documentación recibida · monto necesitado · plazo deseado · gap estimado vs monto óptimo de anticresis · urgencia financiera (timing) · motivo de la urgencia (si se obtuvo) · sub-flujo aplicado (cónyuge / copropietarios / poder notarial / anticresis-y-vende) · etiqueta preliminar de la matriz · perfil de acreedores candidatos pre-identificados · red flags (edificaciones no declaradas, cargas observadas en la partida). El director comercial lee esto antes de salir y arma su estrategia de inspección, valorización en sitio y negociación.
+  <strong>Contexto que se envía al Director Hunter ANTES de la visita:</strong> nombre del deudor y de todos los titulares · DNI · ubicación del inmueble · documentación recibida · monto necesitado · plazo deseado · gap estimado vs monto óptimo de anticresis · urgencia financiera (timing) · motivo de la urgencia (si se obtuvo) · sub-flujo aplicado (cónyuge / copropietarios / poder notarial / anticresis-y-vende) · etiqueta preliminar de la matriz · perfil de acreedores candidatos pre-identificados · red flags (edificaciones no declaradas, cargas observadas en la partida). El Director Hunter lee esto antes de salir y arma su estrategia de inspección, valorización en sitio y negociación.
 </div>
 
 <div class="nota">
@@ -264,7 +264,7 @@ flowchart TD
 </div>
 
 <div class="nota">
-  <strong>Negociación de comisión:</strong> es esperada en toda visita. Tabla guía operativa — contratos grandes (alto monto) bajan el porcentaje de comisión pero suben el margen absoluto; contratos chicos suben el porcentaje para que la operación sea rentable. El director comercial llega con un rango aprobado, ajusta en tablet y firma en sitio.
+  <strong>Negociación de comisión:</strong> es esperada en toda visita. Tabla guía operativa — contratos grandes (alto monto) bajan el porcentaje de comisión pero suben el margen absoluto; contratos chicos suben el porcentaje para que la operación sea rentable. El Director Hunter llega con un rango aprobado, ajusta en tablet y firma en sitio.
 </div>
 
 <div class="nota">
@@ -307,7 +307,7 @@ flowchart TD
     <tr><th>Etiqueta</th><th>Cuándo aplica</th><th>Condición a destrabar</th><th>Promoción al inventario</th><th>Seguimiento</th></tr>
   </thead>
   <tbody>
-    <tr><td><span class="badge badge-pot">CAPTABLE</span></td><td>Urgencia + monto coherente</td><td>—</td><td>Prioritaria: alerta a top acreedores frecuentes, prioridad en cola de match, búsqueda activa simultánea</td><td>Director comercial · update semanal · ofertas de acreedores reportadas en 24 h</td></tr>
+    <tr><td><span class="badge badge-pot">CAPTABLE</span></td><td>Urgencia + monto coherente</td><td>—</td><td>Prioritaria: alerta a top acreedores frecuentes, prioridad en cola de match, búsqueda activa simultánea</td><td>Director Hunter · update semanal · ofertas de acreedores reportadas en 24 h</td></tr>
     <tr><td><span class="badge badge-pot">CAPTABLE_condicional</span></td><td>Una variable fuera de rango (monto un poco alto + urgencia, o urgencia media + monto coherente)</td><td>Bajar monto al rango sugerido o trigger que acelere urgencia</td><td>Prioritaria con monitoreo de la condición</td><td>Update semanal · alerta por triggers</td></tr>
     <tr><td><span class="badge badge-pot">CAPTABLE_doble</span></td><td>Anticresis-y-vende (el inmueble ya no le sirve a futuro)</td><td>Sincronizar cierre del plazo de anticresis con la captación posterior para venta</td><td>Prioritaria en captación + cartera espejo en venta diferida</td><td>Doble seguimiento sincronizado</td></tr>
     <tr><td><span class="badge badge-semi">SEMI-CAPTABLE</span></td><td>Caso medio (2–4 sem + gap 5–9%)</td><td>Acelerar urgencia o ajustar monto</td><td>Regular: ronda regular del inventario, sin búsqueda activa</td><td>Re-evaluación cada 4 semanas + alerta por triggers</td></tr>
@@ -319,7 +319,7 @@ flowchart TD
   </tbody>
 </table>
 
-<h2>Comisión y plazo de exclusividad (guía para el director comercial)</h2>
+<h2>Comisión y plazo de exclusividad (guía para el Director Hunter)</h2>
 
 <h3>Tabla de comisión negociable</h3>
 
@@ -464,7 +464,7 @@ flowchart TD
 
 <div class="pendientes">
   <ol>
-    <li><strong>Plantilla del contrato virtual editable de exclusividad de captación</strong> y <strong>plantilla de la escritura pública de anticresis</strong> — definir formato y certificadora de firma digital (INDECOPI / RENIEC) que se usará en la tablet del director comercial.</li>
+    <li><strong>Plantilla del contrato virtual editable de exclusividad de captación</strong> y <strong>plantilla de la escritura pública de anticresis</strong> — definir formato y certificadora de firma digital (INDECOPI / RENIEC) que se usará en la tablet del Director Hunter.</li>
     <li><strong>Tramos de comisión por porcentaje</strong> para contratos de anticresis de más de USD 70,000 — qué % aplica a cada tramo. Confirmar si la comisión mínima de USD 2,500 + IGV se mantiene igual que en vendedor o se ajusta a la realidad de anticresis.</li>
     <li><strong>Política de exclusividad compartida en anticresis</strong> — definir si aplica el mismo concepto que en vendedor y cómo se reparte la comisión con otros agentes.</li>
     <li><strong>Estructura del inventario base de acreedores frecuentes</strong> — cómo se mantiene actualizado, qué datos guarda (ticket, horizonte, tipo de inmueble buscado, zona), cómo se prioriza el match con un deudor entrante.</li>

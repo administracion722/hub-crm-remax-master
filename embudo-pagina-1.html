@@ -430,9 +430,9 @@
       <li>☎️ <strong>Teléfono único de oficina</strong> — [número a confirmar]</li>
     </ul>
 
-    <p>Quien recibe: <strong>Coordinador dedicado</strong> (rol exclusivo, no vende propiedades).<br>
-    Backup: <strong>Coordinador suplente</strong> = [closer designado, a definir por Eduardo].<br>
-    Fuera de horario: autorespondedor WhatsApp + acuse de recibo; el coordinador procesa cola al abrir oficina; el SLA se mide desde apertura, no desde el mensaje.</p>
+    <p>Quien recibe: <strong>Coordinadora (Minnueth)</strong> (rol exclusivo, no vende propiedades).<br>
+    Backup: <strong>agente designado</strong> (a definir por Eduardo).<br>
+    Fuera de horario: autorespondedor WhatsApp + acuse de recibo; la Coordinadora procesa cola al abrir oficina; el SLA se mide desde apertura, no desde el mensaje.</p>
 
     <h2>2. ROUTER · Identificar el perfil del lead (8 opciones)</h2>
 
@@ -500,7 +500,7 @@
 
     <h2>3. FILTRO CURIOSO · Descarte temprano</h2>
 
-    <p>El coordinador descarta como <strong>CURIOSO</strong> cuando:</p>
+    <p>La Coordinadora descarta como <strong>CURIOSO</strong> cuando:</p>
 
     <ul>
       <li>❌ No da nombre completo cuando se le pide</li>
@@ -513,7 +513,7 @@
 
     <h2>4. CALIFICACIÓN · Aplicar el flujo del perfil</h2>
 
-    <p>Aplica el coordinador (modelo Alto) o el closer asignado (modelo Mínimo, durante la transición):</p>
+    <p>Aplica la Coordinadora (modelo Alto) o el agente asignado (modelo Mínimo, durante la transición):</p>
 
     <ol>
       <li><strong>Preguntas de calificación</strong> del flujo del perfil (zona, monto, timing, financiamiento, características de la propiedad).</li>
@@ -571,27 +571,34 @@
 
     <p>→ Mapeo completo: <code>Anexo-Tabla-Etiquetas.md</code></p>
 
-    <h2>6. ASIGNACIÓN · Closer con nombre, &lt; 5 min</h2>
+    <h2>6. ASIGNACIÓN · Agente con nombre, &lt; 5 min</h2>
 
-    <p><strong>Regla default</strong>: round-robin entre closers activos del día, ponderado por disponibilidad (closer con menos leads abiertos primero).</p>
+    <p><strong>El routeo depende del PERFIL del lead</strong>:</p>
+
+    <ul>
+      <li>Lead <strong>propietario</strong> (vendedor / arrendador / anticresista deudor / constructora) → <strong>equipo Hunter</strong>.</li>
+      <li>Lead <strong>adquirente</strong> (comprador / arrendatario / anticresista acreedor) → <strong>equipo Closer</strong>.</li>
+    </ul>
+
+    <p><strong>Regla default</strong>: round-robin dentro del pool que corresponde (Hunter o Closer), ponderado por disponibilidad (el agente con menos leads abiertos primero). El roster general de la oficina es la hoja <strong>Agentes</strong>.</p>
 
     <p><strong>Overrides</strong> (en este orden de prioridad):</p>
 
     <ol>
-      <li><strong>Especialista por perfil</strong> — si hay closer especializado en el perfil del lead, asignar si está disponible.</li>
+      <li><strong>Especialista por perfil</strong> — si hay un agente especializado en el perfil del lead, asignar si está disponible.</li>
       <li><strong>Especialista por zona o tipo de inmueble</strong> — si el lead corresponde a una zona/inmueble con especialista, asignar si está disponible.</li>
-      <li><strong>Afinidad</strong> — si el lead viene con relación previa a un closer (referido, vínculo directo), respetar afinidad.</li>
+      <li><strong>Afinidad</strong> — si el lead viene con relación previa a un agente (referido, vínculo directo), respetar afinidad.</li>
     </ol>
 
-    <p><strong>Acuse de recibo</strong>: el closer asignado responde "RECIBIDO + [hora]" por el canal de handoff (grupo de WhatsApp de oficina). Eso dispara el SLA del primer contacto.</p>
+    <p><strong>Acuse de recibo</strong>: el agente asignado responde "RECIBIDO + [hora]" por el canal de handoff (grupo de WhatsApp de oficina). Eso dispara el SLA del primer contacto.</p>
 
-    <p><strong>Sin closer disponible en 5 min</strong> → escalar al suplente del día (closer rotativo de guardia).</p>
+    <p><strong>Sin agente disponible en 5 min</strong> → escalar al suplente del día (agente rotativo de guardia).</p>
 
-    <p>→ Reglas detalladas + lista cerrada de closers: <code>Anexo-Reglas-Asignacion.md</code></p>
+    <p>→ Reglas detalladas + lista cerrada de agentes: <code>Anexo-Reglas-Asignacion.md</code></p>
 
     <h2>7. AGENDAMIENTO + DOSSIER · Lead listo para visita</h2>
 
-    <p>(Modelo Alto: lo hace el coordinador. Modelo Mínimo: lo hace el closer durante la transición.)</p>
+    <p>(Modelo Alto: lo hace la Coordinadora. Modelo Mínimo: lo hace el agente durante la transición.)</p>
 
     <ol>
       <li><strong>Agendar visita</strong> con <strong>doble confirmación</strong>:
@@ -600,7 +607,7 @@
           <li>1 hora antes</li>
         </ul>
       </li>
-      <li><strong>Compilar dossier</strong> del lead para entregar al closer:
+      <li><strong>Compilar dossier</strong> del lead para entregar al agente:
         <ul>
           <li>Datos: nombre, DNI, teléfono, canal preferido</li>
           <li>Zona, monto, timing, financiamiento</li>
@@ -609,15 +616,15 @@
           <li>Notas / red flags</li>
         </ul>
       </li>
-      <li><strong>Entregar dossier al closer</strong> antes de la visita (PDF/Word o mensaje estructurado).</li>
+      <li><strong>Entregar dossier al agente</strong> antes de la visita (PDF/Word o mensaje estructurado).</li>
     </ol>
 
-    <h2>8. PRIMER CONTACTO + VISITA + CIERRE · Closer ejecuta</h2>
+    <h2>8. PRIMER CONTACTO + VISITA + CIERRE · Agente ejecuta</h2>
 
     <ul>
-      <li><strong>Primer contacto</strong> — el closer contacta al lead en <strong>&lt; 30 min y el mismo día</strong> (presenta, confirma agendamiento, resuelve dudas).</li>
+      <li><strong>Primer contacto</strong> — el agente contacta al lead en <strong>&lt; 30 min y el mismo día</strong> (presenta, confirma agendamiento, resuelve dudas).</li>
       <li><strong>Visita</strong> — 48-72 hrs si prioridad ALTA; según agenda si MEDIA/BAJA.</li>
-      <li><strong>Negociación + cierre</strong> — el mismo closer lleva el caso hasta firma de contrato.</li>
+      <li><strong>Negociación + cierre</strong> — el mismo agente lleva el caso hasta firma de contrato.</li>
       <li><strong>Actualización CRM</strong> después de cada paso (contactado, visitado, negociando, cerrado).</li>
     </ul>
 
@@ -760,11 +767,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>Asignación al closer</td><td><strong>&lt; 5 min</strong> desde entrada</td><td>Coordinador</td></tr>
-        <tr><td>Acuse de recibo del closer</td><td><strong>&lt; 15 min</strong> desde asignación</td><td>Closer asignado</td></tr>
-        <tr><td>Primer contacto con el lead</td><td><strong>&lt; 30 min</strong> · mismo día (antes de las 8pm)</td><td>Closer asignado</td></tr>
-        <tr><td>Visita agendada (prioridad ALTA)</td><td><strong>48-72 hrs</strong></td><td>Coordinador (Alto) / Closer (Mínimo)</td></tr>
-        <tr><td>Registro completo en CRM</td><td><strong>100%</strong> de los leads</td><td>Coordinador</td></tr>
+        <tr><td>Asignación al agente</td><td><strong>&lt; 5 min</strong> desde entrada</td><td>Coordinadora</td></tr>
+        <tr><td>Acuse de recibo del agente</td><td><strong>&lt; 15 min</strong> desde asignación</td><td>Agente asignado (Hunter/Closer)</td></tr>
+        <tr><td>Primer contacto con el lead</td><td><strong>&lt; 30 min</strong> · mismo día (antes de las 8pm)</td><td>Agente asignado</td></tr>
+        <tr><td>Visita agendada (prioridad ALTA)</td><td><strong>48-72 hrs</strong></td><td>Coordinadora (Alto) / Agente (Mínimo)</td></tr>
+        <tr><td>Registro completo en CRM</td><td><strong>100%</strong> de los leads</td><td>Coordinadora</td></tr>
       </tbody>
     </table>
 
@@ -775,8 +782,8 @@
         <tr>
           <th>Fase</th>
           <th>Tiempo</th>
-          <th>Qué hace el coordinador</th>
-          <th>Qué hace el closer</th>
+          <th>Qué hace la Coordinadora</th>
+          <th>Qué hace el Agente (Hunter/Closer)</th>
         </tr>
       </thead>
       <tbody>
