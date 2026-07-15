@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#010101">
+  <meta name="description" content="Los dashboards del CRM RE/MAX Master Arequipa: qué muestra cada uno, quién lo mira y qué preguntas responde. Todos se actualizan solos.">
+  <title>Los dashboards — Guía del CRM · RE/MAX Master</title>
+  <link rel="icon" type="image/png" href="../assets/isotipo-globo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream:#F7F5EE; --white:#FFFFFF; --black:#010101; --charcoal:#232323;
+      --remax-red:#FF1200; --bridge-red:#AA1120;
+      --master-blue:#003DA5; --bridge-blue:#0C2749; --dark-blue:#000E35; --sky-blue:#A3D4F2;
+      --estado-alta:#2A9D8F; --estado-media:#E9B949; --estado-baja:#E76F51; --estado-descarte:#7A2E2E;
+      --gris-borde:#E0E0E0; --gris-texto-suave:#6C757D;
+      --fondo-app:var(--cream); --fondo-tarjeta:var(--white);
+      --texto-principal:var(--charcoal); --texto-titulo:var(--black);
+      --acento-primario:var(--black); --acento-secundario:var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(1, 1, 1, 0.08), 0 1px 2px rgba(1, 1, 1, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--white);
+      color: var(--texto-principal);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 3px solid var(--remax-red);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .site-brand .brand-master { color: var(--remax-red); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .site-nav a {
+      color: var(--charcoal);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; color: var(--remax-red); }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--master-blue);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--remax-red); }
+
+    strong { font-weight: 700; color: var(--black); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--black);
+      color: var(--cream);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(1, 1, 1, 0.03); }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(1, 1, 1, 0.06);
+      color: var(--charcoal);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--black);
+      color: var(--charcoal);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* ── Componentes de la Guía del CRM ── */
+
+    /* Semáforo de pestañas */
+    .chip {
+      display: inline-block;
+      padding: 0.18em 0.7em;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      border-radius: 999px;
+      line-height: 1.5;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    .chip-verde { background-color: rgba(42, 157, 143, 0.12); color: #1d6f65; }
+    .chip-ambar { background-color: rgba(233, 185, 73, 0.15); color: #7a5e12; }
+    .chip-rojo  { background-color: rgba(122, 46, 46, 0.12);  color: #7A2E2E; }
+
+    /* Captura de pantalla */
+    figure.captura {
+      margin: 1.25em 0;
+      padding: 0;
+    }
+
+    figure.captura figcaption {
+      font-size: 0.85rem;
+      color: var(--gris-texto-suave);
+      margin-top: 0.4em;
+    }
+
+    /* Caja "regla de oro" */
+    .regla-oro {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      background-color: var(--white);
+      border-left: 4px solid var(--remax-red);
+      border-radius: 0 var(--radio) var(--radio) 0;
+      box-shadow: var(--sombra-tarjeta);
+    }
+
+    .regla-oro p:last-child { margin-bottom: 0; }
+
+    /* Caja "así se ve" */
+    .asi-se-ve {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      background-color: var(--white);
+      border-left: 4px solid var(--estado-alta);
+      border-radius: 0 var(--radio) var(--radio) 0;
+      box-shadow: var(--sombra-tarjeta);
+    }
+
+    .asi-se-ve p:last-child { margin-bottom: 0; }
+
+    /* Etiqueta "¿Quién lo mira?" */
+    .quien {
+      font-size: 0.95rem;
+      margin-bottom: 0.75em;
+    }
+
+    .quien strong { color: var(--black); }
+
+    /* Navegación final */
+    .nav-final {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--gris-borde);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--black);
+      color: var(--cream);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">
+        <img src="../assets/logo-master-horizontal.png" alt="RE/MAX Master · Arequipa" style="height:48px;display:block" />
+      </a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="./index.html">← Guía del CRM</a>
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Los dashboards</h1>
+
+    <p>Un dashboard es un <strong>tablero de resultados</strong>: una pestaña del CRM que junta los números importantes en una sola pantalla, para que no tengas que contar filas a mano. El CRM tiene seis. Aquí te decimos qué muestra cada uno, quién lo mira y qué preguntas te responde.</p>
+
+    <div class="callout-info">
+      <p><strong>Lo primero que debes saber:</strong> los dashboards <strong>se actualizan solos</strong>. Cada vez que alguien registra un lead, una visita o un cierre en las hojas de trabajo, los números se recalculan sin que nadie haga nada. Por eso todos llevan el chip <span class="chip chip-ambar">🟡 SOLO MIRAR</span>: son de <strong>solo lectura</strong>. No se escribe en ellos, no se "corrige" un número ahí, no se borra nada.</p>
+    </div>
+
+    <div class="regla-oro">
+      <p><strong>Regla de oro:</strong> si un número del dashboard se ve raro, el problema (o el dato faltante) está en las hojas de trabajo — <code>personas</code>, <code>propiedades</code>, <code>visitas propiedades</code>, <code>campañas</code>. Se corrige <strong>ahí</strong>, nunca en el dashboard. Y si no sabes dónde, avisa a Dirección. Si editas una celda calculada, el sistema la revierte y te avisa.</p>
+    </div>
+
+    <h2>Mapa rápido: quién mira qué</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Dashboard</th>
+          <th>Quién lo mira</th>
+          <th>Para qué sirve</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Dashboard</strong> (operativo)</td>
+          <td>Coordinadora, todos los días</td>
+          <td>La foto diaria de toda la operación</td>
+        </tr>
+        <tr>
+          <td><strong>Dashboard Hunter</strong></td>
+          <td>Equipo Hunter (captación) y Dirección</td>
+          <td>Cómo va la captación de propietarios</td>
+        </tr>
+        <tr>
+          <td><strong>Dashboard Closer</strong></td>
+          <td>Equipo Closer (cierre) y Dirección</td>
+          <td>Cómo va el cierre con adquirentes</td>
+        </tr>
+        <tr>
+          <td><strong>Dashboard Coordinadora</strong></td>
+          <td>La Coordinadora (su tablero personal)</td>
+          <td>Su agenda del día y el avance de su compensación</td>
+        </tr>
+        <tr>
+          <td><strong>Dashboard Nómina</strong></td>
+          <td>Solo Dirección</td>
+          <td>Cuánto cuesta el equipo, hoy y proyectado</td>
+        </tr>
+        <tr>
+          <td><strong>Dashboard Reclutamiento</strong></td>
+          <td>Coordinadora y Dirección</td>
+          <td>Cómo avanza el embudo de postulantes a agente</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ══════════════ 1. DASHBOARD OPERATIVO ══════════════ -->
+
+    <h2>1. Dashboard (operativo) <span class="chip chip-ambar">🟡 SOLO MIRAR</span></h2>
+
+    <p class="quien"><strong>¿Quién lo mira?</strong> La Coordinadora, todas las mañanas al abrir el CRM. También Dirección cuando quiere la foto general del día.</p>
+
+    <p>Es el tablero madre: resume <strong>toda la operación en una pantalla</strong>. Muestra las alertas del día (leads para reactivar, plazos vencidos), el embudo completo de leads por estado, el cumplimiento de los SLA (los plazos máximos de atención: asignar en menos de 30 minutos, agendar visita el mismo día), el rendimiento de cada agente y el pulso de las campañas de publicidad. Aquí vive también la métrica innegociable de la oficina: <strong>cuántos cierres de compraventa hay por mes, por agente y por perfil</strong>.</p>
+
+    <h3>Qué te responde</h3>
+    <ul>
+      <li>¿Cuántos leads entraron hoy y cuáles están <strong>vencidos de SLA</strong> (sin asignar o sin visita agendada a tiempo)?</li>
+      <li>¿Cuántos leads hay en cada etapa del embudo y dónde se están atorando?</li>
+      <li>¿Cuántos cierres de compraventa llevamos este mes y qué origen o campaña está trayendo más leads?</li>
+    </ul>
+
+    <div class="asi-se-ve">
+      <p><strong>Así se ve en la práctica:</strong> entra un lead de "Carlos Demo Quispe" a las 10:12 por WhatsApp y nadie lo asigna. A los 30 minutos, el bloque de SLA del Dashboard lo pinta en rojo. La Coordinadora lo ve, asigna al agente, y el rojo desaparece solo. Nadie tuvo que contar nada.</p>
+    </div>
+
+    <figure class="captura">
+      <img src="img/dash-operativo.png" alt="Captura del Dashboard operativo: alertas, embudo por estado, SLAs y campañas" style="width:100%;border:1px solid var(--gris-borde);border-radius:8px">
+      <figcaption>El Dashboard operativo: la foto diaria de la operación completa.</figcaption>
+    </figure>
+
+    <!-- ══════════════ 2. DASHBOARD HUNTER ══════════════ -->
+
+    <h2>2. Dashboard Hunter <span class="chip chip-ambar">🟡 SOLO MIRAR</span></h2>
+
+    <p class="quien"><strong>¿Quién lo mira?</strong> El equipo <strong>Hunter</strong> — el lado que capta propietarios (vendedores, arrendadores, anticresistas deudores, constructoras): su Director(a) y sus asistentes. Dirección lo revisa para el seguimiento del piloto.</p>
+
+    <p>Mide la <strong>captación</strong>: cuántas propiedades entran a la cartera y qué tan bien se les da mantenimiento. Tiene tres bandas: los indicadores del mes contra su meta (captaciones, pipeline de propietarios, días en mercado), la tendencia de los últimos 12 meses con gráfico, y el detalle por asistente — cada uno contra <strong>su propia meta</strong>, para coaching, no para ranking. Además vigila dos alertas propias del lado Hunter: los <strong>informes al propietario cada 15 días</strong> (si uno se vence, sale en rojo) y el <strong>tope de pauta</strong> por propiedad (si el gasto en anuncios se pasa del límite, avisa).</p>
+
+    <h3>Qué te responde</h3>
+    <ul>
+      <li>¿Cuántas propiedades captamos este mes y cuánto falta para la meta?</li>
+      <li>¿A qué propietarios se les <strong>venció el informe de 15 días</strong> y hay que enviárselo ya?</li>
+      <li>¿Alguna propiedad se pasó del tope de gasto en publicidad?</li>
+    </ul>
+
+    <figure class="captura">
+      <img src="img/dash-hunter.png" alt="Captura del Dashboard Hunter: KPIs de captación, informes de 15 días y tope de pauta" style="width:100%;border:1px solid var(--gris-borde);border-radius:8px">
+      <figcaption>El Dashboard Hunter: la salud de la captación de propietarios.</figcaption>
+    </figure>
+
+    <!-- ══════════════ 3. DASHBOARD CLOSER ══════════════ -->
+
+    <h2>3. Dashboard Closer <span class="chip chip-ambar">🟡 SOLO MIRAR</span></h2>
+
+    <p class="quien"><strong>¿Quién lo mira?</strong> El equipo <strong>Closer</strong> — el lado que cierra con adquirentes (compradores, arrendatarios, anticresistas acreedores): su Director(a) y sus asistentes. Dirección lo revisa para el seguimiento del piloto.</p>
+
+    <p>Mide el <strong>cierre</strong>: qué tan rápido se atiende a los adquirentes y cuántos terminan cerrando. Su pieza central es el embudo de conversión — <strong>leads → contactados → visita → oferta → cierre</strong> — con el porcentaje que pasa de cada paso al siguiente: ahí se ve exactamente en qué escalón se caen los leads. También muestra los cierres del mes contra la meta, el ticket promedio, la velocidad de respuesta, cuántas visitas cuesta un cierre, la tendencia de 12 meses y el detalle por asistente contra su propia meta.</p>
+
+    <h3>Qué te responde</h3>
+    <ul>
+      <li>¿Cuántos cierres llevamos este mes contra la meta?</li>
+      <li>¿Qué leads siguen <strong>sin contactar en este momento</strong>? (alerta en rojo si hay alguno)</li>
+      <li>¿En qué paso del embudo se pierden más leads: del contacto a la visita, o de la visita a la oferta?</li>
+    </ul>
+
+    <figure class="captura">
+      <img src="img/dash-closer.png" alt="Captura del Dashboard Closer: embudo de conversión, velocidad de respuesta y cierres del mes" style="width:100%;border:1px solid var(--gris-borde);border-radius:8px">
+      <figcaption>El Dashboard Closer: el embudo de cierre paso a paso.</figcaption>
+    </figure>
+
+    <!-- ══════════════ 4. DASHBOARD COORDINADORA ══════════════ -->
+
+    <h2>4. Dashboard Coordinadora <span class="chip chip-ambar">🟡 SOLO MIRAR</span></h2>
+
+    <p class="quien"><strong>¿Quién lo mira?</strong> La <strong>Coordinadora</strong> — es su tablero personal. Dirección lo usa para validar su compensación a fin de mes.</p>
+
+    <p>Junta dos cosas en una pantalla. Primero, <strong>la agenda de visitas de hoy</strong>: qué visitas hay confirmadas para el día y a quién corresponden. Segundo, <strong>el avance de su compensación del mes</strong>, descrito por función (los montos exactos son parte de su acuerdo con Dirección): cuánto proyecta el mes, cuánto ya está asegurado por los cierres reales, y el tráqueo de su desempeño — cuántos fallos de SLA lleva (leads que se asignaron tarde) y cuántos cierres del mes suman a su bono. Si los fallos se acumulan, el bloque se pinta en rojo: es su semáforo personal para no dejar leads sin asignar.</p>
+
+    <h3>Qué te responde</h3>
+    <ul>
+      <li>¿Qué visitas hay agendadas <strong>hoy</strong> y con qué agente?</li>
+      <li>¿Cuántos fallos de SLA llevo este mes y cómo afectan mi bono de desempeño?</li>
+      <li>¿Cómo va mi mes: qué proyecta el sistema y qué ya está asegurado por los cierres reales?</li>
+    </ul>
+
+    <figure class="captura">
+      <img src="img/dash-coordinadora.png" alt="Captura del Dashboard Coordinadora: agenda de visitas de hoy y tráqueo de desempeño" style="width:100%;border:1px solid var(--gris-borde);border-radius:8px">
+      <figcaption>El Dashboard Coordinadora: agenda del día + su semáforo de desempeño.</figcaption>
+    </figure>
+
+    <!-- ══════════════ 5. DASHBOARD NÓMINA ══════════════ -->
+
+    <h2>5. Dashboard Nómina <span class="chip chip-ambar">🟡 SOLO MIRAR</span></h2>
+
+    <p class="quien"><strong>¿Quién lo mira?</strong> <strong>Solo Dirección.</strong> Es el tablero de caja del equipo — no es material del día a día de la Coordinadora ni de los equipos.</p>
+
+    <p>Responde una sola gran pregunta — cuánto cuesta el equipo — en <strong>dos vistas</strong>. La <strong>vista ACTUAL</strong> es viva: el costo del mes en curso con el roster activo real (sueldos, bonos en vivo, cargas sociales, movilidad), todo incluido. La <strong>vista PROYECTADA</strong> es la película del año: una matriz persona por persona, mes a mes, que sigue la rampa del piloto y marca en ámbar los meses pico — cuando caen gratificaciones y CTS (los beneficios de ley que se pagan dos veces al año) la caja del mes sube, y este tablero lo anticipa para que no sorprenda.</p>
+
+    <h3>Qué te responde</h3>
+    <ul>
+      <li>¿Cuánto cuesta el equipo <strong>este mes</strong>, con todo incluido (sueldos, bonos, cargas sociales)?</li>
+      <li>¿En qué meses del año la planilla pega picos por gratificaciones y CTS?</li>
+      <li>¿Cómo evoluciona el costo del equipo mes a mes según el ritmo de operaciones del piloto?</li>
+    </ul>
+
+    <figure class="captura">
+      <img src="img/dash-nomina.png" alt="Captura del Dashboard Nómina: vista actual del mes y proyección anual mes a mes" style="width:100%;border:1px solid var(--gris-borde);border-radius:8px">
+      <figcaption>El Dashboard Nómina: la caja del equipo en dos vistas — hoy y el año proyectado.</figcaption>
+    </figure>
+
+    <!-- ══════════════ 6. DASHBOARD RECLUTAMIENTO ══════════════ -->
+
+    <h2>6. Dashboard Reclutamiento <span class="chip chip-ambar">🟡 SOLO MIRAR</span></h2>
+
+    <p class="quien"><strong>¿Quién lo mira?</strong> La Coordinadora (que registra a los postulantes) y Dirección (que decide las afiliaciones).</p>
+
+    <p>Sigue el embudo de los <strong>agentes postulantes</strong> — las personas que quieren unirse a la oficina como agentes. Ellos no compran ni venden propiedades, así que tienen su propio camino: <code>POSTULANTE → EN_ENTREVISTA → EN_VERIFICACION → EN_CAPACITACION → AFILIADO</code> (o <code>RECHAZADO</code> en cualquier etapa). El dashboard muestra ese funnel etapa por etapa, la tasa de conversión (cuántos de los que postulan terminan afiliados y cuántos rechazados), los motivos de rechazo más frecuentes y el resumen del mes: postulantes nuevos, afiliados y rechazados. Cuando alguien llega a <code>AFILIADO</code>, el sistema lo da de alta solo en el roster de <code>Agentes</code>.</p>
+
+    <h3>Qué te responde</h3>
+    <ul>
+      <li>¿Cuántos postulantes hay ahora y en qué etapa va cada uno?</li>
+      <li>¿Cuántos se afiliaron y cuántos se rechazaron este mes?</li>
+      <li>¿Por qué motivos se rechaza más? (para afinar el filtro de entrada)</li>
+    </ul>
+
+    <!-- ══════════════ CIERRE ══════════════ -->
+
+    <h2>Una última cosa</h2>
+
+    <div class="callout-warn">
+      <p><strong>Paciencia con los ~10 segundos.</strong> Cuando registras algo en las hojas de trabajo, los dashboards tardan unos segundos en reflejarlo — es el ritmo normal de Google Sheets, no una falla. Teclea, espera, y el número aparece. Algunas celdas de <strong>meta</strong> (pintadas de amarillo en los dashboards Hunter y Closer) sí son editables, pero solo las ajusta Dirección.</p>
+    </div>
+
+    <p><em>Versión 1 · 2026-07-14 · RE/MAX Master Arequipa · Guía del CRM</em></p>
+
+    <p class="nav-final"><a href="./index.html">← Guía del CRM</a> · <a href="../index.html">Hub</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">v1.0 · 2026-07-14</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

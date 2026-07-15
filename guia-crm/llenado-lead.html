@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#010101">
+  <meta name="description" content="Cómo llenar un lead paso a paso en el CRM RE/MAX Master: qué tecleas tú y qué hace el sistema solo, con capturas de cada momento.">
+  <title>Llenar un lead paso a paso — Guía del CRM · RE/MAX Master</title>
+  <link rel="icon" type="image/png" href="../assets/isotipo-globo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream:#F7F5EE; --white:#FFFFFF; --black:#010101; --charcoal:#232323;
+      --remax-red:#FF1200; --bridge-red:#AA1120;
+      --master-blue:#003DA5; --bridge-blue:#0C2749; --dark-blue:#000E35; --sky-blue:#A3D4F2;
+      --estado-alta:#2A9D8F; --estado-media:#E9B949; --estado-baja:#E76F51; --estado-descarte:#7A2E2E;
+      --gris-borde:#E0E0E0; --gris-texto-suave:#6C757D;
+      --fondo-app:var(--cream); --fondo-tarjeta:var(--white);
+      --texto-principal:var(--charcoal); --texto-titulo:var(--black);
+      --acento-primario:var(--black); --acento-secundario:var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(1, 1, 1, 0.08), 0 1px 2px rgba(1, 1, 1, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--white);
+      color: var(--texto-principal);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 3px solid var(--remax-red);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .site-brand .brand-master { color: var(--remax-red); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .site-nav a {
+      color: var(--charcoal);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; color: var(--remax-red); }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--master-blue);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--remax-red); }
+
+    strong { font-weight: 700; color: var(--black); }
+
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(1, 1, 1, 0.06);
+      color: var(--charcoal);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    /* ===== Componentes de la guía ===== */
+
+    /* Chips del semáforo */
+    .chip {
+      display: inline-block;
+      padding: 0.18em 0.7em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      border-radius: 999px;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+    .chip-verde { background-color: rgba(42, 157, 143, 0.12); color: #1d6f65; }
+    .chip-ambar { background-color: rgba(233, 185, 73, 0.15); color: #8a6d1c; }
+    .chip-rojo  { background-color: rgba(122, 46, 46, 0.12); color: #7A2E2E; }
+
+    /* Captura de pantalla */
+    figure.captura {
+      margin: 1.25em 0;
+    }
+    figure.captura img {
+      width: 100%;
+      border: 1px solid var(--gris-borde);
+      border-radius: 8px;
+      display: block;
+      background-color: var(--white);
+    }
+    figure.captura figcaption {
+      font-size: 0.85rem;
+      color: var(--gris-texto-suave);
+      margin-top: 0.4em;
+      text-align: center;
+    }
+
+    /* Caja "regla de oro" — borde izquierdo rojo */
+    .regla-oro {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      background-color: var(--white);
+      border-left: 4px solid var(--remax-red);
+      border-radius: 0 var(--radio) var(--radio) 0;
+      box-shadow: var(--sombra-tarjeta);
+    }
+    .regla-oro p:last-child { margin-bottom: 0; }
+
+    /* Caja "así se ve" — borde izquierdo verde estado */
+    .asi-se-ve {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      background-color: var(--white);
+      border-left: 4px solid var(--estado-alta);
+      border-radius: 0 var(--radio) var(--radio) 0;
+      box-shadow: var(--sombra-tarjeta);
+    }
+    .asi-se-ve p:last-child { margin-bottom: 0; }
+
+    /* Paso numerado */
+    .paso {
+      background-color: var(--fondo-tarjeta);
+      border: 1px solid var(--gris-borde);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra-tarjeta);
+      padding: 1.25rem 1.5rem;
+      margin: 1.75rem 0;
+    }
+    .paso-titulo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 0 0 0.75rem;
+    }
+    .paso-num {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 50%;
+      background-color: var(--black);
+      color: var(--cream);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .paso-titulo h3 { margin: 0; }
+
+    .bloque-tu, .bloque-crm {
+      margin: 0.9em 0;
+      padding: 0.8em 1em;
+      border-radius: var(--radio);
+    }
+    .bloque-tu {
+      background-color: rgba(1, 1, 1, 0.035);
+      border-left: 4px solid var(--black);
+    }
+    .bloque-crm {
+      background-color: rgba(42, 157, 143, 0.07);
+      border-left: 4px solid var(--estado-alta);
+    }
+    .bloque-tu .etiqueta-bloque,
+    .bloque-crm .etiqueta-bloque {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.3em;
+    }
+    .bloque-tu .etiqueta-bloque { color: var(--black); }
+    .bloque-crm .etiqueta-bloque { color: #1d6f65; }
+    .bloque-tu p:last-child, .bloque-crm p:last-child,
+    .bloque-tu ul:last-child, .bloque-crm ul:last-child { margin-bottom: 0; }
+
+    /* Franja de estados (chuleta) */
+    .estados-franja {
+      background-color: var(--fondo-tarjeta);
+      border: 1px solid var(--gris-borde);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra-tarjeta);
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+      overflow-x: auto;
+    }
+    .estados-linea {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      min-width: max-content;
+      margin-bottom: 0.75rem;
+    }
+    .estados-linea:last-child { margin-bottom: 0; }
+    .estado-pill {
+      display: inline-block;
+      padding: 0.25em 0.75em;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      background-color: var(--cream);
+      border: 1.5px solid var(--charcoal);
+      color: var(--charcoal);
+    }
+    .estado-pill.pill-captado { background-color: rgba(0, 61, 165, 0.08); border-color: var(--master-blue); color: var(--master-blue); }
+    .estado-pill.pill-pausa   { background-color: rgba(233, 185, 73, 0.18); border-color: var(--estado-media); color: #8a6d1c; }
+    .estado-pill.pill-ganado  { background-color: var(--estado-alta); border-color: var(--estado-alta); color: var(--white); }
+    .estado-pill.pill-perdido { background-color: var(--estado-descarte); border-color: var(--estado-descarte); color: var(--white); }
+    .flecha-estado {
+      color: var(--gris-texto-suave);
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+    .estados-nota {
+      font-size: 0.82rem;
+      color: var(--gris-texto-suave);
+      white-space: nowrap;
+      margin-right: 0.5rem;
+      font-weight: 600;
+      min-width: 8.5rem;
+    }
+
+    /* Callout informativo (heredado de la plantilla) */
+    .callout-info {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid var(--black);
+      background-color: rgba(163, 212, 242, 0.25);
+      color: var(--charcoal);
+    }
+    .callout-info p:last-child { margin-bottom: 0; }
+    .callout-info strong { color: inherit; }
+
+    /* Navegación final */
+    .nav-final {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--gris-borde);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--black);
+      color: var(--cream);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      .paso { padding: 1rem 1.1rem; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">
+        <img src="../assets/logo-master-horizontal.png" alt="RE/MAX Master · Arequipa" style="height:48px;display:block" />
+      </a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="./index.html">← Guía del CRM</a>
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Llenar un lead paso a paso</h1>
+
+    <p>Esta es la página más importante de la guía. Te lleva de la mano desde que suena el WhatsApp hasta que el cierre queda registrado. En cada paso vas a ver dos cosas: <strong>lo que haces tú</strong> (qué tecleas y dónde) y <strong>lo que el CRM hace solo</strong> unos ~10 segundos después.</p>
+
+    <div class="callout-info">
+      <p><strong>Todo pasa en la hoja <code>personas</code></strong> <span class="chip chip-verde">🟢 SE LLENA</span> — un lead por fila, solo las columnas blancas de entrada. Y ojo: el retraso de ~10 segundos entre que tecleas y que el CRM reacciona es <strong>normal</strong> (es Google, no el CRM). Teclea y espera.</p>
+    </div>
+
+    <p>Para el ejemplo vamos a usar a <strong>Carlos Demo Quispe</strong>, un propietario que quiere vender su casa en Cayma. Es un nombre de práctica — nunca pongas datos inventados en el CRM real.</p>
+
+    <!-- ============ PASO 1 ============ -->
+    <section class="paso" id="paso-1">
+      <div class="paso-titulo">
+        <span class="paso-num">1</span>
+        <h3>Llega el lead: escribe el nombre</h3>
+      </div>
+
+      <div class="bloque-tu">
+        <span class="etiqueta-bloque">Tú haces</span>
+        <p>Anda a la hoja <code>personas</code> y ubica la <strong>primera fila vacía</strong> (la que sigue después del último lead). En la columna <strong>Nombre completo</strong> (columna F) escribe el nombre con al menos un apellido: <code>Carlos Demo Quispe</code>. Presiona Enter.</p>
+      </div>
+
+      <figure class="captura">
+        <img src="img/llenado-01-nombre.png" alt="Escribiendo el nombre completo del lead en la primera fila vacía de la hoja personas">
+        <figcaption>Paso 1 — Escribes el nombre en la primera fila vacía de <code>personas</code>.</figcaption>
+      </figure>
+
+      <div class="bloque-crm">
+        <span class="etiqueta-bloque">El CRM hace solo</span>
+        <p>Unos segundos después aparecen solos el <strong>Lead ID</strong> (columna A, formato <code>YYYYMMDD-NNN</code>), la <strong>Fecha y hora de entrada</strong> (columna B) y el estado <code>NUEVO</code>. No los toques nunca — el Lead ID es la cédula del lead en todo el sistema.</p>
+      </div>
+
+      <figure class="captura">
+        <img src="img/llenado-02-leadid.png" alt="El CRM generó solo el Lead ID y la fecha y hora de entrada">
+        <figcaption>El Lead ID y la fecha de entrada aparecen solos. Tú no los escribes.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ PASO 2 ============ -->
+    <section class="paso" id="paso-2">
+      <div class="paso-titulo">
+        <span class="paso-num">2</span>
+        <h3>Completa teléfono, canal y origen</h3>
+      </div>
+
+      <div class="bloque-tu">
+        <span class="etiqueta-bloque">Tú haces</span>
+        <ul>
+          <li><strong>Teléfono</strong> (columna G): 9 dígitos, sin +51. Ejemplo: <code>999111222</code>.</li>
+          <li><strong>Canal</strong> (columna C): elige del desplegable por dónde llegó — WhatsApp · Llamada · Web · Presencial · Email.</li>
+          <li><strong>Origen</strong> (columna D): de dónde vino — Facebook · Instagram · TikTok · Web Master · Google Ads · Referido · Presencial · Otros. Si vino de una campaña de pauta, copia también la <strong>UTM</strong> (columna E), el código que conecta el lead con su campaña.</li>
+        </ul>
+      </div>
+
+      <div class="bloque-crm">
+        <span class="etiqueta-bloque">El CRM hace solo</span>
+        <p>Si el teléfono ya existe en otra fila, la celda se <strong>resalta en naranja</strong>. No es un error: es un aviso de posible lead repetido. Si es la misma persona que vuelve, se crea fila nueva y se enlaza con <code>Lead original ID</code> (eso lo vemos en otra página de la guía).</p>
+      </div>
+    </section>
+
+    <!-- ============ PASO 3 ============ -->
+    <section class="paso" id="paso-3">
+      <div class="paso-titulo">
+        <span class="paso-num">3</span>
+        <h3>Elige el Perfil</h3>
+      </div>
+
+      <div class="bloque-tu">
+        <span class="etiqueta-bloque">Tú haces</span>
+        <p>En la columna <strong>Perfil</strong> (columna I), abre el desplegable y elige qué quiere el lead. Son 8 opciones: Comprador · Vendedor · Arrendador · Arrendatario · Anticresista acreedor · Anticresista deudor · Constructora · Agente postulante. Carlos quiere vender: elegimos <strong>Vendedor</strong>.</p>
+      </div>
+
+      <figure class="captura">
+        <img src="img/llenado-03-perfil.png" alt="Eligiendo el perfil del lead en el desplegable de la columna Perfil">
+        <figcaption>Paso 3 — El Perfil se elige siempre del desplegable, nunca se escribe a mano.</figcaption>
+      </figure>
+
+      <div class="bloque-crm">
+        <span class="etiqueta-bloque">El CRM hace solo</span>
+        <ul>
+          <li>Crea la fila del lead en la <strong>hoja de su perfil</strong> (para Carlos: la hoja <code>vendedor</code>, donde después se marcan sus casillas de documentos).</li>
+          <li>Filtra el desplegable de <strong>Etiqueta específica</strong> para mostrarte solo las etiquetas de ese perfil.</li>
+          <li>Adapta el desplegable de <strong>Closer asignado</strong>: si el perfil es propietario te mostrará el equipo <strong>Hunter</strong>; si es adquirente, el equipo <strong>Closer</strong>.</li>
+          <li>El estado pasa solo de <code>NUEVO</code> a <code>EN_CALIFICACION</code>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PASO 4 ============ -->
+    <section class="paso" id="paso-4">
+      <div class="paso-titulo">
+        <span class="paso-num">4</span>
+        <h3>Clasifica: etiqueta y prioridad</h3>
+      </div>
+
+      <div class="bloque-tu">
+        <span class="etiqueta-bloque">Tú haces</span>
+        <p>Aplica el flujo de calificación del perfil y llena los datos que recojas: <strong>DNI</strong>, <strong>Distrito principal</strong>, <strong>Moneda</strong> y <strong>Monto referencial</strong>, <strong>Timing</strong>. Al terminar, elige la <strong>Etiqueta específica</strong> (columna P) del desplegable — que ya viene filtrado por el perfil. Para Carlos, que cumple todo el criterio: <code>POTENCIAL</code>.</p>
+      </div>
+
+      <div class="bloque-crm">
+        <span class="etiqueta-bloque">El CRM hace solo</span>
+        <ul>
+          <li>Llena la <strong>Prioridad común</strong> según la etiqueta: ALTA · MEDIA · BAJA · DESCARTE. Para <code>POTENCIAL</code>: <strong>ALTA</strong>. No la edites — se calcula sola.</li>
+          <li>Si la prioridad resulta <strong>DESCARTE</strong> (o marcaste "Es curioso"), el lead pasa solo a <code>DESCARTADO</code> y el CRM le pone fecha de reactivación a +45 días.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PASO 5 ============ -->
+    <section class="paso" id="paso-5">
+      <div class="paso-titulo">
+        <span class="paso-num">5</span>
+        <h3>Asigna: elige en "Closer asignado"</h3>
+      </div>
+
+      <div class="bloque-tu">
+        <span class="etiqueta-bloque">Tú haces</span>
+        <p>En la columna <strong>Closer asignado</strong> (columna T), abre el desplegable y elige a la persona que trabajará el lead. <strong>El desplegable ya te muestra el equipo correcto:</strong> como Carlos es propietario (Vendedor), verás al equipo <strong>Hunter</strong>; si fuera un comprador o arrendatario, verías al equipo <strong>Closer</strong>. La meta: asignar en <strong>menos de 30 minutos</strong> desde que entró el lead.</p>
+      </div>
+
+      <div class="bloque-crm">
+        <span class="etiqueta-bloque">El CRM hace solo</span>
+        <ul>
+          <li>Sella la <strong>Fecha y hora de asignación</strong>.</li>
+          <li>Mueve el estado a <code>ASIGNADO</code>.</li>
+          <li>Evalúa el <strong>SLA de asignación</strong> (SLA = compromiso de tiempo de respuesta): queda en verde si asignaste en menos de 30 minutos.</li>
+        </ul>
+      </div>
+
+      <figure class="captura">
+        <img src="img/llenado-04-asignar.png" alt="Al elegir el Closer asignado, el CRM sella la fecha, cambia el estado a ASIGNADO y evalúa el SLA">
+        <figcaption>Paso 5 — Eliges del desplegable y el CRM sella fecha, estado <code>ASIGNADO</code> y SLA, todo solo.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ PASO 6 ============ -->
+    <section class="paso" id="paso-6">
+      <div class="paso-titulo">
+        <span class="paso-num">6</span>
+        <h3>El lead avanza: mueve el "Estado actual"</h3>
+      </div>
+
+      <div class="bloque-tu">
+        <span class="etiqueta-bloque">Tú haces</span>
+        <p>Conforme el lead avanza, cambia el <strong>Estado actual</strong> (columna AD) desde el desplegable: <code>CONTACTADO</code> cuando hay contacto efectivo, <code>EN_VISITA</code> tras la visita, <code>EN_NEGOCIACION</code> si hay conversación de cierre… Varios de estos saltos también ocurren solos al llenar otras columnas (por ejemplo, al poner la <strong>Fecha visita agendada</strong> el estado pasa solo a <code>CONTACTADO</code>).</p>
+      </div>
+
+      <div class="bloque-crm">
+        <span class="etiqueta-bloque">El CRM hace solo</span>
+        <ul>
+          <li><strong>Valida la transición.</strong> El estado se mueve en orden — si intentas un salto no permitido (de <code>NUEVO</code> a <code>CERRADO_GANADO</code>, por ejemplo), el CRM lo <strong>revierte</strong> y te avisa el motivo.</li>
+          <li>Sella la <strong>Fecha de cambio de estado</strong>.</li>
+          <li>Agrega una fila a la hoja <code>actividades</code> <span class="chip chip-ambar">🟡 SOLO MIRAR</span> — la bitácora automática. Cada cambio queda registrado con fecha, hora y quién lo hizo. Esa hoja solo se lee, nunca se edita.</li>
+        </ul>
+      </div>
+
+      <figure class="captura">
+        <img src="img/llenado-05-estado.png" alt="Cambio de Estado actual desde el desplegable; cada cambio queda registrado en la hoja actividades">
+        <figcaption>Paso 6 — Cada cambio de estado queda anotado solo en <code>actividades</code>, con fecha y hora.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ PASO 7 ============ -->
+    <section class="paso" id="paso-7">
+      <div class="paso-titulo">
+        <span class="paso-num">7</span>
+        <h3>Si es propietario y firma: CAPTADO</h3>
+      </div>
+
+      <div class="bloque-tu">
+        <span class="etiqueta-bloque">Tú haces</span>
+        <p>Cuando un lead propietario (Vendedor, Arrendador, Anticresista deudor o Constructora) <strong>firma la exclusividad</strong>, cambia su <strong>Estado actual</strong> a <code>CAPTADO</code>. Nada más — no vayas a crear la propiedad a mano.</p>
+      </div>
+
+      <div class="bloque-crm">
+        <span class="etiqueta-bloque">El CRM hace solo</span>
+        <p><strong>La propiedad se crea sola</strong> en la hoja <code>propiedades</code>: con su Propiedad ID, el distrito, el precio y la moneda copiados del lead, y <strong>Estado en cartera = "En cartera"</strong>. La casa de Carlos ya está oficialmente en la cartera de la oficina.</p>
+      </div>
+
+      <figure class="captura">
+        <img src="img/llenado-06-captado-propiedad.png" alt="Al pasar el lead a CAPTADO, la propiedad se crea sola en la hoja propiedades">
+        <figcaption>Paso 7 — Estado <code>CAPTADO</code> y la fila nueva aparece sola en <code>propiedades</code>.</figcaption>
+      </figure>
+
+      <div class="callout-info">
+        <p><strong>¿Y si es un comprador?</strong> <code>CAPTADO</code> es solo para propietarios. Si por error se lo pones a un adquirente (Comprador, Arrendatario, Anticresista acreedor), el CRM lo revierte y te avisa.</p>
+      </div>
+    </section>
+
+    <!-- ============ PASO 8 ============ -->
+    <section class="paso" id="paso-8">
+      <div class="paso-titulo">
+        <span class="paso-num">8</span>
+        <h3>El cierre: CERRADO_GANADO + monto final</h3>
+      </div>
+
+      <div class="bloque-tu">
+        <span class="etiqueta-bloque">Tú haces</span>
+        <p>Cuando la operación se concreta, cambia el <strong>Estado actual</strong> a <code>CERRADO_GANADO</code> y llena el <strong>Monto final del cierre</strong> (columna AF), en la moneda del lead. Recuerda: todo monto va con su <strong>Moneda</strong> (PEN o USD) — el sistema convierte a soles solo.</p>
+      </div>
+
+      <div class="bloque-crm">
+        <span class="etiqueta-bloque">El CRM hace solo</span>
+        <ul>
+          <li>Calcula la <strong>comisión</strong> completa: bruta, referido y neta según el caso. Nadie saca calculadora.</li>
+          <li>Pasa la propiedad a <strong>Estado en cartera = "Vendida"</strong>.</li>
+          <li>Sella el tiempo total del lead en el embudo y alimenta los dashboards del mes.</li>
+        </ul>
+      </div>
+
+      <figure class="captura">
+        <img src="img/llenado-07-cierre-comision.png" alt="Al registrar CERRADO_GANADO con el monto final, la comisión se calcula sola y la propiedad pasa a Vendida">
+        <figcaption>Paso 8 — Cierre registrado: comisión calculada sola y propiedad "Vendida".</figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ ADVERTENCIAS ============ -->
+    <h2>Dos cosas que el CRM no te va a dejar hacer</h2>
+
+    <div class="regla-oro">
+      <p><strong>⛔ "¿Y si escribo OFICINA?"</strong></p>
+      <p>Nada de "OFICINA", "x" ni texto libre en Closer asignado. Si lo tecleas, el CRM lo <strong>rechaza en seco</strong> con un mensaje: solo acepta nombres de la lista de agentes activos. Es la regla que salvó al CRM del caos anterior — todos los leads con dueño de verdad.</p>
+      <figure class="captura">
+        <img src="img/llenado-08-rechazo-oficina.png" alt="El CRM rechaza el texto OFICINA en la columna Closer asignado con un mensaje de error">
+        <figcaption>Rechazo duro: el CRM no acepta valores fuera de la lista de agentes.</figcaption>
+      </figure>
+    </div>
+
+    <div class="regla-oro">
+      <p><strong>⛔ "¿Y si toco una columna gris?"</strong></p>
+      <p>Las columnas grises son <strong>AUTO</strong>: las llena el sistema (Lead ID, fechas selladas, SLAs, prioridad, comisiones…). Si escribes encima, el CRM <strong>revierte tu cambio</strong> y te muestra un aviso pequeño abajo a la derecha explicando el motivo. Léelo — siempre dice qué pasó. Si crees que un dato AUTO está mal, no lo corrijas a mano: avisa a Dirección.</p>
+      <div style="max-width:520px;margin:0.75rem 0 0.25rem auto;background:#232323;color:#F7F5EE;border-radius:8px;padding:0.9rem 1.1rem;box-shadow:0 4px 14px rgba(1,1,1,0.25);font-size:0.92rem">
+        <strong style="display:block;margin-bottom:0.25rem">⚠️ Columna AUTO</strong>
+        Esta celda la llena el CRM automáticamente — tu cambio se revirtió.
+      </div>
+      <p style="font-size:0.85rem;color:var(--gris-texto-suave);margin-top:0.4rem">Así se ve el aviso que aparece abajo a la derecha de la hoja durante unos segundos. La celda vuelve sola a su valor correcto.</p>
+    </div>
+
+    <!-- ============ CHULETA DE ESTADOS ============ -->
+    <h2>Chuleta: los 11 estados del lead</h2>
+
+    <p>Este es el camino completo. Los estados se mueven <strong>en orden</strong> — el CRM bloquea los saltos inválidos.</p>
+
+    <div class="estados-franja">
+      <div class="estados-linea">
+        <span class="estados-nota">Camino normal:</span>
+        <span class="estado-pill">NUEVO</span>
+        <span class="flecha-estado">→</span>
+        <span class="estado-pill">EN_CALIFICACION</span>
+        <span class="flecha-estado">→</span>
+        <span class="estado-pill">ASIGNADO</span>
+        <span class="flecha-estado">→</span>
+        <span class="estado-pill">CONTACTADO</span>
+        <span class="flecha-estado">→</span>
+        <span class="estado-pill">EN_VISITA</span>
+        <span class="flecha-estado">→</span>
+        <span class="estado-pill">EN_NEGOCIACION</span>
+        <span class="flecha-estado">→</span>
+        <span class="estado-pill pill-ganado">CERRADO_GANADO</span>
+      </div>
+      <div class="estados-linea">
+        <span class="estados-nota">Solo propietarios:</span>
+        <span class="estado-pill">EN_VISITA</span>
+        <span class="flecha-estado">→</span>
+        <span class="estado-pill pill-captado">CAPTADO</span>
+        <span class="flecha-estado">→</span>
+        <span class="estado-pill pill-ganado">CERRADO_GANADO</span>
+        <span class="flecha-estado" style="margin-left:0.5rem">·</span>
+        <span style="font-size:0.82rem;color:var(--gris-texto-suave)">al firmar la exclusividad; la propiedad entra a la cartera</span>
+      </div>
+      <div class="estados-linea">
+        <span class="estados-nota">Pausa:</span>
+        <span class="estado-pill pill-pausa">APLAZADO</span>
+        <span class="flecha-estado" style="margin-left:0.5rem">·</span>
+        <span style="font-size:0.82rem;color:var(--gris-texto-suave)">lead en espera (reprogramó, no asistió); cuando vuelve, pasa a NUEVO</span>
+      </div>
+      <div class="estados-linea">
+        <span class="estados-nota">Terminales:</span>
+        <span class="estado-pill pill-ganado">CERRADO_GANADO</span>
+        <span class="estado-pill pill-perdido">CERRADO_PERDIDO</span>
+        <span class="estado-pill pill-perdido">DESCARTADO</span>
+        <span class="flecha-estado" style="margin-left:0.5rem">·</span>
+        <span style="font-size:0.82rem;color:var(--gris-texto-suave)">de aquí no se sale; para retomar, se crea un lead nuevo enlazado al original</span>
+      </div>
+    </div>
+
+    <div class="asi-se-ve">
+      <p><strong>La foto final:</strong> tú tecleas 8 cosas y el CRM hace el resto — genera el ID, sella las fechas, valida cada paso, crea la propiedad, calcula la comisión y anota todo en la bitácora. Si el CRM revierte algo y te avisa, <strong>lee el mensaje</strong>: siempre dice el motivo exacto. Y ante la duda, no borres nada — pregunta a Dirección.</p>
+    </div>
+
+    <nav class="nav-final" aria-label="Navegación de la guía">
+      <a href="./index.html">← Guía del CRM</a> · <a href="../index.html">Hub</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">Guía del CRM · v1.0 · 2026-07-14</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

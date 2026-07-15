@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#010101">
+  <meta name="description" content="Mapa de pestañas del CRM RE/MAX Master Arequipa: qué hoja se llena, cuál solo se mira y cuál no se toca.">
+  <title>Mapa de pestañas — Guía del CRM · RE/MAX Master</title>
+  <link rel="icon" type="image/png" href="../assets/isotipo-globo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream:#F7F5EE; --white:#FFFFFF; --black:#010101; --charcoal:#232323;
+      --remax-red:#FF1200; --bridge-red:#AA1120;
+      --master-blue:#003DA5; --bridge-blue:#0C2749; --dark-blue:#000E35; --sky-blue:#A3D4F2;
+      --estado-alta:#2A9D8F; --estado-media:#E9B949; --estado-baja:#E76F51; --estado-descarte:#7A2E2E;
+      --gris-borde:#E0E0E0; --gris-texto-suave:#6C757D;
+      --fondo-app:var(--cream); --fondo-tarjeta:var(--white);
+      --texto-principal:var(--charcoal); --texto-titulo:var(--black);
+      --acento-primario:var(--black); --acento-secundario:var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(1, 1, 1, 0.08), 0 1px 2px rgba(1, 1, 1, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--white);
+      color: var(--texto-principal);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 3px solid var(--remax-red);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .site-brand .brand-master { color: var(--remax-red); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .site-nav a {
+      color: var(--charcoal);
+      text-decoration: none;
+      opacity: 0.85;
+      margin-left: 1rem;
+    }
+
+    .site-nav a:first-child { margin-left: 0; }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; color: var(--remax-red); }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--master-blue);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--remax-red); }
+
+    strong { font-weight: 700; color: var(--black); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--black);
+      color: var(--cream);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(1, 1, 1, 0.03); }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(1, 1, 1, 0.06);
+      color: var(--charcoal);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--black);
+      color: var(--charcoal);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* Chips del semáforo */
+    .chip {
+      display: inline-block;
+      padding: 0.18em 0.65em;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      border-radius: 999px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .chip-verde {
+      background-color: rgba(42, 157, 143, 0.12);
+      color: #1d6f65;
+    }
+
+    .chip-ambar {
+      background-color: rgba(233, 185, 73, 0.15);
+      color: #8a6410;
+    }
+
+    .chip-rojo {
+      background-color: rgba(122, 46, 46, 0.12);
+      color: #7A2E2E;
+    }
+
+    /* Caja "regla de oro" */
+    .regla-oro {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      background-color: var(--white);
+      border-left: 4px solid var(--remax-red);
+      border-radius: 0 var(--radio) var(--radio) 0;
+      box-shadow: var(--sombra-tarjeta);
+    }
+
+    .regla-oro p:last-child { margin-bottom: 0; }
+
+    /* Caja "así se ve" */
+    .asi-se-ve {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      background-color: var(--white);
+      border-left: 4px solid var(--estado-alta);
+      border-radius: 0 var(--radio) var(--radio) 0;
+      box-shadow: var(--sombra-tarjeta);
+    }
+
+    .asi-se-ve p:last-child { margin-bottom: 0; }
+
+    /* Capturas */
+    figure.captura {
+      margin: 1.5em 0;
+      padding: 0;
+    }
+
+    figure.captura figcaption {
+      font-size: 0.85rem;
+      color: var(--gris-texto-suave);
+      margin-top: 0.5em;
+    }
+
+    /* Bloque de navegación final */
+    .nav-final {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--gris-borde);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--black);
+      color: var(--cream);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">
+        <img src="../assets/logo-master-horizontal.png" alt="RE/MAX Master · Arequipa" style="height:48px;display:block" />
+      </a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="./index.html">← Guía del CRM</a>
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Mapa de pestañas del CRM</h1>
+
+    <p>El CRM tiene muchas pestañas, pero solo unas pocas se llenan a mano. Este mapa te dice, pestaña por pestaña, qué es cada una, quién la usa y si puedes tocarla o no.</p>
+
+    <h2>El semáforo: cómo leer este mapa</h2>
+
+    <p>Cada pestaña del CRM tiene un color, como un semáforo:</p>
+
+    <ul>
+      <li><span class="chip chip-verde">🟢 SE LLENA</span> — aquí sí escribes a mano. Al llenar, el CRM dispara sus automatizaciones (IDs, fechas, estados, comisiones).</li>
+      <li><span class="chip chip-ambar">🟡 SOLO MIRAR</span> — se calculan solas. Las abres para leer, nunca para escribir.</li>
+      <li><span class="chip chip-rojo">🔴 NO TOCAR</span> — son el motor del sistema. Si se editan, la automatización se rompe.</li>
+    </ul>
+
+    <div class="asi-se-ve">
+      <p><strong>Así se ve en el CRM:</strong> al abrir el Google Sheet, la primera pestaña es <strong>Inicio</strong> — la portada. Su tabla <strong>"¿A dónde vas?"</strong> te lleva directo a la pestaña que necesitas. Empieza siempre por ahí.</p>
+    </div>
+
+    <figure class="captura">
+      <img src="img/mapa-01-inicio.png" alt="Portada Inicio del CRM con su tabla ¿A dónde vas?" style="width:100%;border:1px solid var(--gris-borde);border-radius:8px">
+      <figcaption>La portada <strong>Inicio</strong> del CRM: la tabla "¿A dónde vas?" es tu punto de partida cada día.</figcaption>
+    </figure>
+
+    <h2>🟢 Las que SE LLENAN (a mano)</h2>
+
+    <p>Estas son las únicas pestañas donde escribes. Cada dato que tecleas dispara algo automático unos ~10 segundos después (eso es normal: es Google, no el CRM).</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Pestaña</th>
+          <th>Para qué sirve</th>
+          <th>Quién la usa</th>
+          <th>Semáforo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>personas</code></td>
+          <td>LA hoja de trabajo: un lead por fila. Solo se llenan las columnas blancas de entrada; las grises son automáticas.</td>
+          <td>Coordinadora</td>
+          <td><span class="chip chip-verde">🟢 SE LLENA</span></td>
+        </tr>
+        <tr>
+          <td><code>visitas propiedades</code></td>
+          <td>Registro de visitas: una fila por cada visita a una propiedad.</td>
+          <td>Coordinadora</td>
+          <td><span class="chip chip-verde">🟢 SE LLENA</span></td>
+        </tr>
+        <tr>
+          <td><code>campañas</code></td>
+          <td>Presupuesto, gasto y UTM de cada campaña de publicidad.</td>
+          <td>Coordinadora / Dirección</td>
+          <td><span class="chip chip-verde">🟢 SE LLENA</span></td>
+        </tr>
+        <tr>
+          <td><code>agente_postulante</code></td>
+          <td>Ficha de cada persona que postula para ser agente de la oficina.</td>
+          <td>Coordinadora</td>
+          <td><span class="chip chip-verde">🟢 SE LLENA</span></td>
+        </tr>
+        <tr>
+          <td><code>informes_propietario</code></td>
+          <td>Informes al dueño de cada propiedad: se llenan solo las columnas A–G; el resto se calcula solo.</td>
+          <td>Equipo Hunter / Coordinadora</td>
+          <td><span class="chip chip-verde">🟢 SE LLENA</span></td>
+        </tr>
+        <tr>
+          <td><code>propiedades</code></td>
+          <td>La cartera de inmuebles. Casi todo lo llena el sistema; a mano solo precio y moneda si faltan.</td>
+          <td>Coordinadora (solo precio/moneda)</td>
+          <td><span class="chip chip-verde">🟢 SE LLENA</span></td>
+        </tr>
+        <tr>
+          <td><code>Agentes</code></td>
+          <td>Roster de agentes afiliados de la oficina (categoría PLATA/ORO).</td>
+          <td>Solo Dirección</td>
+          <td><span class="chip chip-verde">🟢 SE LLENA</span></td>
+        </tr>
+        <tr>
+          <td><code>equipo_piloto</code></td>
+          <td>Roster del equipo del piloto DOMO (Hunter y Closer).</td>
+          <td>Solo Dirección</td>
+          <td><span class="chip chip-verde">🟢 SE LLENA</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-info">
+      <p><strong>Ojo con <code>propiedades</code>:</strong> es verde solo a medias. Las filas las crea el CRM solo (cuando un lead propietario pasa a CAPTADO). Tú solo completas precio y moneda si quedaron vacíos. Nada más.</p>
+    </div>
+
+    <h2>🟡 Las que SOLO SE MIRAN (se calculan solas)</h2>
+
+    <p>Estas pestañas son reportes vivos: se arman solas con lo que llenaste en las verdes. Se abren para leer y tomar decisiones. Si escribes en ellas, dañas las fórmulas.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Pestaña</th>
+          <th>Para qué sirve</th>
+          <th>Quién la usa</th>
+          <th>Semáforo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Inicio</code></td>
+          <td>La portada del CRM: la tabla "¿A dónde vas?" te lleva a cada pestaña.</td>
+          <td>Todos</td>
+          <td><span class="chip chip-ambar">🟡 SOLO MIRAR</span></td>
+        </tr>
+        <tr>
+          <td><code>Dashboard</code></td>
+          <td>La foto diaria de la operación: alertas, embudo, SLAs y campañas.</td>
+          <td>Coordinadora / Dirección</td>
+          <td><span class="chip chip-ambar">🟡 SOLO MIRAR</span></td>
+        </tr>
+        <tr>
+          <td><code>Dashboard Hunter</code></td>
+          <td>El lado de captación: KPIs, informes de 15 días y tope de pauta.</td>
+          <td>Equipo Hunter / Dirección</td>
+          <td><span class="chip chip-ambar">🟡 SOLO MIRAR</span></td>
+        </tr>
+        <tr>
+          <td><code>Dashboard Closer</code></td>
+          <td>El lado de cierre: embudo, velocidad y cierres.</td>
+          <td>Equipo Closer / Dirección</td>
+          <td><span class="chip chip-ambar">🟡 SOLO MIRAR</span></td>
+        </tr>
+        <tr>
+          <td><code>Dashboard Coordinadora</code></td>
+          <td>La agenda de visitas de hoy, más su nómina y bonos.</td>
+          <td>Coordinadora</td>
+          <td><span class="chip chip-ambar">🟡 SOLO MIRAR</span></td>
+        </tr>
+        <tr>
+          <td><code>Dashboard Nómina</code></td>
+          <td>La caja del equipo en dos vistas.</td>
+          <td>Dirección</td>
+          <td><span class="chip chip-ambar">🟡 SOLO MIRAR</span></td>
+        </tr>
+        <tr>
+          <td><code>Dashboard Reclutamiento</code></td>
+          <td>El funnel de postulantes a agente: cuántos entran, avanzan y se afilian.</td>
+          <td>Dirección / Coordinadora</td>
+          <td><span class="chip chip-ambar">🟡 SOLO MIRAR</span></td>
+        </tr>
+        <tr>
+          <td><code>actividades</code></td>
+          <td>La bitácora automática de todo lo que pasa con cada lead. NO se edita, solo se lee.</td>
+          <td>Todos (solo lectura)</td>
+          <td><span class="chip chip-ambar">🟡 SOLO MIRAR</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>🔴 Las que NO SE TOCAN (motor del sistema)</h2>
+
+    <p>Estas pestañas hacen funcionar todo lo demás. No se abren para trabajar; algunas ni hace falta abrirlas nunca.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Pestaña</th>
+          <th>Para qué sirve</th>
+          <th>Quién la usa</th>
+          <th>Semáforo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Config</code></td>
+          <td>Los parámetros del sistema (tipo de cambio, plazos de SLA). Solo Dirección los cambia.</td>
+          <td>Solo Dirección</td>
+          <td><span class="chip chip-rojo">🔴 NO TOCAR</span></td>
+        </tr>
+        <tr>
+          <td><code>Diccionario</code></td>
+          <td>La referencia de qué significa cada campo y cada estado.</td>
+          <td>Consulta (solo lectura)</td>
+          <td><span class="chip chip-rojo">🔴 NO TOCAR</span></td>
+        </tr>
+        <tr>
+          <td><code>_Listas</code></td>
+          <td>Alimenta todos los desplegables del CRM (perfiles, estados, agentes).</td>
+          <td>El sistema</td>
+          <td><span class="chip chip-rojo">🔴 NO TOCAR</span></td>
+        </tr>
+        <tr>
+          <td><code>_SLA_fallos</code></td>
+          <td>El registro automático de los SLAs (compromisos de tiempo) que no se cumplieron.</td>
+          <td>El sistema</td>
+          <td><span class="chip chip-rojo">🔴 NO TOCAR</span></td>
+        </tr>
+        <tr>
+          <td><code>_snapshot_precorte</code></td>
+          <td>Una foto congelada de los datos antes de un corte. Es respaldo histórico.</td>
+          <td>El sistema</td>
+          <td><span class="chip chip-rojo">🔴 NO TOCAR</span></td>
+        </tr>
+        <tr>
+          <td><code>comprador</code>, <code>vendedor</code>, <code>arrendador</code>, <code>arrendatario</code>, <code>anticresista_acreedor</code>, <code>anticresista_deudor</code>, <code>constructora</code></td>
+          <td>Las hojas de perfil: el detalle de cada lead según su tipo. El sistema las llena solo.</td>
+          <td>El sistema (excepto gates)</td>
+          <td><span class="chip chip-rojo">🔴 NO TOCAR</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-warn">
+      <p><strong>La única excepción en las hojas de perfil:</strong> las <strong>casillas de gates</strong> (los checkboxes de requisitos, como "DNI recibido"). Esas sí se marcan a mano — y al marcarlas todas, "Gates completos" se recalcula solo en <code>personas</code>. Todo lo demás de esas hojas, ni tocarlo.</p>
+    </div>
+
+    <h2>¿Por qué hay hojas que no se tocan?</h2>
+
+    <p>Porque el motor del CRM vive ahí. Las hojas rojas guardan las listas de los desplegables, los parámetros de cálculo y los registros automáticos. Cuando escribes un nombre en <code>personas</code> y el Lead ID aparece solo, eso funciona porque esas hojas están intactas.</p>
+
+    <p>Si alguien edita <code>_Listas</code>, los desplegables muestran opciones equivocadas o se quedan vacíos. Si alguien cambia <code>Config</code>, las comisiones y los SLAs se calculan mal. Si alguien escribe en una hoja de perfil, el vínculo con <code>personas</code> se rompe. No es una regla de capricho: es que <strong>tocar una hoja roja rompe la automatización para todos</strong>.</p>
+
+    <div class="regla-oro">
+      <p><strong>Regla de oro:</strong> ante la duda, NO borres y NO escribas. Si algo se ve mal en una hoja amarilla o roja, avisa a Dirección — hay respaldos y el arreglo es sencillo si nadie tocó nada. Y nunca, nunca, borres ni edites la <strong>fila 2</strong> de <code>personas</code> ni de <code>propiedades</code>: ahí viven las fórmulas de todo el sistema.</p>
+    </div>
+
+    <p class="nav-final"><a href="./index.html">← Guía del CRM</a> · <a href="../index.html">Hub</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">Guía del CRM · Mapa de pestañas</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -5,37 +5,58 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flujo de recepción de vendedor (= propietario) — RE/MAX Master</title>
+<link rel="icon" type="image/png" href="../assets/isotipo-globo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <style>
   :root {
-    --rojo: #AA1120;
-    --verde: #2A9D8F;
-    --amarillo: #E9B949;
-    --azul: #003DA5;
-    --gris: #6C757D;
-    --texto: #0C2749;
+    --cream:#F7F5EE; --white:#FFFFFF; --black:#010101; --charcoal:#232323;
+    --remax-red:#FF1200; --bridge-red:#AA1120;
+    --master-blue:#003DA5; --bridge-blue:#0C2749; --dark-blue:#000E35; --sky-blue:#A3D4F2;
+    --estado-alta:#2A9D8F; --estado-media:#E9B949; --estado-baja:#E76F51; --estado-descarte:#7A2E2E;
+    --gris-borde:#E0E0E0; --gris-texto-suave:#6C757D;
+    --fondo-app:var(--cream); --fondo-tarjeta:var(--white);
+    --texto-principal:var(--charcoal); --texto-titulo:var(--black);
+    --acento-primario:var(--black); --acento-secundario:var(--remax-red);
+    /* alias heredados de la página */
+    --rojo: var(--bridge-red);
+    --verde: var(--estado-alta);
+    --amarillo: var(--estado-media);
+    --azul: var(--master-blue);
+    --gris: var(--gris-texto-suave);
+    --texto: var(--charcoal);
   }
   * { box-sizing: border-box; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     max-width: 1300px;
     margin: 2rem auto;
     padding: 0 1.5rem 4rem;
     line-height: 1.55;
-    color: var(--texto);
-    background: #F7F5EE;
+    color: var(--charcoal);
+    background: var(--cream);
   }
+  .encabezado {
+    border-bottom: 3px solid var(--remax-red);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .encabezado img { margin-bottom: 0.9rem; }
+  .encabezado .meta { margin-bottom: 0; }
   h1 {
-    border-bottom: 3px solid var(--azul);
+    color: var(--black);
     padding-bottom: 0.5rem;
     margin-bottom: 0.25rem;
   }
   h2 {
     margin-top: 2.5rem;
-    color: var(--azul);
-    border-left: 4px solid var(--azul);
+    color: var(--black);
+    border-left: 4px solid var(--black);
     padding-left: 0.75rem;
   }
+  h3 { color: var(--charcoal); }
   .meta { color: var(--gris); font-size: 0.95rem; margin-bottom: 1.5rem; }
   .intro, .nota, .pendientes {
     background: #fff;
@@ -88,7 +109,7 @@
     font-size: 0.92rem;
     vertical-align: top;
   }
-  th { background: #f1f5f9; font-weight: 600; }
+  th { background: var(--cream); font-weight: 600; }
   .badge {
     display: inline-block;
     padding: 0.1rem 0.5rem;
@@ -109,8 +130,11 @@
 </head>
 <body>
 
-<h1>Flujo de recepción y calificación de vendedor (= propietario)</h1>
-<p class="meta">RE/MAX Master · v1 · 2026-05-05</p>
+<header class="encabezado">
+  <img src="../assets/logo-master-horizontal.png" alt="RE/MAX Master · Arequipa" style="height:48px;display:block" />
+  <h1>Flujo de recepción y calificación de vendedor (= propietario)</h1>
+  <p class="meta">RE/MAX Master · v1 · 2026-05-05</p>
+</header>
 
 <div class="intro">
   <p><strong>Cómo leer:</strong> el lead entra arriba. Cada rombo es una decisión y muestra las respuestas posibles del propietario. Cada caja final coloreada es la <strong>etiqueta</strong> con la que el lead queda en el CRM y dispara la <strong>asignación de marketing</strong> (premium / estándar / mínimo).</p>

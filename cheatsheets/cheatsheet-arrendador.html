@@ -4,7 +4,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#003DA5">
+  <meta name="theme-color" content="#F7F5EE">
   <meta name="description" content="Cheatsheet operativo del perfil ARRENDADOR: guía rápida del coordinador para calificar leads propietarios que quieren alquilar su inmueble.">
   <title>Cheatsheet · Perfil Arrendador · RE/MAX Master</title>
 
@@ -12,44 +12,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <link rel="icon" type="image/png" href="../assets/isotipo-globo.png">
+
   <style>
     :root {
-      /* Primarios de marca */
-      --master-blue: #003DA5;
-      --remax-red: #FF1200;
-      --remax-blue: #0043FF;
-      --cream: #F7F5EE;
-      --white: #FFFFFF;
-      --black: #010101;
-      --charcoal: #232323;
+      --cream:#F7F5EE; --white:#FFFFFF; --black:#010101; --charcoal:#232323;
+      --remax-red:#FF1200; --bridge-red:#AA1120;
+      --master-blue:#003DA5; --bridge-blue:#0C2749; --dark-blue:#000E35; --sky-blue:#A3D4F2;
+      --estado-alta:#2A9D8F; --estado-media:#E9B949; --estado-baja:#E76F51; --estado-descarte:#7A2E2E;
+      --gris-borde:#E0E0E0; --gris-texto-suave:#6C757D;
+      --fondo-app:var(--cream); --fondo-tarjeta:var(--white);
+      --texto-principal:var(--charcoal); --texto-titulo:var(--black);
+      --acento-primario:var(--black); --acento-secundario:var(--remax-red);
 
-      /* Secundarios */
-      --bridge-blue: #0C2749;
-      --dark-blue: #000E35;
-      --bridge-red: #AA1120;
-      --sky-blue: #A3D4F2;
-
-      /* Estados del embudo (sistema, no marca) */
-      --estado-alta: #2A9D8F;
-      --estado-media: #E9B949;
-      --estado-baja: #E76F51;
-      --estado-descarte: #7A2E2E;
-
-      /* Neutros UI */
-      --gris-borde: #E0E0E0;
-      --gris-texto-suave: #6C757D;
-      --fondo-app: var(--cream);
-      --fondo-tarjeta: var(--white);
-      --texto-principal: var(--charcoal);
-      --texto-titulo: var(--bridge-blue);
-      --acento-primario: var(--master-blue);
-      --acento-secundario: var(--remax-red);
-
-      /* Tipografía y layout */
+      /* Tipografía y layout (extras de esta página) */
       --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --max-width: 960px;
       --radio: 8px;
-      --sombra-tarjeta: 0 1px 3px rgba(12, 39, 73, 0.08), 0 1px 2px rgba(12, 39, 73, 0.04);
+      --sombra-tarjeta: 0 1px 3px rgba(1, 1, 1, 0.08), 0 1px 2px rgba(1, 1, 1, 0.04);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -70,10 +50,10 @@
 
     /* Header */
     .site-header {
-      background-color: var(--bridge-blue);
-      color: var(--white);
+      background-color: var(--white);
+      color: var(--black);
       padding: 1.25rem 1.5rem;
-      border-bottom: 4px solid var(--master-blue);
+      border-bottom: 3px solid var(--remax-red);
     }
 
     .site-header-inner {
@@ -90,11 +70,14 @@
       font-weight: 700;
       font-size: 1.1rem;
       letter-spacing: 0.02em;
-      color: var(--white);
+      color: var(--black);
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    .site-brand .brand-master { color: var(--sky-blue); }
+    .site-brand .brand-master { color: var(--remax-red); }
 
     .site-nav {
       font-size: 0.875rem;
@@ -102,12 +85,12 @@
     }
 
     .site-nav a {
-      color: var(--white);
+      color: var(--charcoal);
       text-decoration: none;
       opacity: 0.85;
     }
 
-    .site-nav a:hover { opacity: 1; text-decoration: underline; }
+    .site-nav a:hover { opacity: 1; text-decoration: underline; color: var(--remax-red); }
 
     /* Main */
     main {
@@ -155,14 +138,14 @@
     p { margin: 0 0 1em; }
 
     a {
-      color: var(--acento-primario);
+      color: var(--master-blue);
       text-decoration: underline;
       text-underline-offset: 2px;
     }
 
-    a:hover { color: var(--bridge-blue); }
+    a:hover { color: var(--remax-red); }
 
-    strong { font-weight: 700; color: var(--bridge-blue); }
+    strong { font-weight: 700; color: var(--black); }
 
     /* Listas */
     ul, ol {
@@ -187,7 +170,7 @@
     }
 
     thead {
-      background-color: var(--bridge-blue);
+      background-color: var(--black);
       color: var(--white);
     }
 
@@ -206,7 +189,7 @@
 
     tbody tr:last-child td { border-bottom: none; }
 
-    tbody tr:nth-child(even) td { background-color: rgba(163, 212, 242, 0.08); }
+    tbody tr:nth-child(even) td { background-color: rgba(1, 1, 1, 0.03); }
 
     /* Blockquote */
     blockquote {
@@ -225,14 +208,14 @@
     code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 0.92em;
-      background-color: rgba(12, 39, 73, 0.06);
-      color: var(--bridge-blue);
+      background-color: rgba(1, 1, 1, 0.06);
+      color: var(--charcoal);
       padding: 0.12em 0.35em;
       border-radius: 4px;
     }
 
     pre {
-      background-color: var(--bridge-blue);
+      background-color: var(--charcoal);
       color: var(--white);
       padding: 1em 1.1em;
       border-radius: var(--radio);
@@ -259,7 +242,7 @@
     .callout-info {
       background-color: rgba(163, 212, 242, 0.25);
       border-left-color: var(--master-blue);
-      color: var(--bridge-blue);
+      color: var(--charcoal);
     }
 
     .callout-warn {
@@ -331,7 +314,7 @@
 
     /* Footer */
     .site-footer {
-      background-color: var(--bridge-blue);
+      background-color: var(--black);
       color: var(--white);
       padding: 1.5rem;
       font-size: 0.875rem;
@@ -348,7 +331,7 @@
     }
 
     .site-footer a {
-      color: var(--sky-blue);
+      color: var(--cream);
       text-decoration: none;
     }
 
@@ -378,7 +361,7 @@
 
   <header class="site-header">
     <div class="site-header-inner">
-      <a href="../index.html" class="site-brand">RE/MAX <span class="brand-master">Master</span> · Arequipa</a>
+      <a href="../index.html" class="site-brand"><img src="../assets/logo-master-horizontal.png" alt="RE/MAX Master · Arequipa" style="height:48px;display:block" /></a>
       <nav class="site-nav" aria-label="Navegación principal">
         <a href="../index.html">Hub</a>
       </nav>

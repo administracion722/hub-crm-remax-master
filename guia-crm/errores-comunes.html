@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#010101">
+  <meta name="description" content="Errores comunes del CRM RE/MAX Master Arequipa: qué hacer cuando algo no sale como esperabas, en formato pregunta y solución.">
+  <title>Errores comunes — Guía del CRM · RE/MAX Master</title>
+  <link rel="icon" type="image/png" href="../assets/isotipo-globo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream:#F7F5EE; --white:#FFFFFF; --black:#010101; --charcoal:#232323;
+      --remax-red:#FF1200; --bridge-red:#AA1120;
+      --master-blue:#003DA5; --bridge-blue:#0C2749; --dark-blue:#000E35; --sky-blue:#A3D4F2;
+      --estado-alta:#2A9D8F; --estado-media:#E9B949; --estado-baja:#E76F51; --estado-descarte:#7A2E2E;
+      --gris-borde:#E0E0E0; --gris-texto-suave:#6C757D;
+      --fondo-app:var(--cream); --fondo-tarjeta:var(--white);
+      --texto-principal:var(--charcoal); --texto-titulo:var(--black);
+      --acento-primario:var(--black); --acento-secundario:var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(1, 1, 1, 0.08), 0 1px 2px rgba(1, 1, 1, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--white);
+      color: var(--texto-principal);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 3px solid var(--remax-red);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .site-brand .brand-master { color: var(--remax-red); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .site-nav a {
+      color: var(--charcoal);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; color: var(--remax-red); }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--master-blue);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--remax-red); }
+
+    strong { font-weight: 700; color: var(--black); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(1, 1, 1, 0.06);
+      color: var(--charcoal);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--black);
+      color: var(--charcoal);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* Semáforo (chips) */
+    .chip {
+      display: inline-block;
+      padding: 0.18em 0.65em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      border-radius: 999px;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+
+    .chip-verde { background-color: rgba(42, 157, 143, 0.12); color: #1d6f65; }
+    .chip-ambar { background-color: rgba(233, 185, 73, 0.15); color: #7a5c00; }
+    .chip-rojo  { background-color: rgba(122, 46, 46, 0.12); color: #7A2E2E; }
+
+    /* Captura de pantalla */
+    figure.captura {
+      margin: 1.25em 0;
+    }
+
+    figure.captura figcaption {
+      font-size: 0.85rem;
+      color: var(--gris-texto-suave);
+      margin-top: 0.4em;
+    }
+
+    /* Caja regla de oro */
+    .regla-oro {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      background-color: var(--white);
+      border-left: 4px solid var(--remax-red);
+      border-radius: 0 var(--radio) var(--radio) 0;
+      box-shadow: var(--sombra-tarjeta);
+    }
+
+    .regla-oro p:last-child { margin-bottom: 0; }
+
+    /* Caja "así se ve" */
+    .asi-se-ve {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      background-color: var(--white);
+      border-left: 4px solid var(--estado-alta);
+      border-radius: 0 var(--radio) var(--radio) 0;
+      box-shadow: var(--sombra-tarjeta);
+    }
+
+    .asi-se-ve p:last-child { margin-bottom: 0; }
+
+    /* Acordeón pregunta/solución */
+    details.faq {
+      background-color: var(--fondo-tarjeta);
+      border: 1px solid var(--gris-borde);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra-tarjeta);
+      margin: 0 0 0.85rem;
+      overflow: hidden;
+    }
+
+    details.faq summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 0.95em 1.1em;
+      font-weight: 600;
+      font-size: 1.02rem;
+      color: var(--black);
+      display: flex;
+      align-items: baseline;
+      gap: 0.65em;
+      user-select: none;
+    }
+
+    details.faq summary::-webkit-details-marker { display: none; }
+
+    details.faq summary::before {
+      content: "+";
+      font-weight: 700;
+      font-size: 1.15rem;
+      line-height: 1;
+      color: var(--remax-red);
+      flex-shrink: 0;
+      transform: translateY(1px);
+    }
+
+    details.faq[open] summary::before { content: "−"; }
+
+    details.faq[open] summary {
+      border-bottom: 1px solid var(--gris-borde);
+      background-color: rgba(1, 1, 1, 0.02);
+    }
+
+    details.faq summary:hover { background-color: rgba(1, 1, 1, 0.03); }
+
+    details.faq .faq-body {
+      padding: 1em 1.1em 1.1em 2.4em;
+    }
+
+    details.faq .faq-body > :last-child { margin-bottom: 0; }
+
+    /* Navegación al pie de la guía */
+    .nav-guia {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--gris-borde);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--black);
+      color: var(--cream);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      details.faq summary { font-size: 0.95rem; }
+      details.faq .faq-body { padding-left: 1.1em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+      details.faq { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">
+        <img src="../assets/logo-master-horizontal.png" alt="RE/MAX Master · Arequipa" style="height:48px;display:block" />
+      </a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="./index.html">← Guía del CRM</a>
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Errores comunes</h1>
+
+    <p>Aquí están los sustos más frecuentes del día a día y qué hacer en cada uno. Haz clic en cada pregunta para ver la solución. La mayoría de estas cosas <strong>no son errores tuyos ni fallas del CRM</strong> — son el sistema haciendo su trabajo.</p>
+
+    <div class="callout-info">
+      <p><strong>Antes de asustarte, recuerda:</strong> si el CRM revierte algo y te muestra un aviso, <strong>lee el mensaje</strong>. Siempre dice el motivo exacto y qué sí puedes hacer.</p>
+    </div>
+
+    <h2>Pregunta y solución</h2>
+
+    <details class="faq">
+      <summary>"Escribí el nombre y no pasa nada"</summary>
+      <div class="faq-body">
+        <p><strong>Espera unos 10 segundos.</strong> El CRM corre sobre Google y ese retraso es normal — no significa que algo se rompió. Teclea, quita el cursor de la celda y espera: el <strong>Lead ID</strong> y la <strong>fecha de entrada</strong> aparecen solos.</p>
+        <p>Si después de esperar sigue sin pasar nada, revisa dos cosas:</p>
+        <ul>
+          <li><strong>¿Estás en la pestaña <code>personas</code>?</strong> Las automatizaciones del lead solo corren ahí. Si escribiste el nombre en otra hoja (por ejemplo en <code>actividades</code> o en un dashboard), no va a pasar nada — y esas hojas ni siquiera se editan.</li>
+          <li><strong>¿Escribiste en la columna correcta?</strong> El gatillo es la columna <strong>Nombre completo</strong>, en una fila nueva (nunca la fila 2).</li>
+        </ul>
+        <div class="asi-se-ve">
+          <p><strong>Así se ve cuando funciona:</strong> escribes "Carlos Demo Quispe", esperas ~10 segundos, y el Lead ID (tipo <code>20260714-001</code>) y la fecha y hora aparecen solos en su columna.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>"El desplegable no me acepta un nombre"</summary>
+      <div class="faq-body">
+        <p>Si eliges o escribes un nombre en <strong>Closer asignado</strong> y el CRM lo rechaza, es porque <strong>esa persona no está activa en el roster</strong> (la lista oficial de las hojas <code>Agentes</code> o <code>equipo_piloto</code>).</p>
+        <p>El desplegable solo acepta personas activas de la lista. No es un capricho: es lo que evita que vuelvan los tiempos de "OFICINA", "x" y nombres sueltos que hacían perder leads.</p>
+        <p><strong>Qué hacer:</strong> avisa a Dirección para que agregue o reactive a la persona en el roster. Esas hojas las maneja solo Dirección. Mientras tanto, deja la celda vacía — <strong>nunca escribas el nombre "a la fuerza"</strong> como texto libre.</p>
+        <div class="regla-oro">
+          <p><strong>Regla de oro:</strong> nunca "OFICINA", "x" ni texto libre en Closer asignado. Siempre la lista.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>"Cambié el estado y se regresó solo"</summary>
+      <div class="faq-body">
+        <p>Eso significa que intentaste una <strong>transición inválida</strong>: un salto de estado que no está permitido (por ejemplo, de <code>NUEVO</code> directo a <code>CERRADO_GANADO</code>, o <code>CAPTADO</code> en un lead comprador).</p>
+        <p>El CRM revierte el cambio y te muestra un aviso. <strong>Ese aviso te dice el motivo</strong> — léelo completo antes de volver a intentar.</p>
+        <p><strong>Qué hacer:</strong> revisa la secuencia de estados y mueve el lead paso por paso. Los estados van en orden (nuevo → calificación → asignado → contactado → visita → negociación → cierre); no se puede saltar etapas.</p>
+        <div class="asi-se-ve">
+          <p><strong>Así se ve:</strong> cambias el estado, ~10 segundos después la celda vuelve a su valor anterior y aparece un mensajito abajo a la derecha explicando por qué. Eso es el CRM protegiendo la data, no un error.</p>
+        </div>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>"Necesito corregir una fecha automática"</summary>
+      <div class="faq-body">
+        <p><strong>No se corrige a mano.</strong> Las fechas automáticas (entrada, asignación, cambio de estado) y las demás columnas AUTO (grises) las llena el sistema, y si las editas, <strong>el CRM revierte tu cambio</strong> y te avisa.</p>
+        <p>Esas fechas alimentan los SLAs y los dashboards; corregirlas a mano rompería las métricas.</p>
+        <p><strong>Qué hacer:</strong> si una fecha automática quedó realmente mal (por ejemplo, registraste el lead un día después de que llegó), <strong>avisa a Dirección</strong> con el Lead ID y la fecha correcta. Dirección tiene la forma de ajustarla sin romper nada.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>"Borré algo sin querer"</summary>
+      <div class="faq-body">
+        <p><strong>Cmd+Z de inmediato</strong> (deshacer). Si lo haces en el momento, casi siempre se recupera.</p>
+        <p>Si Cmd+Z ya no funciona (pasó tiempo, cerraste la hoja, o borraste varias cosas), <strong>avisa a Dirección</strong>. Hay respaldos del CRM y se puede recuperar lo perdido.</p>
+        <div class="regla-oro">
+          <p><strong>NO intentes reconstruirlo a mano.</strong> Volver a escribir de memoria lo borrado crea datos falsos (fechas nuevas, IDs nuevos, actividades duplicadas) y es peor que el borrado. Restaurar desde respaldo es limpio; reconstruir a mano no.</p>
+        </div>
+        <p>Y ojo con el borrado más peligroso de todos: <strong>la fila 2 de <code>personas</code> y de <code>propiedades</code> no se toca nunca</strong> — hospeda las fórmulas de todo el sistema.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>"En informes_propietario mi fila quedó roja"</summary>
+      <div class="faq-body">
+        <p>La fila roja significa que <strong>la propiedad de ese informe no tiene moneda o precio válido</strong> en la hoja <code>propiedades</code>. Sin esos dos datos, el sistema no puede calcular la evolución del precio, así que marca el informe en rojo y <strong>no lo cuenta en las métricas</strong> hasta que se corrija.</p>
+        <p><strong>Qué hacer:</strong></p>
+        <ol>
+          <li>Ve a la hoja <code>propiedades</code> y busca la propiedad del informe.</li>
+          <li>Revisa que tenga <strong>Moneda</strong> (PEN o USD) y un <strong>precio</strong> válido (número, mayor que cero).</li>
+          <li>Corrige lo que falte <strong>ahí, en <code>propiedades</code></strong> — no en la fila del informe.</li>
+        </ol>
+        <p>Al corregirlo, el informe deja de estar rojo y vuelve a alimentar las métricas. No hace falta borrar ni rehacer la fila del informe.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>"Quiero eliminar un lead duplicado"</summary>
+      <div class="faq-body">
+        <p>Para eso existe el menú <strong>Mantenimiento CRM → "Borrar lead(s) por ID…"</strong> (está en la barra de menús del Sheet, arriba). Le das el Lead ID del duplicado y el sistema lo elimina limpiamente: borra el lead y todo su rastro en las demás hojas, sin romper nada.</p>
+        <div class="regla-oro">
+          <p><strong>NUNCA borres la fila a mano</strong> (clic derecho → eliminar fila). Eso deja huérfanos en <code>actividades</code> y en las hojas de perfil, puede correr las fórmulas y, si te equivocas de fila, puedes llevarte la fila 2 — la que sostiene todo.</p>
+        </div>
+        <p><strong>Ojo:</strong> antes de borrar, verifica que sea de verdad un duplicado (mismo teléfono, misma persona, doble registro por error). Si es la misma persona que <em>volvió</em> después de un tiempo, eso no es duplicado — es una reactivación: se crea fila nueva y se enlaza con <code>lead_original_id</code>.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>"El CRM está lento"</summary>
+      <div class="faq-body">
+        <p><strong>~10 segundos de espera después de teclear es normal.</strong> Es el tiempo que tarda Google en despertar las automatizaciones — no depende de cuántos leads haya ni de tu computadora, y no se puede acelerar.</p>
+        <p>La rutina sana: teclea, pasa al siguiente campo y deja que el sistema alcance. No re-escribas la misma celda "porque no reaccionó" — probablemente sí reaccionó, solo que todavía no lo ves.</p>
+        <p><strong>Si es mucho más que eso</strong> (un minuto, celdas que no cargan, la hoja congelada): <strong>recarga la página</strong> del navegador (Cmd+R). Casi siempre es el navegador, no el CRM. Si después de recargar sigue igual, avisa a Dirección.</p>
+      </div>
+    </details>
+
+    <h2>¿A quién acudo?</h2>
+
+    <p>Para todo lo que esta página no resuelve, el canal es uno solo: <strong>Dirección (Eduardo)</strong>. En concreto:</p>
+
+    <ul>
+      <li>Agregar, reactivar o quitar a alguien del <strong>roster</strong> (hojas <code>Agentes</code> y <code>equipo_piloto</code>).</li>
+      <li>Corregir una <strong>columna automática</strong> (fechas, SLAs, comisiones) que quedó mal.</li>
+      <li>Recuperar algo <strong>borrado</strong> que Cmd+Z ya no alcanza — hay respaldos.</li>
+      <li>Cambiar cualquier parámetro de <strong>Config</strong> (tipo de cambio, SLAs, listas).</li>
+      <li>Cualquier comportamiento raro que se repita después de recargar la página.</li>
+    </ul>
+
+    <p>Avisar con el <strong>Lead ID</strong> (o el nombre de la hoja y la fila) y una frase de qué pasó es suficiente. Mejor un aviso "tonto" a tiempo que un arreglo casero que ensucie la data.</p>
+
+    <div class="regla-oro">
+      <p><strong>La regla que resume todo: ante la duda, NO borres.</strong> Un dato de más se limpia en un minuto; un dato borrado cuesta horas recuperarlo. Cmd+Z si te acabas de equivocar, y si no alcanza, Dirección — hay respaldos.</p>
+    </div>
+
+    <p class="nav-guia"><a href="./index.html">← Guía del CRM</a> · <a href="../index.html">Hub</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">Guía del CRM · Errores comunes</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>

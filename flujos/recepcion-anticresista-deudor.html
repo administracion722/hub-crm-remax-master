@@ -5,35 +5,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flujo de recepción de anticresista deudor — RE/MAX Master</title>
+<link rel="icon" type="image/png" href="../assets/isotipo-globo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <style>
   :root {
-    --rojo: #AA1120;
-    --verde: #2A9D8F;
-    --amarillo: #E9B949;
-    --azul: #003DA5;
-    --gris: #6C757D;
-    --texto: #0C2749;
+    --cream:#F7F5EE; --white:#FFFFFF; --black:#010101; --charcoal:#232323;
+    --remax-red:#FF1200; --bridge-red:#AA1120;
+    --master-blue:#003DA5; --bridge-blue:#0C2749; --dark-blue:#000E35; --sky-blue:#A3D4F2;
+    --estado-alta:#2A9D8F; --estado-media:#E9B949; --estado-baja:#E76F51; --estado-descarte:#7A2E2E;
+    --gris-borde:#E0E0E0; --gris-texto-suave:#6C757D;
+    --fondo-app:var(--cream); --fondo-tarjeta:var(--white);
+    --texto-principal:var(--charcoal); --texto-titulo:var(--black);
+    --acento-primario:var(--black); --acento-secundario:var(--remax-red);
+    /* variables legadas de esta página */
+    --rojo: var(--bridge-red);
+    --verde: var(--estado-alta);
+    --amarillo: var(--estado-media);
+    --azul: var(--master-blue);
+    --gris: var(--gris-texto-suave);
+    --texto: var(--charcoal);
   }
   * { box-sizing: border-box; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     max-width: 1300px;
     margin: 2rem auto;
     padding: 0 1.5rem 4rem;
     line-height: 1.55;
-    color: var(--texto);
-    background: #F7F5EE;
+    color: var(--charcoal);
+    background: var(--cream);
   }
   h1 {
-    border-bottom: 3px solid var(--azul);
+    color: var(--black);
+    border-bottom: 3px solid var(--remax-red);
     padding-bottom: 0.5rem;
     margin-bottom: 0.25rem;
   }
   h2 {
     margin-top: 2.5rem;
-    color: var(--azul);
-    border-left: 4px solid var(--azul);
+    color: var(--black);
+    border-left: 4px solid var(--black);
     padding-left: 0.75rem;
   }
   h3 {
@@ -109,6 +123,7 @@
 </head>
 <body>
 
+<img src="../assets/logo-master-horizontal.png" alt="RE/MAX Master · Arequipa" style="height:48px;display:block;margin-bottom:0.75rem" />
 <h1>Flujo de recepción y calificación de anticresista deudor</h1>
 <p class="meta">RE/MAX Master · v2 · 2026-05-06</p>
 

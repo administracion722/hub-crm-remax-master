@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#010101">
+  <meta name="description" content="Las automatizaciones del CRM RE/MAX Master: qué hace el sistema solo cuando tecleas, por qué tarda unos segundos y cómo saber que funcionó.">
+  <title>Las automatizaciones — Guía del CRM · RE/MAX Master</title>
+  <link rel="icon" type="image/png" href="../assets/isotipo-globo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream:#F7F5EE; --white:#FFFFFF; --black:#010101; --charcoal:#232323;
+      --remax-red:#FF1200; --bridge-red:#AA1120;
+      --master-blue:#003DA5; --bridge-blue:#0C2749; --dark-blue:#000E35; --sky-blue:#A3D4F2;
+      --estado-alta:#2A9D8F; --estado-media:#E9B949; --estado-baja:#E76F51; --estado-descarte:#7A2E2E;
+      --gris-borde:#E0E0E0; --gris-texto-suave:#6C757D;
+      --fondo-app:var(--cream); --fondo-tarjeta:var(--white);
+      --texto-principal:var(--charcoal); --texto-titulo:var(--black);
+      --acento-primario:var(--black); --acento-secundario:var(--remax-red);
+
+      /* Tipografía y layout */
+      --font-base: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --max-width: 960px;
+      --radio: 8px;
+      --sombra-tarjeta: 0 1px 3px rgba(1, 1, 1, 0.08), 0 1px 2px rgba(1, 1, 1, 0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-base);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--texto-principal);
+      background-color: var(--fondo-app);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Header */
+    .site-header {
+      background-color: var(--white);
+      color: var(--texto-principal);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 3px solid var(--remax-red);
+    }
+
+    .site-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .site-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .site-brand .brand-master { color: var(--remax-red); }
+
+    .site-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .site-nav a {
+      color: var(--charcoal);
+      text-decoration: none;
+      opacity: 0.85;
+    }
+
+    .site-nav a:hover { opacity: 1; text-decoration: underline; color: var(--remax-red); }
+
+    /* Main */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Tipografía */
+    h1, h2, h3, h4 {
+      font-family: var(--font-base);
+      line-height: 1.25;
+      margin: 1.75em 0 0.5em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--acento-primario);
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--texto-titulo);
+      border-bottom: 1px solid var(--gris-borde);
+      padding-bottom: 0.3em;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    p { margin: 0 0 1em; }
+
+    a {
+      color: var(--master-blue);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a:hover { color: var(--remax-red); }
+
+    strong { font-weight: 700; color: var(--black); }
+
+    /* Listas */
+    ul, ol {
+      margin: 0 0 1em;
+      padding-left: 1.5em;
+    }
+
+    li { margin-bottom: 0.35em; }
+
+    li::marker { color: var(--acento-primario); }
+
+    /* Tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25em 0;
+      font-size: 0.95rem;
+      background-color: var(--fondo-tarjeta);
+      box-shadow: var(--sombra-tarjeta);
+      border-radius: var(--radio);
+      overflow: hidden;
+    }
+
+    thead {
+      background-color: var(--black);
+      color: var(--cream);
+    }
+
+    th, td {
+      padding: 0.7em 0.9em;
+      text-align: left;
+      border-bottom: 1px solid var(--gris-borde);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody tr:nth-child(even) td { background-color: rgba(1, 1, 1, 0.03); }
+
+    /* Code */
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      background-color: rgba(1, 1, 1, 0.06);
+      color: var(--charcoal);
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+    }
+
+    /* Callouts */
+    .callout-info,
+    .callout-warn {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-radius: var(--radio);
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background-color: rgba(163, 212, 242, 0.25);
+      border-left-color: var(--black);
+      color: var(--charcoal);
+    }
+
+    .callout-warn {
+      background-color: rgba(233, 185, 73, 0.18);
+      border-left-color: var(--estado-media);
+      color: var(--charcoal);
+    }
+
+    .callout-info p:last-child,
+    .callout-warn p:last-child { margin-bottom: 0; }
+
+    .callout-info strong,
+    .callout-warn strong { color: inherit; }
+
+    /* ===== Componentes de la Guía del CRM ===== */
+
+    /* Semáforo (chips) */
+    .chip {
+      display: inline-block;
+      padding: 0.18em 0.65em;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: 999px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .chip-verde { background-color: rgba(42, 157, 143, 0.12); color: #1d6f65; }
+    .chip-ambar { background-color: rgba(233, 185, 73, 0.15); color: var(--charcoal); }
+    .chip-rojo  { background-color: rgba(122, 46, 46, 0.12); color: var(--estado-descarte); }
+
+    /* Captura de pantalla */
+    figure.captura {
+      margin: 1.25em 0;
+    }
+
+    figure.captura figcaption {
+      font-size: 0.85rem;
+      color: var(--gris-texto-suave);
+      margin-top: 0.4em;
+    }
+
+    /* Caja "regla de oro" */
+    .regla-oro {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-left: 4px solid var(--remax-red);
+      background-color: var(--white);
+      border-radius: 0 var(--radio) var(--radio) 0;
+      box-shadow: var(--sombra-tarjeta);
+    }
+
+    .regla-oro p:last-child { margin-bottom: 0; }
+
+    /* Caja "así se ve" */
+    .asi-se-ve {
+      margin: 1.25em 0;
+      padding: 0.9em 1.1em;
+      border-left: 4px solid var(--estado-alta);
+      background-color: var(--white);
+      border-radius: 0 var(--radio) var(--radio) 0;
+      box-shadow: var(--sombra-tarjeta);
+    }
+
+    .asi-se-ve p:last-child { margin-bottom: 0; }
+
+    /* Bloque de navegación de la guía */
+    .guia-nav {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--gris-borde);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .site-footer {
+      background-color: var(--black);
+      color: var(--cream);
+      padding: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .site-footer a {
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    .site-footer .meta { opacity: 0.75; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      main { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: 0.875rem; }
+      th, td { padding: 0.55em 0.6em; }
+    }
+
+    /* Print */
+    @media print {
+      body { background-color: var(--white); }
+      .site-header, .site-footer { background-color: var(--white); color: var(--black); border-color: var(--gris-borde); }
+      .site-brand, .site-nav a, .site-footer a { color: var(--black); }
+      a { color: var(--black); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="../index.html" class="site-brand">
+        <img src="../assets/logo-master-horizontal.png" alt="RE/MAX Master · Arequipa" style="height:48px;display:block" />
+      </a>
+      <nav class="site-nav" aria-label="Navegación principal">
+        <a href="./index.html">← Guía del CRM</a>
+        <a href="../index.html">Hub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Las automatizaciones: tú tecleas, el CRM trabaja</h1>
+
+    <p>El CRM no es solo una tabla. Tiene un motor: cada vez que llenas ciertas casillas, el sistema hace cosas por ti — genera códigos, sella fechas, calcula comisiones, crea filas en otras hojas. En esta página está la lista completa de lo que hace solo, para que sepas qué esperar y qué NO tienes que llenar tú.</p>
+
+    <h2>Primero lo más importante: el retraso de ~10 segundos es normal</h2>
+
+    <p>Cuando tecleas algo que dispara una automatización, el dato automático <strong>no aparece al instante</strong>: tarda unos <strong>10 segundos</strong>. Ese retraso no es un error tuyo ni del CRM — es el motor de Google (los servidores de Google Sheets, que es donde vive el CRM) despertando y haciendo el trabajo. Pasa igual con una fila o con mil. La regla es simple: <strong>teclea y espera</strong>. <strong>NO vuelvas a teclear</strong> el mismo dato "porque no salió" — si lo repites, puedes confundir al sistema o duplicar información. Cuenta hasta diez y el dato aparece.</p>
+
+    <div class="regla-oro">
+      <p><strong>Regla de oro:</strong> tecleas una vez, esperas ~10 segundos, verificas. Nunca re-tecleas. Si después de esperar no pasó nada, avisa a Dirección — no lo "arregles" a mano.</p>
+    </div>
+
+    <h2>Las 10 automatizaciones</h2>
+
+    <p>Esta es la lista completa. Columna izquierda: lo que haces tú. Columna derecha: lo que el CRM hace solo, ~10 segundos después.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:42%">Tú haces…</th>
+          <th>El CRM hace solo…</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1.</strong> Escribes el <strong>Nombre completo</strong> del lead en la hoja <code>personas</code> (ej. "Carlos Demo Quispe").</td>
+          <td>Genera el <strong>Lead ID</strong> (el código único del lead) y sella la <strong>Fecha y hora de entrada</strong>. No los escribes nunca tú.</td>
+        </tr>
+        <tr>
+          <td><strong>2.</strong> Eliges el <strong>Perfil</strong> del lead (Comprador, Vendedor, etc.).</td>
+          <td>Adapta el desplegable de <strong>"Closer asignado"</strong>: si el lead es propietario (vende, alquila o da su inmueble), te muestra al equipo <strong>Hunter</strong>; si es adquirente (compra, alquila para vivir, presta), te muestra al equipo <strong>Closer</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>3.</strong> Llenas <strong>Closer asignado</strong> eligiendo un nombre de la lista.</td>
+          <td>Sella la <strong>Fecha y hora de asignación</strong>, mueve el estado a <strong>ASIGNADO</strong> y calcula el semáforo del <strong>SLA de asignación</strong> (si asignaste a tiempo o no).</td>
+        </tr>
+        <tr>
+          <td><strong>4.</strong> Cambias el <strong>Estado actual</strong> del lead.</td>
+          <td>Valida que el salto sea permitido (si no lo es, <strong>revierte y te avisa el motivo</strong>), sella la <strong>Fecha de cambio de estado</strong> y anota una fila en la bitácora <code>actividades</code>.</td>
+        </tr>
+        <tr>
+          <td><strong>5.</strong> Pones el estado en <strong>CAPTADO</strong> (solo perfiles propietario: Vendedor, Arrendador, Anticresista deudor, Constructora).</td>
+          <td><strong>Crea la propiedad</strong> en la hoja <code>propiedades</code>, con Estado en cartera = "En cartera". No tienes que crearla tú.</td>
+        </tr>
+        <tr>
+          <td><strong>6.</strong> Pones el estado en <strong>CERRADO_GANADO</strong> (se cerró la operación).</td>
+          <td>Pasa la propiedad a <strong>"Vendida"</strong> y calcula la <strong>comisión</strong> sola: bruta, referido y neta, según el caso que corresponda.</td>
+        </tr>
+        <tr>
+          <td><strong>7.</strong> Marcas los <strong>gates</strong> (las casillas de documentos y requisitos) en la hoja del perfil del lead.</td>
+          <td>Recalcula <strong>"Gates completos"</strong> en <code>personas</code>: se pone en verdadero solo cuando todas las casillas del perfil están marcadas.</td>
+        </tr>
+        <tr>
+          <td><strong>8.</strong> Editas por error una columna <strong>AUTO</strong> (las grises, que el sistema llena).</td>
+          <td><strong>Revierte tu cambio</strong> y te muestra un aviso. Esas columnas no se corrigen a mano; si ves un dato mal ahí, avisa a Dirección.</td>
+        </tr>
+        <tr>
+          <td><strong>9.</strong> Escribes un valor fuera de la lista (por ejemplo "OFICINA" o "x" en Closer asignado).</td>
+          <td><strong>Lo rechaza</strong> con un mensaje. Los desplegables mandan: solo se aceptan los valores de la lista.</td>
+        </tr>
+        <tr>
+          <td><strong>10.</strong> En <code>informes_propietario</code> llenas las columnas <strong>A a G</strong>.</td>
+          <td>Calcula solas las columnas <strong>H a Q</strong>. Y si la propiedad no tiene moneda o precio válido, pinta la fila de <strong>ROJO</strong> y te avisa — ese informe no alimenta las métricas hasta corregirlo.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-info">
+      <p><strong>¿Y si me equivoco?</strong> Fíjate en las automatizaciones 4, 8 y 9: el CRM se defiende solo. Si el cambio no es válido, lo revierte o lo rechaza, y el mensaje te dice el motivo exacto. Léelo antes de intentar otra cosa.</p>
+    </div>
+
+    <h2>¿Cómo sé que funcionó?</h2>
+
+    <p>Hay dos señales, y solo dos:</p>
+
+    <h3>Señal 1 — El dato aparece solo</h3>
+
+    <div class="asi-se-ve">
+      <p><strong>Así se ve cuando funciona:</strong> escribes "María Demo Flores" en Nombre completo, sueltas la celda, esperas… y unos 10 segundos después el Lead ID y la fecha de entrada aparecen solos en sus columnas. Tú no tocaste nada más. Eso es la automatización trabajando.</p>
+    </div>
+
+    <p>Lo mismo con todas las de la tabla: llenas tu parte y la parte del sistema se llena sola. Si el dato automático apareció, funcionó. Punto.</p>
+
+    <h3>Señal 2 — Si algo estaba mal, el CRM revierte y avisa</h3>
+
+    <div class="asi-se-ve">
+      <p><strong>Así se ve cuando algo estaba mal:</strong> intentas un salto de estado no permitido, o editas una columna gris. La celda <strong>vuelve sola a su valor anterior</strong> y sale un aviso en pantalla con el motivo (por ejemplo, a qué estados sí puedes ir). No es que "se borró tu trabajo": es el sistema protegiendo la data.</p>
+    </div>
+
+    <p>En resumen: <strong>si el dato quedó, funcionó; si volvió atrás con aviso, algo estaba mal y el aviso te dice qué</strong>. No hay tercera opción — y si alguna vez la hubiera (esperaste, no apareció el dato y tampoco hubo aviso), no improvises: avisa a Dirección.</p>
+
+    <p>¿Quieres ver estas automatizaciones con capturas de pantalla, paso a paso? Los ejemplos visuales viven en la página <a href="./llenado-lead.html">Llenado de un lead</a>.</p>
+
+    <p class="guia-nav"><a href="./index.html">← Guía del CRM</a> · <a href="../index.html">Hub</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <span>RE/MAX Master · Arequipa</span>
+      <span class="meta">Guía del CRM · Las automatizaciones · 2026-07-14</span>
+      <a href="../index.html">Volver al hub</a>
+    </div>
+  </footer>
+
+</body>
+</html>
