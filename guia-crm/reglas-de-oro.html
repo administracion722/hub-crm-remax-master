@@ -360,7 +360,7 @@
       <figcaption>Así se ve el menú <strong>Mantenimiento CRM</strong> en la barra superior del Google Sheet. La opción <strong>"Borrar lead(s) por ID…"</strong> es la única forma correcta de eliminar un lead.</figcaption>
     </figure>
 
-    <h2>Las otras 8 reglas</h2>
+    <h2>Las otras 9 reglas</h2>
 
     <div class="regla">
       <div class="regla-num">3</div>
@@ -420,6 +420,14 @@
 
     <div class="regla">
       <div class="regla-num">10</div>
+      <div class="regla-cuerpo">
+        <p class="regla-frase"><code>CERRADO_GANADO</code> solo si cerró el piloto — y solo desde <code>EN_NEGOCIACION</code>.</p>
+        <p class="regla-porque">El CRM mide SOLO lo que gana el piloto. Si el lead compró fuera, o el cierre lo hicieron agentes de la casa sin ninguna punta del piloto, va a <code>CERRADO_PERDIDO</code> — aunque la oficina haya ganado. Y el salto a ganado solo se permite desde <code>EN_NEGOCIACION</code>; si intentas cerrarlo desde otro estado, el CRM lo revierte.</p>
+      </div>
+    </div>
+
+    <div class="regla">
+      <div class="regla-num">11</div>
       <div class="regla-cuerpo">
         <p class="regla-frase">Ante la duda: NO borres.</p>
         <p class="regla-porque">Si te equivocaste, Cmd+Z de inmediato. Si ya no se puede deshacer, avisa a Dirección: hay respaldos y se recupera.</p>

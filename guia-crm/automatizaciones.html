@@ -354,7 +354,7 @@
       <p><strong>Regla de oro:</strong> tecleas una vez, esperas ~10 segundos, verificas. Nunca re-tecleas. Si después de esperar no pasó nada, avisa a Dirección — no lo "arregles" a mano.</p>
     </div>
 
-    <h2>Las 10 automatizaciones</h2>
+    <h2>Las 13 automatizaciones</h2>
 
     <p>Esta es la lista completa. Columna izquierda: lo que haces tú. Columna derecha: lo que el CRM hace solo, ~10 segundos después.</p>
 
@@ -391,8 +391,8 @@
           <td>Pasa la propiedad a <strong>"Vendida"</strong> y calcula la <strong>comisión</strong> sola: bruta, referido y neta, según el caso que corresponda.</td>
         </tr>
         <tr>
-          <td><strong>7.</strong> Marcas los <strong>gates</strong> (las casillas de documentos y requisitos) en la hoja del perfil del lead.</td>
-          <td>Recalcula <strong>"Gates completos"</strong> en <code>personas</code>: se pone en verdadero solo cuando todas las casillas del perfil están marcadas.</td>
+          <td><strong>7.</strong> Marcas los <strong>gates</strong> (las casillas de documentos y requisitos) en la hoja del perfil del lead — o escribes/corriges el <strong>DNI</strong> en <code>personas</code>.</td>
+          <td>Recalcula <strong>"Gates completos"</strong> en <code>personas</code>: se pone en verdadero solo cuando todas las casillas del perfil están marcadas <strong>y el DNI es válido</strong> (8 dígitos). Corregir el DNI también lo recalcula al instante.</td>
         </tr>
         <tr>
           <td><strong>8.</strong> Editas por error una columna <strong>AUTO</strong> (las grises, que el sistema llena).</td>
@@ -405,6 +405,18 @@
         <tr>
           <td><strong>10.</strong> En <code>informes_propietario</code> llenas las columnas <strong>A a G</strong>.</td>
           <td>Calcula solas las columnas <strong>H a Q</strong>. Y si la propiedad no tiene moneda o precio válido, pinta la fila de <strong>ROJO</strong> y te avisa — ese informe no alimenta las métricas hasta corregirlo.</td>
+        </tr>
+        <tr>
+          <td><strong>11.</strong> Registras una visita en <code>visitas propiedades</code> (Lead ID + Propiedad ID si es de la cartera; si es ajena, eliges el <strong>Origen</strong> y llenas la <strong>Referencia</strong>).</td>
+          <td>Llena solos el <strong>nombre del lead</strong> y la <strong>dirección</strong> de la propiedad, y actualiza el contador de <strong>visitas realizadas</strong> del lead y la <strong>"Próxima visita"</strong> de la propiedad. Ojo: registrar una visita <strong>nunca cambia el estado del lead</strong> — eso lo decides tú en <code>personas</code>.</td>
+        </tr>
+        <tr>
+          <td><strong>12.</strong> Registras la <strong>2.ª visita "Cancelada"</strong> de un mismo lead.</td>
+          <td>Te avisa en pantalla para que <strong>contactes al closer asignado</strong> y vean qué pasa con ese adquirente. Según lo que él te diga, cambias la etiqueta o lo descartas — siempre a mano. Queda rastro en <code>actividades</code>.</td>
+        </tr>
+        <tr>
+          <td><strong>13.</strong> Escribes un <strong>teléfono o DNI que ya existe</strong> en otro lead.</td>
+          <td>Te avisa <strong>"Posible lead duplicado"</strong> con el Lead ID, nombre y perfil del otro registro. Tú decides cuál se queda; el otro se descarta o se borra con el menú <strong>Mantenimiento CRM → "Borrar lead(s) por ID…"</strong>. El CRM no borra nada solo.</td>
         </tr>
       </tbody>
     </table>
@@ -441,7 +453,7 @@
   <footer class="site-footer">
     <div class="site-footer-inner">
       <span>REMAX Master · Arequipa</span>
-      <span class="meta">Guía del CRM · Las automatizaciones · 2026-07-14</span>
+      <span class="meta">Guía del CRM · Las automatizaciones · 2026-07-15</span>
       <a href="../index.html">Volver al hub</a>
     </div>
   </footer>

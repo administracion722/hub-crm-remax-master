@@ -497,7 +497,7 @@
 
       <div class="bloque-tu">
         <span class="etiqueta-bloque">Tú haces</span>
-        <p>Aplica el flujo de calificación del perfil y llena los datos que recojas: <strong>DNI</strong>, <strong>Distrito principal</strong>, <strong>Moneda</strong> y <strong>Monto referencial</strong>, <strong>Timing</strong>. Al terminar, elige la <strong>Etiqueta específica</strong> (columna P) del desplegable — que ya viene filtrado por el perfil. Para Carlos, que cumple todo el criterio: <code>POTENCIAL</code>.</p>
+        <p>Aplica el flujo de calificación del perfil y llena los datos que recojas: <strong>DNI</strong>, <strong>Distrito principal</strong>, <strong>Moneda</strong> y <strong>Monto referencial</strong>, <strong>Timing</strong>. Al terminar, elige la <strong>Etiqueta específica</strong> (columna P) del desplegable — que ya viene filtrado por el perfil. Para Carlos, que cumple todo el criterio: <code>POTENCIAL</code>. Ojo con el <strong>DNI</strong>: si ya existe en otro lead, el CRM te avisa "Posible lead duplicado" con el ID del otro registro (igual pasa con el teléfono); y si lo corriges después, los <strong>"Gates completos"</strong> se recalculan solos.</p>
       </div>
 
       <div class="bloque-crm">
@@ -545,7 +545,7 @@
 
       <div class="bloque-tu">
         <span class="etiqueta-bloque">Tú haces</span>
-        <p>Conforme el lead avanza, cambia el <strong>Estado actual</strong> (columna AD) desde el desplegable: <code>CONTACTADO</code> cuando hay contacto efectivo, <code>EN_VISITA</code> tras la visita, <code>EN_NEGOCIACION</code> si hay conversación de cierre… Varios de estos saltos también ocurren solos al llenar otras columnas (por ejemplo, al poner la <strong>Fecha visita agendada</strong> el estado pasa solo a <code>CONTACTADO</code>).</p>
+        <p>Conforme el lead avanza, cambia el <strong>Estado actual</strong> (columna AD) desde el desplegable: <code>CONTACTADO</code> cuando hay contacto efectivo, <code>EN_VISITA</code> tras la visita, <code>EN_NEGOCIACION</code> si hay conversación de cierre… Varios de estos saltos también ocurren solos al llenar otras columnas (por ejemplo, al poner la <strong>Fecha visita agendada</strong> el estado pasa solo a <code>CONTACTADO</code>). Dos reglas del cierre: <code>CERRADO_GANADO</code> solo se alcanza <strong>desde <code>EN_NEGOCIACION</code></strong> y solo si la operación la cerró <strong>el equipo del piloto</strong>; si el lead compró fuera — o el cierre fue de agentes de la casa sin punta del piloto — va a <code>CERRADO_PERDIDO</code>. Y registrar visitas en <code>visitas propiedades</code> <strong>nunca mueve el estado</strong>: el lead sigue <code>EN_VISITA</code> mientras busca, y el estado lo cambias tú en <code>personas</code>.</p>
       </div>
 
       <div class="bloque-crm">
