@@ -777,10 +777,10 @@
         <tr>
           <td>29</td>
           <td><code>motivo_perdida</code></td>
-          <td>Lista cerrada: Eligió otra opción · Se enfrió · Precio fuera de rango · No documentos · Otro</td>
+          <td>Texto libre — se escribe con las palabras del closer (decisión 2026-07-16; se estandarizará una lista cuando la data muestre patrones)</td>
           <td>Al CERRAR_PERDIDO</td>
           <td>Closer</td>
-          <td>Lista cerrada</td>
+          <td>Texto libre</td>
         </tr>
         <tr>
           <td>30</td>
@@ -1053,7 +1053,7 @@
       <li><code>confirmacion_1dia_antes</code> + <code>confirmacion_1hora_antes</code> — hoy no se hace.</li>
       <li><code>resultado_visita</code> (lista cerrada) — hoy texto libre.</li>
       <li><code>sla_*_cumplido</code> (campos auto) — hoy no existen.</li>
-      <li><code>motivo_perdida</code> (lista cerrada) — hoy no se registra.</li>
+      <li><code>motivo_perdida</code> (texto libre) — hoy no se registra.</li>
     </ul>
 
     <h3>Hojas del Excel actual (Sheet 2: Compradores, Sheet 3/4: Métricas)</h3>
@@ -1069,7 +1069,7 @@
 
     <ol>
       <li><strong>Crear las columnas</strong> según el esquema definido en el Sprint 0 del Proyecto 2 (Google Sheet con 15 hojas: 5 del nodo n24 + Agentes + Diccionario + 8 por perfil). El número total de campos es ~39 universales + gates distribuidos + 1 en <code>propiedades</code> — ver secciones C, F, H, I de este anexo.</li>
-      <li><strong>Implementar listas cerradas</strong> para los campos críticos (canal, origen, perfil, closer, distrito, etiqueta, prioridad, estado, regla_asignacion, resultado_visita, motivo_perdida, tipo_operacion derivado).</li>
+      <li><strong>Implementar listas cerradas</strong> para los campos críticos (canal, origen, perfil, closer, distrito, etiqueta, prioridad, estado, regla_asignacion, resultado_visita, tipo_operacion derivado). <code>motivo_perdida</code> queda como texto libre (decisión 2026-07-16).</li>
       <li><strong>Migrar los ~250 leads</strong> del Excel actual a la nueva estructura, con regla de limpieza:
         <ul>
           <li>"DESCONOCIDO" en ASESOR → asignar manualmente o marcar <code>pendiente_asignacion</code>.</li>
@@ -1160,7 +1160,7 @@
 
     <p><strong>Sin cambios respecto a v2:</strong></p>
     <ul>
-      <li>Las listas cerradas críticas (canal, origen, perfil, etiquetas, distrito, motivo_perdida, regla_asignacion, resultado_visita).</li>
+      <li>Las listas cerradas críticas (canal, origen, perfil, etiquetas, distrito, regla_asignacion, resultado_visita). <code>motivo_perdida</code> es texto libre desde el 2026-07-16.</li>
       <li>Los gates <code>gate_*</code> distribuidos por hoja de perfil.</li>
       <li>Los campos auto-calculados (sla_*, tiempo_total_embudo, gates_completos).</li>
       <li>Los 4 campos universales agregados en v2 (<code>tipo_operacion</code>, <code>ciudad_residencia</code>, <code>lead_original_id</code> siguen igual; <code>closer_historico</code> se suma en v3).</li>
